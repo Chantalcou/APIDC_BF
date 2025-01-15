@@ -1,0 +1,21 @@
+.captcha-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.modal-header,
+.modal-footer {
+  background-color: #0a9d6d;
+  opacity: 0.8;
+  color: white;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+
+}
+
+button:disabled {
+  background-color: #6c757d;
+}

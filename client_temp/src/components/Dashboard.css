@@ -1,0 +1,42 @@
+/* Asegúrate de que el contenedor ocupa toda la pantalla */
+.container-dashboard {
+  max-width: 900px; /* Limita el ancho del contenido */
+  height: calc(100vh - 70px); /* Calcula el espacio restante debajo del navbar (ajusta según el alto real de tu navbar) */
+  margin: 0 auto; /* Centra horizontalmente */
+  display: flex; /* Habilita flexbox */
+  flex-direction: column; /* Alinea elementos en columna */
+  justify-content: center; /* Centra verticalmente */
+  align-items: center; /* Centra horizontalmente */
+  padding: 20px;
+  box-sizing: border-box; /* Incluye padding en las dimensiones del contenedor */
+}
+
+h2 {
+  color: #343a40;
+  margin-bottom: 20px; /* Ajusta el espaciado debajo del título */
+}
+
+table {
+  width: 100%; /* Tabla toma todo el ancho disponible */
+  max-width: 100%; /* Evita que se desborde */
+}
+
+thead {
+  background-color: #343a40;
+  color: white;
+}
+
+td,
+th {
+  text-align: center;
+  padding: 10px;
+}
+
+table.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f2f2f2;
+}
+
+.table-bordered td,
+.table-bordered th {
+  border: 1px solid #dee2e6;
+}

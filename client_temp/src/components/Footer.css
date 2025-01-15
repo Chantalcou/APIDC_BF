@@ -1,0 +1,23 @@
+/* Estilo general para el footer */
+.footer {
+  background-color: rgba(0, 0, 0, 0.8); 
+  color: white; 
+  padding: 2rem 1rem;
+  bottom: 0; 
+  left: 0; 
+  width: 100%; 
+  text-align: center; 
+  z-index: 1000; 
+  margin-top: 20px;
+}
+
+.footer-icon {
+  width: 30px; 
+  height: 30px; 
+  margin: 0 10px;
+  transition: transform 0.3s ease;
+}
+
+.footer-icon:hover {
+  transform: scale(1.1); 
+}

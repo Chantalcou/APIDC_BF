@@ -1,0 +1,41 @@
+.breadcrumbs {
+    position: fixed; /* Fijo en la parte superior */
+    top: 60px; /* Ajusta según la altura de tu navbar */
+    left: 0;
+    width: 100%; /* Ocupa todo el ancho */
+    background-color: #f8f9fa; /* Fondo claro */
+    padding: 10px 20px; /* Espaciado interno */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para separación */
+    z-index: 1000; /* Asegúrate de que esté por encima del contenido */
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    color: #555;
+  }
+  
+  .breadcrumbs ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .breadcrumbs li {
+    display: flex;
+    align-items: center;
+  }
+  
+  .breadcrumbs li a {
+    text-decoration: none;
+    color: #007bff; /* Azul claro para los enlaces */
+    transition: color 0.2s;
+  }
+  
+  .breadcrumbs li a:hover {
+    color: #0056b3; /* Azul más oscuro al pasar el mouse */
+  }
+  
+  .breadcrumbs li span {
+    margin: 0 8px;
+    color: #888; /* Color gris para el separador */
+  }
+  

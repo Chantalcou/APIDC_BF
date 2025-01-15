@@ -1,0 +1,24 @@
+.scroll-arrow {
+  position: absolute;
+
+  left: 50%;
+  z-index: 133;
+  transform: translate(
+    -50%,
+    0
+  ); /* Asegúrate de que esté centrado horizontalmente */
+  cursor: pointer;
+  font-size: 2rem; /* Ajusta el tamaño según tu diseño */
+  color: #202020; /* Cambia el color según tu diseño */
+  animation: bounce 1s infinite; /* Animación de rebote opcional */
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}

@@ -1,0 +1,27 @@
+.moving-banner {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    white-space: nowrap;
+  }
+  
+  .moving-logos {
+    display: flex;
+    animation: scroll 10s linear infinite;
+  }
+  
+  .logo {
+    flex-shrink: 0;
+    width: 150px; /* Ajusta el tamaño según tus necesidades */
+    margin-right: 20px;
+  }
+  
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  

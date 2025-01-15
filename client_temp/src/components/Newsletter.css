@@ -1,0 +1,132 @@
+/* Newsletter.css */
+.newsletter-container {
+    font-family: Arial, sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-top: 70px;
+  }
+  
+  .newsletter-header {
+    text-align: center;
+    background-image: url('https://res.cloudinary.com/dqgjcfosx/image/upload/v1736182825/pexels-ekrulila-3957616_hfbjgi.jpg');
+    background-size: cover; /* La imagen cubrirá toda el área del header */
+    background-position: center; /* Centra la imagen en el header */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    color: white;
+    padding: 100px 40px;
+    border-radius: 8px;
+  }
+  
+  
+  .newsletter-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .newsletter-header p {
+    font-size: 1.2rem;
+  }
+  
+  .content {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+  }
+  
+  .sidebar {
+    width: 30%;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .sidebar h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .news-item {
+    margin-bottom: 20px;
+  }
+  
+  .news-item img {
+    width: 100%;
+    border-radius: 8px;
+  }
+  
+  .news-item p {
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+  
+  .main-content {
+    /* width: 65%; */
+    padding: 20px;
+  }
+  
+  .benefits h2, .how-it-works h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .benefit-card {
+    background-color: #fafafa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .benefit-card img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .benefit-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .benefit-card p {
+    font-size: 1rem;
+  }
+  
+  .call-to-action {
+    text-align: center;
+    margin-top: 40px;
+  }
+  
+  .call-to-action h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .call-to-action p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+  
+  .call-to-action button {
+    background-color: #008C45;
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .call-to-action button:hover {
+    background-color: #006c36;
+  }
+  
+  .newsletter-footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 1rem;
+    color: #555;
+  }
+  

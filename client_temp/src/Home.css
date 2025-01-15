@@ -1,0 +1,337 @@
+/* Estilos globales y básicos */
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  box-sizing: border-box;
+  background-color: #f8f9fa;
+  color: #343a40;
+  text-align: center;
+  overflow-x: hidden;
+}
+.home-bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.container-fluid {
+  padding: 0;
+}
+
+.main-content {
+  position: relative;
+}
+
+/* Estilos para el video de fondo */
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+.welcome-name{
+  color:#fff
+}
+
+.bg-video_top {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+/* Estilo para el contenido estático encima del video */
+.static-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* height: 100%; */
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-image_center {
+  max-width: 200px;
+  transition: transform 1s ease;
+}
+
+.home-image_center:hover {
+  transform: rotate(360deg);
+}
+
+.home-button_conocenos {
+  border-color: #28a745;
+  color: #28a745;
+}
+
+.home-button_conocenos:hover {
+  background-color: #0a9d6d;
+  color: #fff;
+}
+
+/* Estilo específico para el banner */
+.bg-banner {
+  position: relative;
+  padding: 80px 0;
+  color: white;
+}
+
+.banner-title {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  z-index: 99;
+}
+
+.sub-title_banner {
+  font-size: 1.25rem;
+  font-weight: normal;
+  margin-top: 0;
+  z-index: 99;
+}
+
+.btn-asociarte-custom_2 {
+  margin-top: 20px;
+}
+
+/* .bg-banner .bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+} */
+/* opacity: 0.6; */
+/* z-index: -1; */
+
+/* .bg-banner .d-flex {
+  z-index: 1;
+} */
+
+.content-cards {
+  margin-bottom: 200px;
+}
+
+.present-section {
+  display: flex;
+  flex-direction: row; /* Cambia a columna en pantallas pequeñas */
+  align-items: center; /* Centra el contenido */
+  justify-content: center;
+  padding: 50px;
+  min-height: 93vh;
+  background-color: #f9f9f9;
+}
+
+.present-content {
+  flex: 1;
+  padding: 20px; /* Agrega un poco de espacio en pantallas más pequeñas */
+  text-align: center; /* Centra el texto en pantallas pequeñas */
+}
+
+.present-content p {
+  text-align: justify;
+}
+
+.present-image {
+  flex: 1;
+  text-align: center; /* Centra la imagen */
+  margin-top: 20px; /* Espaciado entre el texto y la imagen */
+}
+
+.present-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* about section */
+.content-about_section {
+  width: 100vw;
+  padding: 0 20px;
+}
+.about-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+.container-fluid {
+  padding: 0;
+  margin: 0 auto;
+}
+
+.present-section img {
+  width: 100%;
+  height: auto;
+}
+.bg-video {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.home-title_about_section p {
+  text-align: justify;
+}
+
+/* Segundo video container */
+.container-video_2 {
+  top: 50px;
+  position: relative;
+  width: 100%;
+  background-color: #ffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 20px;
+}
+
+.bg-banner {
+  position: relative;
+  width: 100%;
+  height: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  z-index: 1;
+}
+
+.bg-video {
+  border-radius: 5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.banner-title {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.ley-section img {
+  margin-top: 55px;
+  width: 100%;
+  max-width: 100%;
+  height: 90vh;
+  max-height: 300px;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+/* Subtitulo descripcion ley */
+.home-subTitle_about_section {
+  padding: 0 60px;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+  .banner-title {
+    font-size: 2rem;
+  }
+
+  .sub-title_banner {
+    font-size: 1rem;
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .present-section {
+    flex-direction: column; /* Coloca los elementos en columna */
+    padding: 20px; /* Reduce el padding en pantallas más pequeñas */
+  }
+
+  .present-content {
+    padding: 10px; /* Reduce el padding en pantallas más pequeñas */
+  }
+}
+
+
+/* Despliegue pregunats/respuestas */
+/* Estilo para el summary */
+.toggleFaqs_faqsQuestions__RozJk {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25em 5%;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
+  font-size: 1.25em;
+  line-height: 1.4rem;
+  cursor: pointer;
+  background-color: #f7f7f7;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  color:#0a9d6d;
+  
+}
+.summary-p{
+  padding:10px 50px;
+color:rgb(56, 56, 56);
+}
+
+/* Flecha que indica si el contenido está abierto o cerrado */
+.toggleFaqs_faqsQuestions__arrow {
+  transition: transform 0.3s ease;
+}
+
+.toggleFaqs_faqsQuestions[open] .toggleFaqs_faqsQuestions__arrow {
+  transform: rotate(90deg); /* Rota la flecha cuando el contenido está abierto */
+}
+
+/* Cambiar el color al hacer hover */
+.toggleFaqs_faqsQuestions__RozJk:hover {
+  background-color: #e9e9e9;
+}
+
+/* Estilo para el contenido del <details> que se despliega */
+.toggleFaqs_faqsQuestions details {
+  margin: 10px 0;
+}
+
+/* Estilo para el contenido cuando se abre */
+.toggleFaqs_faqsQuestions details[open] p {
+  padding: 1em 5%;
+  background-color: #f1f1f1;
+  border-top: 1px solid #ddd;
+  font-size: 1em;
+  line-height: 1.6rem;
+}
+
+
+.content-summary {
+  margin-top: -100px; /* Ajusta el valor a tu preferencia */
+}
+
+
