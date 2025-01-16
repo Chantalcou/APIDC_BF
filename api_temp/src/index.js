@@ -101,14 +101,12 @@ app.use("/", authRoutes);
 app.use("/send", mailerRoutes);
 
 // Servir archivos estáticos del frontend
-app.use(express.static(path.join(__dirname, "../client_temp/build")));
-
+app.use(express.static(path.join(__dirname, "../../client_temp/build")));
 
 // Manejar todas las demás rutas para servir el frontend
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client_temp/build", "index.html"));
+  res.sendFile(path.join(__dirname, "../../client_temp/build", "index.html"));
 });
-
 
 
 // Middleware global para manejo de errores
