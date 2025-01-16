@@ -86,7 +86,8 @@ const PORT = process.env.PORT || 5000;
 // Configuración de CORS
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    // origin: "http://localhost:3000",
+    origin: "https://apidc-frontend.onrender.com", 
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
@@ -98,6 +99,17 @@ app.use(bodyParser.json());
 // Rutas
 app.use("/", authRoutes);
 app.use("/send", mailerRoutes);
+
+// Servir archivos estáticos del frontend
+app.use(express.static(path.join(__dirname, "../client_temp/build")));
+
+
+// Manejar todas las demás rutas para servir el frontend
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client_temp/build", "index.html"));
+});
+
+
 
 // Middleware global para manejo de errores
 app.use((err, req, res, next) => {
