@@ -66,7 +66,7 @@ const pool = require("./config/db");
 const sequelize = require("./config/db");
 const bodyParser = require("body-parser");
 const mailerRoutes = require("./routes/nodeMailerRoutes");
-
+const path = require("path");
 // Verifica si faltan variables de entorno críticas
 if (
   !process.env.DB_USER ||
