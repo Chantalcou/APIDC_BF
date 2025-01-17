@@ -67,6 +67,8 @@ const sequelize = require("./config/db");
 const bodyParser = require("body-parser");
 const mailerRoutes = require("./routes/nodeMailerRoutes");
 const path = require("path");
+require("dotenv").config();
+
 // Verifica si faltan variables de entorno críticas
 if (
   !process.env.DB_USER ||
@@ -87,7 +89,7 @@ const PORT = process.env.PORT || 5000;
 app.use(
   cors({
     // origin: "http://localhost:3000",
-    origin: "https://apidc-frontend.onrender.com", 
+    origin: "https://apidc-frontend.onrender.com",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
@@ -107,7 +109,6 @@ app.use(express.static(path.join(__dirname, "../../client_temp/build")));
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client_temp/build", "index.html"));
 });
-
 
 // Middleware global para manejo de errores
 app.use((err, req, res, next) => {

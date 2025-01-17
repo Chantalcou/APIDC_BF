@@ -146,7 +146,7 @@ export const registerUser = (userData, token) => {
     try {
       // Petición POST al endpoint de registro
       const response = await axios.post(
-        `${API_URL}/register`, // Actualiza la URL
+        `${API_URL}/register`,
         {
           email: userData.email,
           name: userData.name,
@@ -161,7 +161,6 @@ export const registerUser = (userData, token) => {
 
       const { user } = response.data;
 
-      console.log(response.data, "esto me deberia devolver todos los users");
       // Despachamos la acción de Redux con los datos del usuario
       dispatch({
         type: REGISTER_USER,
@@ -186,7 +185,7 @@ export const registerUser = (userData, token) => {
 // Acción para enviar los datos del formulario al backend
 export const formInfo = (formData) => async (dispatch) => {
   try {
-    console.log(formData, "AKA ESTA LA DATA QUE VOY A ENVIAR");
+  
     // Enviar los datos al backend
     const response = await axios.post(
       `${API_URL}/send/admin`, // Actualiza la URL

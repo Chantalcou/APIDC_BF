@@ -35,7 +35,6 @@ const Home = () => {
   };
   useEffect(() => {
     if (selectedRole) {
-      console.log("Role updated in useEffect:", selectedRole);
       handleLogin(); //La función de Login actualzia el rol
     }
   }, [selectedRole]); // Ejecutar cuando selectedRole cambie
