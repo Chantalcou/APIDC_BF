@@ -1,34 +1,26 @@
-import { useEffect, useRef } from "react";
+import React from "react";
 
 const VideoComponent = () => {
-  const videoRef = useRef(null);
+  const isMobile = window.innerWidth <= 768;
 
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play().catch((error) => {
-        console.log("Autoplay bloqueado:", error);
-      });
-    }
-  }, []);
+  const videoUrl = isMobile
+    ? "https://res.cloudinary.com/dqgjcfosx/video/upload/w_360,q_50,f_auto/v1234567/7667357-uhd_3840_2160_30fps_nm24my.mp4"
+    : "https://res.cloudinary.com/dqgjcfosx/video/upload/w_720,q_auto,f_auto/v1234567/7667357-uhd_3840_2160_30fps_nm24my.mp4";
 
   return (
-    <div className="video-container">
-      <video
-        ref={videoRef}
-        playsInline
-        muted
-        preload="auto"
-        controls
-        style={{ width: "100%", height: "auto" }}
-      >
-        <source
-          src="https://res.cloudinary.com/dqgjcfosx/video/upload/w_360,q_50,f_auto/v1234567/7667357-uhd_3840_2160_30fps_nm24my.mp4"
-          type="video/mp4"
-        />
-        Your browser does not support the video tag.
-      </video>
-    </div>
+    <video
+      playsInline
+      autoPlay
+      muted
+      controls
+      preload="auto"
+      style={{ width: "100%", height: "auto" }}
+    >
+      <source src={videoUrl} type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
   );
 };
 
 export default VideoComponent;
+
