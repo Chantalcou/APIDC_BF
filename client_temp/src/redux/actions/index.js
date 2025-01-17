@@ -146,7 +146,7 @@ export const registerUser = (userData, token) => {
     try {
       // Petición POST al endpoint de registro
       const response = await axios.post(
-        `${API_URL}/register`,
+        `https://apidc-bf-2.onrender.com/register`,
         {
           email: userData.email,
           name: userData.name,
@@ -185,10 +185,9 @@ export const registerUser = (userData, token) => {
 // Acción para enviar los datos del formulario al backend
 export const formInfo = (formData) => async (dispatch) => {
   try {
-  
     // Enviar los datos al backend
     const response = await axios.post(
-      `${API_URL}/send/admin`, // Actualiza la URL
+      `https://apidc-bf-2.onrender.com/send/admin`, // Actualiza la URL
       formData,
       {
         headers: {
@@ -217,12 +216,15 @@ export const fetchUsers = (token) => {
   return async (dispatch) => {
     try {
       console.log("Token enviado en fetchUsers:", token); // Verifica el token aquí
-      const response = await axios.get(`${API_URL}/users`, {
-        // Actualiza la URL
-        headers: {
-          Authorization: `Bearer ${token}`, // Token de autenticación
-        },
-      });
+      const response = await axios.get(
+        `https://apidc-bf-2.onrender.com/users`,
+        {
+          // Actualiza la URL
+          headers: {
+            Authorization: `Bearer ${token}`, // Token de autenticación
+          },
+        }
+      );
 
       dispatch({
         type: "FETCH_USERS_SUCCESS",
