@@ -1,4 +1,5 @@
 import React from "react";
+import ReactPlayer from "react-player";
 
 const VideoComponent = () => {
   const isMobile = window.innerWidth <= 768;
@@ -8,19 +9,15 @@ const VideoComponent = () => {
     : "https://res.cloudinary.com/dqgjcfosx/video/upload/w_720,q_auto,f_auto/v1234567/7667357-uhd_3840_2160_30fps_nm24my.mp4";
 
   return (
-    <video
-      playsInline
-      autoPlay
-      muted
-      controls
-      preload="auto"
-      style={{ width: "100%", height: "auto" }}
-    >
-      <source src={videoUrl} type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
+    <ReactPlayer
+      url={videoUrl} // URL dinámica según el ancho del dispositivo
+      playing={false} // No se reproduce automáticamente
+      controls={true} // Mostrar controles
+      width="100%" // Ancho completo
+      height="auto" // Altura automática
+      muted={true} // Silenciar para permitir reproducción automática en mobile si necesario
+    />
   );
 };
 
 export default VideoComponent;
-
