@@ -7,7 +7,9 @@ const transporter = nodemailer.createTransport({
     pass: process.env.EMAIL_PASSWORD, // Configurado en tu archivo .env - Password APIDC -
   },
 });
-console.log(process.env.EMAIL_USER, "EMAIL");
+console.log("Email User:", process.env.EMAIL_USER); // Debería imprimir el correo configurado
+console.log("Email Password:", process.env.EMAIL_PASSWORD); // Debería imprimir la contraseña
+
 const sendMail = async (to, subject, text) => {
   try {
     await transporter.sendMail({
