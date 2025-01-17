@@ -86,14 +86,19 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Configuración de CORS
-app.use(
-  cors({
-    // origin: "http://localhost:3000",
-    origin: "https://apidc-bf-2.onrender.com/",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  })
-);
+const cors = require("cors");
+
+// Configurar los orígenes permitidos
+const corsOptions = {
+  origin: ["https://apidc-frontend.onrender.com", "https://apidc-bf-2.onrender.com"],
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+};
+app.options("*", cors(corsOptions)); // Manejar preflight requests
+
+// Middleware de CORS
+app.use(cors(corsOptions));
+
 
 app.use(json()); // Para manejar JSON sin usar bodyParser
 app.use(bodyParser.json());

@@ -134,6 +134,7 @@
 //     }
 //   };
 // };
+
 import { REGISTER_USER, SET_ERROR, SUBMIT_FORM } from "../actions_types";
 import axios from "axios";
 
