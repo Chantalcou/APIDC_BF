@@ -1,0 +1,113 @@
+[33mcommit 1d8eca1589206c8a5db13cfd3fea85d46c82b149[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Chantal <chantiicou@gmail.com>
+Date:   Fri Jan 17 11:04:30 2025 -0300
+
+    mobile-static-image
+
+[33mcommit 20cb259ae57071b82f87bdda930beb0b95923c6b[m
+Author: Chantal <chantiicou@gmail.com>
+Date:   Fri Jan 17 10:42:48 2025 -0300
+
+    optimizando tamaño  video-11-agregando css
+
+[33mcommit e372027ca19b823a081b9e177377c4ccf68acc50[m
+Author: Chantal <chantiicou@gmail.com>
+Date:   Fri Jan 17 10:37:31 2025 -0300
+
+    optimizando tamaño  video-10-version mobile con imagen
+
+[33mcommit 4172eed255d9098b52a9632365a6af5ba0ce8343[m
+Author: Chantal <chantiicou@gmail.com>
+Date:   Fri Jan 17 10:31:44 2025 -0300
+
+    optimizando tamaño  video-9- agregando react-player
+
+[33mcommit 6433fd6f71786ecbd4df73b9f3364d3f25a77f6c[m
+Author: Chantal <chantiicou@gmail.com>
+Date:   Fri Jan 17 10:23:02 2025 -0300
+
+    optimizando tamaño  video-8-componente separado
+
+[33mcommit 9fcb6ac349e6b53b3b629e81e47162e2b74eab7e[m
+Author: Chantal <chantiicou@gmail.com>
+Date:   Fri Jan 17 10:14:01 2025 -0300
+
+    optimizando tamaño  video-7-componente separado
+
+[33mcommit 481a0b6f5fe03c6ecbab528b0bc1fa14ce3b72ba[m
+Author: Chantal <chantiicou@gmail.com>
+Date:   Fri Jan 17 10:04:19 2025 -0300
+
+    optimizando tamaño  video-6-componente separado
+
+[33mcommit 7e991f747bd77a04a8da23eeb1daae877ba84c27[m
+Author: Chantal <chantiicou@gmail.com>
+Date:   Fri Jan 17 09:54:54 2025 -0300
+
+    optimizando tamaño  video-5-componente separado
+
+[33mcommit efa6d0d2befa9e1b9d46eb4b644bab9223ef7027[m
+Author: Chantal <chantiicou@gmail.com>
+Date:   Fri Jan 17 09:39:57 2025 -0300
+
+    optimizando tamaño  video-4
+
+[33mcommit 71866811d8c7714999ed2a93b02472917cbbef0e[m
+Author: Chantal <chantiicou@gmail.com>
+Date:   Fri Jan 17 09:30:11 2025 -0300
+
+    optimizando tamaño  video-3
+
+[33mcommit 1ede5e6adf1a45596da3402cf9e0583f27bd3ff5[m
+Author: Chantal <chantiicou@gmail.com>
+Date:   Fri Jan 17 09:24:35 2025 -0300
+
+    optimizando tamaño  video-2
+
+[33mcommit 1aa20f56230136d07385f39fd4dfe8ea82183e20[m
+Author: Chantal <chantiicou@gmail.com>
+Date:   Fri Jan 17 09:18:07 2025 -0300
+
+    optimizando tamaño  video
+
+[33mcommit 7aa3d1dbf6c141b7562632130340f49e05279256[m
+Author: Chantal <chantiicou@gmail.com>
+Date:   Thu Jan 16 13:56:02 2025 -0300
+
+    Cambiando urls a production
+
+[33mcommit 730090c1ccf3fdf4d34129fa773d3750055df813[m
+Author: Chantal <chantiicou@gmail.com>
+Date:   Thu Jan 16 12:42:57 2025 -0300
+
+    Cambio rutas relativas
+
+[33mcommit 12240c3c9f055973dee9259002ac57e0c889e994[m
+Author: Chantal <chantiicou@gmail.com>
+Date:   Thu Jan 16 12:35:08 2025 -0300
+
+    ruta path agregada
+
+[33mcommit a3ee964daa66acc167ce9037265bbf31db866496[m
+Author: Chantal <chantiicou@gmail.com>
+Date:   Thu Jan 16 12:30:25 2025 -0300
+
+    build added
+
+[33mcommit 94a6b20084e8b698459d6ae98f0531791837a091[m
+Author: Chantal <chantiicou@gmail.com>
+Date:   Thu Jan 16 12:17:09 2025 -0300
+
+    Reemplazando rutas
+
+[33mcommit 201da2ccdfe2bc70cca7f1a5582f4fe7ddf9e5b8[m
+Author: Chantal <chantiicou@gmail.com>
+Date:   Thu Jan 16 10:59:52 2025 -0300
+
+    node/start
+
+[33mcommit 6f348d39141c6f522c5bc25afbb96f4286f2250e[m
+Author: Chantal <chantiicou@gmail.com>
+Date:   Wed Jan 15 11:24:24 2025 -0300
+
+    back-front
