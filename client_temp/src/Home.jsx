@@ -154,21 +154,33 @@ const Home = () => {
       <div>
         <div className="container-fluid p-0 main-content">
           <div className="video-container">
-            <video playsinline controls>
+            {/* <video playsinline controls>
               <source
                 src="https://res.cloudinary.com/dqgjcfosx/video/upload/w_720,q_auto,f_auto/v1234567/7667357-uhd_3840_2160_30fps_nm24my.mp4"
                 type="video/mp4"
               ></source>
               Your browser does not support the video tag.
             </video>
-            {/* <video autoPlay muted loop className="home-bg-video">
+   */}
+            <video
+              playsInline
+              controls
+              autoPlay
+              muted
+              style={{ width: "100%", height: "auto" }}
+            >
               <source
-                src="https://res.cloudinary.com/dqgjcfosx/video/upload/w_720,q_auto,f_auto/v1234567/7667357-uhd_3840_2160_30fps_nm24my.mp4"
-
+                media="(max-width: 768px)"
+                src="https://res.cloudinary.com/dqgjcfosx/video/upload/w_480,q_auto,f_auto/v1234567/7667357-uhd_3840_2160_30fps_nm24my.mp4"
+                type="video/mp4"
+              />
+              <source
+                media="(min-width: 769px)"
+                src="https://res.cloudinary.com/dqgjcfosx/video/upload/w_1080,q_auto,f_auto/v1234567/7667357-uhd_3840_2160_30fps_nm24my.mp4"
                 type="video/mp4"
               />
               Your browser does not support the video tag.
-            </video> */}
+            </video>
             <div className="static-content d-flex flex-column justify-content-center align-items-center h-100">
               {/* Texto agregado sobre el logo */}
               <h1 className="welcome-name">
