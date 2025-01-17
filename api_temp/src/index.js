@@ -89,7 +89,7 @@ const PORT = process.env.PORT || 5000;
 app.use(
   cors({
     // origin: "http://localhost:3000",
-    origin: "https://apidc-frontend.onrender.com",
+    origin: "https://apidc-bf-2.onrender.com/",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
