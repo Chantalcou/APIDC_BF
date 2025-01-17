@@ -58,6 +58,7 @@
 // });
 
 // sequelize.sync({ force: false });
+
 require("dotenv").config();
 const cors = require("cors");
 const { json } = require("express");
@@ -67,7 +68,6 @@ const sequelize = require("./config/db");
 const bodyParser = require("body-parser");
 const mailerRoutes = require("./routes/nodeMailerRoutes");
 const path = require("path");
-require("dotenv").config();
 
 // Verifica si faltan variables de entorno críticas
 if (
