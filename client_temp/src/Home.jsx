@@ -156,7 +156,8 @@ const Home = () => {
           <div className="video-container">
             <video autoPlay muted loop className="home-bg-video">
               <source
-                src="https://res.cloudinary.com/dqgjcfosx/video/upload/v1735916939/7667357-uhd_3840_2160_30fps_nm24my.mp4"
+                src="https://res.cloudinary.com/dqgjcfosx/video/upload/q_auto,f_auto/v1735916939/7667357-uhd_3840_2160_30fps_nm24my.mp4
+"
                 type="video/mp4"
               />
               Your browser does not support the video tag.
