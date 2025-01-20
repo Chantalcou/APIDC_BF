@@ -99,7 +99,6 @@ const corsOptions = {
   origin: [
     "https://apidc-frontend.onrender.com",
     "https://apidc-bf-2.onrender.com",
-    "http://localhost:3000",
   ],
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
