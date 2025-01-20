@@ -77,20 +77,20 @@ const registerUser = async (req, res) => {
     // Verificar si el usuario ya existe
     const userExists = await User.findOne({ where: { email } });
     const isAdmin = email === process.env.ADMIN_EMAIL;
-
+    console.log(isAdmin, "ADMIN EMAIL");
     if (userExists) {
       if (isAdmin) {
-
-        const userAmin = await User.findOne({
+        console.log("entro a es admin?");
+        const userAdmin = await User.findOne({
           attributes: ["id", "name", "email", "isAdmin"],
         });
         const users = await User.findAll({
           attributes: ["id", "name", "email", "isAdmin"], // Obtener todos los usuarios
         });
-      
+        console.log(userAdmin, "userAdmin");
         return res.status(200).json({
           message: "Usuario ya registrado y es admin",
-          userAmin,
+          userAdmin,
           users,
         });
       }
