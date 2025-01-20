@@ -7,6 +7,7 @@ export const registerUser = (userData, token) => {
     try {
       // Petición POST al endpoint de registro
       const response = await axios.post(
+        // "http://localhost:5001/register",
         "https://apidc-bf-2.onrender.com/register",
         {
           email: userData.email,
@@ -31,8 +32,6 @@ export const registerUser = (userData, token) => {
 
       // Guardamos si el usuario es admin en el localStorage
       localStorage.setItem("isAdmin", user.isAdmin);
-
-      // Aquí se puede manejar cualquier lógica adicional, como redirigir al usuario
     } catch (error) {
       console.error("Error registrando usuario:", error);
       dispatch({
@@ -48,6 +47,7 @@ export const formInfo = (formData) => async (dispatch) => {
   try {
     // Enviar los datos al backend
     const response = await axios.post(
+      // "http://localhost:5001/send/admin",
       "https://apidc-bf-2.onrender.com/send/admin",
 
       formData,
@@ -79,6 +79,7 @@ export const fetchUsers = (token) => {
     try {
       console.log("Token enviado en fetchUsers:", token); // Verifica el token aquí
       const response = await axios.get(
+        // "http://localhost:5001/users",
         `https://apidc-bf-2.onrender.com/users`,
         {
           // Actualiza la URL
