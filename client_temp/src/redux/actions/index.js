@@ -21,6 +21,10 @@ export const registerUser = (userData, token) => {
       );
 
       const { user } = response.data;
+      console.log(
+        response.data.userAdmin.isAdmin,
+        "response.data.userAdmin.isAdmin "
+      );
       // Despachamos la acción de Redux con los datos del usuario
       dispatch({
         type: REGISTER_USER,
@@ -36,7 +40,6 @@ export const registerUser = (userData, token) => {
         type: SET_ERROR,
         payload: error.response ? error.response.data : error.message,
       });
-      
     }
   };
 };
