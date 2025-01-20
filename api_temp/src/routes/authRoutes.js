@@ -10,6 +10,7 @@ const router = express.Router();
 
 // Ruta para registrar usuario (no requiere autenticación)
 router.post("/register", registerUser);
+              
 
 // Ruta para iniciar sesión (no requiere autenticación)
 router.post("/login", loginUser);
