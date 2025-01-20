@@ -90,7 +90,7 @@ const registerUser = async (req, res) => {
         console.log(userAdmin, "userAdmin");
         return res.status(200).json({
           message: "Usuario ya registrado y es admin",
-          userAdmin,
+          userAdmin: userAdmin || null,
           users,
         });
       }

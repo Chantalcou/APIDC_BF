@@ -85,16 +85,26 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Configurar los orígenes permitidos
+// LOCAL
+// app.use(
+//   cors({
+//     origin: "http://localhost:3000",
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//     credentials: true,
+//   })
+// );
+
+// Configurar los orígenes permitidos - DESARROLLO
 const corsOptions = {
   origin: [
     "https://apidc-frontend.onrender.com",
     "https://apidc-bf-2.onrender.com",
+    "http://localhost:3000",
   ],
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
 };
-app.options("*", cors(corsOptions)); // Manejar preflight requests
+app.options("*", cors(corsOptions));
 
 app.use(json()); // Para manejar JSON sin usar bodyParser
 app.use(bodyParser.json());

@@ -139,15 +139,16 @@ import { REGISTER_USER, SET_ERROR, SUBMIT_FORM } from "../actions_types";
 import axios from "axios";
 
 // Dirección base de tu API en producción
-const API_URL = "https://apidc-bf-2.onrender.com"; // Cambia localhost a la URL de producción
-
+// const API_URL = "https://apidc-bf-2.onrender.com";
+const API_URL = process.env.REACT_APP_API_URL_DESARROLLO;
+console.log(API_URL, "APIURL");
 // Acción para registrar al usuario usando Axios
 export const registerUser = (userData, token) => {
   return async (dispatch) => {
     try {
       // Petición POST al endpoint de registro
       const response = await axios.post(
-        `https://apidc-bf-2.onrender.com/register`,
+        `${API_URL}/register`,
         {
           email: userData.email,
           name: userData.name,
@@ -161,11 +162,11 @@ export const registerUser = (userData, token) => {
       );
 
       const { user } = response.data;
-
+      console.log(user, "USER EN EL ACTIONS");
       // Despachamos la acción de Redux con los datos del usuario
       dispatch({
         type: REGISTER_USER,
-        payload: response.data.userAmin.isAdmin,
+        payload: response.data.userAdmin.isAdmin || null,
         allUsers: response.data.users,
       });
 
@@ -188,7 +189,7 @@ export const formInfo = (formData) => async (dispatch) => {
   try {
     // Enviar los datos al backend
     const response = await axios.post(
-      `https://apidc-bf-2.onrender.com/send/admin`, // Actualiza la URL
+      `${API_URL}/send/admin`, // Actualiza la URL
       formData,
       {
         headers: {
@@ -217,15 +218,12 @@ export const fetchUsers = (token) => {
   return async (dispatch) => {
     try {
       console.log("Token enviado en fetchUsers:", token); // Verifica el token aquí
-      const response = await axios.get(
-        `https://apidc-bf-2.onrender.com/users`,
-        {
-          // Actualiza la URL
-          headers: {
-            Authorization: `Bearer ${token}`, // Token de autenticación
-          },
-        }
-      );
+      const response = await axios.get(`${API_URL}/users`, {
+        // Actualiza la URL
+        headers: {
+          Authorization: `Bearer ${token}`, // Token de autenticación
+        },
+      });
 
       dispatch({
         type: "FETCH_USERS_SUCCESS",
