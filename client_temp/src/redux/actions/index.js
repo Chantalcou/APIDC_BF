@@ -147,8 +147,9 @@ export const registerUser = (userData, token) => {
   return async (dispatch) => {
     try {
       // Petición POST al endpoint de registro
+      // `${API_URL}/register`,
       const response = await axios.post(
-        `${API_URL}/register`,
+        'https://apidc-bf-2.onrender.com/register',
         {
           email: userData.email,
           name: userData.name,
@@ -189,7 +190,8 @@ export const formInfo = (formData) => async (dispatch) => {
   try {
     // Enviar los datos al backend
     const response = await axios.post(
-      `${API_URL}/send/admin`, // Actualiza la URL
+         'https://apidc-bf-2.onrender.com/send/admin',
+      // `${API_URL}/send/admin`, 
       formData,
       {
         headers: {
