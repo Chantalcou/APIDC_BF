@@ -7,7 +7,6 @@ export const registerUser = (userData, token) => {
     try {
       // Petición POST al endpoint de registro
       const response = await axios.post(
-        // "http://localhost:5001/register",
         "https://apidc-bf-2.onrender.com/register",
         {
           email: userData.email,
