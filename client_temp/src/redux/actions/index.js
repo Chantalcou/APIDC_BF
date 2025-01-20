@@ -142,6 +142,7 @@ import axios from "axios";
 // const API_URL = "https://apidc-bf-2.onrender.com";
 const API_URL = process.env.REACT_APP_API_URL_DESARROLLO;
 console.log(API_URL, "APIURL");
+
 // Acción para registrar al usuario usando Axios
 export const registerUser = (userData, token) => {
   return async (dispatch) => {
@@ -149,11 +150,12 @@ export const registerUser = (userData, token) => {
       // Petición POST al endpoint de registro
       // `${API_URL}/register`,
       const response = await axios.post(
-        'https://apidc-bf-2.onrender.com/register',
+        "https://apidc-bf-2.onrender.com/register",
         {
           email: userData.email,
           name: userData.name,
         },
+        { credentials: "include" },
         {
           headers: {
             "Content-Type": "application/json",
@@ -190,8 +192,8 @@ export const formInfo = (formData) => async (dispatch) => {
   try {
     // Enviar los datos al backend
     const response = await axios.post(
-         'https://apidc-bf-2.onrender.com/send/admin',
-      // `${API_URL}/send/admin`, 
+      "https://apidc-bf-2.onrender.com/send/admin",
+      // `${API_URL}/send/admin`,
       formData,
       {
         headers: {

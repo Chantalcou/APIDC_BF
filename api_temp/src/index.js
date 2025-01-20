@@ -96,7 +96,8 @@ const PORT = process.env.PORT || 5000;
 
 // Configurar los orígenes permitidos - DESARROLLO
 const corsOptions = {
-  origin: "https://apidc-bf-2.onrender.com",
+  origin: "https://apidc-bf-2.onrender.com/",
+
   methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
   credentials: true,
 };
