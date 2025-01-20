@@ -5,19 +5,18 @@ import axios from "axios";
 export const registerUser = (userData, token) => {
   return async (dispatch) => {
     try {
-      // Petición POST al endpoint de registro
       const response = await axios.post(
         "https://apidc-bf-2.onrender.com/register",
         {
           email: userData.email,
           name: userData.name,
         },
-        { credentials: "include" },
         {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
+          withCredentials: true, // Asegúrate de que la cookie pueda ser enviada/recibida
         }
       );
 
@@ -35,8 +34,9 @@ export const registerUser = (userData, token) => {
       console.error("Error registrando usuario:", error);
       dispatch({
         type: SET_ERROR,
-        payload: error.message,
+        payload: error.response ? error.response.data : error.message,
       });
+      
     }
   };
 };
