@@ -72,12 +72,16 @@ const verifyToken = async (req, res, next) => {
 
 const registerUser = async (req, res) => {
   const { name, email } = req.body;
-
+  console.log(name, email, " name, email s");
   try {
     // Verificar si el usuario ya existe
     const userExists = await User.findOne({ where: { email } });
+    console.log(userExists, "userExists");
     const isAdmin = email === process.env.ADMIN_EMAIL;
-    console.log(isAdmin, "ADMIN EMAIL");
+    console.log(
+      isAdmin,
+      "ADMIN=> ESTO ME DEVUELVE TRUE EN EL CASO DE SER ADMIN"
+    );
     if (userExists) {
       if (isAdmin) {
         console.log("entro a es admin?");
@@ -87,7 +91,7 @@ const registerUser = async (req, res) => {
         const users = await User.findAll({
           attributes: ["id", "name", "email", "isAdmin"], // Obtener todos los usuarios
         });
-        console.log(userAdmin, "userAdmin");
+        console.log("userAdmin", userAdmin);
         return res.status(200).json({
           message: "Usuario ya registrado y es admin",
           userAdmin: userAdmin || null,
@@ -99,6 +103,8 @@ const registerUser = async (req, res) => {
         message: "El usuario ya está registrado.",
         user: userExists,
       });
+
+      console.log("User:", user, "User Admin", userAdmin);
     }
 
     // Crear nuevo usuario

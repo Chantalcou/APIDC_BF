@@ -3,21 +3,21 @@ import { REGISTER_USER, SET_ERROR } from "../actions_types";
 const initialState = {
   user: null,
   isAdmin: false,
-  users: [], 
+  users: [],
   error: null,
 };
 
 const reducer = (state = initialState, action) => {
-  console.log(action)
+  console.log(action);
   switch (action.type) {
     case REGISTER_USER:
+      console.log(action, "reducer");
       return {
         ...state,
-        user: action.payload,  
+        user: action.payload,
         isAuthenticated: true,
         isAdmin: action.payload,
-        users: action.allUsers,  
-        
+        users: action.allUsers,
       };
     case "FETCH_USERS_SUCCESS":
       return {

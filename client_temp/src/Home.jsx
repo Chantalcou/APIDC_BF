@@ -9,6 +9,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import SpinnerComponent from "./components/SpinnerComponent.jsx";
 import GestionarReprocan from "./components/GestionarReprocan.jsx";
 import MovingBanner from "./components/MovingBanner.jsx";
+import { WorkTogether } from "./components/WorkTogether.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./Home.css";
@@ -119,7 +120,7 @@ const Home = () => {
 
   return (
     <>
-    {/* Optimización SEO */}
+      {/* Optimización SEO */}
       <Helmet>
         <title>Inicio - Asociación Civil para el Cannabis Terapéutico</title>
         <meta
@@ -153,12 +154,9 @@ const Home = () => {
       <div>
         <div className="container-fluid p-0 main-content">
           <div className="video-container">
-
-          
             <video autoPlay muted loop className="home-bg-video">
               <source
                 src="https://res.cloudinary.com/dqgjcfosx/video/upload/w_720,q_auto,f_auto/v1234567/7667357-uhd_3840_2160_30fps_nm24my.mp4"
-
                 type="video/mp4"
               />
               Your browser does not support the video tag.
@@ -546,6 +544,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <WorkTogether />
     </>
   );
 };

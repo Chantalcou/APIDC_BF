@@ -14,6 +14,8 @@ const NavBar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
+  const userAdmin = useSelector((state) => state.userAdmin); // Asegúrate de que esto esté accediendo correctamente
+  // console.log(userAdmin);
   const isAdmin = useSelector((state) => state.isAdmin);
   const userFromRedux = useSelector((state) => state.user);
 
@@ -42,7 +44,7 @@ const NavBar = () => {
           const token = await getAccessTokenSilently();
           console.log("Token generado:", token);
           dispatch(registerUser(user, token)); // Despacha la acción de registro
-          console.log(user.isAdmin, "AS ADMIN"); // Usar directamente el valor de user.isAdmin
+          console.log(user, "IS ADMIN"); // Usar directamente el valor de user.isAdmin
 
           // Si es admin, realizar la acción de obtener usuarios
           if (user.isAdmin) {

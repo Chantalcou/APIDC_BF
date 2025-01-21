@@ -5,8 +5,9 @@ import axios from "axios";
 export const registerUser = (userData, token) => {
   return async (dispatch) => {
     try {
+      //  " http://localhost:5001/register"
       const response = await axios.post(
-        "https://apidc-bf-2.onrender.com/register",
+        "http://localhost:5001/register",
         {
           email: userData.email,
           name: userData.name,
@@ -20,20 +21,34 @@ export const registerUser = (userData, token) => {
         }
       );
 
-      const { user } = response.data;
-      console.log(
-        response.data.userAdmin.isAdmin,
-        "response.data.userAdmin.isAdmin "
-      );
+      console.log(response.data, "esto me llega del back al front");
+
       // Despachamos la acción de Redux con los datos del usuario
-      dispatch({
-        type: REGISTER_USER,
-        payload: response.data.userAdmin.isAdmin || null,
-        allUsers: response.data.users,
-      });
+      // const { user, userAdmin, users } = response.data;
+
+      // if (userAdmin) {
+
+      //   dispatch({
+      //     type: REGISTER_USER,
+      //     payload: userAdmin.isAdmin || null, // Si es admin, se devuelve su valor, de lo contrario null
+      //     allUsers: users, // Devuelves todos los usuarios
+      //   });
+      //   console.log("Dispatch ejecutado", { userAdmin, users });
+      // } else {
+      //   dispatch({
+      //     type: SET_ERROR,
+      //     payload: "Error: No se encontró información de admin.",
+      //   });
+      // }
+
+      // dispatch({
+      //   type: REGISTER_USER,
+      //   payload: response.data.userAdmin.isAdmin || null,
+      //   allUsers: response.data.users,
+      // });
 
       // Guardamos si el usuario es admin en el localStorage
-      localStorage.setItem("isAdmin", user.isAdmin);
+      // localStorage.setItem("isAdmin", user.isAdmin);
     } catch (error) {
       console.error("Error registrando usuario:", error);
       dispatch({
@@ -50,7 +65,7 @@ export const formInfo = (formData) => async (dispatch) => {
     // Enviar los datos al backend
     const response = await axios.post(
       // "http://localhost:5001/send/admin",
-      "https://apidc-bf-2.onrender.com/send/admin",
+      "http://localhost:5001/send/admin",
 
       formData,
       {
@@ -82,7 +97,7 @@ export const fetchUsers = (token) => {
       console.log("Token enviado en fetchUsers:", token); // Verifica el token aquí
       const response = await axios.get(
         // "http://localhost:5001/users",
-        `https://apidc-bf-2.onrender.com/users`,
+        `http://localhost:5001/users`,
         {
           // Actualiza la URL
           headers: {
@@ -103,4 +118,31 @@ export const fetchUsers = (token) => {
       });
     }
   };
+};
+
+// Este formulario nos va a enviar 'Trabajemos juntos'
+export const sendWorkTogether = (formData) => async (dispatch) => {
+  console.log(formData, "form data entro????");
+
+  try {
+    const response = await axios.post(
+      "http://localhost:5001/send/workWithUs",
+
+      formData,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    dispatch({
+      type: "SEND_FORM_SUCCESS",
+      payload: response.data, // Aquí puedes enviar una respuesta que diga "correo enviado"
+    });
+  } catch (error) {
+    dispatch({
+      type: "SEND_FORM_FAIL",
+      payload: error.response ? error.response.data : "Error desconocido",
+    });
+  }
 };

@@ -1,0 +1,145 @@
+import React, { useState } from "react";
+import { send } from "emailjs-com";
+import { sendWorkTogether } from "../redux/actions/index";
+import ButtonComponent from "./Button";
+import { useDispatch } from "react-redux";
+import "./WorkTogether.css";
+
+export const WorkTogether = () => {
+  const dispatch = useDispatch();
+
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    message: "",
+  });
+
+  const [errors, setErrors] = useState({});
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const validateField = (name, value) => {
+    const newErrors = { ...errors };
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+    switch (name) {
+      case "fullName":
+        if (!value.trim()) {
+          newErrors.fullName = "Por favor escriba su nombre.";
+        } else {
+          delete newErrors.fullName;
+        }
+        break;
+      case "email":
+        if (!emailRegex.test(value)) {
+          newErrors.email = "Por favor, escriba un email válido.";
+        } else {
+          delete newErrors.email;
+        }
+        break;
+      case "message":
+        if (!value.trim()) {
+          newErrors.message = "El mensaje no puede estar vacío.";
+        } else {
+          delete newErrors.message;
+        }
+        break;
+      default:
+        break;
+    }
+
+    setErrors(newErrors);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    validateField(name, value);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Verificar si hay errores
+    const hasErrors = Object.keys(errors).length > 0;
+
+    if (!hasErrors) {
+      dispatch(sendWorkTogether(formData));
+      setIsSubmitted(true); // Esto indica que el formulario fue enviado
+    }
+  };
+
+  return (
+    <div className="work-together">
+      <video className="background-video" autoPlay muted loop>
+        <source
+          src="https://res.cloudinary.com/dqgjcfosx/video/upload/v1737463914/8243034-uhd_2160_3840_24fps_bsifnn.mp4"
+          type="video/mp4"
+        />
+        Tu navegador no soporta videos HTML5.
+      </video>
+      <div className="content-work_together">
+        <h2 className="work-together-title">¡Trabajemos juntos!</h2>
+        {isSubmitted ? (
+          <div className="success-message">
+            ¡Gracias por contactarte con nosotros!
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="work-together-form">
+            <div className="form-group">
+              <label htmlFor="fullName">Nombre Completo</label>
+              <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                value={formData.fullName}
+                onChange={handleChange}
+                className={errors.fullName ? "error" : ""}
+              />
+              {errors.fullName && (
+                <span className="error-message">{errors.fullName}</span>
+              )}
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className={errors.email ? "error" : ""}
+              />
+              {errors.email && (
+                <span className="error-message">{errors.email}</span>
+              )}
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="message">Mensaje</label>
+              <textarea
+                id="message"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                className={errors.message ? "error" : ""}
+              />
+              {errors.message && (
+                <span className="error-message">{errors.message}</span>
+              )}
+            </div>
+
+            <ButtonComponent
+              text="Enviar"
+              color={{
+                background: "transparent",
+                text: "#ffffff",
+                border: "2px solid white",
+              }}
+              // Aquí llamamos a la función handleSubmit
+            />
+          </form>
+        )}
+      </div>
+    </div>
+  );
+};

@@ -24,14 +24,22 @@ const sendEmailToUser = async (req, res) => {
 
 //Email que le llega a APIDC con la info del usuario
 const sendEmailToAdmin = async (req, res) => {
+  console.log("Ruta /send/workWithUs alcanzada");
   try {
     console.log("Datos recibidos:", req.body);
 
-    const { fullName, lastName, email, phone, reprocanNumber, memberType,message } =
-      req.body;
+    const {
+      fullName,
+      lastName,
+      email,
+      phone,
+      reprocanNumber,
+      memberType,
+      message,
+    } = req.body;
     console.log("Datos recibidos en el backend:", req.body);
 
-    if (!fullName || !lastName || !email || !phone ) {
+    if (!fullName || !lastName || !email || !phone) {
       console.error("Faltan datos obligatorios:", {
         fullName,
         lastName,
@@ -60,4 +68,40 @@ const sendEmailToAdmin = async (req, res) => {
   }
 };
 
-module.exports = { sendEmailToUser, sendEmailToAdmin };
+//Email que le llega a APIDC-work with us
+const sendEmailWorkTogether = async (req, res) => {
+  console.log("Ruta /send/workWithUs alcanzada");
+  try {
+    console.log("Datos recibidos:", req.body);
+
+    const { email, fullName, message } = req.body;
+    console.log("Datos recibidos en el backend:", req.body);
+
+    if (!email || !fullName || !message) {
+      console.error("Faltan datos obligatorios:", {
+        email,
+        fullName,
+        message,
+      });
+      return res.status(400).json({ error: "Faltan datos" });
+    }
+
+    await sendMail(
+      process.env.EMAIL_USER,
+      "Nuevo mensaje recibido",
+      `Has recibido un mensaje para trabajar con nosotros de: Email: ${email}: Nombre completo: ${fullName} , Email: ${email}, mensaje: ${message}`
+    );
+
+    console.log("Correo enviado exitosamente");
+    res
+      .status(200)
+      .json({ message: "Correo enviado exitosamente al administrador" });
+  } catch (error) {
+    console.error("Error en sendEmailToAdmin:", error.message);
+    res
+      .status(500)
+      .json({ error: "Error al enviar el correo", details: error.message });
+  }
+};
+
+module.exports = { sendEmailToUser, sendEmailToAdmin,sendEmailWorkTogether };
