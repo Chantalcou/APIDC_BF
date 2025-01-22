@@ -12,6 +12,7 @@ export const WorkTogether = () => {
     fullName: "",
     email: "",
     message: "",
+     areaOfInterest: ""
   });
 
   const [errors, setErrors] = useState({});
@@ -43,6 +44,14 @@ export const WorkTogether = () => {
           delete newErrors.message;
         }
         break;
+      case "areaOfInterest":
+        if (!value) {
+          newErrors.areaOfInterest =
+            "Por favor, selecciona un área de interés.";
+        } else {
+          delete newErrors.areaOfInterest;
+        }
+        break;
       default:
         break;
     }
@@ -53,8 +62,13 @@ export const WorkTogether = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    validateField(name, value);
+    if (name === "areaOfInterest") {
+      validateField(name, value); // Si necesitas validación adicional
+    } else {
+      validateField(name, value);
+    }
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -125,6 +139,28 @@ export const WorkTogether = () => {
               />
               {errors.message && (
                 <span className="error-message">{errors.message}</span>
+              )}
+            </div>
+            <div className="form-group">
+              <label htmlFor="areaOfInterest">Área de interés</label>
+              <select
+                id="areaOfInterest"
+                name="areaOfInterest"
+                value={formData.areaOfInterest}
+                onChange={handleChange}
+                className={errors.areaOfInterest ? "error" : ""}
+              >
+                <option value="">Selecciona una opción</option>
+                <option value="medicos">Médicos</option>
+                <option value="ingenierosAgronomos">
+                  Ingenieros Agrónomos
+                </option>
+                <option value="administracion">Administración</option>
+                <option value="tecnicosCultivo">Técnicos en Cultivo</option>
+                <option value="ayudantesCultivo">Ayudantes de Cultivo</option>
+              </select>
+              {errors.areaOfInterest && (
+                <span className="error-message">{errors.areaOfInterest}</span>
               )}
             </div>
 

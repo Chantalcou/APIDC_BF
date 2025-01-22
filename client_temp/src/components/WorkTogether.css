@@ -144,3 +144,25 @@ textarea {
   font-weight: bold;
   margin-top: 20px;
 }
+
+
+select {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  font-size: 1rem;
+  color: #333;
+}
+
+select:focus {
+  outline: none;
+  border-color: #007b5e;
+  box-shadow: 0 0 5px rgba(0, 123, 94, 0.5);
+}
+
+.error-message {
+  color: red;
+  font-size: 0.9rem;
+}

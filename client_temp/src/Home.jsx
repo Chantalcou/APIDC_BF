@@ -251,7 +251,10 @@ const Home = () => {
               </div>
             </div>
             <div className="static-content d-flex flex-column justify-content-center align-items-center mt-5 h-100 position-relative">
-              <ScrollArrow onClick={() => scrollToSection("ley-section")} />
+              <ScrollArrow
+                onClick={() => scrollToSection("ley-section")}
+                color=" #202020"
+              />
             </div>
 
             <div id="ley-section" className="ley-section text-center">
@@ -278,7 +281,7 @@ const Home = () => {
               </p>
               <div className="static-content d-flex flex-column justify-content-center align-items-center mt-5 h-100 position-relative">
                 <ScrollArrow
-                  onClick={() => scrollToSection("present-section")}
+                  onClick={() => scrollToSection("present-section")}color=" #202020" 
                 />
               </div>
             </div>
@@ -320,7 +323,7 @@ const Home = () => {
 
             <div className="static-content d-flex flex-column justify-content-center align-items-center h-100 position-relative">
               <ScrollArrow
-                onClick={() => scrollToSection("membership-section")}
+                onClick={() => scrollToSection("membership-section")}color=" #202020" 
               />
             </div>
           </div>
@@ -546,7 +549,7 @@ const Home = () => {
         </div>
       </div>
       <WorkTogether />
-      <ContactInfo/>
+      <ContactInfo />
     </>
   );
 };

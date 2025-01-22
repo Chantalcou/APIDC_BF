@@ -1,37 +1,108 @@
+/* Products Section */
 .products-section {
-  padding: 2rem;
-  background-color: #f9f9f9;
+  padding: 4rem 2rem;
+  background-color: #ffffff;
+  margin-top: 100px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
   text-align: center;
 }
 
 .section-title {
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: 1.5rem;
-  color: #333;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #000;
 }
 
+/* Product Grid */
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  padding: 1rem;
+  grid-template-columns: repeat(3, 1fr); /* Tres columnas */
+  gap: 2rem;
+  padding: 0 1rem;
 }
 
 .product-card {
-  background: #fff;
-  border-radius: 8px;
+  position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease-in-out;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 }
 
 .product-card:hover {
-  transform: translateY(-5px);
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Image Container */
+.image-container {
+  overflow: hidden;
+  /* border-radius: 12px; */
+  position: relative;
 }
 
 .product-image {
   width: 100%;
-  height: auto;
-  display: block;
+  height: 300px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.1);
+}
+
+/* Product Info */
+.product-info {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.product-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0.5rem 0;
+  color: #333;
+}
+
+.product-description {
+  font-size: 1rem;
+  color: #666;
+  margin: 0;
+  padding: 10px 10px;
+  text-align: justify;
+}
+.product-title {
+  color: #ffff;
+  font-size: 3rem;
+  text-align: center;
+  /* text-align: justify; */
+}
+
+.custom-scroll-arrow_products {
+  color: white !important; /* Color predeterminado */
+  font-size: 2rem; /* Ajusta el tamaño si es necesario */
+  transition: color 0.3s ease; /* Transición suave */
+}
+.custom-scroll-arrow_products:hover {
+  color: #0a9d6d;
+}
+/* Responsiveness */
+@media (max-width: 768px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas en tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .products-grid {
+    grid-template-columns: 1fr; /* Una columna en móviles */
+  }
 }

@@ -42,10 +42,7 @@ const NavBar = () => {
       if (isAuthenticated && user) {
         try {
           const token = await getAccessTokenSilently();
-          console.log("Token generado:", token);
           dispatch(registerUser(user, token)); // Despacha la acción de registro
-          console.log(user, "IS ADMIN"); // Usar directamente el valor de user.isAdmin
-
           // Si es admin, realizar la acción de obtener usuarios
           if (user.isAdmin) {
             dispatch(fetchUsers(token)); // Solo llamar si el usuario es admin
@@ -190,7 +187,10 @@ const NavBar = () => {
                       {userFromRedux?.name || user?.name}
                     </span>
                   </Nav.Link>
-                  
+                  <Link to="/products" className="nav-link">
+                      Productos
+                    </Link>
+
                   {isAuthenticated && user && isAdmin && (
                     <Link to="/dashboard" className="nav-link">
                       Dashboard

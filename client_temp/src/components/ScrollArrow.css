@@ -6,11 +6,11 @@
   transform: translate(
     -50%,
     0
-  ); /* Asegúrate de que esté centrado horizontalmente */
+  ); 
   cursor: pointer;
-  font-size: 2rem; /* Ajusta el tamaño según tu diseño */
-  color: #202020; /* Cambia el color según tu diseño */
-  animation: bounce 1s infinite; /* Animación de rebote opcional */
+  font-size: 2rem;
+  /* color: */
+  animation: bounce 1s infinite; 
 }
 
 @keyframes bounce {
