@@ -5,6 +5,7 @@ import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser, fetchUsers } from "../redux/actions/index";
 import BreadCrumRoutes from "./BreadCrumbRoutes";
+import ProductsSection from "./ProductsSection";
 import LoginModal from "./LoginModal";
 import $ from "jquery";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -14,8 +15,7 @@ const NavBar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
-  const userAdmin = useSelector((state) => state.userAdmin); // Asegúrate de que esto esté accediendo correctamente
-  // console.log(userAdmin);
+  const userAdmin = useSelector((state) => state.userAdmin);
   const isAdmin = useSelector((state) => state.isAdmin);
   const userFromRedux = useSelector((state) => state.user);
 
@@ -168,12 +168,18 @@ const NavBar = () => {
             <Nav className="ms-auto align-items-center">
               <Nav.Link href="/">Inicio</Nav.Link>
               {shouldShowAsociate && (
+                <Nav.Link onClick={() => scrollToSection("about-section")}>
+                  Nosotros
+                </Nav.Link>
+              )}
+              {shouldShowAsociate && (
                 <Nav.Link onClick={() => scrollToSection("asociarme-section")}>
                   Asociate
                 </Nav.Link>
               )}
               {isAuthenticated && user ? (
                 <>
+                  {/* <Nav.Link href="/products">Productos</Nav.Link> */}
                   <Nav.Link href="#" className="d-flex align-items-center">
                     <img
                       src={user.picture}
@@ -184,6 +190,7 @@ const NavBar = () => {
                       {userFromRedux?.name || user?.name}
                     </span>
                   </Nav.Link>
+                  
                   {isAuthenticated && user && isAdmin && (
                     <Link to="/dashboard" className="nav-link">
                       Dashboard

@@ -9,6 +9,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import SpinnerComponent from "./components/SpinnerComponent.jsx";
 import GestionarReprocan from "./components/GestionarReprocan.jsx";
 import MovingBanner from "./components/MovingBanner.jsx";
+import ContactInfo from "./components/ContactInfo.jsx";
 import { WorkTogether } from "./components/WorkTogether.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -480,7 +481,7 @@ const Home = () => {
               </div>
             </div>
             <GestionarReprocan />
-            <h1 className="mt-5">Nuestros convenios</h1>
+            <h1 className="mt-5">Nuestros aliados</h1>
             <div>
               <MovingBanner logos={logos} />
             </div>
@@ -545,6 +546,7 @@ const Home = () => {
         </div>
       </div>
       <WorkTogether />
+      <ContactInfo/>
     </>
   );
 };

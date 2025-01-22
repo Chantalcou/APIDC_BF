@@ -16,30 +16,32 @@ import { HelmetProvider } from "react-helmet-async"; //Optimización SEO
 // import Admin from "./components/Admin";
 // import ProtectedRoute from "./components/ProtectedRoute";
 import "bootstrap/dist/css/bootstrap.min.css";
+import ProductsSection from "./components/ProductsSection";
 
 const App = () => {
   return (
     <>
-    <HelmetProvider> 
-      <NavBar />
-      {/* <BreadcrumbsRoutes /> */}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/gestor" element={<Gestor />} />
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />
-        <Route path="/contacto" element={<ContactForm />} />
-        <Route path="/SocioConReprocan" element={<SocioConReprocan />} />
-        <Route path="/SocioSinReprocan" element={<SocioSinReprocan />} />
-        <Route path="/newsletter" element={<Newsletter />} />
-        {/* <Route path="/loguin" element={<Loguin />} />  */}
-        {/* <Route
+      <HelmetProvider>
+        <NavBar />
+        {/* <BreadcrumbsRoutes /> */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/gestor" element={<Gestor />} />
+          <Route path="/products" element={<ProductsSection />} />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/contacto" element={<ContactForm />} />
+          <Route path="/SocioConReprocan" element={<SocioConReprocan />} />
+          <Route path="/SocioSinReprocan" element={<SocioSinReprocan />} />
+          <Route path="/newsletter" element={<Newsletter />} />
+          {/* <Route path="/loguin" element={<Loguin />} />  */}
+          {/* <Route
           path="/admin"
           element={
             <ProtectedRoute isAdminRoute={true}>
@@ -47,9 +49,9 @@ const App = () => {
             </ProtectedRoute>
           }
         /> */}
-      </Routes>
-      <WhatsApp />
-      <Footer />
+        </Routes>
+        <WhatsApp />
+        <Footer />
       </HelmetProvider>
     </>
   );
