@@ -6,7 +6,7 @@ export const registerUser = (userData, token) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(
-        "http://https://apidc-bf-2.onrender.com/register",
+        "https://apidc-bf-2.onrender.com/register",
         {
           email: userData.email,
           name: userData.name,
@@ -63,7 +63,7 @@ export const formInfo = (formData) => async (dispatch) => {
   try {
     // Enviar los datos al backend
     const response = await axios.post(
-      "http://https://apidc-bf-2.onrender.com/send/admin",
+      "https://apidc-bf-2.onrender.com/send/admin",
 
       formData,
       {
@@ -94,8 +94,8 @@ export const fetchUsers = (token) => {
     try {
       console.log("Token enviado en fetchUsers:", token); // Verifica el token aquí
       const response = await axios.get(
-        // "http://https://apidc-bf-2.onrender.com/users",
-        `http://https://apidc-bf-2.onrender.com/users`,
+        // "https://apidc-bf-2.onrender.com/users",
+        `https://apidc-bf-2.onrender.com/users`,
         {
           // Actualiza la URL
           headers: {
@@ -124,7 +124,7 @@ export const sendWorkTogether = (formData) => async (dispatch) => {
 
   try {
     const response = await axios.post(
-      "http://https://apidc-bf-2.onrender.com/send/workWithUs",
+      "https://apidc-bf-2.onrender.com/send/workWithUs",
 
       formData,
       {

@@ -1,7 +1,7 @@
 /* Estilo principal */
 .work-together {
   position: relative;
-  height: 100vh;
+  height: 125vh;
   overflow: hidden;
   color: #fff;
   font-family: "Arial", sans-serif;
@@ -20,7 +20,7 @@
   height: 100%;
   object-fit: cover;
   z-index: -1;
-  filter: brightness(40%); /* Reduce el brillo del video */
+  filter: brightness(50%); /* Reduce el brillo del video */
 }
 
 /* Contenedor opaco que ocupa todo el ancho y alto del video */
@@ -38,7 +38,7 @@
   justify-content: center; /* Centra contenido verticalmente */
   text-align: center;
   /* gap: 20px; */
-  /* padding: 40px;  */
+  padding: 40px; 
 }
 
 /* Título y subtítulo */

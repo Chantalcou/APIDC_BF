@@ -17,6 +17,7 @@ import { HelmetProvider } from "react-helmet-async"; //Optimización SEO
 // import ProtectedRoute from "./components/ProtectedRoute";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ProductsSection from "./components/ProductsSection";
+import MembershipComponent from './components/MembershipComponent'
 
 const App = () => {
   return (
@@ -28,6 +29,8 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/gestor" element={<Gestor />} />
           <Route path="/products" element={<ProductsSection />} />
+          <Route path="/membershipSection" element={<MembershipComponent />} />
+
           <Route
             path="/dashboard"
             element={

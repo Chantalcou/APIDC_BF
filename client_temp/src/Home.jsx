@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Importa useNavigate
+import { useNavigate, Link } from "react-router-dom";
 import $ from "jquery";
 import ScrollArrow from "./components/ScrollArrow.jsx";
 import ButtonComponent from "./components/Button";
@@ -9,6 +9,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import SpinnerComponent from "./components/SpinnerComponent.jsx";
 import GestionarReprocan from "./components/GestionarReprocan.jsx";
 import MovingBanner from "./components/MovingBanner.jsx";
+import { FaArrowRight } from "react-icons/fa";
 import ContactInfo from "./components/ContactInfo.jsx";
 import { WorkTogether } from "./components/WorkTogether.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -27,19 +28,9 @@ const Home = () => {
   } = useAuth0();
 
   const userFromRedux = useSelector((state) => state.user);
-
   const [loading, setLoading] = useState(true);
   const [isSpinning, setIsSpinning] = useState(false);
   const [selectedRole, setSelectedRole] = useState(null);
-
-  const handleRoleSelect = (role) => {
-    setSelectedRole(role);
-  };
-  useEffect(() => {
-    if (selectedRole) {
-      handleLogin(); //La función de Login actualzia el rol
-    }
-  }, [selectedRole]); // Ejecutar cuando selectedRole cambie
 
   useEffect(() => {
     // Simula una carga de datos o cualquier otra operación asíncrona
@@ -64,31 +55,6 @@ const Home = () => {
       },
       1000
     );
-  };
-  const handleLogin = async () => {
-    if (isAuthenticated) {
-      if (!selectedRole) {
-        console.log("No role selected, please select a role.");
-        return;
-      }
-
-      // Evaluar roles de manera exclusiva
-      if (selectedRole === "SocioConReprocan") {
-        navigate("/SocioConReprocan");
-      } else if (selectedRole === "SocioSinReprocan") {
-        navigate("/SocioSinReprocan");
-      } else {
-        navigate("/gestor"); // Default para otros roles no especificados
-      }
-    } else {
-      try {
-        await loginWithRedirect({
-          redirectUri: window.location.origin + "/",
-        });
-      } catch (error) {
-        console.error("Error during login:", error);
-      }
-    }
   };
 
   // Banner
@@ -118,6 +84,10 @@ const Home = () => {
       alt: "Ministerio economia",
     },
   ];
+  const handleAsociateClick = () => {
+    // Aquí rediriges o abres la sección/modal de asociación
+    window.location.href = "#asociarme-seccion"; // Ejemplo: scroll a la sección
+  };
 
   return (
     <>
@@ -281,7 +251,8 @@ const Home = () => {
               </p>
               <div className="static-content d-flex flex-column justify-content-center align-items-center mt-5 h-100 position-relative">
                 <ScrollArrow
-                  onClick={() => scrollToSection("present-section")}color=" #202020" 
+                  onClick={() => scrollToSection("present-section")}
+                  color=" #202020"
                 />
               </div>
             </div>
@@ -323,233 +294,126 @@ const Home = () => {
 
             <div className="static-content d-flex flex-column justify-content-center align-items-center h-100 position-relative">
               <ScrollArrow
-                onClick={() => scrollToSection("membership-section")}color=" #202020" 
+                onClick={() => scrollToSection("membership-section")}
+                color="#202020"
               />
             </div>
           </div>
         </div>
 
-        <div id="membership-section" className="py-1 bg-light">
-          <div className="container-video_2 my-1">
-            <div className="bg-banner text-center position-relative">
-              <video
-                autoPlay
-                muted
-                loop
-                className="bg-video position-absolute w-100 h-100"
-                style={{ objectFit: "cover", top: 0, left: 0 }}
-              >
-                <source
-                  src="https://res.cloudinary.com/dqgjcfosx/video/upload/v1726834753/7667101-uhd_3840_2160_30fps_tpxp07.mp4"
-                  type="video/mp4"
-                />
-                Your browser does not support the video tag.
-              </video>
+        {/* ASOCIARME SECTION */}
+        <div className="container-video_2 my-1" id="membership-section">
+          {/* Fondo del video con superposición */}
+          <div className="bg-banner text-center position-relative">
+            <video
+              autoPlay
+              muted
+              loop
+              className="bg-video position-absolute w-100 h-100"
+              style={{ objectFit: "cover", top: 0, left: 0 }}
+              poster="https://res.cloudinary.com/dqgjcfosx/image/upload/v1234567890/poster-image.jpg"
+            >
+              <source
+                src="https://res.cloudinary.com/dqgjcfosx/video/upload/v1726834753/7667101-uhd_3840_2160_30fps_tpxp07.mp4"
+                type="video/mp4"
+              />
+              Your browser does not support the video tag.
+            </video>
 
-              <div
-                id="asociarme-seccion"
-                className="d-flex flex-column justify-content-center align-items-center h-100"
-                style={{ zIndex: 99 }}
+            {/* Contenido sobre el video */}
+            <div
+              id="asociarme-seccion"
+              className="d-flex flex-column justify-content-center align-items-center h-100 text-white"
+              style={{ zIndex: 99 }} // Superposición semitransparente
+            >
+              <h1
+                id="asociarme-section"
+                className="banner-title mb-3"
+                style={{ fontSize: "2.5rem", fontWeight: "bold" }}
               >
-                <h1 id="asociarme-section" className="banner-title">
-                  ASOCIARME
-                </h1>
-                <p className="sub-title_banner text-center mb-5">
-                  Descubri las opciones de membresía que ofrecemos y eligi la
-                  que mejor se adapte a tus necesidades.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="row mt-5 justify-content-center text-center content-cards">
-            <div className="col-md-4 col-sm-6 mb-4">
-              <div
-                className="card h-100 p-3 border-light shadow-sm"
-                style={{ transition: "transform 0.3s", borderRadius: "10px" }}
+                ¡Asóciate Ahora!
+              </h1>
+              <p
+                className="sub-title_banner text-center mb-4"
+                style={{ maxWidth: "700px", lineHeight: "1.6" }}
               >
-                <div className="card-body">
-                  <i
-                    className="fas fa-user-tie fa-2x mb-3"
-                    style={{ color: "#0a9d6d" }}
-                  ></i>
-                  <h5
-                    className="card-title"
-                    style={{ fontWeight: "bold", color: "#0a9d6d" }}
-                  >
-                    Gestor
-                  </h5>
-                  <p className="card-text text-muted">
-                    Apoya y guía a otros en el proceso de asociación y gestión
-                    de beneficios.
-                  </p>
-                  <div className="text-center mt-5 btn-asociarte-custom_2">
-                    <ButtonComponent
-                      text="Ser Gestor"
-                      // onClick={() => navigate("/gestor")}
-                      onClick={() => {
-                        handleRoleSelect("gestor"); // Establece el rol como "gestor"
-                        handleLogin();
-                      }}
-                      color={{
-                        background: "transparent",
-                        text: "black",
-                        border: "2px solid black",
-                      }}
-                      customClass="hover-change-to-white"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-md-4 col-sm-6 mb-4">
-              <div
-                className="card h-100 p-3 border-light shadow-sm"
-                style={{
-                  transition: "transform 0.3s",
-                  borderRadius: "10px",
-                  color: "#0a9d6d",
-                }}
-              >
-                <div className="card-body">
-                  <i
-                    className="fas fa-handshake fa-2x mb-3"
-                    style={{ color: "#0a9d6d" }}
-                  ></i>
-                  <h5
-                    className="card-title"
-                    style={{ fontWeight: "bold", color: "#0a9d6d" }}
-                  >
-                    Socio Adherente (sin Reprocan)
-                  </h5>
-                  <p className="card-text text-muted">
-                    Obtén acceso a asesoría, descuentos y un espacio en nuestra
-                    comunidad.
-                  </p>
-                  <div className="text-center mt-5 btn-asociarte-custom_2">
-                    <ButtonComponent
-                      text="Socio Adherente"
-                      onClick={() => {
-                        handleRoleSelect("SocioSinReprocan");
-                        handleLogin();
-                      }}
-                      color={{
-                        background: "transparent",
-                        text: "black",
-                        border: "2px solid black",
-                      }}
-                      customClass="hover-change-to-white"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-4 col-sm-6 mb-4">
-              <div
-                className="card h-100 p-3 border-light shadow-sm"
-                style={{ transition: "transform 0.3s", borderRadius: "10px" }}
-              >
-                <div className="card-body">
-                  <i
-                    className="fas fa-user-md fa-2x mb-3"
-                    style={{ color: "#0a9d6d" }}
-                  ></i>
-                  <h5
-                    className="card-title"
-                    style={{ fontWeight: "bold", color: "#0a9d6d" }}
-                  >
-                    Socio Adherente (con Reprocan)
-                  </h5>
-                  <p className="card-text text-muted">
-                    Con beneficios adicionales y prioridad en el acceso a
-                    información y eventos.
-                  </p>
-                  <div className="text-center mt-5 btn-asociarte-custom_2">
-                    <ButtonComponent
-                      text="Con Reprocan"
-                      onClick={() => {
-                        handleRoleSelect("SocioConReprocan");
-                        handleLogin();
-                      }}
-                      color={{
-                        background: "transparent",
-                        text: "black",
-                        border: "2px solid black",
-                      }}
-                      customClass="hover-change-to-white"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <GestionarReprocan />
-            <h1 className="mt-5">Nuestros aliados</h1>
-            <div>
-              <MovingBanner logos={logos} />
-            </div>
-          </div>
-
-          <div className="content-summary">
-            <details className="toggleFaqs_faqsQuestions mt-1">
-              <summary className="toggleFaqs_faqsQuestions__RozJk">
-                ¿Qué es una asociación civil de cannabis?
-                <span className="toggleFaqs_faqsQuestions__arrow">➔</span>
-              </summary>
-              <p className="summary-p">
-                Una asociación civil de cannabis es una organización sin fines
-                de lucro que promueve la investigación, educación y el uso
-                responsable de la planta de cannabis, tanto para fines
-                medicinales como recreativos, según las normativas locales.
+                Descubre las opciones de membresía que ofrecemos y elige la que
+                mejor se adapte a tus necesidades.
               </p>
-            </details>
 
-            <details className="toggleFaqs_faqsQuestions">
-              <summary className="toggleFaqs_faqsQuestions__RozJk">
-                ¿Cómo puedo asociarme a una asociación civil de cannabis?
-                <span className="toggleFaqs_faqsQuestions__arrow">➔</span>
-              </summary>
-              <p className="summary-p">
-                Para asociarte, generalmente debes ser mayor de edad, presentar
-                ciertos documentos como tu identificación y completar un
-                formulario de solicitud. Cada asociación tiene sus propios
-                requisitos específicos, por lo que es recomendable contactarlos
-                directamente.
-              </p>
-            </details>
+              {/* Botón mejorado */}
 
-            <details className="toggleFaqs_faqsQuestions">
-              <summary className="toggleFaqs_faqsQuestions__RozJk">
-                ¿Cuáles son los beneficios de ser miembro de una asociación
-                civil de cannabis?
-                <span className="toggleFaqs_faqsQuestions__arrow">➔</span>
-              </summary>
-              <p className="summary-p">
-                Los beneficios pueden incluir acceso a productos de cannabis de
-                calidad controlada, participación en programas educativos, la
-                posibilidad de influir en políticas públicas relacionadas con el
-                cannabis, y el derecho a votar en decisiones dentro de la
-                asociación.
-              </p>
-            </details>
-
-            <details className="toggleFaqs_faqsQuestions">
-              <summary className="toggleFaqs_faqsQuestions__RozJk">
-                ¿Es legal formar una asociación civil de cannabis?
-                <span className="toggleFaqs_faqsQuestions__arrow">➔</span>
-              </summary>
-              <p className="summary-p">
-                La legalidad depende del país y de las leyes locales sobre el
-                cannabis. En muchos lugares, es legal formar asociaciones
-                civiles con el objetivo de promover el uso medicinal del
-                cannabis, pero en otros lugares aún puede ser ilegal.
-              </p>
-            </details>
+              <Link
+                to="/membershipSection"
+                className="btn-asociate-custom"
+                aria-label="Explorar Membresías"
+              >
+                Explorar Membresías
+                <FaArrowRight className="btn-icon" />
+              </Link>
+            </div>
           </div>
         </div>
+        {/* ASOCIARME SECTION */}
       </div>
-      <WorkTogether />
       <ContactInfo />
+      <WorkTogether />
+
+      <div className="content-summary">
+        <details className="toggleFaqs_faqsQuestions mt-1">
+          <summary className="toggleFaqs_faqsQuestions__RozJk">
+            ¿Qué es una asociación civil de cannabis?
+            <span className="toggleFaqs_faqsQuestions__arrow">➔</span>
+          </summary>
+          <p className="summary-p">
+            Una asociación civil de cannabis es una organización sin fines de
+            lucro que promueve la investigación, educación y el uso responsable
+            de la planta de cannabis, tanto para fines medicinales como
+            recreativos, según las normativas locales.
+          </p>
+        </details>
+
+        <details className="toggleFaqs_faqsQuestions">
+          <summary className="toggleFaqs_faqsQuestions__RozJk">
+            ¿Cómo puedo asociarme a una asociación civil de cannabis?
+            <span className="toggleFaqs_faqsQuestions__arrow">➔</span>
+          </summary>
+          <p className="summary-p">
+            Para asociarte, generalmente debes ser mayor de edad, presentar
+            ciertos documentos como tu identificación y completar un formulario
+            de solicitud. Cada asociación tiene sus propios requisitos
+            específicos, por lo que es recomendable contactarlos directamente.
+          </p>
+        </details>
+
+        <details className="toggleFaqs_faqsQuestions">
+          <summary className="toggleFaqs_faqsQuestions__RozJk">
+            ¿Cuáles son los beneficios de ser miembro de una asociación civil de
+            cannabis?
+            <span className="toggleFaqs_faqsQuestions__arrow">➔</span>
+          </summary>
+          <p className="summary-p">
+            Los beneficios pueden incluir acceso a productos de cannabis de
+            calidad controlada, participación en programas educativos, la
+            posibilidad de influir en políticas públicas relacionadas con el
+            cannabis, y el derecho a votar en decisiones dentro de la
+            asociación.
+          </p>
+        </details>
+
+        <details className="toggleFaqs_faqsQuestions">
+          <summary className="toggleFaqs_faqsQuestions__RozJk">
+            ¿Es legal formar una asociación civil de cannabis?
+            <span className="toggleFaqs_faqsQuestions__arrow">➔</span>
+          </summary>
+          <p className="summary-p">
+            La legalidad depende del país y de las leyes locales sobre el
+            cannabis. En muchos lugares, es legal formar asociaciones civiles
+            con el objetivo de promover el uso medicinal del cannabis, pero en
+            otros lugares aún puede ser ilegal.
+          </p>
+        </details>
+      </div>
     </>
   );
 };
