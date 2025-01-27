@@ -33,6 +33,7 @@ app.use(bodyParser.json());
 //     credentials: true,
 //   })
 // );
+
 app.use(
   cors({
     origin: "https://apidc-bf-2.onrender.com", // URL de tu frontend en producción

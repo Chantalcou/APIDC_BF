@@ -45,21 +45,21 @@ const MembershipComponent = () => {
       <div className="membership-section">
       <h1 className="section-title">Opciones de Membresía</h1>
         <p className="section-subtitle">
-          Elegí el plan que mejor se adapte a tus necesidades. Primero debes ser
-          socio adherente para acceder a las opciones siguientes.
-        </p>
+          Elegí NNamNameeameel plan que mejor se adapte a tus necesidades. Primero debes ser
+          socio adeherente para acceder a las opciones siguientes.
+    </p>
 
            {/*  STEEPS*/}
         <p className="section-subtitle">Pasos</p>
-      <div class="steps-container">
-        <div class="step">
-          <div class="circle">1</div>
-          <p class="step-text">Unirse como Socio Adherente</p>
+      <div className="steps-container">
+        <div className="step">
+          <div className="circle">1</div>
+          <p className="step-text">Unirse como Socio Adherente</p>
         </div>
-        <div class="arrow">→</div>
-        <div class="step">
-          <div class="circle">2</div>
-          <p class="step-text">Elegir Reprocan o Gestor</p>
+        <div className="arrow">→</div>
+        <div className="step">
+          <div className="circle">2</div>
+          <p className="step-text">Elegir Reprocan o Gestor</p>
         </div>
       </div>{" "}
   

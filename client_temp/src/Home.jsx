@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import $ from "jquery";
+import { registerUser, fetchUsers } from "./redux/actions/index.js";
 import ScrollArrow from "./components/ScrollArrow.jsx";
 import ButtonComponent from "./components/Button";
 import { useSelector, useDispatch } from "react-redux";
 import { Helmet } from "react-helmet-async"; //Optimizacion SEO
-import { useAuth0 } from "@auth0/auth0-react";
-import SpinnerComponent from "./components/SpinnerComponent.jsx";
-import GestionarReprocan from "./components/GestionarReprocan.jsx";
-import MovingBanner from "./components/MovingBanner.jsx";
+import { useAuth0, isAuthenticated, isLoading } from "@auth0/auth0-react";
 import { FaArrowRight } from "react-icons/fa";
+import LoginModal from "./components/LoginModal.jsx";
 import ContactInfo from "./components/ContactInfo.jsx";
 import { WorkTogether } from "./components/WorkTogether.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -17,20 +16,25 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./Home.css";
 
 const Home = () => {
-  // const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const userFromRedux = useSelector((state) => state.user);
   const {
     isAuthenticated,
     loginWithRedirect,
     // logout,
     user,
-    // getAccessTokenSilently,
+    getAccessTokenSilently,
   } = useAuth0();
 
-  const userFromRedux = useSelector((state) => state.user);
+  const handleShowModal = () => setShowModal(true);
+  const handleCloseModal = () => setShowModal(false);
+
+  const [showModal, setShowModal] = useState(false);
+  const [showCaptcha, setShowCaptcha] = useState(false);
   const [loading, setLoading] = useState(true);
   const [isSpinning, setIsSpinning] = useState(false);
   const [selectedRole, setSelectedRole] = useState(null);
+  const [captchaVerified, setCaptchaVerified] = useState(false);
 
   useEffect(() => {
     // Simula una carga de datos o cualquier otra operación asíncrona
@@ -39,13 +43,13 @@ const Home = () => {
     }, 2000); // Simula una carga de 2 segundos
   }, []);
 
-  if (loading) {
-    return <SpinnerComponent />;
-  }
+  // if (loading) {
+  //   return <SpinnerComponent />;
+  // }
 
   const handleLogoClick = () => {
     setIsSpinning(true);
-    setTimeout(() => setIsSpinning(false), 1000);
+    setTimeout(() => setIsSpinning(false), 2000);
   };
 
   const scrollToSection = (sectionId) => {
@@ -57,38 +61,42 @@ const Home = () => {
     );
   };
 
-  // Banner
-  const logos = [
-    {
-      src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1736344234/conicet_eg7ncj.jpg",
-      alt: "Conicet",
-    },
-    {
-      src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1736345614/andreani_e9flk9.png",
-      alt: "Andreani",
-    },
-    {
-      src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1736345887/racme_u3r9wv.jpg",
-      alt: "Ministerio economia",
-    },
-    {
-      src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1736344234/conicet_eg7ncj.jpg",
-      alt: "Conicet",
-    },
-    {
-      src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1736345614/andreani_e9flk9.png",
-      alt: "Andreani",
-    },
-    {
-      src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1736345887/racme_u3r9wv.jpg",
-      alt: "Ministerio economia",
-    },
-  ];
-  const handleAsociateClick = () => {
-    // Aquí rediriges o abres la sección/modal de asociación
-    window.location.href = "#asociarme-seccion"; // Ejemplo: scroll a la sección
-  };
+  useEffect(() => {
+    console.log("entra aca?????");
+    const fetchUserData = async () => {
+      if (isAuthenticated && user) {
+        try {
+          const token = await getAccessTokenSilently();
+          dispatch(registerUser(user, token)); // Despacha la acción de registro
+          // Si es admin, realizar la acción de obtener usuarios
+          if (user.isAdmin) {
+            dispatch(fetchUsers(token)); // Solo llamar si el usuario es admin
+          }
+        } catch (error) {
+          console.error("Error obteniendo token:", error);
+        }
+      }
+    };
+    fetchUserData();
+  }, [isAuthenticated, user, getAccessTokenSilently, dispatch]);
 
+  const handleLogin = async () => {
+    if (!captchaVerified) {
+      setShowCaptcha(true); // Muestra el modal si el CAPTCHA no está verificado
+      return;
+    }
+
+    try {
+      await loginWithRedirect();
+
+      if (isAuthenticated && user) {
+        const token = await getAccessTokenSilently();
+        dispatch(registerUser(user, token)); // Llamamos a la acción `registerUser` solo después de la verificación
+      }
+    } catch (error) {
+      console.error("Error durante el login o el registro:", error);
+    }
+  };
   return (
     <>
       {/* Optimización SEO */}
@@ -340,17 +348,27 @@ const Home = () => {
                 Descubre las opciones de membresía que ofrecemos y elige la que
                 mejor se adapte a tus necesidades.
               </p>
-
-              {/* Botón mejorado */}
-
-              <Link
-                to="/membershipSection"
-                className="btn-asociate-custom"
-                aria-label="Explorar Membresías"
-              >
-                Explorar Membresías
-                <FaArrowRight className="btn-icon" />
-              </Link>
+              {!isAuthenticated && !user ? (
+                <>
+                  <Link
+                    onClick={handleShowModal || handleLogin}
+                    className="btn-asociate-custom"
+                    aria-label="Explorar Membresías - ESTA AUTENTICADO"
+                  >
+                    Explorar Membresías
+                    <FaArrowRight className="btn-icon" />
+                  </Link>
+                </>
+              ) : (
+                <Link
+                  to="/membershipSection"
+                  className="btn-asociate-custom"
+                  aria-label="Explorar Membresías"
+                >
+                  Explorar Membresías
+                  <FaArrowRight className="btn-icon" />
+                </Link>
+              )}
             </div>
           </div>
         </div>
@@ -414,6 +432,7 @@ const Home = () => {
           </p>
         </details>
       </div>
+      <LoginModal show={showModal} handleClose={handleCloseModal} />
     </>
   );
 };

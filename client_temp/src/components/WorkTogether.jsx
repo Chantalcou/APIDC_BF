@@ -12,7 +12,7 @@ export const WorkTogether = () => {
     fullName: "",
     email: "",
     message: "",
-     areaOfInterest: ""
+    areaOfInterest: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -82,7 +82,7 @@ export const WorkTogether = () => {
   };
 
   return (
-    <div className="work-together">
+    <div id="work-together" className="work-together">
       <video className="background-video" autoPlay muted loop>
         <source
           src="https://res.cloudinary.com/dqgjcfosx/video/upload/v1737463914/8243034-uhd_2160_3840_24fps_bsifnn.mp4"

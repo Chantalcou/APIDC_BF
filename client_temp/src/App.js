@@ -30,7 +30,6 @@ const App = () => {
           <Route path="/gestor" element={<Gestor />} />
           <Route path="/products" element={<ProductsSection />} />
           <Route path="/membershipSection" element={<MembershipComponent />} />
-
           <Route
             path="/dashboard"
             element={

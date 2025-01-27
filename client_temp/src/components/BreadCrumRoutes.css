@@ -1,6 +1,6 @@
 .breadcrumbs {
     position: fixed; /* Fijo en la parte superior */
-    top: 60px; /* Ajusta según la altura de tu navbar */
+    top: 69px; /* Ajusta según la altura de tu navbar */
     left: 0;
     width: 100%; /* Ocupa todo el ancho */
     background-color: #f8f9fa; /* Fondo claro */

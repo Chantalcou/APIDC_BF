@@ -10,7 +10,8 @@ const breadcrumbRoutes = {
   "/SocioConReprocan": "SocioConReprocan",
   "/SocioSinReprocan": "SocioSinReprocan",
   "/newsletter": "Newsletter",
-  "/membershipSection":"Membresias"
+  "/membershipSection":"Membresias",
+    "/products":"Productos"
 };
 
 const Breadcrumbs = () => {

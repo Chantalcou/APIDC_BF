@@ -15,6 +15,7 @@ const NavBar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
+
   const userAdmin = useSelector((state) => state.userAdmin);
   const isAdmin = useSelector((state) => state.isAdmin);
   const userFromRedux = useSelector((state) => state.user);
@@ -71,23 +72,6 @@ const NavBar = () => {
     };
   }, [scrollPosition]);
 
-  // const handleLogin = async () => {
-  //   if (!captchaVerified) {
-  //     setShowCaptcha(true);
-  //     return;
-  //   }
-
-  //   try {
-  //     await loginWithRedirect();
-
-  //     if (isAuthenticated && user) {
-  //       const token = await getAccessTokenSilently();
-  //       dispatch(registerUser(user, token));
-  //     }
-  //   } catch (error) {
-  //     console.error("Error durante el login o el registro:", error);
-  //   }
-  // };
   const handleLogin = async () => {
     if (!captchaVerified) {
       setShowCaptcha(true); // Muestra el modal si el CAPTCHA no está verificado
@@ -121,12 +105,12 @@ const NavBar = () => {
     );
   };
 
-  const shouldShowAsociate = ![
-    "/gestor",
-    "/SocioSinReprocan",
-    "/SocioConReprocan",
-  ].includes(location.pathname);
-
+  // const shouldShowAsociate = ![
+  //   "/gestor",
+  //   "/SocioSinReprocan",
+  //   "/SocioConReprocan",
+  // ].includes(location.pathname);
+  const isHome = location.pathname === "/";
   // Maneja la verificación de reCAPTCHA
   const handleCaptchaVerify = (value) => {
     if (value) {
@@ -161,19 +145,33 @@ const NavBar = () => {
             />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
+
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ms-auto align-items-center">
+            <Nav  className="basic-navbar-nav-autentication-left">
               <Nav.Link href="/">Inicio</Nav.Link>
-              {shouldShowAsociate && (
+              {isHome && (
                 <Nav.Link onClick={() => scrollToSection("about-section")}>
                   Nosotros
                 </Nav.Link>
               )}
-              {shouldShowAsociate && (
+              {isHome && (
                 <Nav.Link onClick={() => scrollToSection("asociarme-section")}>
                   Asociate
                 </Nav.Link>
               )}
+              {isHome && (
+                <Nav.Link onClick={() => scrollToSection("work-together")}>
+                  Trabaja con nosotros
+                </Nav.Link>
+              )}
+              <Link to="/products" className="nav-link">
+                Productos
+              </Link>
+            </Nav>
+          </Navbar.Collapse>
+
+          <Navbar.Collapse id="basic-navbar-nav-autentication">
+            <Nav className="basic-navbar-nav-autentication-2">
               {isAuthenticated && user ? (
                 <>
                   {/* <Nav.Link href="/products">Productos</Nav.Link> */}
@@ -187,9 +185,6 @@ const NavBar = () => {
                       {userFromRedux?.name || user?.name}
                     </span>
                   </Nav.Link>
-                  <Link to="/products" className="nav-link">
-                      Productos
-                    </Link>
 
                   {isAuthenticated && user && isAdmin && (
                     <Link to="/dashboard" className="nav-link">

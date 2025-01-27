@@ -157,12 +157,36 @@
   /* Ajustes para los elementos de navegación */
   .navbar-nav {
     display: flex;
-    gap: 1rem;
+    gap:.5rem;
     justify-content: flex-end; /* Alinea los enlaces a la derecha */
     align-items: center;
     width: 100%;
   }
   
+  .basic-navbar-nav-autentication{
+    display: flex;
+    gap: 2rem;
+    justify-content: center; /* Alinea los enlaces a la derecha */
+    align-items: center;
+    width: 100%;
+  }
+
+    
+  .basic-navbar-nav-autentication-2{
+    display: flex;
+    gap: 2rem;
+    justify-content: right; /* Alinea los enlaces a la derecha */
+    align-items: center;
+    width: 100%;
+  }
+
+  .basic-navbar-nav-autentication-left{
+    display: flex;
+    gap: .5rem;
+    justify-content: left; /* Alinea los enlaces a la derecha */
+    align-items: center;
+    width: 100%;
+  }
   .navbar-brand {
     flex-shrink: 0; /* Evita que el logo se redimensione */
     margin-right: auto; /* Alinea el logo a la izquierda */
