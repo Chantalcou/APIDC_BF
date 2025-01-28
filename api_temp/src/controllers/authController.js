@@ -70,19 +70,97 @@ const verifyToken = async (req, res, next) => {
   }
 };
 
+// const registerUser = async (req, res) => {
+//   const { name, email } = req.body;
+//   console.log(name, email, " name, email s");
+//   try {
+//     // Verificar si el usuario ya existe
+//     const userExists = await User.findOne({ where: { email } });
+//     console.log(userExists, "userExists");
+//     const isAdmin = email === process.env.ADMIN_EMAIL;
+//     console.log(
+//       isAdmin,
+//       "ADMIN=> ESTO ME DEVUELVE TRUE EN EL CASO DE SER ADMIN"
+//     );
+//     if (userExists) {
+//       if (isAdmin) {
+//         console.log("entro a es admin?");
+//         const userAdmin = await User.findOne({
+//           attributes: ["id", "name", "email", "isAdmin"],
+//         });
+//         const users = await User.findAll({
+//           attributes: ["id", "name", "email", "isAdmin"], // Obtener todos los usuarios
+//         });
+//         console.log("userAdmin", userAdmin);
+//         return res.status(200).json({
+//           message: "Usuario ya registrado y es admin",
+//           userAdmin: userAdmin || null,
+//           users,
+//         });
+//       }
+
+//       return res.status(200).json({
+//         message: "El usuario ya está registrado.",
+//         user: userExists,
+//       });
+
+//       console.log("User:", user, "User Admin", userAdmin);
+//     }
+
+//     // Crear nuevo usuario
+//     const newUser = await User.create({
+//       name,
+//       email,
+//       isAdmin,
+//     });
+
+//     if (isAdmin) {
+//       // Si es admin, devolver todos los usuarios después del registro
+//       const users = await User.findAll({
+//         attributes: ["id", "name", "email", "isAdmin"],
+//       });
+//       return res.status(201).json({
+//         message: "Usuario registrado con éxito y es admin",
+//         users,
+//       });
+//     }
+
+//     return res.status(201).json({
+//       message: "Usuario registrado con éxito",
+//       user: {
+//         id: newUser.id,
+//         name: newUser.name,
+//         email: newUser.email,
+//         isAdmin: newUser.isAdmin,
+//       },
+//     });
+//   } catch (error) {
+//     console.error("Error al registrar el usuario:", error);
+//     res.status(500).json({ error: "Error al registrar el usuario" });
+//   }
+// };
+
+
+
+
+
+
 const registerUser = async (req, res) => {
   const { name, email } = req.body;
   console.log(name, email, " name, email s");
+
   try {
     // Verificar si el usuario ya existe
     const userExists = await User.findOne({ where: { email } });
     console.log(userExists, "userExists");
+
+    // Verificar si el usuario es admin
     const isAdmin = email === process.env.ADMIN_EMAIL;
-    console.log(
-      isAdmin,
-      "ADMIN=> ESTO ME DEVUELVE TRUE EN EL CASO DE SER ADMIN"
-    );
+    console.log(isAdmin, "ADMIN=> ESTO ME DEVUELVE TRUE EN EL CASO DE SER ADMIN");
+
+    // Si el usuario ya existe
     if (userExists) {
+      // Si es admin, devolver los datos del admin y todos los usuarios
       if (isAdmin) {
         console.log("entro a es admin?");
         const userAdmin = await User.findOne({
@@ -99,23 +177,22 @@ const registerUser = async (req, res) => {
         });
       }
 
+      // Si no es admin, devolver solo los datos del usuario existente
       return res.status(200).json({
         message: "El usuario ya está registrado.",
         user: userExists,
       });
-
-      console.log("User:", user, "User Admin", userAdmin);
     }
 
-    // Crear nuevo usuario
+    // Si el usuario no existe, crear un nuevo usuario
     const newUser = await User.create({
       name,
       email,
       isAdmin,
     });
 
+    // Si es admin, devolver todos los usuarios después del registro
     if (isAdmin) {
-      // Si es admin, devolver todos los usuarios después del registro
       const users = await User.findAll({
         attributes: ["id", "name", "email", "isAdmin"],
       });
@@ -125,6 +202,7 @@ const registerUser = async (req, res) => {
       });
     }
 
+    // Si no es admin, devolver solo los datos del nuevo usuario
     return res.status(201).json({
       message: "Usuario registrado con éxito",
       user: {

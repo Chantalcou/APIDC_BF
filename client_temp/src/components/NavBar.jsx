@@ -123,6 +123,8 @@ const NavBar = () => {
     setShowCaptcha(false); // Cierra el modal sin verificar
   };
 
+  console.log(isAuthenticated, user, isAdmin, "AKA TENDRIA QUE SER");
+
   return (
     <>
       <Navbar
@@ -147,7 +149,7 @@ const NavBar = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav  className="basic-navbar-nav-autentication-left">
+            <Nav className="basic-navbar-nav-autentication-left">
               <Nav.Link href="/">Inicio</Nav.Link>
               {isHome && (
                 <Nav.Link onClick={() => scrollToSection("about-section")}>

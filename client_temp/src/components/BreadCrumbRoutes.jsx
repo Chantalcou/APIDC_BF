@@ -4,11 +4,11 @@ import { Link, useLocation } from "react-router-dom";
 
 const breadcrumbRoutes = {
   "/": "Inicio",
-  "/gestor": "Gestor",
+  "/membershipSection/gestor": "Gestor",
   "/dashboard": "Dashboard",
   "/contacto": "Contacto",
-  "/SocioConReprocan": "SocioConReprocan",
-  "/SocioSinReprocan": "SocioSinReprocan",
+  "/membershipSection/SocioConReprocan": "Socio Premiun",
+  "/membershipSection/socioSinReprocan": "Socio adherente",
   "/newsletter": "Newsletter",
   "/membershipSection":"Membresias",
     "/products":"Productos"

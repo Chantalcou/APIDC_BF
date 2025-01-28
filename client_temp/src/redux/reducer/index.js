@@ -2,6 +2,7 @@ import { REGISTER_USER, SET_ERROR } from "../actions_types";
 
 const initialState = {
   user: null,
+  isAuthenticated: false,
   isAdmin: false,
   users: [],
   error: null,
@@ -14,15 +15,11 @@ const reducer = (state = initialState, action) => {
       console.log(action, "reducer");
       return {
         ...state,
-        user: action.payload,
+        user: action.payload.user,
         isAuthenticated: true,
-        isAdmin: action.payload,
-        users: action.allUsers,
-      };
-    case "FETCH_USERS_SUCCESS":
-      return {
-        ...state,
-        users: action.payload,
+        isAdmin: action.payload.isAdmin,
+        users: action.payload.users,
+        error: null,
       };
 
     case SET_ERROR:

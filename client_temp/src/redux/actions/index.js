@@ -1,7 +1,6 @@
 import { REGISTER_USER, SET_ERROR, SUBMIT_FORM } from "../actions_types";
 import axios from "axios";
 
-// Acción para registrar al usuario usando Axios
 export const registerUser = (userData, token) => {
   return async (dispatch) => {
     try {
@@ -16,43 +15,31 @@ export const registerUser = (userData, token) => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          withCredentials: true, // Asegúrate de que la cookie pueda ser enviada/recibida
+          withCredentials: true,
         }
       );
 
-      console.log(response.data, "esto me llega del back al front");
+      console.log(response.data, "esto necesito");
 
-      // Despachamos la acción de Redux con los datos del usuario
-      // const { user, userAdmin, users } = response.data;
+      // Desestructurar los datos de la respuesta
+      const { userAdmin, users } = response.data;
 
-      // if (userAdmin) {
-
-      //   dispatch({
-      //     type: REGISTER_USER,
-      //     payload: userAdmin.isAdmin || null, // Si es admin, se devuelve su valor, de lo contrario null
-      //     allUsers: users, // Devuelves todos los usuarios
-      //   });
-      //   console.log("Dispatch ejecutado", { userAdmin, users });
-      // } else {
-      //   dispatch({
-      //     type: SET_ERROR,
-      //     payload: "Error: No se encontró información de admin.",
-      //   });
-      // }
-
-      // dispatch({
-      //   type: REGISTER_USER,
-      //   payload: response.data.userAdmin.isAdmin || null,
-      //   allUsers: response.data.users,
-      // });
-
-      // Guardamos si el usuario es admin en el localStorage
-      // localStorage.setItem("isAdmin", user.isAdmin);
+      // Despachar acción para actualizar el estado
+      dispatch({
+        type: REGISTER_USER,
+        payload: {
+          user: userAdmin,
+          isAdmin: userAdmin.isAdmin,
+          users: users,
+        },
+      });
     } catch (error) {
       console.error("Error registrando usuario:", error);
+
+      // Despachar acción de error
       dispatch({
         type: SET_ERROR,
-        payload: error.response ? error.response.data : error.message,
+        payload: error.response ? error.response.data.message : error.message,
       });
     }
   };

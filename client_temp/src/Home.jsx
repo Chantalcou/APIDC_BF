@@ -25,6 +25,9 @@ const Home = () => {
     user,
     getAccessTokenSilently,
   } = useAuth0();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);

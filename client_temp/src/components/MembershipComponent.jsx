@@ -25,11 +25,11 @@ const MembershipComponent = () => {
   const handleLogin = async () => {
     if (isAuthenticated) {
       if (selectedRole === "SocioConReprocan") {
-        navigate("/SocioConReprocan");
+        navigate("/membershipSection/SocioConReprocan");
       } else if (selectedRole === "SocioSinReprocan") {
-        navigate("/SocioSinReprocan");
+        navigate("/membershipSection/socioSinReprocan");
       } else {
-        navigate("/gestor");
+        navigate("/membershipSection/gestor");
       }
     } else {
       await loginWithRedirect({
@@ -72,8 +72,8 @@ const MembershipComponent = () => {
               Beneficios adicionales y prioridad en eventos.
             </p>
             <p className="price-container">
-              <span className="price-old">$35</span>
-              <span className="price-new">$25 / mes</span>
+              <span className="price-old">$17.000</span>
+              <span className="price-new">$10.000 / mes</span>
             </p>
             <ul className="benefits-list">
               <li>✔ Acceso a asesoramiento</li>
@@ -83,7 +83,7 @@ const MembershipComponent = () => {
             </ul>
             <button
               className="card-button"
-              onClick={() => handleRoleSelect("SocioConReprocan")}
+              onClick={() => handleRoleSelect("SocioSinReprocan")}
             >
               Más Información
             </button>
@@ -129,7 +129,7 @@ const MembershipComponent = () => {
             </ul>
             <button
               className="card-button"
-              onClick={() => handleRoleSelect("SocioConReprocan")}
+              onClick={() => handleRoleSelect("Gestor")}
             >
               Más Información
             </button>

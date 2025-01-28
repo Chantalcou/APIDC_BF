@@ -258,15 +258,9 @@ const SocioSinReprocan = () => {
               className="d-flex flex-column justify-content-center align-items-center h-100"
               style={{ zIndex: 99 }}
             >
-              <h1 className="banner-title">Socio sin Reprocan</h1>
+              <h1 className="banner-title">Socio Adherente</h1>
               <p className="sub-title_banner text-center mb-5">
-                Da el primer paso hacia un futuro lleno de oportunidades en la
-                industria del cannabis medicinal. Como Socio sin Reprocan,
-                formarás parte de una red colaborativa y visionaria, obteniendo
-                apoyo para maximizar tu impacto y conocimiento en este sector.
-                Estamos aquí para ayudarte a crecer, aprender y explorar nuevas
-                posibilidades. Únete y juntos construyamos un camino hacia un
-                futuro prometedor.
+              Como socio adherente de nuestra asociación civil, tendrás acceso a información y recursos sobre el cultivo y uso medicinal del cannabis. Además, podrás optar por convertirte en socio premium a través del registro REPROCANN, lo que te permitirá cultivar en nuestro campo y gestionar la venta de productos, obteniendo un porcentaje de las ganancias.
               </p>
 
               <div className="gestor-scroll_arrow static-content d-flex flex-column justify-content-center align-items-center  position-relative">

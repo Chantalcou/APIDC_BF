@@ -27,7 +27,7 @@ const App = () => {
         {/* <BreadcrumbsRoutes /> */}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/gestor" element={<Gestor />} />
+          <Route path="/membershipSection/gestor" element={<Gestor />} />
           <Route path="/products" element={<ProductsSection />} />
           <Route path="/membershipSection" element={<MembershipComponent />} />
           <Route
@@ -39,8 +39,8 @@ const App = () => {
             }
           />
           <Route path="/contacto" element={<ContactForm />} />
-          <Route path="/SocioConReprocan" element={<SocioConReprocan />} />
-          <Route path="/SocioSinReprocan" element={<SocioSinReprocan />} />
+          <Route path="/membershipSection/SocioConReprocan" element={<SocioConReprocan />} />
+          <Route path="/membershipSection/socioSinReprocan" element={<SocioSinReprocan />} />
           <Route path="/newsletter" element={<Newsletter />} />
           {/* <Route path="/loguin" element={<Loguin />} />  */}
           {/* <Route

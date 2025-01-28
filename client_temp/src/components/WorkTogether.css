@@ -1,7 +1,7 @@
 /* Estilo principal */
 .work-together {
   position: relative;
-  height: 125vh;
+  height: 112vh;
   overflow: hidden;
   color: #fff;
   font-family: "Arial", sans-serif;
@@ -35,7 +35,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* Centra contenido verticalmente */
+
   text-align: center;
   /* gap: 20px; */
   padding: 40px; 
@@ -46,7 +46,7 @@
   font-size: 2.5rem;
   font-weight: bold;
   margin: 0;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
   color: #0a9d6d;
 }
 
