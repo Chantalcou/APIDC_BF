@@ -68,18 +68,17 @@ const MembershipComponent = () => {
           {/* Socio con Reprocan */}
           <div className="card-first">
             <h2 className="card-title">Socio adherente</h2>
-            <p className="card-description">
+            {/* <p className="card-description">
               Beneficios adicionales y prioridad en eventos.
-            </p>
+            </p> */}
             <p className="price-container">
-              <span className="price-old">$17.000</span>
-              <span className="price-new">$10.000 / mes</span>
+              {/* <span className="price-old">17.000</span> */}
+              <span className="price-new">10.000 / mes</span>
             </p>
             <ul className="benefits-list">
-              <li>✔ Acceso a asesoramiento</li>
-              <li>✔ Descuentos exclusivos</li>
-              <li>✖ Gestión de comunidad</li>
-              <li>✔ Prioridad en eventos</li>
+              <li>✔ Participación en Investigación de Cultivo Medicinalo</li>
+              <li>✔ Colaboración en Distribución de Aceite Medicinal a Hospitales de Gerontes</li>
+              <li>✔ Atención Personalizada Online para Gestión del REPROCAN</li>
             </ul>
             <button
               className="card-button"
@@ -90,18 +89,17 @@ const MembershipComponent = () => {
           </div>
           <div className="card">
             <h2 className="card-title">Socio Premium</h2>
-            <p className="card-description">
+            {/* <p className="card-description">
               Beneficios adicionales y prioridad en eventos.
-            </p>
+            </p> */}
             <p className="price-container">
-              <span className="price-old">$35</span>
-              <span className="price-new">$25 / mes</span>
+              <span className="price-old">200</span>
+              <span className="price-new">150 / mes</span>
             </p>
             <ul className="benefits-list">
-              <li>✔ Acceso a asesoramiento</li>
-              <li>✔ Descuentos exclusivos</li>
-              <li>✖ Gestión de comunidad</li>
-              <li>✔ Prioridad en eventos</li>
+              <li>✔ Un Frasco Gratis de Cannabis Medicinal</li>
+              <li>✔ Cultivo Exclusivo en Nuestros Campos</li>
+              <li>✔ Asesoramiento Exclusivo Personalizado</li>
             </ul>
             <button
               className="card-button"
@@ -114,18 +112,18 @@ const MembershipComponent = () => {
           {/* Socio con Reprocan */}
           <div className="card">
             <h2 className="card-title">Gestor</h2>
-            <p className="card-description">
+            {/* <p className="card-description">
               Beneficios adicionales y prioridad en eventos.
-            </p>
+            </p> */}
             <p className="price-container">
-              <span className="price-old">$35</span>
-              <span className="price-new">$25 / mes</span>
+              <span className="price-old">35</span>
+              <span className="price-new">25 / mes</span>
             </p>
             <ul className="benefits-list">
-              <li>✔ Acceso a asesoramiento</li>
-              <li>✔ Descuentos exclusivos</li>
-              <li>✖ Gestión de comunidad</li>
-              <li>✔ Prioridad en eventos</li>
+              <li>✔ Cultivo en Nuestros Campos (Con Reprocan)</li>
+              <li>✔ Comisión por Nuevos Socios Activos</li>
+              <li>✔ Acceso a Material Exclusivo</li>
+              <li>✔ Soporte Continuo y Asesoramiento Personalizado</li>
             </ul>
             <button
               className="card-button"
@@ -137,50 +135,77 @@ const MembershipComponent = () => {
         </div>
 
         {/* Tabla de beneficios */}
-        <div className="benefits-table-container">
-          <h2 className="benefits-title">Comparación de Beneficios</h2>
-          <table className="benefits-table">
-            <thead>
-              <tr>
-                <th>Beneficio</th>
-                <th>Socio Adherente</th>
-                <th>Gestor</th>
-                <th>Socio sin Reprocan</th>
-                <th>Socio con Reprocan</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Asesoramiento</td>
-                <td>✔</td>
-                <td>✔</td>
-                <td>✔</td>
-                <td>✔</td>
-              </tr>
-              <tr>
-                <td>Descuentos exclusivos</td>
-                <td>✔</td>
-                <td>✔</td>
-                <td>✔</td>
-                <td>✔</td>
-              </tr>
-              <tr>
-                <td>Prioridad en eventos</td>
-                <td>✖</td>
-                <td>✔</td>
-                <td>✖</td>
-                <td>✔</td>
-              </tr>
-              <tr>
-                <td>Gestión de comunidad</td>
-                <td>✖</td>
-                <td>✔</td>
-                <td>✖</td>
-                <td>✖</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+      {/* Tabla de beneficios */}
+<div className="benefits-table-container">
+  <h2 className="benefits-title">Comparación de Beneficios</h2>
+  <table className="benefits-table">
+    <thead>
+      <tr>
+        <th>Beneficio</th>
+        <th>Socio Adherente</th>
+        <th>Socio Gestor</th>
+        <th>Socio Premium / con Reprocan</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Participación en investigación de cultivo medicinal</td>
+        <td>✔</td>
+        <td>✔</td>
+        <td>✔</td>
+      </tr>
+      <tr>
+        <td>Distribución de aceite medicinal a hospitales</td>
+        <td>✔</td>
+        <td>✔</td>
+        <td>✔</td>
+      </tr>
+      <tr>
+        <td>Atención personalizada online para gestión de Reprocan</td>
+        <td>✔</td>
+        <td>✔</td>
+        <td>✔</td>
+      </tr>
+      <tr>
+        <td>Acceso a newsletter mensual con noticias</td>
+        <td>✔</td>
+        <td>✔</td>
+        <td>✔</td>
+      </tr>
+      <tr>
+        <td>Frasco gratis de cannabis medicinal</td>
+        <td>✖</td>
+        <td>✖</td>
+        <td>✔</td>
+      </tr>
+      <tr>
+        <td>Cultivo en nuestro campo (Con Reprocan)</td>
+        <td>✖</td>
+        <td>✔</td>
+        <td>✔</td>
+      </tr>
+      <tr>
+        <td>Asesoramiento exclusivo</td>
+        <td>✖</td>
+        <td>✔</td>
+        <td>✔</td>
+      </tr>
+      <tr>
+        <td>Comisión por nuevos socios activos referidos</td>
+        <td>✖</td>
+        <td>✔</td>
+        <td>✖</td>
+      </tr>
+      <tr>
+        <td>Recomendación y promoción de la asociación</td>
+        <td>✖</td>
+        <td>✔</td>
+        <td>✖</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
       </div>
     </>
   );

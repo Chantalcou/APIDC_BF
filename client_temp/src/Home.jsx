@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import $ from "jquery";
 import { registerUser, fetchUsers } from "./redux/actions/index.js";
 import ScrollArrow from "./components/ScrollArrow.jsx";
 import ButtonComponent from "./components/Button";
 import { useSelector, useDispatch } from "react-redux";
 import { Helmet } from "react-helmet-async"; //Optimizacion SEO
-import { useAuth0, isAuthenticated, isLoading } from "@auth0/auth0-react";
+import { useAuth0 } from "@auth0/auth0-react";
 import { FaArrowRight } from "react-icons/fa";
 import LoginModal from "./components/LoginModal.jsx";
 import ContactInfo from "./components/ContactInfo.jsx";
 import { WorkTogether } from "./components/WorkTogether.jsx";
+// Librerias de aniamcion
+import AOS from "aos";
+import "aos/dist/aos.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./Home.css";
@@ -39,6 +42,16 @@ const Home = () => {
   const [selectedRole, setSelectedRole] = useState(null);
   const [captchaVerified, setCaptchaVerified] = useState(false);
 
+  // ANIMACION
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // Duración de las animaciones (opcional)
+      easing: "ease-in-out", // Efecto de animación (opcional)
+      once: true, // La animación ocurre solo una vez cuando el elemento entra en la vista (opcional)
+    });
+  }, []); // El segundo argumento [] asegura que se ejecute solo una vez al montar el componente
+
   useEffect(() => {
     // Simula una carga de datos o cualquier otra operación asíncrona
     setTimeout(() => {
@@ -65,7 +78,6 @@ const Home = () => {
   };
 
   useEffect(() => {
-    console.log("entra aca?????");
     const fetchUserData = async () => {
       if (isAuthenticated && user) {
         try {
@@ -136,17 +148,45 @@ const Home = () => {
       <div>
         <div className="container-fluid p-0 main-content">
           <div className="video-container">
-            <video autoPlay muted loop className="home-bg-video">
+            {/* <video autoPlay muted loop className="home-bg-video">
               <source
                 src="https://res.cloudinary.com/dqgjcfosx/video/upload/w_720,q_auto,f_auto/v1234567/7667357-uhd_3840_2160_30fps_nm24my.mp4"
                 type="video/mp4"
               />
               Your browser does not support the video tag.
+            </video> */}
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline // Mejor soporte móvil
+              preload="metadata" // Evita carga completa inicial
+              className="home-bg-video"
+              poster="https://res.cloudinary.com/dqgjcfosx/image/upload/w_720,q_auto,f_auto/v1234567/thumbnail_video.jpg" // Thumbnail de pre-carga
+            >
+              {/* Priorizar formato WebM (mejor compresión) */}
+              <source
+                src="https://res.cloudinary.com/dqgjcfosx/video/upload/f_webm,w_480,q_auto:good,vc_h265/v1234567/7667357-uhd_3840_2160_30fps_nm24my.mp4"
+                type="video/webm"
+              />
+
+              {/* Fallback para Safari */}
+              <source
+                src="https://res.cloudinary.com/dqgjcfosx/video/upload/w_720,q_auto,f_mp4,vc_h264/v1234567/7667357-uhd_3840_2160_30fps_nm24my.mp4"
+                type="video/mp4"
+              />
+
+              {/* Fallback texto para navegadores muy antiguos */}
+              <p>
+                Tu navegador no soporta videos HTML5. Te recomendamos actualizar
+                tu navegador.
+              </p>
             </video>
             <div className="static-content d-flex flex-column justify-content-center align-items-center h-100">
               {/* Texto agregado sobre el logo */}
+              {console.log(user)}
               <h1 className="welcome-name">
-                {userFromRedux?.name ? `Bienvenid@ ${userFromRedux.name}` : ""}
+                {user ? `Bienvenid@ ${user.name}` : ""}
               </h1>
 
               <img
@@ -174,12 +214,14 @@ const Home = () => {
         <div className="about-section" id="about-section">
           <div>
             <div className="content-about_section row text-center my-5 ">
-              <div className="col-md-4 col-12 mb-4">
+              <div data-aos="fade-up" className="col-md-4 col-12 mb-4">
                 <img
-                  src="https://res.cloudinary.com/dqgjcfosx/image/upload/v1726139381/imagen-3-apidc_sezunb.jpg"
+                  src="https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1726139381/imagen-3-apidc_sezunb.jpg"
+                  loading="lazy"
                   alt="Quienes somos"
                   className="img-fluid mb-3"
                 />
+
                 <h3
                   className="home-title_about_section"
                   style={{ color: "#0a9d6d" }}
@@ -192,12 +234,14 @@ const Home = () => {
                   con el Cannabis, su procesamiento y sus usos terapéuticos.
                 </p>
               </div>
-              <div className="col-md-4 col-12 mb-4">
+              <div data-aos="fade-down" className="col-md-4 col-12 mb-4">
                 <img
-                  src="https://res.cloudinary.com/dqgjcfosx/image/upload/v1726139381/imagen-2-apidc_jd0dnj.jpg"
+                  src="https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1726139381/imagen-2-apidc_jd0dnj.jpg"
                   alt="Nuestro camino"
                   className="img-fluid mb-3"
+                  loading="lazy"
                 />
+
                 <h3
                   style={{ color: "#0a9d6d" }}
                   className="home-title_about_section"
@@ -212,12 +256,14 @@ const Home = () => {
                   investigación.
                 </p>
               </div>
-              <div className="col-md-4 col-12 mb-4">
+              <div data-aos="fade-up" className="col-md-4 col-12 mb-4">
                 <img
-                  src="https://res.cloudinary.com/dqgjcfosx/image/upload/v1726139381/imagen-1-apidc_vtapiq.jpg"
+                  src="https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1726139381/imagen-1-apidc_vtapiq.jpg"
                   alt="A donde vamos"
                   className="img-fluid mb-3"
+                  loading="lazy"
                 />
+
                 <h3
                   style={{ color: "#0a9d6d" }}
                   className="home-title_about_section"
@@ -239,12 +285,18 @@ const Home = () => {
             </div>
 
             <div id="ley-section" className="ley-section text-center">
-              <img
-                src="https://res.cloudinary.com/dqgjcfosx/image/upload/q_100,w_800/v1735841633/pexels-pavel-danilyuk-8112199_pvqmxc.jpg
-"
-                alt="Ley 27.350"
-                className="img-fluid"
-              />
+              <div
+                data-aos="fade-right"
+                data-aos-offset="300"
+                data-aos-easing="ease-in-sine"
+              >
+                <img
+                  src="https://res.cloudinary.com/dqgjcfosx/image/upload/w_800,q_auto,f_auto/v1735841633/pexels-pavel-danilyuk-8112199_pvqmxc.jpg"
+                  alt="Ley 27.350"
+                  className="img-fluid"
+                  loading="lazy"
+                />
+              </div>
               <h3
                 style={{ color: "#0a9d6d" }}
                 className="home-title_about_section"
@@ -297,8 +349,9 @@ const Home = () => {
 
               <div className="present-image">
                 <img
-                  src="https://res.cloudinary.com/dqgjcfosx/image/upload/v1727005386/apidc-all_d15wow.jpg"
+                  src="https://res.cloudinary.com/dqgjcfosx/image/upload/w_800,q_auto,f_auto/v1727005386/apidc-all_d15wow.jpg"
                   alt="Nuestro presente"
+                  loading="lazy"
                 />
               </div>
             </div>

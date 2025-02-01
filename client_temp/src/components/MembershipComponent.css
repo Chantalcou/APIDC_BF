@@ -76,17 +76,9 @@
   margin: 10px 0;
 }
 
-.large-card .card-button {
-  background-color: #007bff;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
 
 .large-card .card-button:hover {
-  background-color: #0056b3;
+  background-color: #175b44;
 }
 
 /* Cards de la parte inferior (distribuidas en tres columnas) */
@@ -94,11 +86,18 @@
   display: flex; /* Usamos flexbox para las cards */
   justify-content: space-around; /* Alineamos las cards con espacio entre ellas */
   margin-top: 40px;
+  gap: 20px; /* Añadido para separar las cards entre sí */
 }
 
 /* Card común */
 /* socio adherente */
 .card-first {
+  display: flex;
+  flex-direction: column; /* Asegura que los elementos estén en columna */
+  justify-content: space-between; /* Esto asegura que las cards se estiren para ocupar el espacio */
+  align-items: center;
+  padding: 20px;
+  width: 30%; /* Tres cards en una fila */
     border: 0.1rem solid rgb(255, 255, 255)!important;
   border-radius: 10px;
   padding: 20px;
@@ -114,7 +113,19 @@
     rgba(17, 17, 17, 0.07); /* Gradiente aplicado */
   box-shadow: 0px 4px 8px rgba(34, 13, 13, 0.1);
 }
+.card-button {
+  margin-top: auto; /* Esto asegura que el botón se pegue al fondo de la card */
+  background-color: #007bff;
+  color: white;
+  /* padding: 10px 20px; */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
+.card-button:hover {
+  background-color: #175b44;
+}
 
 /* Estilo para el título dentro de las cards */
 .card-first h2 {
@@ -139,6 +150,7 @@
   .card-first .price-new {
     color: #28a745; /* Cambié el color a verde para resaltar el nuevo precio */
     font-weight: bold;
+    font-size: 2rem;
   }
   
   /* Estilo de la lista de beneficios dentro de las cards */
@@ -153,17 +165,10 @@
   }
   
   /* Estilo del botón dentro de las cards */
-  .card-first .card-button {
-    background-color: #007bff;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
+
   
   .card-first .card-button:hover {
-    background-color: #0056b3;
+    background-color: #175b44;
   }
   
 
@@ -180,18 +185,19 @@
     color: white; /* Texto blanco para los beneficios */
   }
   
-  /* Estilo del botón dentro de las cards */
+  /* Estilo del botón dentro de las cards - primer card*/
   .card-first .card-button {
-    background-color: #007bff;
+    background-color: #0a9d6d;
     color: white;
     padding: 8px 16px;
     border: none;
+    width: 320px;
     border-radius: 5px;
     cursor: pointer;
   }
   
   .card-first .card-button:hover {
-    background-color: #0056b3;
+    background-color: #175b44;
   }
   
   
@@ -232,6 +238,7 @@
 .card .price-new {
   color: #28a745; /* Cambié el color a verde para resaltar el nuevo precio */
   font-weight: bold;
+  font-size: 2rem;
 }
 
 /* Estilo de la lista de beneficios dentro de las cards */
@@ -243,20 +250,6 @@
 .card .benefits-list li {
   margin: 10px 0;
   color: white; /* Texto blanco para los beneficios */
-}
-
-/* Estilo del botón dentro de las cards */
-.card .card-button {
-  background-color: #007bff;
-  color: white;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.card .card-button:hover {
-  background-color: #0056b3;
 }
 
 
@@ -291,7 +284,8 @@
 }
 
 .card .card-button {
-  background-color: #007bff;
+  background-color:   #0a9d6d;
+
   color: white;
   padding: 8px 16px;
   border: none;
@@ -300,7 +294,9 @@
 }
 
 .card .card-button:hover {
-  background-color: #0056b3;
+  background-color: #175b44;
+
+
 }
 
 /* Para dispositivos muy pequeños, como móviles en orientación vertical */

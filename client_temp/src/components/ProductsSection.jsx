@@ -17,42 +17,42 @@ const ProductsSection = () => {
   const products = [
     {
       image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1737993399/pexels-kindelmedia-7773109_jh0l6n.jpg",
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993399/pexels-kindelmedia-7773109_jh0l6n.jpg",
       title: "White Widow",
       description:
         "Una de las variedades más populares, conocida por su alto contenido de resina y efectos equilibrados. Es famosa por su potencia, sabor terroso y afrutado, y efectos relajantes.",
     },
     {
       image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1737993398/pexels-perfect-lens-6536878_exlrcm.jpg",
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993398/pexels-perfect-lens-6536878_exlrcm.jpg",
       title: "Blue Dream",
       description:
         "Híbrida entre la Blueberry y la Haze, esta cepa es conocida por sus efectos eufóricos y calmantes. Es ideal para aliviar el estrés y la ansiedad, con un sabor dulce y afrutado.",
     },
     {
       image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1737993398/pexels-printexstar-11652812_uuesob.jpg",
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993398/pexels-printexstar-11652812_uuesob.jpg",
       title: "OG Kush",
       description:
         "Esta variedad es famosa por su potencia y efectos relajantes. Tiene un perfil de sabor a tierra y cítricos, y es utilizada por quienes buscan alivio para el dolor y la ansiedad.",
     },
     {
       image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1737993398/pexels-perfect-lens-8263955_fg8e94.jpg",
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993398/pexels-perfect-lens-8263955_fg8e94.jpg",
       title: "Northern Lights",
       description:
         "Conocida por su resistencia y facilidad de cultivo, esta variedad índica tiene efectos profundamente relajantes. Su sabor es dulce y terroso, y es perfecta para la relajación nocturna.",
     },
     {
       image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1737993398/pexels-perfect-lens-12967923_lgn2au.jpg",
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993398/pexels-perfect-lens-12967923_lgn2au.jpg",
       title: "Amnesia Haze",
       description:
         "Una variedad sativa que produce efectos cerebrales energizantes. Su sabor cítrico y afrutado la convierte en una opción popular entre quienes buscan elevar su ánimo y creatividad.",
     },
     {
       image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1737993398/pexels-perfect-lens-6536878_exlrcm.jpg",
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993398/pexels-perfect-lens-6536878_exlrcm.jpg",
       title: "Green Crack",
       description:
         "Conocida por su efecto energizante, esta sativa es excelente para aumentar la productividad y la concentración. Tiene un sabor fresco y afrutado, ideal para empezar el día con energía.",
@@ -118,6 +118,7 @@ const ProductsSection = () => {
                     alt={product.title}
                     className="product-image"
                     onLoad={handleImageLoad} // Al cargar la imagen, se cambia el estado
+                    loading="lazy" // Carga perezosa
                   />
                 </div>
                 <div className="product-info">
