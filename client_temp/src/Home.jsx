@@ -7,7 +7,7 @@ import ButtonComponent from "./components/Button";
 import { useSelector, useDispatch } from "react-redux";
 import { Helmet } from "react-helmet-async"; //Optimizacion SEO
 import { useAuth0 } from "@auth0/auth0-react";
-import { FaArrowRight } from "react-icons/fa";
+import { FaArrowRight, FaSeedling, FaClipboardCheck } from "react-icons/fa";
 import LoginModal from "./components/LoginModal.jsx";
 import ContactInfo from "./components/ContactInfo.jsx";
 import { WorkTogether } from "./components/WorkTogether.jsx";
@@ -186,7 +186,9 @@ const Home = () => {
               {/* Texto agregado sobre el logo */}
               {console.log(user)}
               <h1 className="welcome-name">
-                {user ? `Bienvenid@ ${user.name}` : ""}
+                {user
+                  ? `Bienvenid@ ${user.name}`
+                  : "Asociación de Cannabis Medicinal"}
               </h1>
 
               <img
@@ -197,17 +199,63 @@ const Home = () => {
                 }`}
                 onClick={handleLogoClick}
               />
+              <div className="d-flex flex-column flex-md-row gap-3">
+                <ButtonComponent
+                  text="Conocenos"
+                  onClick={() => scrollToSection("about-section")}
+                  color={{
+                    background: "transparent",
+                    text: "#ffffff",
+                    border: "2px solid white",
+                  }}
+                />
+                <ButtonComponent
+                  text="Asociate Ahora"
+                  onClick={() => scrollToSection("asociarme-seccion")}
+                  color={{
+                    background: "white",
+                    text: "#0a9d6d",
+                    border: "2px solid #0a9d6d",
+                  }}
+                  icon={<FaArrowRight className="me-2" />}
+                />
+              </div>
+              {/* <p className="text-white mt-3 text-center">
+              ⭐️ +500 socios confían en nosotros | Registro REPROCANN 100%
+              legal ⭐️
+            </p> */}
+            </div>
+          </div>
+        </div>
 
-              <ButtonComponent
-                text="Conocenos"
-                onClick={() => scrollToSection("about-section")}
-                color={{
-                  background: "transparent",
-                  text: "#ffffff",
-                  border: "2px solid white",
-                }}
-              />
-            </div>{" "}
+        <div id="beneficios" className="benefits-section py-5">
+          <h2 className="text-center mb-4">¿Por qué asociarte?</h2>
+          <div className="row justify-content-center">
+            {[
+              {
+                icon: "⚖️",
+                title: "Asesoramiento Legal",
+                text: "Tramitación REPROCANN garantizada",
+              },
+              {
+                icon: "🌱",
+                title: "Cultivo Seguro",
+                text: "Acceso a espacios de cultivo supervisados",
+              },
+              {
+                icon: "💊",
+                title: "Productos Controlados",
+                text: "Cannabis medicinal con análisis de laboratorio",
+              },
+            ].map((item, index) => (
+              <div key={index} className="col-md-4 mb-4" data-aos="fade-up">
+                <div className="benefit-card p-4">
+                  <div className="icon-display">{item.icon}</div>
+                  <h5>{item.title}</h5>
+                  <p>{item.text}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
@@ -229,9 +277,7 @@ const Home = () => {
                   Quienes Somos
                 </h3>
                 <p>
-                  Somos una Asociación Civil sin fines de lucro. Conformada por
-                  un gran equipo de personas que se relaciona de manera directa
-                  con el Cannabis, su procesamiento y sus usos terapéuticos.
+                Somos una Asociación Civil sin fines de lucro, conformada por un gran equipo de usuari@s, cultivadores y profesionales comprometidos con el abordaje integral e interdisciplinario de la planta de Cannabis. Nuestra asociación nace con el propósito de fomentar el conocimiento, el procesamiento responsable y los usos terapéuticos del Cannabis, siempre desde una perspectiva inclusiva y colaborativa.
                 </p>
               </div>
               <div data-aos="fade-down" className="col-md-4 col-12 mb-4">
@@ -320,48 +366,120 @@ const Home = () => {
               </div>
             </div>
 
-            <div className="present-section" id="present-section">
-              <div className="present-content">
-                <h2 style={{ color: "#0a9d6d" }}>NUESTRO PRESENTE</h2>
-                <p>
-                  Actualmente asistimos a usuarios terapéuticos; acompañando a
-                  la comunidad con el servicio de gestión, asesoramiento y
-                  vinculación a REPROCANN. Actualmente asistimos a usuarios
-                  terapéuticos; acompañando a la comunidad con el servicio de
-                  gestión, asesoramiento y vinculación a REPROCANN. Actualmente
-                  asistimos a usuarios terapéuticos; acompañando a la comunidad
-                  con el servicio de gestión.
-                </p>
+            <section
+              className="present-section"
+              id="present-section"
+              style={{ padding: "60px 20px" }}
+            >
+              <div className="container">
+                <div className="row align-items-center">
+                  <div className="col-md-6 mb-4">
+                    <header className="text-center">
+                      <h2
+                        style={{
+                          color: "#0a9d6d",
+                          fontSize: "2.5rem",
+                          fontWeight: "700",
+                        }}
+                      >
+                        Nuestro Presente
+                      </h2>
+                    </header>
 
-                <div className="btn-asociarte-custom text-center">
-                  <ButtonComponent
-                    text="ASOCIATE"
-                    onClick={() => scrollToSection("asociarme-seccion")}
-                    color={{
-                      background: "transparent",
-                      text: "black",
-                      border: "2px solid black",
-                    }}
-                    customClass="hover-change-to-white"
-                  />
+                    <div className="present-description">
+                      <p
+                        className="lead"
+                        style={{ fontSize: "1rem", color: "#333" }}
+                      >
+                        Brindamos apoyo integral a usuarios terapéuticos,
+                        ofreciendo un servicio de gestión, asesoramiento y
+                        vinculación con REPROCANN. Acompañamos a la comunidad
+                        con un enfoque profesional, garantizando eficiencia en
+                        cada paso del proceso.
+                      </p>
+
+                      <h3
+                        style={{
+                          color: "#333",
+                          fontSize: "1.5rem",
+                          fontWeight: "300",
+                        }}
+                      >
+                        Lo que ofrecemos hoy
+                      </h3>
+
+                      <div className="service-grid d-flex flex-wrap justify-content-center mt-4">
+                        <div
+                          className="service-item text-center p-3"
+                          style={{ width: "250px" }}
+                        >
+                          <FaClipboardCheck
+                            className="service-icon"
+                            style={{ fontSize: "3rem", color: "#0a9d6d" }}
+                          />
+                          <h5 style={{ fontWeight: "600", marginTop: "15px" }}>
+                            Gestión REPROCANN
+                          </h5>
+                          <p>Tramitamos tu registro en menos de 72 horas.</p>
+                        </div>
+
+                        <div
+                          className="service-item text-center p-3"
+                          style={{ width: "250px" }}
+                        >
+                          <FaSeedling
+                            className="service-icon"
+                            style={{ fontSize: "3rem", color: "#0a9d6d" }}
+                          />
+                          <h5 style={{ fontWeight: "600", marginTop: "15px" }}>
+                            Cultivos Controlados
+                          </h5>
+                          <p>
+                            Plantación y seguimiento profesional de cultivos.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="text-center mt-5">
+                      <ButtonComponent
+                        text="ASÓCIATE"
+                        onClick={() => scrollToSection("asociarme-seccion")}
+                        color={{
+                          background: "#0a9d6d",
+                          text: "white",
+                          border: "2px solid #0a9d6d",
+                        }}
+                        customClass="hover-change-to-light"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="col-md-6">
+                    <div className="present-image">
+                      <img
+                        src="https://res.cloudinary.com/dqgjcfosx/image/upload/w_800,q_auto,f_auto/v1727005386/apidc-all_d15wow.jpg"
+                        alt="Imagen ilustrativa de nuestro servicio terapéutico"
+                        loading="lazy"
+                        style={{
+                          width: "100%",
+                        
+                          borderRadius: "15px",
+                          boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.1)",
+                        }}
+                      />
+                    </div>
+                  </div>
                 </div>
-              </div>
-
-              <div className="present-image">
-                <img
-                  src="https://res.cloudinary.com/dqgjcfosx/image/upload/w_800,q_auto,f_auto/v1727005386/apidc-all_d15wow.jpg"
-                  alt="Nuestro presente"
-                  loading="lazy"
-                />
-              </div>
-            </div>
-
-            <div className="static-content d-flex flex-column justify-content-center align-items-center h-100 position-relative">
+            <div className="static-content d-flex flex-column justify-content-center align-items-center h-100 position-relative mt-5">
               <ScrollArrow
                 onClick={() => scrollToSection("membership-section")}
                 color="#202020"
               />
             </div>
+              </div>
+            </section>
+
           </div>
         </div>
 

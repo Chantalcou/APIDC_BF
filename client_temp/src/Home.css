@@ -175,6 +175,7 @@ body {
 .content-cards {
   margin-bottom: 200px;
 }
+/* present section */
 
 .present-section {
   display: flex;
@@ -183,35 +184,44 @@ body {
   justify-content: center;
   padding: 50px;
   min-height: 93vh;
-  background-color: #f9f9f9;
+  background-color: #f5f5f5;
 }
 
+
+/* Contenido textual a la izquierda */
 .present-content {
-  flex: 1;
-  padding: 20px; /* Agrega un poco de espacio en pantallas más pequeñas */
-  text-align: center; /* Centra el texto en pantallas pequeñas */
+  flex: 1; /* Ocupa la mitad de la pantalla */
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centra los textos verticalmente */
 }
 
-.present-content p {
-  text-align: justify;
-}
-
+/* Estilo para la imagen a la derecha */
 .present-image {
-  flex: 1;
-  text-align: center; /* Centra la imagen */
-  margin-top: 20px; /* Espaciado entre el texto y la imagen */
+  flex: 1; /* Ocupa la otra mitad de la pantalla */
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
 
 .present-image img {
   max-width: 100%;
-  height: auto;
+  height: 100%; /* Asegura que la imagen tenga la misma altura que el texto */
+  object-fit: cover; /* Asegura que la imagen cubra completamente el área */
   border-radius: 8px;
+  
 }
+
 
 /* about section */
 .content-about_section {
   width: 100vw;
   padding: 0 20px;
+  
 }
 .about-section {
   display: flex;
@@ -232,6 +242,7 @@ img {
 .present-section img {
   width: 100%;
   height: auto;
+  height: 80vh;
 }
 .bg-video {
   width: 100%;
@@ -316,6 +327,7 @@ img {
   .present-section {
     flex-direction: column; /* Coloca los elementos en columna */
     padding: 20px; /* Reduce el padding en pantallas más pequeñas */
+    background-color: #f9f9f9;
   }
 
   .present-content {
