@@ -28,6 +28,28 @@ const User = sequelize.define(
       allowNull: true,   //Modificar a false apenas lo consiga
       unique: true,
     },
+    // NUEVOS CAMPOS
+    membershipType: {
+      type: DataTypes.ENUM('sinMembresia', 'premium', 'gestor'),
+      defaultValue: 'sinMembresia'
+    },
+    paymentProof: { // URL a comprobante de pago subido
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    isApproved: { // Aprobación manual por admin
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
+    gestorCode: { // Código único para referidos (si es gestor)
+      type: DataTypes.STRING,
+      unique: true,
+      allowNull: true
+    },
+    referredBy: { // ID del gestor que lo refirió
+      type: DataTypes.INTEGER,
+      allowNull: true
+    }
     // authProvider: {
     //   type: DataTypes.STRING,
     //   allowNull: false,

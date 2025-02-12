@@ -140,11 +140,6 @@ const verifyToken = async (req, res, next) => {
 //   }
 // };
 
-
-
-
-
-
 const registerUser = async (req, res) => {
   const { name, email } = req.body;
   console.log(name, email, " name, email s");
@@ -156,7 +151,10 @@ const registerUser = async (req, res) => {
 
     // Verificar si el usuario es admin
     const isAdmin = email === process.env.ADMIN_EMAIL;
-    console.log(isAdmin, "ADMIN=> ESTO ME DEVUELVE TRUE EN EL CASO DE SER ADMIN");
+    console.log(
+      isAdmin,
+      "ADMIN=> ESTO ME DEVUELVE TRUE EN EL CASO DE SER ADMIN"
+    );
 
     // Si el usuario ya existe
     if (userExists) {
@@ -298,7 +296,81 @@ const isAdmin = (req, res, next) => {
   next();
 };
 
-// Exportar funciones
+const upgradeToPremium = async (req, res) => {
+  const { userId } = req.body;
+
+  try {
+    const user = await User.findByPk(userId);
+    if (!user) {
+      return res.status(404).json({ error: "Usuario no encontrado" });
+    }
+
+    // Actualizar a premium
+    await user.update({
+      membershipType: "premium",
+      isApproved: true,
+    });
+
+    // Notificar al usuario vía email/WhatsApp
+    sendWhatsAppMessage(
+      user.phone,
+      "¡Tu cuenta premium está activa! Accede a la tienda aquí: [link]"
+    );
+
+    res
+      .status(200)
+      .json({ message: "Usuario actualizado a premium exitosamente" });
+  } catch (error) {
+    console.error("Error actualizando a premium:", error);
+    res.status(500).json({ error: "Error en la actualización" });
+  }
+};
+
+const getPendingUsers = async (req, res) => {
+  try {
+    const users = await User.findAll({
+      where: {
+        membershipType: "adherente", // Solo usuarios adherentes
+      },
+      attributes: ["id", "name", "email", "phone", "createdAt"],
+    });
+
+    res.status(200).json(users);
+  } catch (error) {
+    console.error("Error obteniendo usuarios pendientes:", error);
+    res.status(500).json({ error: "Error al obtener usuarios pendientes" });
+  }
+};
+
+// Actualizar rol de usuario
+const updateUserRole = async (req, res) => {
+  console.log("entra a esta funcion de update role????");
+  const { userId } = req.params;
+  const { membershipType } = req.body;
+  console.log(membershipType, "BACKEND");
+  try {
+    // Verifica que el rol sea válido
+    if (!["premium", "gestor", "sinMembresia"].includes(membershipType)) {
+      return res.status(400).json({ message: "Rol inválido" });
+    }
+
+    // Actualizar el rol del usuario
+    const user = await User.findByPk(userId);
+    if (!user) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+
+    // Actualizar el rol
+    user.membershipType = membershipType;
+    await user.save();
+    console.log(user);
+    return res.status(200).json({ message: "Rol actualizado con éxito", user });
+  } catch (error) {
+    console.error("Error al actualizar el rol:", error);
+    return res.status(500).json({ message: "Error al actualizar el rol" });
+  }
+};
+
 module.exports = {
   registerUser,
   loginUser,
@@ -306,4 +378,7 @@ module.exports = {
   isAdmin,
   getAllUsers,
   deleteUserByEmail,
+  upgradeToPremium,
+  getPendingUsers,
+  updateUserRole,
 };
