@@ -5,7 +5,7 @@ export const registerUser = (userData, token) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(
-        "https://apidc-bf-2.onrender.comregister",
+        "https://apidc-bf-2.onrender.com/register",
         {
           email: userData.email,
           name: userData.name,
