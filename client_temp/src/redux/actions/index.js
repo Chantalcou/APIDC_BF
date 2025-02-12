@@ -5,7 +5,7 @@ export const registerUser = (userData, token) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(
-        "https://apidc-bf-2.onrender.com/register",
+        "https://apidc-bf-2.onrender.comregister",
         {
           email: userData.email,
           name: userData.name,
@@ -19,9 +19,6 @@ export const registerUser = (userData, token) => {
         }
       );
 
-      console.log(response.data, "esto necesito");
-
-      // Desestructurar los datos de la respuesta
       const { userAdmin, users } = response.data;
 
       // Despachar acción para actualizar el estado
@@ -105,9 +102,43 @@ export const fetchUsers = (token) => {
   };
 };
 
+// Acción para actualizar el rol de un usuario
+export const updateUserRole = (userId, membershipType, token) => {
+  console.log( membershipType, "DATA DESDE EL ACTIONS - MEMBRESIAS");
+  return async (dispatch) => {
+    try {
+      const response = await axios.put(
+        `https://apidc-bf-2.onrender.com/users/${userId}`,
+        { membershipType },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(
+        "ESTO ME DEVUELVE EL BACKEND DE USUARIOS PREMIUM O USUARIOS GESTORES",
+        response.data
+      );
+      dispatch({
+        
+        type: "UPDATE_USER_ROLE_SUCCESS",
+        payload: response.data, // Actualiza con los datos de usuario
+        memberShipType: response.data.membershipType,
+      });
+    } catch (error) {
+      dispatch({
+        type: "UPDATE_USER_ROLE_FAILURE",
+        payload: error.response ? error.response.data : error.message,
+      });
+    }
+  };
+};
+
 // Este formulario nos va a enviar 'Trabajemos juntos'
 export const sendWorkTogether = (formData) => async (dispatch) => {
-  console.log(formData, "form data entro????");
+
 
   try {
     const response = await axios.post(
@@ -122,7 +153,7 @@ export const sendWorkTogether = (formData) => async (dispatch) => {
     );
     dispatch({
       type: "SEND_FORM_SUCCESS",
-      payload: response.data, // Aquí puedes enviar una respuesta que diga "correo enviado"
+      payload: response.data, 
     });
   } catch (error) {
     dispatch({

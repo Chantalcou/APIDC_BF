@@ -3,7 +3,7 @@
   text-align: center;
   margin-top: 110px;
   padding: 50px 20px;
-  background-color: rgba(0, 0, 0, 0.90);
+  background-color: rgba(0, 0, 0, 0.9);
 }
 
 /* Estilo para el título de la sección */
@@ -76,7 +76,6 @@
   margin: 10px 0;
 }
 
-
 .large-card .card-button:hover {
   background-color: #175b44;
 }
@@ -98,7 +97,7 @@
   align-items: center;
   padding: 20px;
   width: 30%; /* Tres cards en una fila */
-    border: 0.1rem solid rgb(255, 255, 255)!important;
+  border: 0.1rem solid rgb(255, 255, 255) !important;
   border-radius: 10px;
   padding: 20px;
   text-align: center;
@@ -129,91 +128,84 @@
 
 /* Estilo para el título dentro de las cards */
 .card-first h2 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-    color: white; /* Aseguramos que el texto sea blanco para contrastar */
-  }
-  
-  /* Estilo para el contenedor de precios dentro de las cards */
-  .card-first .price-container {
-    font-size: 1.2rem;
-    margin-bottom: 15px;
-    color: white; /* El texto del precio también en blanco */
-  }
-  
-  .card-first .price-old {
-    text-decoration: line-through;
-    margin-right: 10px;
-    color: #aaa;
-  }
-  
-  .card-first .price-new {
-    color: #28a745; /* Cambié el color a verde para resaltar el nuevo precio */
-    font-weight: bold;
-    font-size: 2rem;
-  }
-  
-  /* Estilo de la lista de beneficios dentro de las cards */
-  .card-first .benefits-list {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .card-fist .benefits-list li {
-    margin: 10px 0;
-    color: white; /* Texto blanco para los beneficios */
-  }
-  
-  /* Estilo del botón dentro de las cards */
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: white; /* Aseguramos que el texto sea blanco para contrastar */
+}
 
-  
-  .card-first .card-button:hover {
-    background-color: #175b44;
-  }
-  
+/* Estilo para el contenedor de precios dentro de las cards */
+.card-first .price-container {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: white; /* El texto del precio también en blanco */
+}
 
+.card-first .price-old {
+  text-decoration: line-through;
+  margin-right: 10px;
+  color: #aaa;
+}
 
-  
+.card-first .price-new {
+  color: #28a745; /* Cambié el color a verde para resaltar el nuevo precio */
+  font-weight: bold;
+  font-size: 2rem;
+}
+
 /* Estilo de la lista de beneficios dentro de las cards */
 .card-first .benefits-list {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .card-first .benefits-list li {
-    margin: 10px 0;
-    color: white; /* Texto blanco para los beneficios */
-  }
-  
-  /* Estilo del botón dentro de las cards - primer card*/
-  .card-first .card-button {
-    background-color: #0a9d6d;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    width: 320px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .card-first .card-button:hover {
-    background-color: #175b44;
-  }
-  
-  
+  list-style-type: none;
+  padding: 0;
+}
 
-  /*  */
+.card-fist .benefits-list li {
+  margin: 10px 0;
+  color: white; /* Texto blanco para los beneficios */
+}
+
+/* Estilo del botón dentro de las cards */
+
+.card-first .card-button:hover {
+  background-color: #175b44;
+}
+
+/* Estilo de la lista de beneficios dentro de las cards */
+.card-first .benefits-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.card-first .benefits-list li {
+  margin: 10px 0;
+  color: white; /* Texto blanco para los beneficios */
+}
+
+/* Estilo del botón dentro de las cards - primer card*/
+.card-first .card-button {
+  background-color: #0a9d6d;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  width: 320px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.card-first .card-button:hover {
+  background-color: #175b44;
+}
+
+/*  */
 
 .card {
-    border: 0.1rem solid rgb(255, 255, 255)!important;
+  border: 0.1rem solid rgb(255, 255, 255) !important;
   border-radius: 10px;
   padding: 20px;
   text-align: center;
   width: 30%; /* Tres cards en una fila */
-  background:black;
+  background: black;
   box-shadow: 0px 4px 8px rgba(34, 13, 13, 0.1);
 }
-
 
 /* Estilo para el título dentro de las cards */
 .card h2 {
@@ -252,7 +244,6 @@
   color: white; /* Texto blanco para los beneficios */
 }
 
-
 .card h2 {
   font-size: 1.5rem;
   margin-bottom: 15px;
@@ -284,7 +275,7 @@
 }
 
 .card .card-button {
-  background-color:   #0a9d6d;
+  background-color: #0a9d6d;
 
   color: white;
   padding: 8px 16px;
@@ -295,8 +286,10 @@
 
 .card .card-button:hover {
   background-color: #175b44;
+}
 
-
+.card-subtitle {
+  color: #ffff;
 }
 
 /* Para dispositivos muy pequeños, como móviles en orientación vertical */
@@ -334,133 +327,124 @@
   }
 }
 
-
-
 /* steeps section */
 /* Contenedor principal */
 .steps-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 50px 0;
-    gap: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50px 0;
+  gap: 20px;
 
-    /* background-color: rgba(0, 0, 0, 0.90); */
-    padding: 20px;
-    border-radius: 10px;
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); Sombra para realce */
-  }
-  
-  /* Cada paso */
-  .step {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  /* Círculo para los números */
-  .circle {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    border: 2px solid #fff; /* Borde blanco */
-    background-color: transparent; /* Fondo transparente para resaltar el borde */
-    color: #fff; /* Texto blanco */
-    font-size: 1.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1); /* Sutil sombra blanca */
-  }
-  
-  /* Texto debajo del círculo */
-  .step-text {
-    font-size: 1rem;
-    color: #fff; /* Texto blanco */
-    max-width: 150px;
-    text-align: center;
-  }
-  
-  /* Flecha entre los pasos */
-  .arrow {
-    font-size: 2rem;
-    color: #fff; /* Flecha blanca */
-    font-weight: bold;
-  }
-  
+  /* background-color: rgba(0, 0, 0, 0.90); */
+  padding: 20px;
+  border-radius: 10px;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); Sombra para realce */
+}
 
+/* Cada paso */
+.step {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
 
+/* Círculo para los números */
+.circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid #fff; /* Borde blanco */
+  background-color: transparent; /* Fondo transparente para resaltar el borde */
+  color: #fff; /* Texto blanco */
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1); /* Sutil sombra blanca */
+}
 
+/* Texto debajo del círculo */
+.step-text {
+  font-size: 1rem;
+  color: #fff; /* Texto blanco */
+  max-width: 150px;
+  text-align: center;
+}
 
+/* Flecha entre los pasos */
+.arrow {
+  font-size: 2rem;
+  color: #fff; /* Flecha blanca */
+  font-weight: bold;
+}
 
-
-  /* comparacion de beneficios */
-  /* Contenedor principal de la tabla */
+/* comparacion de beneficios */
+/* Contenedor principal de la tabla */
 .benefits-table-container {
-    margin: 40px auto;
-    padding: 20px;
-    background-color: #000; /* Fondo negro */
-    border-radius: 10px; /* Bordes redondeados */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra para destacar */
-    max-width: 90%; /* Asegura que sea responsiva */
-  }
-  
-  /* Título de la tabla */
-  .benefits-title {
-    text-align: center;
-    font-size: 2rem;
-    color: #fff; /* Texto blanco */
-    margin-bottom: 20px;
-    font-weight: bold;
-  }
-  
-  /* Estilo de la tabla */
-  .benefits-table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: center;
-    font-size: 1rem;
-    background-color: #121212; /* Fondo oscuro para la tabla */
-    border: 1px solid #444; /* Bordes grises */
-    color: #fff; /* Texto blanco */
-  }
-  
-  /* Estilo de las celdas del encabezado */
-  .benefits-table thead th {
-    background-color: #333; /* Fondo más oscuro */
-    color: #fff; /* Texto blanco */
-    padding: 15px;
-    font-weight: bold;
-    text-transform: uppercase;
-    border-bottom: 2px solid #555; /* Borde inferior */
-  }
-  
-  /* Estilo de las filas del cuerpo */
-  .benefits-table tbody tr {
-    border-bottom: 1px solid #444; /* Bordes entre filas */
-  }
-  
-  /* Estilo de las celdas */
-  .benefits-table td {
-    padding: 15px;
-    color: #fff; /* Texto blanco */
-  }
-  
-  /* Resalta las filas al pasar el mouse */
-  .benefits-table tbody tr:hover {
-    background-color: #222; /* Color oscuro al hover */
-  }
-  
-  /* Íconos ✔ y ✖ más visibles */
-  .benefits-table td {
-    font-size: 1.2rem;
-  }
-  
-  /* Celdas alternas con un fondo ligeramente diferente */
-  .benefits-table tbody tr:nth-child(even) {
-    background-color: #1c1c1c;
-  }
-  
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #000; /* Fondo negro */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra para destacar */
+  max-width: 90%; /* Asegura que sea responsiva */
+}
+
+/* Título de la tabla */
+.benefits-title {
+  text-align: center;
+  font-size: 2rem;
+  color: #fff; /* Texto blanco */
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Estilo de la tabla */
+.benefits-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  font-size: 1rem;
+  background-color: #121212; /* Fondo oscuro para la tabla */
+  border: 1px solid #444; /* Bordes grises */
+  color: #fff; /* Texto blanco */
+}
+
+/* Estilo de las celdas del encabezado */
+.benefits-table thead th {
+  background-color: #333; /* Fondo más oscuro */
+  color: #fff; /* Texto blanco */
+  padding: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-bottom: 2px solid #555; /* Borde inferior */
+}
+
+/* Estilo de las filas del cuerpo */
+.benefits-table tbody tr {
+  border-bottom: 1px solid #444; /* Bordes entre filas */
+}
+
+/* Estilo de las celdas */
+.benefits-table td {
+  padding: 15px;
+  color: #fff; /* Texto blanco */
+}
+
+/* Resalta las filas al pasar el mouse */
+.benefits-table tbody tr:hover {
+  background-color: #222; /* Color oscuro al hover */
+}
+
+/* Íconos ✔ y ✖ más visibles */
+.benefits-table td {
+  font-size: 1.2rem;
+}
+
+/* Celdas alternas con un fondo ligeramente diferente */
+.benefits-table tbody tr:nth-child(even) {
+  background-color: #1c1c1c;
+}

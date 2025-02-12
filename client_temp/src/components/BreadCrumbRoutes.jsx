@@ -10,7 +10,7 @@ const breadcrumbRoutes = {
   "/membershipSection/SocioConReprocan": "Socio Premiun",
   "/membershipSection/socioSinReprocan": "Socio adherente",
   "/newsletter": "Newsletter",
-  "/membershipSection":"Membresias",
+  "/membershipSection":"Categorías",
     "/products":"Productos"
 };
 

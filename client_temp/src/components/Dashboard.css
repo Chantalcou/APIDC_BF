@@ -1,5 +1,5 @@
 /* Asegúrate de que el contenedor ocupa toda la pantalla */
-.container-dashboard {
+.content-dashboard {
   max-width: 900px; /* Limita el ancho del contenido */
   height: calc(100vh - 70px); /* Calcula el espacio restante debajo del navbar (ajusta según el alto real de tu navbar) */
   margin: 0 auto; /* Centra horizontalmente */

@@ -1,21 +1,30 @@
 .moving-banner {
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-    white-space: nowrap;
-  }
-  
-  .moving-logos {
-    display: flex;
-    animation: scroll 10s linear infinite;
-  }
-  
-  .logo {
-    flex-shrink: 0;
-    width: 150px; /* Ajusta el tamaño según tus necesidades */
-    margin-right: 20px;
-  }
-  
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  white-space: nowrap;
+  background: #f8f8f8; /* Color de fondo opcional */
+  padding: 20px 0;
+
+}
+
+.moving-logos {
+  display: flex;
+  align-items: center;
+  animation: scroll 10s linear infinite;
+}
+
+.logo {
+  flex-shrink: 0;
+  width: 100px; /* Tamaño fijo */
+  height: 100px;
+  border-radius: 50%; /* Hace que los logos sean redondos */
+  object-fit: contain; /* Asegura que la imagen no se deforme */
+  background-color: white; /* Fondo para evitar bordes cortados */
+  padding: 10px; /* Espaciado interno opcional */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  margin-right: 20px;
+}
   @keyframes scroll {
     0% {
       transform: translateX(0);

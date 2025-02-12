@@ -1,13 +1,15 @@
-
 // export const SET_USER = "SET_USER";
 // export const SET_ERROR = "SET_ERROR";
 // export const LOGOUT_USER = "LOGOUT_USER";
 
-
-
-export const REGISTER_USER = 'REGISTER_USER';
-export const SET_ADMIN = 'SET_ADMIN';
-export const LOGOUT_USER = 'LOGOUT_USER';
-export const SET_LOADING = 'SET_LOADING';
-export const SET_ERROR = 'SET_ERROR';
-export const SUBMIT_FORM='SUBMIT_FORM'
+export const REGISTER_USER = "REGISTER_USER";
+export const SET_ADMIN = "SET_ADMIN";
+export const LOGOUT_USER = "LOGOUT_USER";
+export const SET_LOADING = "SET_LOADING";
+export const SET_ERROR = "SET_ERROR";
+export const SUBMIT_FORM = "SUBMIT_FORM";
+export const UPDATE_USER_ROLE_SUCCESS = "UPDATE_USER_ROLE_SUCCESS";
+export const UPDATE_USER_ROLE_FAIL = "UPDATE_USER_ROLE_FAIL";
+export const UPDATE_USER_ROLE = "UPDATE_USER_ROLE";
+export const UPDATE_USER_ROLE_FAILURE = "UPDATE_USER_ROLE_FAILURE";
+export const UPDATE_CURRENT_USER='UPDATE_CURRENT_USER'

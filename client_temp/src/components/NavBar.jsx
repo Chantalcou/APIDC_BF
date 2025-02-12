@@ -16,9 +16,9 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const userAdmin = useSelector((state) => state.userAdmin);
-  const isAdmin = useSelector((state) => state.isAdmin);
-  const userFromRedux = useSelector((state) => state.user);
+  const { userFromRedux, memberShipType, isAdmin, userAdmin } = useSelector(
+    (state) => state
+  );
 
   const {
     isAuthenticated,
@@ -37,16 +37,15 @@ const NavBar = () => {
   const [showModal, setShowModal] = useState(false);
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
-
   useEffect(() => {
     const fetchUserData = async () => {
       if (isAuthenticated && user) {
         try {
           const token = await getAccessTokenSilently();
-          dispatch(registerUser(user, token)); // Despacha la acción de registro
-          // Si es admin, realizar la acción de obtener usuarios
+          localStorage.setItem("authToken", token); // Guardar el token
+          dispatch(registerUser(user, token));
           if (user.isAdmin) {
-            dispatch(fetchUsers(token)); // Solo llamar si el usuario es admin
+            dispatch(fetchUsers(token));
           }
         } catch (error) {
           console.error("Error obteniendo token:", error);
@@ -74,7 +73,7 @@ const NavBar = () => {
 
   const handleLogin = async () => {
     if (!captchaVerified) {
-      setShowCaptcha(true); // Muestra el modal si el CAPTCHA no está verificado
+      setShowCaptcha(true);
       return;
     }
 
@@ -82,8 +81,12 @@ const NavBar = () => {
       await loginWithRedirect();
 
       if (isAuthenticated && user) {
-        const token = await getAccessTokenSilently();
-        dispatch(registerUser(user, token)); // Llamamos a la acción `registerUser` solo después de la verificación
+        let token = localStorage.getItem("authToken");
+        if (!token) {
+          token = await getAccessTokenSilently();
+          localStorage.setItem("authToken", token);
+        }
+        dispatch(registerUser(user, token));
       }
     } catch (error) {
       console.error("Error durante el login o el registro:", error);
@@ -92,6 +95,7 @@ const NavBar = () => {
 
   const handleLogout = () => {
     logout({ returnTo: window.location.origin });
+    localStorage.removeItem("authToken");
     localStorage.removeItem("isAdmin");
     navigate("/");
   };
@@ -123,8 +127,10 @@ const NavBar = () => {
     setShowCaptcha(false); // Cierra el modal sin verificar
   };
 
-  console.log(isAuthenticated, user, isAdmin, "AKA TENDRIA QUE SER");
-
+  useEffect(() => {
+    console.log("Tipo de membresía actualizado:", memberShipType);
+  }, [memberShipType]);
+  console.log(memberShipType, "MEMBRESIA");
   return (
     <>
       <Navbar
@@ -151,6 +157,17 @@ const NavBar = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="basic-navbar-nav-autentication-left">
               <Nav.Link href="/">Inicio</Nav.Link>
+              {/* Mostrar Productos solo si el rol NO es 'sinMembresia' */}
+              {isAuthenticated &&
+                (memberShipType === "premium" || memberShipType === "gestor" ? (
+                  <li>
+                    <Link to="/products" className="nav-link">
+                      Productos
+                    </Link>
+                  </li>
+                ) : null) // Si no tiene membresía premium ni gestor, no se muestra el link
+              }
+
               {isHome && (
                 <Nav.Link onClick={() => scrollToSection("about-section")}>
                   Nosotros
@@ -166,9 +183,6 @@ const NavBar = () => {
                   Trabaja con nosotros
                 </Nav.Link>
               )}
-              <Link to="/products" className="nav-link">
-                Productos
-              </Link>
             </Nav>
           </Navbar.Collapse>
 

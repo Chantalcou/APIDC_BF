@@ -43,14 +43,14 @@ const MembershipComponent = () => {
  
       {/* MEMBERSHIP SECTION */}
       <div className="membership-section">
-      <h1 className="section-title">Opciones de Membresía</h1>
+      <h1 className="section-title">🌱 Tu Camino con APIDC</h1>
         <p className="section-subtitle">
-          Elegí NNamNameeameel plan que mejor se adapte a tus necesidades. Primero debes ser
-          socio adeherente para acceder a las opciones siguientes.
+        Elegí el plan que impulse tu bienestar.
     </p>
 
            {/*  STEEPS*/}
-        <p className="section-subtitle">Pasos</p>
+        <p className="section-subtitle">Para acceder a nuestros servicios, comenza como Socio Adherente y luego selecciona la opción que mejor se adapte a tus objetivos: PREMIUM (cultivo personal REPROCAN) o Gestor (acompañamiento experto).</p>
+        <h2>🚀 Pasos para Unirte</h2>
       <div className="steps-container">
         <div className="step">
           <div className="circle">1</div>
@@ -59,7 +59,7 @@ const MembershipComponent = () => {
         <div className="arrow">→</div>
         <div className="step">
           <div className="circle">2</div>
-          <p className="step-text">Elegir Reprocan o Gestor</p>
+          <p className="step-text">Elegir Premium o Gestor</p>
         </div>
       </div>{" "}
   
@@ -68,9 +68,9 @@ const MembershipComponent = () => {
           {/* Socio con Reprocan */}
           <div className="card-first">
             <h2 className="card-title">Socio adherente</h2>
-            {/* <p className="card-description">
-              Beneficios adicionales y prioridad en eventos.
-            </p> */}
+            <p className="card-subtitle">
+            Hacete parte de un movimiento que transforma vidas.
+            </p>
             <p className="price-container">
               {/* <span className="price-old">17.000</span> */}
               <span className="price-new">10.000 / mes</span>
@@ -89,12 +89,12 @@ const MembershipComponent = () => {
           </div>
           <div className="card">
             <h2 className="card-title">Socio Premium</h2>
-            {/* <p className="card-description">
-              Beneficios adicionales y prioridad en eventos.
-            </p> */}
+            <p className="card-subtitle">
+            Cultiva tu medicina con respaldo legal.
+            </p>
             <p className="price-container">
-              <span className="price-old">200</span>
-              <span className="price-new">150 / mes</span>
+              <span className="price-old">$200.000</span>
+              <span className="price-new">150.000 / mes</span>
             </p>
             <ul className="benefits-list">
               <li>✔ Un Frasco Gratis de Cannabis Medicinal</li>
@@ -112,12 +112,12 @@ const MembershipComponent = () => {
           {/* Socio con Reprocan */}
           <div className="card">
             <h2 className="card-title">Gestor</h2>
-            {/* <p className="card-description">
-              Beneficios adicionales y prioridad en eventos.
-            </p> */}
+            <p className="card-subtitle">
+            Hacete parte de un movimiento que transforma vidas.
+            </p>
             <p className="price-container">
-              <span className="price-old">35</span>
-              <span className="price-new">25 / mes</span>
+              <span className="price-old">$300.000</span>
+              <span className="price-new">250.000 / mes</span>
             </p>
             <ul className="benefits-list">
               <li>✔ Cultivo en Nuestros Campos (Con Reprocan)</li>

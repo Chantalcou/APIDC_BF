@@ -3,9 +3,7 @@ import { useSelector } from "react-redux";
 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, user } = useSelector((state) => state);
-  console.log("isAuthenticated:", isAuthenticated);
-  console.log("isAdmin:", user);
-  console.log(user, "user");
+
 
   if (!isAuthenticated) {
     console.log("No autenticado, redirigiendo...");

@@ -10,6 +10,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { FaArrowRight, FaSeedling, FaClipboardCheck } from "react-icons/fa";
 import LoginModal from "./components/LoginModal.jsx";
 import ContactInfo from "./components/ContactInfo.jsx";
+import MovingBanner from "./components/MovingBanner.jsx";
 import { WorkTogether } from "./components/WorkTogether.jsx";
 // Librerias de aniamcion
 import AOS from "aos";
@@ -184,7 +185,6 @@ const Home = () => {
             </video>
             <div className="static-content d-flex flex-column justify-content-center align-items-center h-100">
               {/* Texto agregado sobre el logo */}
-              {console.log(user)}
               <h1 className="welcome-name">
                 {user
                   ? `Bienvenid@ ${user.name}`
@@ -229,13 +229,14 @@ const Home = () => {
         </div>
 
         <div id="beneficios" className="benefits-section py-5">
-          <h2 className="text-center mb-4">¿Por qué asociarte?</h2>
+          <h2 className="text-center mb-4">✨ ¿Por Qué Elegir APIDC?</h2>
           <div className="row justify-content-center">
             {[
               {
                 icon: "⚖️",
-                title: "Asesoramiento Legal",
-                text: "Tramitación REPROCANN garantizada",
+                title:
+                  "Seguridad jurídica: Todo bajo el marco de la Ley 27.350.",
+                text: "Médicos, abogados y cultivadores trabajando por vos.",
               },
               {
                 icon: "🌱",
@@ -277,7 +278,13 @@ const Home = () => {
                   Quienes Somos
                 </h3>
                 <p>
-                Somos una Asociación Civil sin fines de lucro, conformada por un gran equipo de usuari@s, cultivadores y profesionales comprometidos con el abordaje integral e interdisciplinario de la planta de Cannabis. Nuestra asociación nace con el propósito de fomentar el conocimiento, el procesamiento responsable y los usos terapéuticos del Cannabis, siempre desde una perspectiva inclusiva y colaborativa.
+                  Somos una Asociación Civil sin fines de lucro, conformada por
+                  un gran equipo de usuari@s, cultivadores y profesionales
+                  comprometidos con el abordaje integral e interdisciplinario de
+                  la planta de Cannabis. Nuestra asociación nace con el
+                  propósito de fomentar el conocimiento, el procesamiento
+                  responsable y los usos terapéuticos del Cannabis, siempre
+                  desde una perspectiva inclusiva y colaborativa.
                 </p>
               </div>
               <div data-aos="fade-down" className="col-md-4 col-12 mb-4">
@@ -297,9 +304,12 @@ const Home = () => {
                 <p>
                   Quienes conformamos la Asociación nos vinculamos con las
                   plantas de Cannabis y sus múltiples usos desde hace más de 10
-                  años, cada uno a través de diversas disciplinas: agronomía,
-                  medicina, genética, bioquímica, docencia, abogacía, economía e
-                  investigación.
+                  años, aportando experiencia desde diversas disciplinas como
+                  agronomía, medicina, genética, bioquímica, docencia, abogacía,
+                  economía e investigación. A través de un enfoque clínico
+                  interdisciplinario, ofrecemos acompañamiento especializado a
+                  pacientes en tratamiento con Cannabis, asegurando un abordaje
+                  integral y personalizado.
                 </p>
               </div>
               <div data-aos="fade-up" className="col-md-4 col-12 mb-4">
@@ -317,9 +327,15 @@ const Home = () => {
                   A Dónde Vamos
                 </h3>
                 <p>
-                  Nuestro principal objetivo como Asociación es ser un actor
-                  fundamental en el desarrollo y la investigación del Cannabis a
-                  nivel nacional.
+                  Aspiramos a ser un referente en el futuro del cannabis en
+                  Argentina, consolidándonos en tres pilares clave: innovación
+                  científica y tecnológica, promoviendo investigaciones de
+                  vanguardia; acceso equitativo y políticas públicas, impulsando
+                  regulaciones inclusivas y seguras; y educación y redes
+                  colaborativas, fortaleciendo alianzas para democratizar el
+                  conocimiento y erradicar estigmas. Nuestra visión es un futuro
+                  en el que el cannabis sea sinónimo de salud, innovación y
+                  justicia social.
                 </p>
               </div>
             </div>
@@ -343,21 +359,37 @@ const Home = () => {
                   loading="lazy"
                 />
               </div>
-              <h3
-                style={{ color: "#0a9d6d" }}
-                className="home-title_about_section"
-              >
-                Conoce más sobre la Ley 27.350
-              </h3>
-              <p className="home-subTitle_about_section">
-                La Ley 27.350 fue sancionada en 2017 y establece un marco
-                regulatorio para la investigación médica y científica del
-                cannabis medicinal en Argentina. Además, promueve el acceso
-                terapéutico al cannabis para pacientes que lo necesiten,
-                asegurando su derecho a la salud. A través del REPROCANN,
-                permite a usuarios registrados cultivar cannabis de forma legal
-                para uso medicinal.
-              </p>
+              <section class="ley-container">
+                <h2 style={{ color: "#0a9d6d" }}>
+                  Conoce más sobre la Ley 27.350
+                </h2>
+                <p class="ley-intro">
+                  Sancionada en 2017, esta ley regula la investigación y el
+                  acceso al cannabis medicinal en Argentina, garantizando su uso
+                  seguro y terapéutico.
+                </p>
+
+                <div class="ley-grid">
+                  <div class="ley-card">
+                    <h3>🔬 Investigación científica</h3>
+                    <p>
+                      Impulsa estudios clínicos sobre los usos medicinales del
+                      cannabis.
+                    </p>
+                  </div>
+                  <div class="ley-card">
+                    <h3>⚕️ Acceso terapéutico</h3>
+                    <p>
+                      Permite tratamientos con cannabis para pacientes con
+                      patologías específicas.
+                    </p>
+                  </div>
+                  <div class="ley-card">
+                    <h3>🌿 REPROCANN</h3>
+                    <p>Autoriza el cultivo controlado para uso medicinal.</p>
+                  </div>
+                </div>
+              </section>
               <div className="static-content d-flex flex-column justify-content-center align-items-center mt-5 h-100 position-relative">
                 <ScrollArrow
                   onClick={() => scrollToSection("present-section")}
@@ -463,7 +495,7 @@ const Home = () => {
                         loading="lazy"
                         style={{
                           width: "100%",
-                        
+
                           borderRadius: "15px",
                           boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.1)",
                         }}
@@ -471,15 +503,14 @@ const Home = () => {
                     </div>
                   </div>
                 </div>
-            <div className="static-content d-flex flex-column justify-content-center align-items-center h-100 position-relative mt-5">
-              <ScrollArrow
-                onClick={() => scrollToSection("membership-section")}
-                color="#202020"
-              />
-            </div>
+                <div className="static-content d-flex flex-column justify-content-center align-items-center h-100 position-relative mt-5">
+                  <ScrollArrow
+                    onClick={() => scrollToSection("membership-section")}
+                    color="#202020"
+                  />
+                </div>
               </div>
             </section>
-
           </div>
         </div>
 
@@ -519,7 +550,7 @@ const Home = () => {
                 className="sub-title_banner text-center mb-4"
                 style={{ maxWidth: "700px", lineHeight: "1.6" }}
               >
-                Descubre las opciones de membresía que ofrecemos y elige la que
+                Descubre las opciones de categorías que ofrecemos y elige la que
                 mejor se adapte a tus necesidades.
               </p>
               {!isAuthenticated && !user ? (
@@ -529,7 +560,7 @@ const Home = () => {
                     className="btn-asociate-custom"
                     aria-label="Explorar Membresías - ESTA AUTENTICADO"
                   >
-                    Explorar Membresías
+                    Explorar Categorías
                     <FaArrowRight className="btn-icon" />
                   </Link>
                 </>
@@ -539,7 +570,7 @@ const Home = () => {
                   className="btn-asociate-custom"
                   aria-label="Explorar Membresías"
                 >
-                  Explorar Membresías
+                  Explorar Categorías
                   <FaArrowRight className="btn-icon" />
                 </Link>
               )}
@@ -550,7 +581,8 @@ const Home = () => {
       </div>
       <ContactInfo />
       <WorkTogether />
-
+      <MovingBanner />
+      {/* 
       <div className="content-summary">
         <details className="toggleFaqs_faqsQuestions mt-1">
           <summary className="toggleFaqs_faqsQuestions__RozJk">
@@ -605,7 +637,7 @@ const Home = () => {
             otros lugares aún puede ser ilegal.
           </p>
         </details>
-      </div>
+      </div> */}
       <LoginModal show={showModal} handleClose={handleCloseModal} />
     </>
   );
