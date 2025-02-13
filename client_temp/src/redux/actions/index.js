@@ -6,6 +6,7 @@ export const registerUser = (userData, token) => {
     try {
       const response = await axios.post(
         "https://apidc-bf-2.onrender.com/register",
+        
         {
           email: userData.email,
           name: userData.name,
@@ -62,7 +63,7 @@ export const formInfo = (formData) => async (dispatch) => {
       type: "FORM_INFO_SUCCESS",
       payload: response.data, // Lo que devuelva el backend
     });
-    console.log(response.data, "RESPUESTA DE MI BACKEND");
+    console.log(response.data, "RESPUESTA DE MI BACKEND, SI EL USUARIO ES ADMIN ¿PORQUE NO SE MUESTRA EL DASHBOARD?");
   } catch (error) {
     // Manejo de errores
     dispatch({
@@ -78,7 +79,7 @@ export const fetchUsers = (token) => {
     try {
       console.log("Token enviado en fetchUsers:", token); // Verifica el token aquí
       const response = await axios.get(
-        // "https://apidc-bf-2.onrender.com/users",
+        // "http://localhost:3000/users",
         `https://apidc-bf-2.onrender.com/users`,
         {
           // Actualiza la URL
@@ -104,7 +105,7 @@ export const fetchUsers = (token) => {
 
 // Acción para actualizar el rol de un usuario
 export const updateUserRole = (userId, membershipType, token) => {
-  console.log( membershipType, "DATA DESDE EL ACTIONS - MEMBRESIAS");
+
   return async (dispatch) => {
     try {
       const response = await axios.put(
@@ -117,10 +118,7 @@ export const updateUserRole = (userId, membershipType, token) => {
           },
         }
       );
-      console.log(
-        "ESTO ME DEVUELVE EL BACKEND DE USUARIOS PREMIUM O USUARIOS GESTORES",
-        response.data
-      );
+      
       dispatch({
         
         type: "UPDATE_USER_ROLE_SUCCESS",

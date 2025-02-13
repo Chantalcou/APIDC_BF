@@ -130,7 +130,14 @@ const NavBar = () => {
   useEffect(() => {
     console.log("Tipo de membresía actualizado:", memberShipType);
   }, [memberShipType]);
-  console.log(memberShipType, "MEMBRESIA");
+
+  console.log(
+    "FIJARSE EN PRODUCCION QUE PASA CON ESTO:  ",
+    isAuthenticated,
+    user,
+    isAdmin
+  );
+
   return (
     <>
       <Navbar
@@ -158,14 +165,16 @@ const NavBar = () => {
             <Nav className="basic-navbar-nav-autentication-left">
               <Nav.Link href="/">Inicio</Nav.Link>
               {/* Mostrar Productos solo si el rol NO es 'sinMembresia' */}
-              {isAuthenticated &&
-                (memberShipType === "premium" || memberShipType === "gestor" ? (
-                  <li>
-                    <Link to="/products" className="nav-link">
-                      Productos
-                    </Link>
-                  </li>
-                ) : null) // Si no tiene membresía premium ni gestor, no se muestra el link
+              {
+                isAuthenticated &&
+                  (memberShipType === "premium" ||
+                  memberShipType === "gestor" ? (
+                    <li>
+                      <Link to="/products" className="nav-link">
+                        Productos
+                      </Link>
+                    </li>
+                  ) : null) // Si no tiene membresía premium ni gestor, no se muestra el link
               }
 
               {isHome && (

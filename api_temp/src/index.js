@@ -34,6 +34,7 @@ app.use(bodyParser.json());
 //   })
 // );
 
+// Producción
 app.use(
   cors({
     origin: "https://apidc-bf-2.onrender.com", // URL de tu frontend en producción
