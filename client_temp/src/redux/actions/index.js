@@ -87,6 +87,8 @@ export const fetchUsers = (token) => {
           },
         }
       );
+      console.log("Usuarios obtenidos - FETCH USERS:", response.data);
+
 
       dispatch({
         type: "FETCH_USERS_SUCCESS",

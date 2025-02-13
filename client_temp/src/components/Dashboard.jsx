@@ -9,6 +9,7 @@ const Dashboard = () => {
   const { users } = useSelector((state) => state);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  console.log(users,'=> este users lo trae del reducer')
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
@@ -24,6 +25,7 @@ const Dashboard = () => {
 
     // Encuentra el usuario actual
     const user = users.find((u) => u.id === userId);
+    console.log(user, '=>user en el dashboard')
 
     // Si el usuario ya tiene el rol, lo quitamos (sin membresía)
     const updatedMembershipType =
