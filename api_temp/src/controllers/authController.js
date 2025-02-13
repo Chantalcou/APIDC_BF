@@ -165,7 +165,7 @@ const registerUser = async (req, res) => {
           "userAdmin => FIJARSE EN PRODUCCION QUE PASA ACA",
           userAdmin
         );
-        cosnole.log("borre la abse de datos");
+        console.log("borre la base de datos");
 
         return res.status(200).json({
           message: "Usuario ya registrado y es admin",
