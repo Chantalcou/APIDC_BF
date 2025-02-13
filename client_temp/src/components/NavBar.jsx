@@ -131,12 +131,7 @@ const NavBar = () => {
     console.log("Tipo de membresía actualizado:", memberShipType);
   }, [memberShipType]);
 
-  console.log(
-    "FIJARSE EN PRODUCCION QUE PASA CON ESTO:  ",
-    isAuthenticated,
-    user,
-    isAdmin
-  );
+  console.log("esto es membershiptype", memberShipType);
 
   return (
     <>
