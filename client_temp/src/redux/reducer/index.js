@@ -14,10 +14,11 @@ const initialState = {
   isAdmin: false,
   users: [],
   error: null,
-  memberShipType:''
+  memberShipType: "",
 };
 
 const reducer = (state = initialState, action) => {
+  console.log(action.type, " esto es el reducer");
   switch (action.type) {
     case REGISTER_USER:
       return {
@@ -32,18 +33,21 @@ const reducer = (state = initialState, action) => {
     case UPDATE_USER_ROLE_FAIL:
       return { ...state, error: action.payload };
 
-      case UPDATE_USER_ROLE_SUCCESS:
-        return {
-          ...state,
-          users: state.users.map((user) =>
-            user.id === action.payload.user.id ? action.payload.user : user
-          ),
-          user: state.user?.id === action.payload.user.id 
-            ? { ...state.user, membershipType: action.payload.user.membershipType }
+    case UPDATE_USER_ROLE_SUCCESS:
+      return {
+        ...state,
+        users: state.users.map((user) =>
+          user.id === action.payload.user.id ? action.payload.user : user
+        ),
+        user:
+          state.user?.id === action.payload.user.id
+            ? {
+                ...state.user,
+                membershipType: action.payload.user.membershipType,
+              }
             : state.user,
-          memberShipType: action.payload.user.membershipType,
-        };
-      
+        memberShipType: action.payload.user.membershipType,
+      };
 
     case UPDATE_USER_ROLE_FAILURE:
       return {
@@ -64,7 +68,6 @@ const reducer = (state = initialState, action) => {
         ...state,
         user: action.payload,
       };
-      
 
     default:
       return state;

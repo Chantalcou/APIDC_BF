@@ -21,7 +21,8 @@ const User = sequelize.define(
     },
     isAdmin: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false,
+      allowNull: false,
+      // defaultValue: false,
     },
     auth0Id: {
       type: DataTypes.STRING,

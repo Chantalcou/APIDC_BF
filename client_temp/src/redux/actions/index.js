@@ -21,7 +21,7 @@ export const registerUser = (userData, token) => {
       );
 
       const { userAdmin, users } = response.data;
-      
+
       console.log(userAdmin.isAdmin, "esto necesito saber desde el action");
       // Despachar acción para actualizar el estado
       dispatch({
@@ -89,7 +89,6 @@ export const fetchUsers = (token) => {
       );
       console.log("Usuarios obtenidos - FETCH USERS:", response.data);
 
-
       dispatch({
         type: "FETCH_USERS_SUCCESS",
         payload: response.data,
@@ -106,7 +105,7 @@ export const fetchUsers = (token) => {
 
 // Acción para actualizar el rol de un usuario
 export const updateUserRole = (userId, membershipType, token) => {
-  console.log(membershipType, "DATA DESDE EL ACTIONS - MEMBRESIAS");
+  console.log(userId, membershipType, token, "desde actions");
   return async (dispatch) => {
     try {
       const response = await axios.put(

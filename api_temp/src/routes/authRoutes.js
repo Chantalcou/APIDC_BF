@@ -14,6 +14,7 @@ router.post("/register", registerUser);
 
 // Ruta para iniciar sesión (no requiere autenticación)
 router.post("/login", loginUser);
+
 router.get("/users", verifyToken, isAdmin, getAllUsers);
 
 router.put("/users/:userId", updateUserRole); // Ruta para actualizar rol de usuario
