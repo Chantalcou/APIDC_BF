@@ -6,7 +6,7 @@ export const registerUser = (userData, token) => {
     try {
       const response = await axios.post(
         "https://apidc-bf-2.onrender.com/register",
-        
+
         {
           email: userData.email,
           name: userData.name,
@@ -21,7 +21,8 @@ export const registerUser = (userData, token) => {
       );
 
       const { userAdmin, users } = response.data;
-
+      
+      console.log(userAdmin.isAdmin, "esto necesito saber desde el action");
       // Despachar acción para actualizar el estado
       dispatch({
         type: REGISTER_USER,
@@ -63,7 +64,6 @@ export const formInfo = (formData) => async (dispatch) => {
       type: "FORM_INFO_SUCCESS",
       payload: response.data, // Lo que devuelva el backend
     });
-    console.log(response.data, "RESPUESTA DE MI BACKEND, SI EL USUARIO ES ADMIN ¿PORQUE NO SE MUESTRA EL DASHBOARD?");
   } catch (error) {
     // Manejo de errores
     dispatch({
@@ -77,7 +77,6 @@ export const formInfo = (formData) => async (dispatch) => {
 export const fetchUsers = (token) => {
   return async (dispatch) => {
     try {
-      console.log("Token enviado en fetchUsers:", token); // Verifica el token aquí
       const response = await axios.get(
         // "http://localhost:3000/users",
         `https://apidc-bf-2.onrender.com/users`,
@@ -105,7 +104,7 @@ export const fetchUsers = (token) => {
 
 // Acción para actualizar el rol de un usuario
 export const updateUserRole = (userId, membershipType, token) => {
-
+  console.log(membershipType, "DATA DESDE EL ACTIONS - MEMBRESIAS");
   return async (dispatch) => {
     try {
       const response = await axios.put(
@@ -118,9 +117,11 @@ export const updateUserRole = (userId, membershipType, token) => {
           },
         }
       );
-      
+      console.log(
+        "ESTO ME DEVUELVE EL BACKEND DE USUARIOS PREMIUM O USUARIOS GESTORES",
+        response.data
+      );
       dispatch({
-        
         type: "UPDATE_USER_ROLE_SUCCESS",
         payload: response.data, // Actualiza con los datos de usuario
         memberShipType: response.data.membershipType,
@@ -136,8 +137,6 @@ export const updateUserRole = (userId, membershipType, token) => {
 
 // Este formulario nos va a enviar 'Trabajemos juntos'
 export const sendWorkTogether = (formData) => async (dispatch) => {
-
-
   try {
     const response = await axios.post(
       "https://apidc-bf-2.onrender.com/send/workWithUs",
@@ -151,7 +150,7 @@ export const sendWorkTogether = (formData) => async (dispatch) => {
     );
     dispatch({
       type: "SEND_FORM_SUCCESS",
-      payload: response.data, 
+      payload: response.data,
     });
   } catch (error) {
     dispatch({

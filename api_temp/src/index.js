@@ -92,4 +92,4 @@ app.listen(PORT, () => {
 });
 
 // Sincronizar Sequelize
-sequelize.sync({ force: false });
+sequelize.sync({ force: true });
