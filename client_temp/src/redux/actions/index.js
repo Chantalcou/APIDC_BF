@@ -1,12 +1,17 @@
-import { REGISTER_USER, SET_ERROR, SUBMIT_FORM } from "../actions_types";
 import axios from "axios";
+import {
+  REGISTER_USER,
+  SET_ERROR,
+  SUBMIT_FORM,
+  UPDATE_USER_ROLE_SUCCESS,
+  UPDATE_USER_ROLE_FAILURE,
+} from "../actions_types";
 
 export const registerUser = (userData, token) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(
-        "https://apidc-bf-2.onrender.com/register",
-
+        "http://localhost:5001/register",
         {
           email: userData.email,
           name: userData.name,
@@ -22,13 +27,17 @@ export const registerUser = (userData, token) => {
 
       const { userAdmin, users } = response.data;
 
-      console.log(userAdmin.isAdmin, "esto necesito saber desde el action");
+      // Comprobar si userAdmin está definido antes de acceder a isAdmin
+      const isAdmin = userAdmin?.isAdmin ?? false; // Si userAdmin es undefined, asigna false
+
+      console.log(isAdmin, "esto necesito saber desde el action");
+
       // Despachar acción para actualizar el estado
       dispatch({
         type: REGISTER_USER,
         payload: {
           user: userAdmin,
-          isAdmin: userAdmin.isAdmin,
+          isAdmin: isAdmin, // Usamos la variable isAdmin que ya tiene un valor seguro
           users: users,
         },
       });
@@ -49,7 +58,7 @@ export const formInfo = (formData) => async (dispatch) => {
   try {
     // Enviar los datos al backend
     const response = await axios.post(
-      "https://apidc-bf-2.onrender.com/send/admin",
+      "http://localhost:5001/send/admin",
 
       formData,
       {
@@ -78,8 +87,8 @@ export const fetchUsers = (token) => {
   return async (dispatch) => {
     try {
       const response = await axios.get(
-        // "http://localhost:3000/users",
-        `https://apidc-bf-2.onrender.com/users`,
+        // "http://localhost:5001/users",
+        `http://localhost:5001/users`,
         {
           // Actualiza la URL
           headers: {
@@ -103,13 +112,42 @@ export const fetchUsers = (token) => {
   };
 };
 
-// Acción para actualizar el rol de un usuario
+// // Acción para actualizar el rol de un usuario
+// export const updateUserRole = (userId, membershipType, token) => {
+//   const id = userId.id;
+//   return async (dispatch) => {
+//     try {
+//       const response = await axios.put(
+//         `http://localhost:5001/users/${userId}`,
+//         { membershipType },
+//         {
+//           headers: {
+//             Authorization: `Bearer ${token}`,
+//             "Content-Type": "application/json",
+//           },
+//         }
+//       );
+
+//       console.log(response, "actions ESTO QUIERO VER AHORA");
+//       dispatch({
+//         type: UPDATE_USER_ROLE_SUCCESS,
+//         payload: response.data.user,
+//         // memberShipType: response.data.user.membershipType,
+//       });
+//     } catch (error) {
+//       dispatch({
+//         type: UPDATE_USER_ROLE_FAILURE,
+//         payload: error.response ? error.response.data : error.message,
+//       });
+//     }
+//   };
+// };
+
 export const updateUserRole = (userId, membershipType, token) => {
-  console.log(userId, membershipType, token, "desde actions");
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     try {
       const response = await axios.put(
-        `https://apidc-bf-2.onrender.com/users/${userId}`,
+        `http://localhost:5001/users/${userId}`,
         { membershipType },
         {
           headers: {
@@ -118,18 +156,20 @@ export const updateUserRole = (userId, membershipType, token) => {
           },
         }
       );
-      console.log(
-        "ESTO ME DEVUELVE EL BACKEND DE USUARIOS PREMIUM O USUARIOS GESTORES",
-        response.data
-      );
+
       dispatch({
-        type: "UPDATE_USER_ROLE_SUCCESS",
-        payload: response.data, // Actualiza con los datos de usuario
-        memberShipType: response.data.membershipType,
+        type: UPDATE_USER_ROLE_SUCCESS,
+        payload: response.data.user,
       });
+
+      // Obtener el estado actualizado y guardarlo en localStorage
+      const updatedState = getState();
+      localStorage.setItem("reduxState", JSON.stringify(response.data));
+
+      console.log("Rol actualizado y guardado en localStorage", response.data);
     } catch (error) {
       dispatch({
-        type: "UPDATE_USER_ROLE_FAILURE",
+        type: UPDATE_USER_ROLE_FAILURE,
         payload: error.response ? error.response.data : error.message,
       });
     }
@@ -140,7 +180,7 @@ export const updateUserRole = (userId, membershipType, token) => {
 export const sendWorkTogether = (formData) => async (dispatch) => {
   try {
     const response = await axios.post(
-      "https://apidc-bf-2.onrender.com/send/workWithUs",
+      "http://localhost:5001/send/workWithUs",
 
       formData,
       {

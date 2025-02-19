@@ -85,6 +85,7 @@ const ProductsSection = () => {
           </video>
           <div className="static-content d-flex flex-column justify-content-center align-items-center h-100">
             <h1 className="product-title">TERAPIAS QUE FLORECEN</h1>
+            <h1 className="hero-subtitle">Sanación que nace de la tierra</h1>
           </div>
 
           <div className="static-content d-flex flex-column justify-content-center align-items-center mt-5 h-100 position-relative">

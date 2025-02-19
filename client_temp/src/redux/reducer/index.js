@@ -9,16 +9,15 @@ import {
 } from "../actions_types";
 
 const initialState = {
-  user: null,
+  userFromRedux: {},
   isAuthenticated: false,
   isAdmin: false,
   users: [],
+  user: {},
   error: null,
-  memberShipType: "",
 };
 
 const reducer = (state = initialState, action) => {
-  console.log(action.type, " esto es el reducer");
   switch (action.type) {
     case REGISTER_USER:
       return {
@@ -27,33 +26,41 @@ const reducer = (state = initialState, action) => {
         isAuthenticated: true,
         isAdmin: action.payload.isAdmin,
         users: action.payload.users,
+        userFromRedux: action.payload.user, 
         error: null,
       };
+      case UPDATE_USER_ROLE_SUCCESS:
+        return {
+          ...state,
+          users: state.users.map(user => 
+            user.id === action.payload.id 
+              ? { ...user, membershipType: action.payload.membershipType } 
+              : user
+          ),
+          userFromRedux: 
+            state.userFromRedux.id === action.payload.id
+              ? { ...state.userFromRedux, membershipType: action.payload.membershipType }
+              : state.userFromRedux
+        };
+  
 
-    case UPDATE_USER_ROLE_FAIL:
-      return { ...state, error: action.payload };
-
-    case UPDATE_USER_ROLE_SUCCESS:
-      return {
-        ...state,
-        users: state.users.map((user) =>
-          user.id === action.payload.user.id ? action.payload.user : user
-        ),
-        user:
-          state.user?.id === action.payload.user.id
-            ? {
-                ...state.user,
-                membershipType: action.payload.user.membershipType,
-              }
-            : state.user,
-        memberShipType: action.payload.user.membershipType,
-      };
+    // case UPDATE_USER_ROLE_SUCCESS:
+    //   return {
+    //     ...state,
+    //     users: state.users.map((u) =>
+    //       u.id === action.payload.id
+    //         ? { ...u, membershipType: action.payload.membershipType }
+    //         : u
+    //     ),
+    //     userFromRedux: action.payload,  // Aquí estamos sobreescribiendo completamente `userFromRedux`
+    //   };
 
     case UPDATE_USER_ROLE_FAILURE:
       return {
         ...state,
         error: action.payload,
       };
+
     case UPDATE_USER_ROLE:
       return {
         ...state,
@@ -63,11 +70,12 @@ const reducer = (state = initialState, action) => {
             : user
         ),
       };
-    case UPDATE_CURRENT_USER:
-      return {
-        ...state,
-        user: action.payload,
-      };
+      case UPDATE_CURRENT_USER:
+        return {
+          ...state,
+          userFromRedux: action.payload, // Actualizar userFromRedux aquí
+        };
+  
 
     default:
       return state;

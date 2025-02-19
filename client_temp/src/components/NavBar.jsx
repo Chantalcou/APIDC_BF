@@ -16,9 +16,8 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const { userFromRedux, memberShipType, isAdmin, userAdmin } = useSelector(
-    (state) => state
-  );
+  const { userFromRedux, memberShipType, isAdmin, userAdmin, users } =
+    useSelector((state) => state);
 
   const {
     isAuthenticated,
@@ -128,9 +127,22 @@ const NavBar = () => {
   };
 
   useEffect(() => {
-    console.log("Tipo de membresía actualizado:", memberShipType);
-  }, [memberShipType]);
+    const handleStorageChange = (e) => {
+      if (e.key === "reduxState") {
+        const newState = JSON.parse(e.newValue);
+        dispatch({ type: "REHYDRATE_STATE", payload: newState });
+      }
+    };
 
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, [dispatch]);
+
+  const showProductsLink =
+    isAuthenticated &&
+    userFromRedux?.membershipType &&
+    (userFromRedux.membershipType === "premium" ||
+      userFromRedux.membershipType === "gestor");
 
   return (
     <>
@@ -159,17 +171,13 @@ const NavBar = () => {
             <Nav className="basic-navbar-nav-autentication-left">
               <Nav.Link href="/">Inicio</Nav.Link>
               {/* Mostrar Productos solo si el rol NO es 'sinMembresia' */}
-              {
-                isAuthenticated &&
-                  (memberShipType === "premium" ||
-                  memberShipType === "gestor" ? (
-                    <li>
-                      <Link to="/products" className="nav-link">
-                        Productos
-                      </Link>
-                    </li>
-                  ) : null) // Si no tiene membresía premium ni gestor, no se muestra el link
-              }
+              {showProductsLink && (
+                <li>
+                  <Link to="/products" className="nav-link">
+                    Productos
+                  </Link>
+                </li>
+              )}
 
               {isHome && (
                 <Nav.Link onClick={() => scrollToSection("about-section")}>
@@ -181,14 +189,27 @@ const NavBar = () => {
                   Asociate
                 </Nav.Link>
               )}
-              {isHome && (
+              {/* {isHome && (
                 <Nav.Link onClick={() => scrollToSection("work-together")}>
                   Trabaja con nosotros
                 </Nav.Link>
-              )}
-            </Nav>
-          </Navbar.Collapse>
+              )} */}
+              <Link to="/shop" className="nav-link">
+                Tienda
+              </Link>
 
+
+              
+            </Nav>
+            {/* <button
+              onClick={() => console.log(userFromRedux, "QUE ME LLEGA A VER")}
+            >
+              BOTONNN
+            </button> */}
+          </Navbar.Collapse>
+          {/* <button onClick={() => console.log(users, userFromRedux)}>
+            TIPO MEMBRESIA
+          </button> */}
           <Navbar.Collapse id="basic-navbar-nav-autentication">
             <Nav className="basic-navbar-nav-autentication-2">
               {isAuthenticated && user ? (

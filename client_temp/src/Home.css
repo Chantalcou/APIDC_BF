@@ -157,6 +157,12 @@ body {
 .btn-asociarte-custom_2 {
   margin-top: 20px;
 }
+/* 
+.asociarme-section{
+  font-size: "2.5rem";
+   font-weight: "bold" ;
+  color:#fff
+} */
 
 /* .bg-banner .bg-video {
   position: absolute;
@@ -293,6 +299,7 @@ img {
   font-size: 3rem;
   font-weight: bold;
   margin-bottom: 20px;
+  color: #ffff;
 }
 
 .ley-section img {
@@ -304,10 +311,6 @@ img {
   object-fit: cover;
   margin-bottom: 15px;
 }
-
-
-
-
 
 /* Subtitulo descripcion ley */
 /* .home-subTitle_about_section {
@@ -353,9 +356,6 @@ img {
   font-size: 20px;
   color: #333;
 }
-
-
-
 
 .static-content {
   position: absolute;
@@ -486,4 +486,72 @@ img {
 /* Ícono */
 .btn-asociate-custom .btn-icon {
   margin-left: 10px;
+}
+
+/* contacsection */
+/* Contact Section */
+.contact-section {
+  background: #f8f9fa;
+  padding: 4rem 0;
+}
+
+.contact-card {
+  flex: 1;
+  min-width: 300px;
+  background: white;
+  border-radius: 15px;
+  padding: 2rem;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.contact-card:hover {
+  transform: translateY(-5px);
+}
+
+.contact-card.whatsapp {
+  border-left: 4px solid #25d366;
+}
+
+.contact-card.email {
+  border-left: 4px solid #0a9d6d;
+}
+
+.contact-icon {
+  font-size: 2.5rem;
+  min-width: 60px;
+}
+
+.contact-card.whatsapp .contact-icon {
+  color: #25d366;
+}
+
+.contact-card.email .contact-icon {
+  color: #0a9d6d;
+}
+
+.contact-card h3 {
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.contact-card p {
+  color: #666;
+  margin-bottom: 0;
+}
+
+.cta-text {
+  color: #0a9d6d;
+  font-weight: 600;
+  margin-top: 1rem;
+  display: block;
+  transition: color 0.3s ease;
+}
+
+.contact-card:hover .cta-text {
+  color: #087a55;
 }

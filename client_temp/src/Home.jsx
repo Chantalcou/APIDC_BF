@@ -12,6 +12,8 @@ import LoginModal from "./components/LoginModal.jsx";
 import ContactInfo from "./components/ContactInfo.jsx";
 import MovingBanner from "./components/MovingBanner.jsx";
 import { WorkTogether } from "./components/WorkTogether.jsx";
+import SeccionAs from "./components/SeccionAs.jsx";
+import NewsletterBanner from "./components/NewsLetterBanner.jsx";
 // Librerias de aniamcion
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -104,7 +106,6 @@ const Home = () => {
 
     try {
       await loginWithRedirect();
-
       if (isAuthenticated && user) {
         const token = await getAccessTokenSilently();
         dispatch(registerUser(user, token)); // Llamamos a la acción `registerUser` solo después de la verificación
@@ -211,7 +212,7 @@ const Home = () => {
                 />
                 <ButtonComponent
                   text="Asociate Ahora"
-                  onClick={() => scrollToSection("asociarme-seccion")}
+                  onClick={() => scrollToSection("asociate-ahora-2")}
                   color={{
                     background: "white",
                     text: "#0a9d6d",
@@ -227,7 +228,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-
+        {/* 
         <div id="beneficios" className="benefits-section py-5">
           <h2 className="text-center mb-4">✨ ¿Por Qué Elegir APIDC?</h2>
           <div className="row justify-content-center">
@@ -258,7 +259,7 @@ const Home = () => {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
 
         <div className="about-section" id="about-section">
           <div>
@@ -346,57 +347,7 @@ const Home = () => {
               />
             </div>
 
-            <div id="ley-section" className="ley-section text-center">
-              <div
-                data-aos="fade-right"
-                data-aos-offset="300"
-                data-aos-easing="ease-in-sine"
-              >
-                <img
-                  src="https://res.cloudinary.com/dqgjcfosx/image/upload/w_800,q_auto,f_auto/v1735841633/pexels-pavel-danilyuk-8112199_pvqmxc.jpg"
-                  alt="Ley 27.350"
-                  className="img-fluid"
-                  loading="lazy"
-                />
-              </div>
-              <section class="ley-container">
-                <h2 style={{ color: "#0a9d6d" }}>
-                  Conoce más sobre la Ley 27.350
-                </h2>
-                <p class="ley-intro">
-                  Sancionada en 2017, esta ley regula la investigación y el
-                  acceso al cannabis medicinal en Argentina, garantizando su uso
-                  seguro y terapéutico.
-                </p>
-
-                <div class="ley-grid">
-                  <div class="ley-card">
-                    <h3>🔬 Investigación científica</h3>
-                    <p>
-                      Impulsa estudios clínicos sobre los usos medicinales del
-                      cannabis.
-                    </p>
-                  </div>
-                  <div class="ley-card">
-                    <h3>⚕️ Acceso terapéutico</h3>
-                    <p>
-                      Permite tratamientos con cannabis para pacientes con
-                      patologías específicas.
-                    </p>
-                  </div>
-                  <div class="ley-card">
-                    <h3>🌿 REPROCANN</h3>
-                    <p>Autoriza el cultivo controlado para uso medicinal.</p>
-                  </div>
-                </div>
-              </section>
-              <div className="static-content d-flex flex-column justify-content-center align-items-center mt-5 h-100 position-relative">
-                <ScrollArrow
-                  onClick={() => scrollToSection("present-section")}
-                  color=" #202020"
-                />
-              </div>
-            </div>
+            {/* <SeccionAs/> */}
 
             <section
               className="present-section"
@@ -503,6 +454,7 @@ const Home = () => {
                     </div>
                   </div>
                 </div>
+                <div id="asociate-ahora-2"></div>
                 <div className="static-content d-flex flex-column justify-content-center align-items-center h-100 position-relative mt-5">
                   <ScrollArrow
                     onClick={() => scrollToSection("membership-section")}
@@ -513,6 +465,7 @@ const Home = () => {
             </section>
           </div>
         </div>
+        <SeccionAs />
 
         {/* ASOCIARME SECTION */}
         <div className="container-video_2 my-1" id="membership-section">
@@ -539,12 +492,8 @@ const Home = () => {
               className="d-flex flex-column justify-content-center align-items-center h-100 text-white"
               style={{ zIndex: 99 }} // Superposición semitransparente
             >
-              <h1
-                id="asociarme-section"
-                className="banner-title mb-3"
-                style={{ fontSize: "2.5rem", fontWeight: "bold" }}
-              >
-                ¡Asóciate Ahora!
+              <h1 id="asociarme-section" className="banner-title mb-3">
+                ASOCIATE
               </h1>
               <p
                 className="sub-title_banner text-center mb-4"
@@ -579,7 +528,59 @@ const Home = () => {
         </div>
         {/* ASOCIARME SECTION */}
       </div>
+
+      <div id="ley-section" className="ley-section text-center">
+        <div
+          data-aos="fade-right"
+          data-aos-offset="300"
+          data-aos-easing="ease-in-sine"
+        >
+          <img
+            src="https://res.cloudinary.com/dqgjcfosx/image/upload/w_800,q_auto,f_auto/v1735841633/pexels-pavel-danilyuk-8112199_pvqmxc.jpg"
+            alt="Ley 27.350"
+            className="img-fluid"
+            loading="lazy"
+          />
+        </div>
+        <section id="ley" class="ley-container">
+          <h2 style={{ color: "#0a9d6d" }}>Conoce más sobre la Ley 27.350</h2>
+          <p class="ley-intro">
+            Sancionada en 2017, esta ley regula la investigación y el acceso al
+            cannabis medicinal en Argentina, garantizando su uso seguro y
+            terapéutico.
+          </p>
+
+          <div class="ley-grid">
+            <div class="ley-card">
+              <h3>🔬 Investigación científica</h3>
+              <p>
+                Impulsa estudios clínicos sobre los usos medicinales del
+                cannabis.
+              </p>
+            </div>
+            <div class="ley-card">
+              <h3>⚕️ Acceso terapéutico</h3>
+              <p>
+                Permite tratamientos con cannabis para pacientes con patologías
+                específicas.
+              </p>
+            </div>
+            {/* <div class="ley-card">
+                    <h3>🌿 REPROCANN</h3>
+                    <p>Autoriza el cultivo controlado para uso medicinal.</p>
+                  </div> */}
+          </div>
+        </section>
+        <div className="static-content d-flex flex-column justify-content-center align-items-center mt-5 h-100 position-relative">
+          <ScrollArrow
+            onClick={() => scrollToSection("present-section")}
+            color=" #202020"
+          />
+        </div>
+      </div>
+
       <ContactInfo />
+
       <WorkTogether />
       <MovingBanner />
       {/* 

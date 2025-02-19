@@ -3,7 +3,8 @@ const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
 const { createRemoteJWKSet, jwtVerify } = require("jose");
 const jwksClient = require("jwks-rsa");
-const sequelize = require("../config/db.js");
+const { getIO } = require("../socket.js");
+const secret = process.env.JWT_SECRET;
 
 // Validar las variables de entorno al inicio
 if (
@@ -16,23 +17,11 @@ if (
   );
 }
 
-// Configurar cliente JWKS para Auth0
+// Configuración del cliente JWKS para Auth0
 const jwksUri = `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`;
-const client = jwksClient({ jwksUri });
-const JWKS = createRemoteJWKSet(new URL(jwksUri));
+const JWKS = createRemoteJWKSet(new URL(jwksUri)); // Configuramos JWKS para el cliente
 
-// Obtener clave pública para jwt.verify
-function getKey(header, callback) {
-  client.getSigningKey(header.kid, (err, key) => {
-    if (err) {
-      callback(err, null);
-    } else {
-      callback(null, key.getPublicKey());
-    }
-  });
-}
-
-
+// Middleware para verificar el JWT
 const verifyToken = async (req, res, next) => {
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
@@ -44,7 +33,7 @@ const verifyToken = async (req, res, next) => {
 
   const token = authHeader.split(" ")[1];
   try {
-    const { payload } = await jwtVerify(token, JWKS); // Verifica el token
+    const { payload } = await jwtVerify(token, JWKS); // Verifica el token con el JWKS
     console.log("Token válido, payload:", payload);
     req.user = payload; // Adjunta el usuario al request
     next();
@@ -54,21 +43,18 @@ const verifyToken = async (req, res, next) => {
   }
 };
 
-
+// Registro de usuario
 const registerUser = async (req, res) => {
   const { name, email } = req.body;
 
   try {
     const isAdmin = email === process.env.ADMIN_EMAIL;
 
-    // Verificar si el usuario ya existe
     const userExists = await User.findOne({ where: { email } });
-
     if (userExists) {
       if (isAdmin) {
-        // Corregir: Filtrar por email de admin
         const userAdmin = await User.findOne({
-          where: { email: process.env.ADMIN_EMAIL }, // <--- ¡Aquí!
+          where: { email: process.env.ADMIN_EMAIL },
           attributes: ["id", "name", "email", "isAdmin"],
         });
 
@@ -89,11 +75,10 @@ const registerUser = async (req, res) => {
       });
     }
 
-    // Crear nuevo usuario (asegurar que isAdmin se guarde)
     const newUser = await User.create({
       name,
       email,
-      isAdmin, // Asegurar que el modelo permita este valor
+      isAdmin,
     });
 
     if (isAdmin) {
@@ -131,11 +116,9 @@ const loginUser = async (req, res) => {
       await user.save();
     }
 
-    const token = jwt.sign(
-      { id: user.id, isAdmin: user.isAdmin },
-      process.env.JWT_SECRET,
-      { expiresIn: "1h" }
-    );
+    const token = jwt.sign({ id: user.id, isAdmin: user.isAdmin }, secret, {
+      expiresIn: "1h",
+    });
 
     res.status(200).json({
       token,
@@ -156,7 +139,7 @@ const loginUser = async (req, res) => {
 const getAllUsers = async (req, res) => {
   try {
     const users = await User.findAll({
-      attributes: ["id", "name", "email", "isAdmin"], // Excluye datos sensibles
+      attributes: ["id", "name", "email", "isAdmin"],
     });
     res.status(200).json(users);
   } catch (error) {
@@ -186,6 +169,7 @@ const deleteUserByEmail = async (req, res) => {
   }
 };
 
+// Verificar si el usuario es admin
 const isAdmin = (req, res, next) => {
   if (!req.user || !req.user.isAdmin) {
     console.log("Acceso denegado: Usuario no es admin");
@@ -196,80 +180,38 @@ const isAdmin = (req, res, next) => {
   next();
 };
 
-const upgradeToPremium = async (req, res) => {
-  const { userId } = req.body;
-
-  try {
-    const user = await User.findByPk(userId);
-    if (!user) {
-      return res.status(404).json({ error: "Usuario no encontrado" });
-    }
-
-    // Actualizar a premium
-    await user.update({
-      membershipType: "premium",
-      isApproved: true,
-    });
-
-    // Notificar al usuario vía email/WhatsApp
-    sendWhatsAppMessage(
-      user.phone,
-      "¡Tu cuenta premium está activa! Accede a la tienda aquí: [link]"
-    );
-
-    res
-      .status(200)
-      .json({ message: "Usuario actualizado a premium exitosamente" });
-  } catch (error) {
-    console.error("Error actualizando a premium:", error);
-    res.status(500).json({ error: "Error en la actualización" });
-  }
-};
-
-const getPendingUsers = async (req, res) => {
-  try {
-    const users = await User.findAll({
-      where: {
-        membershipType: "adherente", // Solo usuarios adherentes
-      },
-      attributes: ["id", "name", "email", "phone", "createdAt"],
-    });
-
-    res.status(200).json(users);
-  } catch (error) {
-    console.error("Error obteniendo usuarios pendientes:", error);
-    res.status(500).json({ error: "Error al obtener usuarios pendientes" });
-  }
-};
-
 // Actualizar rol de usuario
 const updateUserRole = async (req, res) => {
-  console.log("entra a esta funcion de update role????");
   const { userId } = req.params;
   const { membershipType } = req.body;
-  console.log(membershipType, "BACKEND");
+
   try {
-    // Verifica que el rol sea válido
     if (!["premium", "gestor", "sinMembresia"].includes(membershipType)) {
       return res.status(400).json({ message: "Rol inválido" });
     }
 
-    // Actualizar el rol del usuario
     const user = await User.findByPk(userId);
     if (!user) {
       return res.status(404).json({ message: "Usuario no encontrado" });
     }
 
-    // Actualizar el rol
     user.membershipType = membershipType;
     await user.save();
-    console.log(user);
+
+    getIO().emit("user_updated", {
+      id: user.id,
+      membershipType: user.membershipType,
+      email: user.email
+    });
+    
+
     return res.status(200).json({ message: "Rol actualizado con éxito", user });
   } catch (error) {
     console.error("Error al actualizar el rol:", error);
     return res.status(500).json({ message: "Error al actualizar el rol" });
   }
 };
+
 
 module.exports = {
   registerUser,
@@ -278,7 +220,6 @@ module.exports = {
   isAdmin,
   getAllUsers,
   deleteUserByEmail,
-  upgradeToPremium,
-  getPendingUsers,
+  // getPendingUsers,
   updateUserRole,
 };

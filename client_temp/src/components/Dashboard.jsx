@@ -2,61 +2,76 @@ import React, { useEffect, useState } from "react";
 import { Table, Container, Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers, updateUserRole } from "../redux/actions/index";
+import io from "socket.io-client";
 import "./Dashboard.css";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
-  const { users } = useSelector((state) => state);
+  const users = useSelector((state) => state.users); // Extraer correctamente
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
-  console.log(users,'=> este users lo trae del reducer')
 
+  // 🟢 Cargar usuarios desde localStorage cuando el componente se monta
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    dispatch(fetchUsers(token));
+    const storedUsers = localStorage.getItem("users");
+    if (storedUsers) {
+      dispatch({
+        type: "SET_USERS_FROM_STORAGE",
+        payload: JSON.parse(storedUsers),
+      });
+    }
   }, [dispatch]);
 
-  const handleRoleUpdate = async (userId, membershipType) => {
-    const token = localStorage.getItem("authToken");
-    if (!token) {
-      setError("No se encontró token de autenticación.");
-      return;
+  useEffect(() => {
+    const socket = io("http://localhost:5001");
+
+    socket.on("connect", () => {
+      console.log("Conexión establecida con el servidor de Socket.IO");
+    });
+
+    socket.on("user_updated", (data) => {
+      console.log("Datos del usuario actualizados:", data);
+      dispatch(updateUserRole(data.id, data.membershipType));
+    });
+
+    return () => socket.disconnect();
+  }, [dispatch]);
+
+  // 🟢 Guardar users en localStorage cada vez que cambien
+  useEffect(() => {
+    if (users.length > 0) {
+      localStorage.setItem("users", JSON.stringify(users));
     }
-
-    // Encuentra el usuario actual
+  }, [users]);
+  const handleRoleUpdate = async (userId, membershipType) => {
     const user = users.find((u) => u.id === userId);
-    console.log(user, '=>user en el dashboard')
-
-    // Si el usuario ya tiene el rol, lo quitamos (sin membresía)
     const updatedMembershipType =
       user.membershipType === membershipType ? "sinMembresia" : membershipType;
 
-    // Actualiza el estado localmente para reflejar cambios inmediatos en la UI
+    // Actualiza el estado de manera optimista
     dispatch({
       type: "UPDATE_USER_ROLE_OPTIMISTIC",
       payload: { userId, membershipType: updatedMembershipType },
     });
 
     try {
-      // Envia la actualización al backend
-      await dispatch(updateUserRole(userId, updatedMembershipType, token));
+      // Aquí ya no se pasa el token
+      await dispatch(updateUserRole(userId, updatedMembershipType));
+
       setSuccess(
         `Usuario ${userId} actualizado a ${
           updatedMembershipType || "sin membresía"
         }`
       );
     } catch (err) {
-      // Si hay un error, revierte el cambio en la UI
       dispatch({
         type: "UPDATE_USER_ROLE_OPTIMISTIC",
-        payload: { userId, membershipType: user.membershipType },
+        payload: { userId, membershipType: user.membershipType }, // Restaura al valor anterior si hay error
       });
       setError("Error al actualizar el rol del usuario");
     }
   };
 
-
-  
   return (
     <Container>
       <div className="content-dashboard">
@@ -73,7 +88,7 @@ const Dashboard = () => {
               <th>Rol Actual</th>
               <th>Socio Premium</th>
               <th>Socio Gestor</th>
-              <th>Sin Membresia</th>
+              <th>Sin Membresía</th>
             </tr>
           </thead>
           <tbody>
@@ -100,7 +115,7 @@ const Dashboard = () => {
                 <td style={{ textAlign: "center" }}>
                   <input
                     type="checkbox"
-                    checked={user.membershipType === "sinMembresia"} // Solo se marcará si membershipType es "sinMembresia"
+                    checked={user.membershipType === "sinMembresia"}
                     onChange={() => handleRoleUpdate(user.id, "sinMembresia")}
                   />
                 </td>

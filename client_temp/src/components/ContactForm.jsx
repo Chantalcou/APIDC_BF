@@ -12,8 +12,8 @@ const ContactForm = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    from_name: "",   // Cambiado a from_name
-    to_name: "",     // Cambiado a to_name (en este caso el destinatario)
+    from_name: "", 
+    to_name: "",     //  (en este caso el destinatario)
     message: "",
   });
 

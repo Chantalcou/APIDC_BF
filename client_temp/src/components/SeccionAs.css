@@ -1,0 +1,82 @@
+.associate-section {
+    background: linear-gradient(135deg, rgb(202, 248, 128) 0%, rgb(113, 206, 126) 100%);
+    padding: 4rem 0;
+    text-align: center;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .associate-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    color: #fff;
+  }
+  
+  .associate-container {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 80%;
+  }
+  
+  .associate-card {
+    background-color: white;
+    color: black;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    width: 25rem;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; /* Asegura que el contenido se distribuya uniformemente */
+    min-height: 350px; /* Altura mínima para ambas tarjetas */
+  }
+  
+  .associate-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  .associate-icon {
+    color: #38a169;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .associate-title-card {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  .associate-text {
+    color: #4a5568;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    flex-grow: 1; /* Hace que el texto ocupe el espacio disponible */
+  }
+  
+  .associate-button {
+    margin-top: 1rem;
+    background-color: #38a169;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-size: 1rem;
+    width: 100%; /* Asegura que el botón tenga el mismo ancho */
+    max-width: 200px; /* Limita el ancho máximo del botón */
+  }
+  
+  .associate-button:hover {
+    background-color: #2f855a;
+  }

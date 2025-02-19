@@ -1,0 +1,222 @@
+/* Products Section */
+.products-section {
+  padding: 4rem 2rem;
+  background-color: #ffffff;
+  margin-top: 110px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #000;
+}
+
+/* Product Grid */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Tres columnas */
+  gap: 2rem;
+  padding: 0 1rem;
+}
+
+.product-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Image Container */
+.image-container {
+  overflow: hidden;
+  /* border-radius: 12px; */
+  position: relative;
+}
+
+.product-image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.1);
+}
+
+/* Product Info */
+.product-info {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.product-title {
+  color: #0a9d6d; /* Mantiene el color actual */
+  font-size: 2.5rem; /* Ajustado para mejor estética */
+  font-weight: 600; /* Reducido para evitar un efecto tosco */
+  text-align: center;
+  text-transform: uppercase; /* Opcional, da un toque más limpio */
+  letter-spacing: 1px; /* Espaciado entre letras para mejor legibilidad */
+  text-shadow: none; /* Eliminar efecto tridimensional */
+}
+
+.product-description {
+  font-size: 1rem;
+  color: #666;
+  margin: 0;
+  padding: 10px 10px;
+  text-align: justify;
+}
+
+.custom-scroll-arrow_products {
+  color: white !important; /* Color predeterminado */
+  font-size: 2rem; /* Ajusta el tamaño si es necesario */
+  transition: color 0.3s ease; /* Transición suave */
+}
+.custom-scroll-arrow_products:hover {
+  color: #0a9d6d;
+}
+/* Responsiveness */
+@media (max-width: 768px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas en tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .products-grid {
+    grid-template-columns: 1fr; /* Una columna en móviles */
+  }
+}
+
+.hero-subtitle {
+  display: block;
+  font-size: 1.8rem;
+  margin-top: 1rem;
+  color: #fff;
+  font-weight: 300;
+  text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.6);
+}
+.hero-content {
+  position: absolute;
+  text-align: center;
+  color: white; /* Asegura contraste */
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente */
+  border-radius: 10px;
+}
+
+.static-content {
+  position: relative; /* Asegura que el z-index funcione */
+  text-align: center;
+  background: rgba(0, 0, 0, 0.2); /* Fondo oscuro semitransparente */
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 1; /* Asegura que esté detrás del título */
+}
+/* Estilos para el contenedor de títulos */
+.titles {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 10;
+  width: 90%;
+  max-width: 800px;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.3); /* Fondo oscuro semitransparente */
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para el título principal */
+.product-title {
+  color: #fff;
+  font-size: 3.5rem;
+  font-weight: 700;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  animation: fadeInDown 1s ease-out;
+}
+
+.product-title_card {
+  color: #0a9d6d;
+  font-size: 2.5rem;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: none;
+}
+
+/* el hover de la imagen */
+.product-image {
+  transition: opacity 0.1s ease-in-out;
+}
+
+/* Estilos para el subtítulo */
+.hero-subtitle {
+  display: block;
+  font-size: 1.8rem;
+  color: #fff;
+  font-weight: 300;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+  animation: fadeInUp 1s ease-out;
+  margin-top: 1rem;
+}
+
+/* Animaciones */
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .product-title {
+    font-size: 2.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .titles {
+    padding: 15px;
+    width: 95%;
+  }
+}

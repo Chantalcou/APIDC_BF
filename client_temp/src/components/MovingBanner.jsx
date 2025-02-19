@@ -1,5 +1,7 @@
 import React from "react";
 import "./MovingBanner.css";
+import { FaHeart } from "react-icons/fa";
+
 
 const MovingBanner = () => {
   const logos = [
@@ -19,6 +21,9 @@ const MovingBanner = () => {
 
   return (
     <div className="moving-banner">
+        <h1 className="banner-title_banner">
+        Nos Acompañan <FaHeart className="heart-icon" />
+      </h1>
       <div className="moving-logos">
         {duplicatedLogos.map((logo, index) => (
           <img key={index} src={logo} alt={`logo-${index}`} className="logo" />

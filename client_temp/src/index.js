@@ -18,6 +18,7 @@ root.render(
         domain="dev-tqgfoevs4h6wlt5q.us.auth0.com"
         clientId="8KX5NG5JLM5pdOJYuYkFZTRGtOs53t2v"
         cacheLocation="localstorage"
+        // useRefreshTokens={true}
         authorizationParams={{
           redirect_uri: `${window.location.origin}`,
         }}

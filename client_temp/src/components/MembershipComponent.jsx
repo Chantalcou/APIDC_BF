@@ -38,38 +38,43 @@ const MembershipComponent = () => {
     }
   };
 
+  const phoneNumber = "1568824488";
+
+  const url = `https://wa.me/${phoneNumber}`;
+
   return (
     <>
- 
       {/* MEMBERSHIP SECTION */}
       <div className="membership-section">
-      <h1 className="section-title">🌱 Tu Camino con APIDC</h1>
+        <h1 className="section-title">🌱 Tu Camino con APIDC</h1>
         <p className="section-subtitle">
-        Elegí el plan que impulse tu bienestar.
-    </p>
-
-           {/*  STEEPS*/}
-        <p className="section-subtitle">Para acceder a nuestros servicios, comenza como Socio Adherente y luego selecciona la opción que mejor se adapte a tus objetivos: PREMIUM (cultivo personal REPROCAN) o Gestor (acompañamiento experto).</p>
+          Elegí el plan que impulse tu bienestar.
+        </p>
+        {/*  STEEPS*/}
+        <p className="section-subtitle">
+          Para acceder a nuestros servicios, comenza como Socio Adherente y
+          luego selecciona la opción que mejor se adapte a tus objetivos:
+          PREMIUM (cultivo personal REPROCAN) o Gestor (acompañamiento experto).
+        </p>
         <h2>🚀 Pasos para Unirte</h2>
-      <div className="steps-container">
-        <div className="step">
-          <div className="circle">1</div>
-          <p className="step-text">Unirse como Socio Adherente</p>
-        </div>
-        <div className="arrow">→</div>
-        <div className="step">
-          <div className="circle">2</div>
-          <p className="step-text">Elegir Premium o Gestor</p>
-        </div>
-      </div>{" "}
-  
+        <div className="steps-container">
+          <div className="step">
+            <div className="circle">1</div>
+            <p className="step-text">Unirse como Socio Adherente</p>
+          </div>
+          <div className="arrow">→</div>
+          <div className="step">
+            <div className="circle">2</div>
+            <p className="step-text">Elegir Premium o Gestor</p>
+          </div>
+        </div>{" "}
         {/* Otras Cards (Distribuidas en tres columnas) */}
         <div className="cards-container">
           {/* Socio con Reprocan */}
           <div className="card-first">
             <h2 className="card-title">Socio adherente</h2>
             <p className="card-subtitle">
-            Hacete parte de un movimiento que transforma vidas.
+              Hacete parte de un movimiento que transforma vidas.
             </p>
             <p className="price-container">
               {/* <span className="price-old">17.000</span> */}
@@ -77,7 +82,10 @@ const MembershipComponent = () => {
             </p>
             <ul className="benefits-list">
               <li>✔ Participación en Investigación de Cultivo Medicinalo</li>
-              <li>✔ Colaboración en Distribución de Aceite Medicinal a Hospitales de Gerontes</li>
+              <li>
+                ✔ Colaboración en Distribución de Aceite Medicinal a Hospitales
+                de Gerontes
+              </li>
               <li>✔ Atención Personalizada Online para Gestión del REPROCAN</li>
             </ul>
             <button
@@ -90,7 +98,7 @@ const MembershipComponent = () => {
           <div className="card">
             <h2 className="card-title">Socio Premium</h2>
             <p className="card-subtitle">
-            Cultiva tu medicina con respaldo legal.
+              Cultiva tu medicina con respaldo legal.
             </p>
             <p className="price-container">
               <span className="price-old">$200.000</span>
@@ -98,7 +106,7 @@ const MembershipComponent = () => {
             </p>
             <ul className="benefits-list">
               <li>✔ Un Frasco Gratis de Cannabis Medicinal</li>
-              <li>✔ Cultivo Exclusivo en Nuestros Campos</li>
+              <li>✔ Cultivo en Nuestros Campos(con Reprocan)</li>
               <li>✔ Asesoramiento Exclusivo Personalizado</li>
             </ul>
             <button
@@ -113,7 +121,7 @@ const MembershipComponent = () => {
           <div className="card">
             <h2 className="card-title">Gestor</h2>
             <p className="card-subtitle">
-            Hacete parte de un movimiento que transforma vidas.
+              Hacete parte de un movimiento que transforma vidas.
             </p>
             <p className="price-container">
               <span className="price-old">$300.000</span>
@@ -121,8 +129,8 @@ const MembershipComponent = () => {
             </p>
             <ul className="benefits-list">
               <li>✔ Cultivo en Nuestros Campos (Con Reprocan)</li>
-              <li>✔ Comisión por Nuevos Socios Activos</li>
-              <li>✔ Acceso a Material Exclusivo</li>
+              <li>✔ Comisión de 10% por Nuevos Socios Activos</li>
+              <li>✔ Capacitación para Gestores</li>
               <li>✔ Soporte Continuo y Asesoramiento Personalizado</li>
             </ul>
             <button
@@ -133,79 +141,85 @@ const MembershipComponent = () => {
             </button>
           </div>
         </div>
-
+        <div className="content-whatsApp">
+          <p className="section-subtitle">
+            ¿Tenés dudas? <strong>¡Chatea con nosotros!</strong>
+            <a
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="whatsapp-button"
+            >
+              <i className="fab fa-whatsapp"></i> ¡Chatea ahora!
+            </a>
+          </p>
+        </div>
         {/* Tabla de beneficios */}
-      {/* Tabla de beneficios */}
-<div className="benefits-table-container">
-  <h2 className="benefits-title">Comparación de Beneficios</h2>
-  <table className="benefits-table">
-    <thead>
-      <tr>
-        <th>Beneficio</th>
-        <th>Socio Adherente</th>
-        <th>Socio Gestor</th>
-        <th>Socio Premium / con Reprocan</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Participación en investigación de cultivo medicinal</td>
-        <td>✔</td>
-        <td>✔</td>
-        <td>✔</td>
-      </tr>
-      <tr>
-        <td>Distribución de aceite medicinal a hospitales</td>
-        <td>✔</td>
-        <td>✔</td>
-        <td>✔</td>
-      </tr>
-      <tr>
-        <td>Atención personalizada online para gestión de Reprocan</td>
-        <td>✔</td>
-        <td>✔</td>
-        <td>✔</td>
-      </tr>
-      <tr>
-        <td>Acceso a newsletter mensual con noticias</td>
-        <td>✔</td>
-        <td>✔</td>
-        <td>✔</td>
-      </tr>
-      <tr>
-        <td>Frasco gratis de cannabis medicinal</td>
-        <td>✖</td>
-        <td>✖</td>
-        <td>✔</td>
-      </tr>
-      <tr>
-        <td>Cultivo en nuestro campo (Con Reprocan)</td>
-        <td>✖</td>
-        <td>✔</td>
-        <td>✔</td>
-      </tr>
-      <tr>
-        <td>Asesoramiento exclusivo</td>
-        <td>✖</td>
-        <td>✔</td>
-        <td>✔</td>
-      </tr>
-      <tr>
-        <td>Comisión por nuevos socios activos referidos</td>
-        <td>✖</td>
-        <td>✔</td>
-        <td>✖</td>
-      </tr>
-      <tr>
-        <td>Recomendación y promoción de la asociación</td>
-        <td>✖</td>
-        <td>✔</td>
-        <td>✖</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+        <div className="benefits-table-container">
+          <h2 className="benefits-title">Comparación de Beneficios</h2>
+          <table className="benefits-table">
+            <thead>
+              <tr>
+                <th>Beneficio</th>
+                <th>Socio Adherente</th>
+                <th>Socio Premium / con Reprocan</th>
+                <th>Socio Gestor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Participación en investigación de cultivo medicinal</td>
+                <td>✔</td>
+                <td>✔</td>
+                <td>✔</td>
+              </tr>
+              <tr>
+                <td>Distribución de aceite medicinal a hospitales</td>
+                <td>✔</td>
+                <td>✔</td>
+                <td>✔</td>
+              </tr>
+              <tr>
+                <td>Atención personalizada online para gestión de Reprocan</td>
+                <td>✔</td>
+                <td>✔</td>
+                <td>✔</td>
+              </tr>
+              <tr>
+                <td>Acceso a newsletter mensual con noticias</td>
+                <td>✔</td>
+                <td>✔</td>
+                <td>✔</td>
+              </tr>
+              <tr>
+                <td>Asesoramiento exclusivo</td>
+                <td>✔</td>
+                <td>✔</td>
+                <td>✔</td>
+              </tr>
+              <tr>
+                <td>Frasco gratis de cannabis medicinal</td>
+                <td>✖</td>
+                <td>✔</td>
+                <td>✔</td>
+              </tr>
+              <tr>
+                <td>Cultivo en nuestro campo (Con Reprocan)</td>
+                <td>✖</td>
+                <td>✔</td>
+                <td>✔</td>
+              </tr>
 
+              <tr>
+                <td>Comisión por nuevos socios activos referidos</td>
+                <td>✖</td>
+                <td>✖</td>
+                <td>✔</td>
+              </tr>
+             
+            </tbody>
+          </table>
+        </div>
       </div>
     </>
   );

@@ -448,3 +448,44 @@
 .benefits-table tbody tr:nth-child(even) {
   background-color: #1c1c1c;
 }
+
+/* Botón de WhatsApp más llamativo */
+.whatsapp-button {
+  background-color: #25d366; /* Color verde típico de WhatsApp */
+  color: white;
+  padding: 12px 24px;
+  border-radius: 50px; /* Bordes redondeados para darle un toque moderno */
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.content-whatsApp {
+  padding-top: 20px;
+}
+
+/* Efecto hover para el botón */
+.whatsapp-button:hover {
+  background-color: #128c7e; /* Color más oscuro al pasar el mouse */
+  transform: scale(1.05); /* Aumenta el tamaño del botón para mayor énfasis */
+}
+
+/* Icono de WhatsApp dentro del botón */
+.whatsapp-button i {
+  font-size: 1.5rem; /* Aumenta el tamaño del icono */
+}
+
+/* Hacer el texto más atractivo y visible */
+.section-subtitle strong {
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.2rem;
+  display: block;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}

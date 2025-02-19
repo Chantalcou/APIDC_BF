@@ -8,6 +8,10 @@
 
 }
 
+.banner-title_banner{
+  color: #28a745;
+}
+
 .moving-logos {
   display: flex;
   align-items: center;
