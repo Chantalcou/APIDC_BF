@@ -1,87 +1,57 @@
 require("dotenv").config();
 const cors = require("cors");
-const express = require("express");
-const bodyParser = require("body-parser");
-const path = require("path");
-const http = require("http");
-const { User } = require("./models/userModel"); // Asegúrate de tener el modelo de usuario configurado
-const sequelize = require("./config/db");
+const { json } = require("express");
 const authRoutes = require("./routes/authRoutes");
-const mailerRoutes = require("./routes/nodeMailerRoutes");
-const socket = require("./socket"); // Importa el archivo de socket.js
+const pool = require("./config/db");
+const sequelize = require("./config/db");
 
-// Verifica si faltan variables de entorno críticas
 if (
   !process.env.DB_USER ||
   !process.env.DB_NAME ||
   !process.env.DB_PASSWORD ||
-  !process.env.PORT ||
-  !process.env.DATABASE_URL
+  !process.env.PORT
 ) {
-  throw new Error("❌ Faltan variables de entorno críticas");
+  throw new Error("Faltan variables de entorno críticas");
 }
+
+const express = require("express");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const server = http.createServer(app); // Usamos `server` para `socket.io`
 
-// Configuración de CORS para el servidor HTTP y Socket.IO
-// app.use(
-//   cors({
-//     origin: "http://localhost:3000",  // Cambia esto según la URL de tu frontend
-//     methods: ["GET", "POST", "PUT", "DELETE"],
-//     credentials: true, // Permite cookies y credenciales
-//   })
-// );
-// Produccion
 app.use(
   cors({
-    origin: "https://apidc-bf-2.onrender.com", // Cambia esto según la URL de tu frontend
+    origin: "http://localhost:3000",
     methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true, // Permite cookies y credenciales
+    credentials: true,
   })
 );
 
-// Middleware
-app.use(bodyParser.json());
-app.use(express.json());
-
-// Inicializar Socket.IO con el servidor HTTP
-socket.initialize(server); // Aquí inicializamos Socket.IO
+app.use(json()); // Para manejar JSON sin usar bodyParser
 
 // Rutas
-app.use("/send", mailerRoutes);
 app.use("/", authRoutes);
-
-// Servir archivos estáticos del frontend
-app.use(express.static(path.join(__dirname, "../../client_temp/build")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../client_temp/build", "index.html"));
-});
 
 // Middleware global para manejo de errores
 app.use((err, req, res, next) => {
-  console.error("❌ Error:", err.message);
+  console.error("Error:", err.message);
   res
     .status(500)
     .json({ error: "Ha ocurrido un error interno en el servidor" });
 });
 
-// Conexión a la base de datos con Sequelize
+// sequielize conexion
 sequelize
-  .authenticate()
-  .then(() => {
-    console.log("✅ Conexión a la base de datos PostgreSQL exitosa");
+  .query("SELECT NOW()")
+  .then(([results, metadata]) => {
+    console.log("Conexión a la base de datos PostgreSQL exitosa");
   })
   .catch((err) => {
-    console.error("❌ Error al conectarse a la base de datos:", err);
+    console.error("Error al conectarse a la base de datos:", err);
   });
-
-// Iniciar el servidor con `server.listen()`, NO `app.listen()`
-server.listen(PORT, () => {
-  console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
+// Iniciar el servidor
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
 
-// Sincronizar Sequelize (sin `force: true` para evitar borrar datos)
-sequelize.sync({ force: false });
+sequelize.sync({ force:false });
