@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Table, Container, Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUsers, updateUserRoleNoToken } from "../redux/actions/index";
+import { updateUserRole } from "../redux/actions/index";
 import io from "socket.io-client";
 import "./Dashboard.css";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
-  const { users, user } =
-    useSelector((state) => state);
+  const { users, user } = useSelector((state) => state);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [socket, setSocket] = useState(null); // <- Estado para almacenar la instancia de Socket.IO
@@ -25,25 +24,25 @@ const Dashboard = () => {
   }, [dispatch]);
 
   // Conexión Socket.IO
-  useEffect(() => {
-    const newSocket = io("https://apidc-bf-2.onrender.com"); // Crear una nueva instancia de Socket.IO
-    setSocket(newSocket); // Guardar la instancia en el estado
+  // useEffect(() => {
+  //   const newSocket = io("https://apidc-bf-2.onrender.com"); // Crear una nueva instancia de Socket.IO
+  //   setSocket(newSocket); // Guardar la instancia en el estado
 
-    newSocket.on("user_updated", (data) => {
-      console.log("Datos del usuario actualizados:", data);
-      // Verificar si el email del evento coincide con el email del usuario autenticado
-      if (user && data.email === user.email) {
-        dispatch(updateUserRoleNoToken(data.id, data.membershipType));
-      }
-    });
+  //   newSocket.on("user_updated", (data) => {
+  //     console.log("Datos del usuario actualizados:", data);
+  //     // Verificar si el email del evento coincide con el email del usuario autenticado
+  //     if (user && data.email === user.email) {
+  //       dispatch(updateUserRoleNoToken(data.id, data.membershipType));
+  //     }
+  //   });
 
-    // Limpiar la conexión al desmontar el componente
-    return () => {
-      newSocket.disconnect();
-    };
-  }, [dispatch, user]);
+  //   // Limpiar la conexión al desmontar el componente
+  //   return () => {
+  //     newSocket.disconnect();
+  //   };
+  // }, [dispatch, user]);
 
-  // Guardar usuarios en localStorage cuando cambie la lista
+  // // Guardar usuarios en localStorage cuando cambie la lista
   useEffect(() => {
     if (users && users.length > 0) {
       localStorage.setItem("users", JSON.stringify(users));
@@ -62,9 +61,11 @@ const Dashboard = () => {
     });
 
     try {
-      await dispatch(updateUserRoleNoToken(userId, updatedMembershipType));
+      await dispatch(updateUserRole(userId, updatedMembershipType));
       setSuccess(
-        `Usuario ${userId} actualizado a ${updatedMembershipType || "sin membresía"}`
+        `Usuario ${userId} actualizado a ${
+          updatedMembershipType || "sin membresía"
+        }`
       );
     } catch (err) {
       dispatch({

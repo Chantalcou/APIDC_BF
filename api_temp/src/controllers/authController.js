@@ -198,11 +198,11 @@ const updateUserRole = async (req, res) => {
     user.membershipType = membershipType;
     await user.save();
 
-    getIO().emit("user_updated", {
-      id: user.id,
-      membershipType: user.membershipType,
-      email: user.email
-    });
+    // getIO().emit("user_updated", {
+    //   id: user.id,
+    //   membershipType: user.membershipType,
+    //   email: user.email
+    // });
     
 
     return res.status(200).json({ message: "Rol actualizado con éxito", user });
