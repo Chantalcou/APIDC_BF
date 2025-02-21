@@ -1,82 +1,141 @@
+/* 🏞️ SECCIÓN PRINCIPAL */
 .associate-section {
-    background: linear-gradient(135deg, rgb(202, 248, 128) 0%, rgb(113, 206, 126) 100%);
-    padding: 4rem 0;
-    text-align: center;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .associate-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 2rem;
-    color: #fff;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 50vh; /* Que siempre ocupe la pantalla completa */
+  width: 100%;
+}
+
+/* 🎥 VIDEO DE FONDO */
+.bg-video_seccion {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1; /* Mantiene el video detrás del contenido */
+}
+
+/* 📌 CONTENIDO */
+.associate-content {
+  position: relative;
+  z-index: 1; /* Asegura que esté sobre el video */
+  width: 100%;
+  max-width: 1200px; /* Evita que el contenido se desborde */
+  padding: 2rem;
+}
+
+/* 🎴 CONTENEDOR DE TARJETAS */
+.associate-container {
+  display: flex;
+  justify-content: center; /* Centra las tarjetas */
+  align-items: stretch; /* Todas con la misma altura */
+  gap: 2rem;
+  flex-wrap: wrap; /* Se adaptan en pantallas pequeñas */
+  width: 100%;
+}
+
+/* 🃏 TARJETAS */
+.associate-card {
+  background-color: rgba(255, 255, 255, 0.95);
+  color: black;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  width: 33rem; /* Tamaño adaptable */
+  max-width: 100%;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 250px;
+}
+
+.associate-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* 🟢 ÍCONOS */
+.associate-icon {
+  color: #38a169;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.associate-title_seccion{
+  font-family: 'Raleway';
+  color: #ffffff;
+  font-size: 312.5%;
+  text-shadow: none;
+  line-height: 1.5;
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  text-align: center;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  font-weight: 800;
+}
+
+/* 📌 RESPONSIVIDAD */
+@media (max-width: 1024px) {
+  .associate-section {
+    height: auto;
+    padding: 2rem 0;
   }
   
   .associate-container {
-    display: flex;
-    gap: 2rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    max-width: 80%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .associate-card {
+    width: 90%;
+  }
+}
+
+@media (max-width: 768px) {
+  .associate-title {
+    font-size: 2rem;
+    color: #ffff;
   }
   
   .associate-card {
-    background-color: white;
-    color: black;
-    padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    width: 25rem;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between; /* Asegura que el contenido se distribuya uniformemente */
-    min-height: 350px; /* Altura mínima para ambas tarjetas */
+    width: 95%;
+    padding: 1.5rem;
   }
-  
-  .associate-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.3);
-  }
-  
-  .associate-icon {
-    color: #38a169;
-    font-size: 3rem;
-    margin-bottom: 1rem;
-  }
-  
-  .associate-title-card {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-  }
-  
+
   .associate-text {
-    color: #4a5568;
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-    flex-grow: 1; /* Hace que el texto ocupe el espacio disponible */
-  }
-  
-  .associate-button {
-    margin-top: 1rem;
-    background-color: #38a169;
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    border: none;
-    cursor: pointer;
-    transition: background 0.3s ease;
     font-size: 1rem;
-    width: 100%; /* Asegura que el botón tenga el mismo ancho */
-    max-width: 200px; /* Limita el ancho máximo del botón */
   }
-  
-  .associate-button:hover {
-    background-color: #2f855a;
+}
+
+@media (max-width: 480px) {
+  .associate-title {
+    font-size: 1.8rem;
   }
+
+  .associate-card {
+    width: 100%;
+    padding: 1.2rem;
+  }
+
+  .associate-text {
+    font-size: 0.9rem;
+  }
+
+  .associate-button {
+    font-size: 0.9rem;
+    padding: 0.7rem 1rem;
+  }
+}

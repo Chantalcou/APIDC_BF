@@ -50,3 +50,8 @@
 .newsletter-button:hover {
   background-color: #3e7c3e;
 }
+
+.status-message{
+  margin-top:20px;
+  width: 350px;
+}

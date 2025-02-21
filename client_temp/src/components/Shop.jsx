@@ -14,6 +14,8 @@ const Shop = () => {
       setLoading(false); // Cambia el estado para ocultar el spinner
     }, 2000); // 2000 ms (2 segundos)
   };
+  const optimizedImage = (url, width = 600, blur = 0, px = 0) =>
+    `${url}?f=auto&q=auto&w=${width}${blur ? `&blur=${blur}&px=${px}` : ""}`;
 
   const products = [
     {
@@ -80,6 +82,13 @@ const Shop = () => {
       1000
     );
   };
+  useEffect(() => {
+    // Precargar imágenes hover
+    products.forEach((product) => {
+      const img = new Image();
+      img.src = product.hoverImage;
+    });
+  }, [products]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -133,7 +142,12 @@ const Shop = () => {
 
           <div id="products" className="products-grid">
             {products.map((product, index) => (
-              <div className="product-card" key={index}>
+              <div
+                className="product-card"
+                onTouchStart={() => setHoveredIndex(index)}
+                onTouchEnd={() => setHoveredIndex(null)}
+                key={index}
+              >
                 <div className="image-container">
                   <img
                     src={
@@ -141,7 +155,9 @@ const Shop = () => {
                         ? product.hoverImage
                         : product.image
                     }
-                    alt={product.title}
+                    alt={`${product.title} - Vista detallada`}
+                    aria-hidden="true"
+                    role="presentation"
                     className="product-image"
                     onLoad={handleImageLoad}
                     onMouseEnter={() => setHoveredIndex(index)}

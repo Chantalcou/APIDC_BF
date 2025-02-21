@@ -29,31 +29,30 @@
 }
 
 .product-card {
-  position: relative;
-  overflow: hidden;
-  border-radius: 12px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
+  will-change: transform;
+  backface-visibility: hidden;
 }
-
 .product-card:hover {
   transform: scale(1.05);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* Image Container */
 .image-container {
-  overflow: hidden;
-  /* border-radius: 12px; */
   position: relative;
+  overflow: hidden;
+  background: #f0f0f0;
+  height: 300px; /* Altura fija para evitar saltos */
 }
 
 .product-image {
+  transform: translateZ(0);
   width: 100%;
   height: 300px;
   object-fit: cover;
-  transition: transform 0.4s ease;
+  transition: none; /* Elimina la transición */
+  aspect-ratio: 16 / 9; 
 }
+
 
 .product-card:hover .product-image {
   transform: scale(1.1);
@@ -66,7 +65,7 @@
 }
 
 .product-title {
-  color: #0a9d6d; /* Mantiene el color actual */
+  color: #ffffff; /* Mantiene el color actual */
   font-size: 2.5rem; /* Ajustado para mejor estética */
   font-weight: 600; /* Reducido para evitar un efecto tosco */
   text-align: center;
@@ -124,7 +123,7 @@
 .static-content {
   position: relative; /* Asegura que el z-index funcione */
   text-align: center;
-  background: rgba(0, 0, 0, 0.2); /* Fondo oscuro semitransparente */
+
   padding: 20px;
   border-radius: 10px;
   z-index: 1; /* Asegura que esté detrás del título */
@@ -145,17 +144,6 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilos para el título principal */
-.product-title {
-  color: #fff;
-  font-size: 3.5rem;
-  font-weight: 700;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
-  margin-bottom: 1rem;
-  line-height: 1.2;
-  animation: fadeInDown 1s ease-out;
-}
-
 .product-title_card {
   color: #0a9d6d;
   font-size: 2.5rem;
@@ -166,10 +154,32 @@
   text-shadow: none;
 }
 
-/* el hover de la imagen */
-.product-image {
-  transition: opacity 0.1s ease-in-out;
+.base-image,
+.hover-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
+
+.hover-image {
+  opacity: 0;
+  transform: scale(1.1);
+}
+
+.product-card:hover .hover-image {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.product-card:hover .base-image {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
 
 /* Estilos para el subtítulo */
 .hero-subtitle {

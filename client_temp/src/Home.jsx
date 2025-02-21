@@ -31,6 +31,7 @@ const Home = () => {
     user,
     getAccessTokenSilently,
   } = useAuth0();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -46,17 +47,15 @@ const Home = () => {
   const [captchaVerified, setCaptchaVerified] = useState(false);
 
   // ANIMACION
-
   useEffect(() => {
     AOS.init({
-      duration: 1000, // Duración de las animaciones (opcional)
-      easing: "ease-in-out", // Efecto de animación (opcional)
-      once: true, // La animación ocurre solo una vez cuando el elemento entra en la vista (opcional)
+      duration: 1000, // Duración de las animaciones
+      easing: "ease-in-out", // Efecto de animación
+      once: true, // La animación ocurre solo una vez cuando el elemento entra en la vista
     });
-  }, []); // El segundo argumento [] asegura que se ejecute solo una vez al montar el componente
+  }, []);
 
   useEffect(() => {
-    // Simula una carga de datos o cualquier otra operación asíncrona
     setTimeout(() => {
       setLoading(false);
     }, 2000); // Simula una carga de 2 segundos
@@ -147,7 +146,9 @@ const Home = () => {
         <meta property="og:url" content="https://example.com/" />
         <meta name="robots" content="index, follow" />
       </Helmet>
+
       <div>
+        {loading}
         <div className="container-fluid p-0 main-content">
           <div className="video-container">
             {/* <video autoPlay muted loop className="home-bg-video">
@@ -304,7 +305,7 @@ const Home = () => {
                 </h3>
                 <p>
                   Quienes conformamos la Asociación nos vinculamos con las
-                  plantas de Cannabis y sus múltiples usos desde hace más de 10
+                  plantas de Cannabis y sus múltiples usos desde hace más de 30
                   años, aportando experiencia desde diversas disciplinas como
                   agronomía, medicina, genética, bioquímica, docencia, abogacía,
                   economía e investigación. A través de un enfoque clínico
@@ -381,7 +382,7 @@ const Home = () => {
                         cada paso del proceso.
                       </p>
 
-                      <h3
+                      {/* <h3
                         style={{
                           color: "#333",
                           fontSize: "1.5rem",
@@ -389,45 +390,13 @@ const Home = () => {
                         }}
                       >
                         Lo que ofrecemos hoy
-                      </h3>
-
-                      <div className="service-grid d-flex flex-wrap justify-content-center mt-4">
-                        <div
-                          className="service-item text-center p-3"
-                          style={{ width: "250px" }}
-                        >
-                          <FaClipboardCheck
-                            className="service-icon"
-                            style={{ fontSize: "3rem", color: "#0a9d6d" }}
-                          />
-                          <h5 style={{ fontWeight: "600", marginTop: "15px" }}>
-                            Gestión REPROCANN
-                          </h5>
-                          <p>Tramitamos tu registro en menos de 72 horas.</p>
-                        </div>
-
-                        <div
-                          className="service-item text-center p-3"
-                          style={{ width: "250px" }}
-                        >
-                          <FaSeedling
-                            className="service-icon"
-                            style={{ fontSize: "3rem", color: "#0a9d6d" }}
-                          />
-                          <h5 style={{ fontWeight: "600", marginTop: "15px" }}>
-                            Cultivos Controlados
-                          </h5>
-                          <p>
-                            Plantación y seguimiento profesional de cultivos.
-                          </p>
-                        </div>
-                      </div>
+                      </h3> */}
                     </div>
 
                     <div className="text-center mt-5">
                       <ButtonComponent
                         text="ASÓCIATE"
-                        onClick={() => scrollToSection("asociarme-seccion")}
+                        onClick={() => scrollToSection("asociate-ahora-2")}
                         color={{
                           background: "#0a9d6d",
                           text: "white",
@@ -454,22 +423,23 @@ const Home = () => {
                     </div>
                   </div>
                 </div>
-                <div id="asociate-ahora-2"></div>
-                <div className="static-content d-flex flex-column justify-content-center align-items-center h-100 position-relative mt-5">
+                {/* <div className="static-content d-flex flex-column justify-content-center align-items-center h-100 position-relative mt-5">
                   <ScrollArrow
-                    onClick={() => scrollToSection("membership-section")}
-                    color="#202020"
+                  onClick={() => scrollToSection("membership-section")}
+                  color="#202020"
                   />
-                </div>
+                  </div> */}
               </div>
             </section>
           </div>
         </div>
+
+        <div id="asociate-ahora-2"></div>
         <SeccionAs />
 
         {/* ASOCIARME SECTION */}
-        <div className="container-video_2 my-1" id="membership-section">
-          {/* Fondo del video con superposición */}
+        {/* <div className="container-video_2 my-1" id="membership-section">
+   
           <div className="bg-banner text-center position-relative">
             <video
               autoPlay
@@ -486,11 +456,10 @@ const Home = () => {
               Your browser does not support the video tag.
             </video>
 
-            {/* Contenido sobre el video */}
             <div
               id="asociarme-seccion"
               className="d-flex flex-column justify-content-center align-items-center h-100 text-white"
-              style={{ zIndex: 99 }} // Superposición semitransparente
+              style={{ zIndex: 99 }} 
             >
               <h1 id="asociarme-section" className="banner-title mb-3">
                 ASOCIATE
@@ -525,9 +494,10 @@ const Home = () => {
               )}
             </div>
           </div>
-        </div>
-        {/* ASOCIARME SECTION */}
+        </div> */}
       </div>
+
+      <ContactInfo />
 
       <div id="ley-section" className="ley-section text-center">
         <div
@@ -578,8 +548,6 @@ const Home = () => {
           />
         </div>
       </div>
-
-      <ContactInfo />
 
       <WorkTogether />
       <MovingBanner />

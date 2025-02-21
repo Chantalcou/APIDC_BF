@@ -6,6 +6,7 @@ import {
   UPDATE_USER_ROLE,
   UPDATE_USER_ROLE_FAIL,
   UPDATE_USER_ROLE_FAILURE,
+  SET_USERS_FROM_STORAGE,
 } from "../actions_types";
 
 const initialState = {
@@ -26,23 +27,23 @@ const reducer = (state = initialState, action) => {
         isAuthenticated: true,
         isAdmin: action.payload.isAdmin,
         users: action.payload.users,
-        userFromRedux: action.payload.user, 
+        userFromRedux: action.payload.user,
         error: null,
       };
-      case UPDATE_USER_ROLE_SUCCESS:
-        return {
-          ...state,
-          users: state.users.map(user => 
-            user.id === action.payload.id 
-              ? { ...user, membershipType: action.payload.membershipType } 
-              : user
-          ),
-          userFromRedux: 
-            state.userFromRedux.id === action.payload.id
-              ? { ...state.userFromRedux, membershipType: action.payload.membershipType }
-              : state.userFromRedux
-        };
-  
+    case UPDATE_USER_ROLE_SUCCESS:
+      return {
+        ...state,
+        users: state.users.map((user) =>
+          user.id === action.payload.id
+            ? { ...user, membershipType: action.payload.membershipType }
+            : user
+        ),
+        userFromRedux:
+        state.userFromRedux && state.userFromRedux.id === action.payload.id
+          ? { ...state.userFromRedux, membershipType: action.payload.membershipType }
+          : state.userFromRedux,
+      
+      };
 
     // case UPDATE_USER_ROLE_SUCCESS:
     //   return {
@@ -70,12 +71,19 @@ const reducer = (state = initialState, action) => {
             : user
         ),
       };
-      case UPDATE_CURRENT_USER:
-        return {
-          ...state,
-          userFromRedux: action.payload, // Actualizar userFromRedux aquí
-        };
-  
+    case UPDATE_CURRENT_USER:
+      return {
+        ...state,
+        userFromRedux: action.payload, // Actualizar userFromRedux aquí
+      };
+
+    case SET_USERS_FROM_STORAGE:
+      return {
+        ...state,
+        // Actualizamos la lista de usuarios
+        users: action.payload,
+        // Y si ya tenías un usuario logueado, lo buscamos en la lista actualizada
+      };
 
     default:
       return state;

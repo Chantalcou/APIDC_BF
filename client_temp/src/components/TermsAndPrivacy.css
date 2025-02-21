@@ -1,0 +1,34 @@
+.terms-privacy-container {
+    padding: 20px;
+    background-color: #f7f7f7;
+    margin-top: 130px!important;
+    font-family: Arial, sans-serif;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+  
+  h2 {
+    color: #005b4f;
+  }
+  
+  h3 {
+    color: #007b6e;
+  }
+  
+  p, ul {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+  }
+  
+  ul {
+    margin-left: 20px;
+  }
+  
+  ul li {
+    margin-bottom: 10px;
+  }
+  

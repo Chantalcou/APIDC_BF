@@ -1,0 +1,113 @@
+.payment-shipping-section {
+  padding: 2rem;
+  background: #f8f9fa;
+  border-radius: 15px;
+  margin: 2rem auto;
+  max-width: 1200px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+  text-align: center;
+  color: #2c5f2d;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
+
+.info-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .info-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.method-icon {
+  font-size: 2.5rem;
+  color: #2c5f2d;
+  margin-right: 1rem;
+}
+
+.icon-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.method-list {
+  list-style: none;
+  padding: 0;
+}
+
+.method-item {
+  background: white;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.method-item:hover {
+  transform: translateY(-3px);
+}
+
+.method-name {
+  font-weight: 600;
+  color: #2c5f2d;
+}
+
+.method-detail {
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+.shipping-details {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.courier-logo {
+  max-width: 120px;
+  height: auto;
+}
+
+.shipping-info {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.highlight {
+  color: #2c5f2d;
+  font-weight: 600;
+}
+
+.process-info {
+  background: #e8f5e9;
+  padding: 1.5rem;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.whatsapp-process-icon {
+  font-size: 2rem;
+  color: #25d366;
+}

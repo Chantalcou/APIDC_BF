@@ -1,19 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import emailjs from "emailjs-com";
 import { useSelector } from "react-redux";
 import { Container, Row, Col, Form, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import ButtonComponent from "./Button";
 import Swal from "sweetalert2";
+
+import { FaRegCheckCircle } from "react-icons/fa";
 import "./ContactForm.css";
 
 const ContactForm = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const userFromRedux = useSelector((state) => state.user);
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    from_name: "", 
-    to_name: "",     //  (en este caso el destinatario)
+    from_name: "",
+    to_name: "", //  (en este caso el destinatario)
     message: "",
   });
 
@@ -57,10 +63,10 @@ const ContactForm = () => {
     // Envío del formulario a EmailJS
     emailjs
       .sendForm(
-        "service_n7iprht",       // ID del servicio
-        "template_rqqmprl",      // ID de la plantilla
-        e.target,                // Formulario que estás enviando
-        "CfDbaVqLjMAHH6wYo"      // Public Key
+        "service_n7iprht", // ID del servicio
+        "template_rqqmprl", // ID de la plantilla
+        e.target, // Formulario que estás enviando
+        "CfDbaVqLjMAHH6wYo" // Public Key
       )
       .then(
         (result) => {
@@ -68,7 +74,7 @@ const ContactForm = () => {
           setStatusVariant("success");
           setFormData({ from_name: "", to_name: "", message: "" });
           setErrors(false); // Limpiar errores si el envío fue exitoso
-          Swal.fire("¡Gracias! El e-mail fue enviado con éxito.");
+          Swal.fire("Gracias por comunicarte con nosotros. A la brevedad nos pondremos en contacto.");
         },
         (error) => {
           console.log(error);
@@ -87,7 +93,7 @@ const ContactForm = () => {
 
             {status && (
               <Alert variant={statusVariant} className="text-center">
-                {status}
+                   <FaRegCheckCircle size={15}/> {status}
               </Alert>
             )}
 

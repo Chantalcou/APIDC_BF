@@ -1,10 +1,10 @@
 .breadcrumbs {
-    position: fixed; /* Fijo en la parte superior */
-    top: 69px; /* Ajusta según la altura de tu navbar */
+    position: fixed;
+    top: 69px; 
     left: 0;
-    width: 100%; /* Ocupa todo el ancho */
+    width: 100%; 
     background-color: #f8f9fa; /* Fondo claro */
-    padding: 10px 20px; /* Espaciado interno */
+    padding: 3px 3px 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para separación */
     z-index: 1000; /* Asegúrate de que esté por encima del contenido */
     font-size: 14px;

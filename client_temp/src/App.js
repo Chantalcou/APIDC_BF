@@ -11,6 +11,7 @@ import WhatsApp from "./components/WhatsApp";
 import Dashboard from "./components/Dashboard";
 import ContactForm from "./components/ContactForm";
 import ProtectedRoute from "./components/ProtectedRoute";
+import TermsAndPrivacy from './components/TermsAndPrivacy'
 import Newsletter from "./components/Newsletter";
 import NewsletterBanner from "./components/NewsLetterBanner";
 import { ContactOptions } from "./components/ContactOptions";
@@ -23,6 +24,7 @@ import ProductsSection from "./components/ProductsSection";
 import MembershipComponent from "./components/MembershipComponent";
 
 const App = () => {
+  
   return (
     <>
       <HelmetProvider>
@@ -52,6 +54,8 @@ const App = () => {
           />
           <Route path="/newsletter" element={<Newsletter />} />
           <Route path="/shop" element={<Shop />} />
+          <Route path="/termsAndPrivacy" element={<TermsAndPrivacy />} />
+          
           {/* <Route path="/loguin" element={<Loguin />} />  */}
           {/* <Route
           path="/admin"

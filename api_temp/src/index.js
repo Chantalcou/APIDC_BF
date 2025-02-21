@@ -4,7 +4,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
 const http = require("http");
-const { User } = require("./models/userModel");  // Asegúrate de tener el modelo de usuario configurado
+const { User } = require("./models/userModel"); // Asegúrate de tener el modelo de usuario configurado
 const sequelize = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
 const mailerRoutes = require("./routes/nodeMailerRoutes");
@@ -26,9 +26,17 @@ const PORT = process.env.PORT || 5000;
 const server = http.createServer(app); // Usamos `server` para `socket.io`
 
 // Configuración de CORS para el servidor HTTP y Socket.IO
+// app.use(
+//   cors({
+//     origin: "http://localhost:3000",  // Cambia esto según la URL de tu frontend
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//     credentials: true, // Permite cookies y credenciales
+//   })
+// );
+// Produccion
 app.use(
   cors({
-    origin: "http://localhost:3000",  // Cambia esto según la URL de tu frontend
+    origin: "https://apidc-bf-2.onrender.com", // Cambia esto según la URL de tu frontend
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true, // Permite cookies y credenciales
   })
@@ -39,7 +47,7 @@ app.use(bodyParser.json());
 app.use(express.json());
 
 // Inicializar Socket.IO con el servidor HTTP
-socket.initialize(server);  // Aquí inicializamos Socket.IO
+socket.initialize(server); // Aquí inicializamos Socket.IO
 
 // Rutas
 app.use("/send", mailerRoutes);
@@ -55,7 +63,9 @@ app.get("*", (req, res) => {
 // Middleware global para manejo de errores
 app.use((err, req, res, next) => {
   console.error("❌ Error:", err.message);
-  res.status(500).json({ error: "Ha ocurrido un error interno en el servidor" });
+  res
+    .status(500)
+    .json({ error: "Ha ocurrido un error interno en el servidor" });
 });
 
 // Conexión a la base de datos con Sequelize

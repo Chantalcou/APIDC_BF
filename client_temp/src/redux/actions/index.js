@@ -11,7 +11,7 @@ export const registerUser = (userData, token) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(
-        "http://localhost:5001/register",
+        "https://apidc-bf-2.onrender.com/register",
         {
           email: userData.email,
           name: userData.name,
@@ -58,7 +58,7 @@ export const formInfo = (formData) => async (dispatch) => {
   try {
     // Enviar los datos al backend
     const response = await axios.post(
-      "http://localhost:5001/send/admin",
+      "https://apidc-bf-2.onrender.com/send/admin",
 
       formData,
       {
@@ -87,8 +87,8 @@ export const fetchUsers = (token) => {
   return async (dispatch) => {
     try {
       const response = await axios.get(
-        // "http://localhost:5001/users",
-        `http://localhost:5001/users`,
+        // "https://apidc-bf-2.onrender.com/users",
+        `https://apidc-bf-2.onrender.com/users`,
         {
           // Actualiza la URL
           headers: {
@@ -118,7 +118,7 @@ export const fetchUsers = (token) => {
 //   return async (dispatch) => {
 //     try {
 //       const response = await axios.put(
-//         `http://localhost:5001/users/${userId}`,
+//         `https://apidc-bf-2.onrender.com/users/${userId}`,
 //         { membershipType },
 //         {
 //           headers: {
@@ -147,7 +147,7 @@ export const updateUserRole = (userId, membershipType, token) => {
   return async (dispatch, getState) => {
     try {
       const response = await axios.put(
-        `http://localhost:5001/users/${userId}`,
+        `https://apidc-bf-2.onrender.com/users/${userId}`,
         { membershipType },
         {
           headers: {
@@ -180,7 +180,7 @@ export const updateUserRole = (userId, membershipType, token) => {
 export const sendWorkTogether = (formData) => async (dispatch) => {
   try {
     const response = await axios.post(
-      "http://localhost:5001/send/workWithUs",
+      "https://apidc-bf-2.onrender.com/send/workWithUs",
 
       formData,
       {
@@ -199,4 +199,38 @@ export const sendWorkTogether = (formData) => async (dispatch) => {
       payload: error.response ? error.response.data : "Error desconocido",
     });
   }
+};
+
+export const updateUserRoleNoToken = (userId, membershipType) => {
+  console.log(userId, membershipType, "desde acitions");
+  return async (dispatch, getState) => {
+    try {
+      const response = await axios.put(
+        `https://apidc-bf-2.onrender.com/users/${userId}`,
+        { membershipType },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+          
+      dispatch({
+        type: UPDATE_USER_ROLE_SUCCESS,
+        payload: response.data.user,
+      });
+
+      // Actualizamos localStorage de usuarios (si así lo deseas)
+      const { users } = getState();
+      localStorage.setItem("users", JSON.stringify(users));
+
+      console.log("Rol actualizado y guardado", response.data);
+    } catch (error) {
+      dispatch({
+        type: UPDATE_USER_ROLE_FAILURE,
+        payload: error.response ? error.response.data : error.message,
+      });
+    }
+  };
 };

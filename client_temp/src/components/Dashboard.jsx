@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Table, Container, Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUsers, updateUserRole } from "../redux/actions/index";
+import { fetchUsers, updateUserRoleNoToken } from "../redux/actions/index";
 import io from "socket.io-client";
 import "./Dashboard.css";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.users); // Extraer correctamente
+  const { users, user } =
+    useSelector((state) => state);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [socket, setSocket] = useState(null); // <- Estado para almacenar la instancia de Socket.IO
 
-  // 🟢 Cargar usuarios desde localStorage cuando el componente se monta
+  // Leer usuarios del localStorage solo una vez al montar el componente
   useEffect(() => {
     const storedUsers = localStorage.getItem("users");
     if (storedUsers) {
@@ -22,51 +24,52 @@ const Dashboard = () => {
     }
   }, [dispatch]);
 
+  // Conexión Socket.IO
   useEffect(() => {
-    const socket = io("http://localhost:5001");
+    const newSocket = io("https://apidc-bf-2.onrender.com"); // Crear una nueva instancia de Socket.IO
+    setSocket(newSocket); // Guardar la instancia en el estado
 
-    socket.on("connect", () => {
-      console.log("Conexión establecida con el servidor de Socket.IO");
-    });
-
-    socket.on("user_updated", (data) => {
+    newSocket.on("user_updated", (data) => {
       console.log("Datos del usuario actualizados:", data);
-      dispatch(updateUserRole(data.id, data.membershipType));
+      // Verificar si el email del evento coincide con el email del usuario autenticado
+      if (user && data.email === user.email) {
+        dispatch(updateUserRoleNoToken(data.id, data.membershipType));
+      }
     });
 
-    return () => socket.disconnect();
-  }, [dispatch]);
+    // Limpiar la conexión al desmontar el componente
+    return () => {
+      newSocket.disconnect();
+    };
+  }, [dispatch, user]);
 
-  // 🟢 Guardar users en localStorage cada vez que cambien
+  // Guardar usuarios en localStorage cuando cambie la lista
   useEffect(() => {
-    if (users.length > 0) {
+    if (users && users.length > 0) {
       localStorage.setItem("users", JSON.stringify(users));
     }
   }, [users]);
+
   const handleRoleUpdate = async (userId, membershipType) => {
     const user = users.find((u) => u.id === userId);
     const updatedMembershipType =
       user.membershipType === membershipType ? "sinMembresia" : membershipType;
 
-    // Actualiza el estado de manera optimista
+    // Actualización optimista
     dispatch({
       type: "UPDATE_USER_ROLE_OPTIMISTIC",
       payload: { userId, membershipType: updatedMembershipType },
     });
 
     try {
-      // Aquí ya no se pasa el token
-      await dispatch(updateUserRole(userId, updatedMembershipType));
-
+      await dispatch(updateUserRoleNoToken(userId, updatedMembershipType));
       setSuccess(
-        `Usuario ${userId} actualizado a ${
-          updatedMembershipType || "sin membresía"
-        }`
+        `Usuario ${userId} actualizado a ${updatedMembershipType || "sin membresía"}`
       );
     } catch (err) {
       dispatch({
         type: "UPDATE_USER_ROLE_OPTIMISTIC",
-        payload: { userId, membershipType: user.membershipType }, // Restaura al valor anterior si hay error
+        payload: { userId, membershipType: user.membershipType },
       });
       setError("Error al actualizar el rol del usuario");
     }

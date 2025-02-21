@@ -20,7 +20,7 @@
 
 /* Navbar negro opaco */
 .navbar {
-  background-color: rgba(0, 0, 0, 0.9) !important;
+  background-color: rgba(86, 150, 68, 0.9) !important;
   padding: 0.5rem 1rem;
 }
 
@@ -40,12 +40,10 @@
 }
 
 .breadcrumbs li a {
-
   text-decoration: none;
 }
 
 .breadcrumbs li a:hover {
-
   text-decoration: underline;
 }
 
@@ -75,143 +73,144 @@
 
 .breadcrumbs {
   position: fixed;
-  top: 68px; /* Ajusta según la altura de tu navbar */
+  top: 68px; 
   width: 100%;
+  padding-bottom: 0px;
   z-index: 1040;
   transition: opacity 0.5s ease, transform 0.5s ease;
-  background-color: rgba(255, 255, 255, 0.70); /* Fondo más opaco */
+  background-color:  rgba(123, 161, 45, 0.68);
   opacity: 1; /* Por defecto, visible */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(123, 161, 45, 0.7)
 }
+
 
 .breadcrumbs.scroll-hide {
   opacity: 0; /* Desaparece completamente */
-  transform: translateY(-20px); /* Opcional: añade un efecto de desplazamiento */
+  transform: translateY(
+    -20px
+  ); /* Opcional: añade un efecto de desplazamiento */
 }
-
 
 /* ------------------------------------------ */
 
 /* Navbar negro transparente */
 .navbar {
-    background-color: rgba(0, 0, 0, 0.7) !important;
-    transition: opacity 0.5s ease, background-color 0.5s ease;
-    padding:0;
+  background-color: rgba(0, 0, 0, 0.7) !important;
+  transition: opacity 0.5s ease, background-color 0.5s ease;
+  padding: 0;
+}
+
+/* Ocultar y mostrar el navbar al hacer scroll */
+.navbar.scroll-hide {
+  opacity: 0;
+}
+
+.navbar.scroll-show {
+  opacity: 1;
+}
+
+/* Estilos para los enlaces del navbar */
+.nav-link {
+  color: #ffffff !important;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.8rem;
+  position: relative;
+  padding: 0.5rem 1rem;
+}
+
+/* Subrayado blanco al hacer hover */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: #ffffff;
+  bottom: 0;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Cambia el color al hacer hover */
+.nav-link:hover {
+  color: #ffffff !important;
+}
+
+/* Estilos para la imagen de perfil */
+.profile-picture {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.user-name {
+  color: #ffffff;
+  font-weight: bold;
+}
+
+/* Ajustes para los elementos de navegación */
+.navbar-nav {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end; /* Alinea los enlaces a la derecha */
+  align-items: center;
+  width: 100%;
+}
+
+.basic-navbar-nav-autentication {
+  display: flex;
+  gap: 2rem;
+  justify-content: center; /* Alinea los enlaces a la derecha */
+  align-items: center;
+  width: 100%;
+}
+
+.basic-navbar-nav-autentication-2 {
+  display: flex;
+  gap: 2rem;
+  justify-content: right; /* Alinea los enlaces a la derecha */
+  align-items: center;
+  width: 100%;
+}
+
+.basic-navbar-nav-autentication-left {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: left; /* Alinea los enlaces a la derecha */
+  align-items: center;
+  width: 100%;
+}
+.navbar-brand {
+  flex-shrink: 0; /* Evita que el logo se redimensione */
+  margin-right: auto; /* Alinea el logo a la izquierda */
+}
+
+/* Alineación del botón de menú hamburguesa */
+.navbar-toggler {
+  border: none;
+}
+
+/* Personalización del icono del menú hamburguesa */
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.5%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/* Estilos responsivos */
+@media (max-width: 991px) {
+  .navbar-nav .nav-link {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+    text-align: center;
   }
-  
-  /* Ocultar y mostrar el navbar al hacer scroll */
-  .navbar.scroll-hide {
-    opacity: 0;
-  }
-  
-  .navbar.scroll-show {
-    opacity: 1;
-  }
-  
-  /* Estilos para los enlaces del navbar */
-  .nav-link {
-    color: #ffffff !important;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 0.8rem;
-    position: relative;
-    padding: 0.5rem 1rem;
-  }
-  
-  /* Subrayado blanco al hacer hover */
-  .nav-link::after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    background-color: #ffffff;
-    bottom: 0;
-    left: 0;
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.3s ease;
-  }
-  
-  .nav-link:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;
-  }
-  
-  /* Cambia el color al hacer hover */
-  .nav-link:hover {
-    color: #ffffff !important;
-  }
-  
-  /* Estilos para la imagen de perfil */
-  .profile-picture {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-  }
-  
-  .user-name {
-    color: #ffffff;
-    font-weight: bold;
-  }
-  
-  /* Ajustes para los elementos de navegación */
+
   .navbar-nav {
-    display: flex;
-    gap:.5rem;
-    justify-content: flex-end; /* Alinea los enlaces a la derecha */
     align-items: center;
-    width: 100%;
   }
-  
-  .basic-navbar-nav-autentication{
-    display: flex;
-    gap: 2rem;
-    justify-content: center; /* Alinea los enlaces a la derecha */
-    align-items: center;
-    width: 100%;
-  }
-
-    
-  .basic-navbar-nav-autentication-2{
-    display: flex;
-    gap: 2rem;
-    justify-content: right; /* Alinea los enlaces a la derecha */
-    align-items: center;
-    width: 100%;
-  }
-
-  .basic-navbar-nav-autentication-left{
-    display: flex;
-    gap: .5rem;
-    justify-content: left; /* Alinea los enlaces a la derecha */
-    align-items: center;
-    width: 100%;
-  }
-  .navbar-brand {
-    flex-shrink: 0; /* Evita que el logo se redimensione */
-    margin-right: auto; /* Alinea el logo a la izquierda */
-  }
-  
-  /* Alineación del botón de menú hamburguesa */
-  .navbar-toggler {
-    border: none;
-  }
-  
-  /* Personalización del icono del menú hamburguesa */
-  .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.5%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-  }
-  
-  /* Estilos responsivos */
-  @media (max-width: 991px) {
-    .navbar-nav .nav-link {
-      margin-right: 0;
-      margin-bottom: 0.5rem;
-      text-align: center;
-    }
-  
-    .navbar-nav {
-      align-items: center;
-    }
-  }
-  
+}

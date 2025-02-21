@@ -8,6 +8,7 @@ import BreadCrumRoutes from "./BreadCrumbRoutes";
 import ProductsSection from "./ProductsSection";
 import LoginModal from "./LoginModal";
 import $ from "jquery";
+import io from "socket.io-client";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./NavBar.css";
 
@@ -143,6 +144,30 @@ const NavBar = () => {
     userFromRedux?.membershipType &&
     (userFromRedux.membershipType === "premium" ||
       userFromRedux.membershipType === "gestor");
+  const [socket, setSocket] = useState(null);
+
+  // useEffect(() => {
+  //   // Crear la conexión de Socket.IO una sola vez
+  //   const newSocket = io("http://localhost:5001");
+  //   setSocket(newSocket);
+
+  //   // Escuchar eventos de Socket.IO
+  //   newSocket.on("user_updated", (data) => {
+  //     console.log("Datos del usuario actualizados:", data);
+  //   });
+
+  //   // Limpiar la conexión al desmontar el componente
+  //   return () => newSocket.disconnect();
+  // }, []);
+
+  const pruebadeSockerFunction = () => {
+    if (socket) {
+      // Emitir un evento de prueba al servidor
+      socket.emit("prueba_evento", { message: "Hola desde el cliente" });
+    } else {
+      console.error("Socket no está conectado");
+    }
+  };
 
   return (
     <>
@@ -197,9 +222,6 @@ const NavBar = () => {
               <Link to="/shop" className="nav-link">
                 Tienda
               </Link>
-
-
-              
             </Nav>
             {/* <button
               onClick={() => console.log(userFromRedux, "QUE ME LLEGA A VER")}
@@ -207,8 +229,12 @@ const NavBar = () => {
               BOTONNN
             </button> */}
           </Navbar.Collapse>
-          {/* <button onClick={() => console.log(users, userFromRedux)}>
+          {/* 
+          <button onClick={() => console.log(users, userFromRedux)}>
             TIPO MEMBRESIA
+          </button> */}
+          {/* <button onClick={() => pruebadeSockerFunction()}>
+            Prueba de Socket
           </button> */}
           <Navbar.Collapse id="basic-navbar-nav-autentication">
             <Nav className="basic-navbar-nav-autentication-2">

@@ -3,9 +3,9 @@ import emailjs from "emailjs-com";
 import { useSelector } from "react-redux";
 import { Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
 import ButtonComponent from "./Button";
 import "./NewsLetterBanner.css";
+import { FaRegCheckCircle } from "react-icons/fa";
 
 export default function NewsletterBanner() {
   const userFromRedux = useSelector((state) => state.user);
@@ -50,16 +50,22 @@ export default function NewsletterBanner() {
       .send(
         "service_n7iprht",
         "template_rqqmprl",
-        { from_email: formData.from_email, to_name: emailRecipient, message: `Email enviado para suscripción al newsletter: ${formData.from_email}` },
+        {
+          from_email: formData.from_email,
+          to_name: emailRecipient,
+          message: `Email enviado para suscripción al newsletter: ${formData.from_email}`,
+        },
         "CfDbaVqLjMAHH6wYo"
       )
       .then(
         () => {
-          setStatus("Mensaje enviado correctamente");
+          setStatus(
+            "¡Gracias por suscribirte! A partir de ahora vas a recibir nuestras novedades en tu email."
+          );
           setStatusVariant("success");
           setFormData({ from_email: "" });
           setErrors(false);
-          Swal.fire("¡Gracias! El e-mail fue enviado con éxito.");
+          // Swal.fire("¡Gracias por suscribirte! A partir de ahora vas a recibir nuestras novedades en tu email.");
         },
         () => {
           setStatus("Hubo un error al enviar el mensaje");
@@ -95,9 +101,12 @@ export default function NewsletterBanner() {
 
       {/* Mensajes de estado (centrados debajo del formulario) */}
       {status && (
-        <Alert variant={statusVariant} className="status-message">
-          {status}
-        </Alert>
+        <>
+          
+          <Alert variant={statusVariant} className="status-message">
+          <FaRegCheckCircle size={15}/> {status}
+          </Alert>
+        </>
       )}
 
       {errors && (

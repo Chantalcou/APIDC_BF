@@ -1,16 +1,16 @@
 /* Estilo principal para la sección */
 .membership-section {
   text-align: center;
-  margin-top: 110px;
+  margin-top: 100px;
   padding: 50px 20px;
   background-color: rgba(0, 0, 0, 0.9);
 }
 
 /* Estilo para el título de la sección */
-.section-title {
+.section-title_title_membership {
   font-size: 2rem;
   margin-bottom: 10px;
-  color: #0a9d6d;
+  color: #ffffff;
   font-weight: 600;
   letter-spacing: 0.5px;
 }
@@ -488,4 +488,68 @@
   display: block;
   margin-bottom: 10px;
   text-transform: uppercase;
+}
+
+
+/* Tabla en tamaño responsive */
+/* Estilo para ocultar la tabla en pantallas pequeñas */
+/* Ocultar la tabla en dispositivos móviles */
+@media (max-width: 768px) {
+  .benefits-table-container {
+    display: none; /* Oculta la tabla en móviles */
+  }
+}/* Cards de la parte inferior (distribuidas en tres columnas) */
+.cards-container {
+  display: flex; /* Usamos flexbox para las cards */
+  justify-content: space-around; /* Alineamos las cards con espacio entre ellas */
+  margin-top: 40px;
+  gap: 20px; /* Añadido para separar las cards entre sí */
+  flex-wrap: wrap; /* Permite que las cards se acomoden en múltiples filas si es necesario */
+}
+
+/* Card común */
+/* socio adherente */
+.card-first, .card {
+  display: flex;
+  flex-direction: column; /* Asegura que los elementos estén en columna */
+  justify-content: space-between; /* Esto asegura que las cards se estiren para ocupar el espacio */
+  align-items: center;
+  padding: 20px;
+  width: 30%; /* Tres cards en una fila */
+  border: 0.1rem solid rgb(255, 255, 255) !important;
+  border-radius: 10px;
+  text-align: center;
+  background: linear-gradient(
+      -45deg,
+      rgba(23, 23, 23, 0.5) -32.32%,
+      rgba(25, 25, 25, 0.5) 67.88%,
+      rgba(94, 239, 159, 0.5) 109.4%,
+      rgba(28, 107, 27, 0.5) 137.63%
+    ),
+    rgba(17, 17, 17, 0.07); /* Gradiente aplicado */
+  box-shadow: 0px 4px 8px rgba(34, 13, 13, 0.1);
+}
+
+/* Media query para pantallas pequeñas (por debajo de 768px) */
+@media (max-width: 768px) {
+  .cards-container {
+    flex-direction: column; /* Cambia la dirección de las cards a columna */
+    align-items: center; /* Centra las cards */
+  }
+
+  .card-first, .card {
+    width: 80%; /* Las cards ocupan el 80% del ancho de la pantalla */
+    margin-bottom: 20px; /* Separación entre las cards */
+  }
+}
+
+@media (max-width: 480px) {
+  .cards-container {
+    flex-direction: column; /* En pantallas muy pequeñas, las cards se siguen mostrando en columna */
+    align-items: center;
+  }
+
+  .card-first, .card {
+    width: 90%; /* Las cards ocupan un mayor porcentaje del ancho en pantallas pequeñas */
+  }
 }

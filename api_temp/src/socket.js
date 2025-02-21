@@ -5,18 +5,16 @@ let io;
 const initialize = (httpServer) => {
   io = socketIo(httpServer, {
     cors: {
-      origin: "http://localhost:3000", // Cambia esto según tu frontend
+      origin: "https://apidc-bf-2.onrender.com",
       methods: ["GET", "POST"],
       allowedHeaders: ["Content-Type"],
-      credentials: true, // Permite que se envíen cookies
+      credentials: true,
     },
   });
 
   io.on("connection", (socket) => {
     console.log("Nuevo cliente conectado", socket.id);
 
-
-    
     // Escuchar evento de desconexión
     socket.on("disconnect", () => {
       console.log("Cliente desconectado");

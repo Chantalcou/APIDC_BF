@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import PaymentShipping from './PaymentShipping'
 import "./MembershipComponent.css"; // Archivo CSS
 
 const MembershipComponent = () => {
@@ -46,7 +47,7 @@ const MembershipComponent = () => {
     <>
       {/* MEMBERSHIP SECTION */}
       <div className="membership-section">
-        <h1 className="section-title">🌱 Tu Camino con APIDC</h1>
+        <h1 className="section-title_title_membership">🌱 Tu Camino con APIDC</h1>
         <p className="section-subtitle">
           Elegí el plan que impulse tu bienestar.
         </p>
@@ -141,6 +142,7 @@ const MembershipComponent = () => {
             </button>
           </div>
         </div>
+        <PaymentShipping/>
         <div className="content-whatsApp">
           <p className="section-subtitle">
             ¿Tenés dudas? <strong>¡Chatea con nosotros!</strong>
