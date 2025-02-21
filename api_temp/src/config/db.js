@@ -33,12 +33,16 @@
 const { Sequelize } = require("sequelize");
 require("dotenv").config();
 
-// Usar DATABASE_URL de las variables de entorno
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
   dialect: "postgres",
   logging: false,
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false // Necesario para Render
+    }
+  } // Cierre de dialectOptions
 });
-
 // Probar la conexión
 async function testConnection() {
   try {
