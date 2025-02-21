@@ -200,37 +200,3 @@ export const sendWorkTogether = (formData) => async (dispatch) => {
     });
   }
 };
-
-// export const updateUserRoleNoToken = (userId, membershipType) => {
-//   console.log(userId, membershipType, "desde acitions");
-//   return async (dispatch, getState) => {
-//     try {
-//       const response = await axios.put(
-//         `https://apidc-bf-2.onrender.com/users/${userId}`,
-//         { membershipType },
-//         {
-//           headers: {
-//             "Content-Type": "application/json",
-//           },
-//         }
-//       );
-
-          
-//       dispatch({
-//         type: UPDATE_USER_ROLE_SUCCESS,
-//         payload: response.data.user,
-//       });
-
-//       // Actualizamos localStorage de usuarios (si así lo deseas)
-//       const { users } = getState();
-//       localStorage.setItem("users", JSON.stringify(users));
-
-//       console.log("Rol actualizado y guardado", response.data);
-//     } catch (error) {
-//       dispatch({
-//         type: UPDATE_USER_ROLE_FAILURE,
-//         payload: error.response ? error.response.data : error.message,
-//       });
-//     }
-//   };
-// };
