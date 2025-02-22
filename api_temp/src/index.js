@@ -2,15 +2,9 @@ require("dotenv").config();
 const cors = require("cors");
 const { json } = require("express");
 const authRoutes = require("./routes/authRoutes");
-const pool = require("./config/db");
 const sequelize = require("./config/db");
 
-if (
-  !process.env.DB_USER ||
-  !process.env.DB_NAME ||
-  !process.env.DB_PASSWORD ||
-  !process.env.PORT
-) {
+if (!process.env.DATABASE_URL || !process.env.PORT) {
   throw new Error("Faltan variables de entorno críticas");
 }
 
@@ -40,18 +34,14 @@ app.use((err, req, res, next) => {
     .json({ error: "Ha ocurrido un error interno en el servidor" });
 });
 
-// sequielize conexion
-sequelize
-  .query("SELECT NOW()")
-  .then(([results, metadata]) => {
-    console.log("Conexión a la base de datos PostgreSQL exitosa");
-  })
-  .catch((err) => {
-    console.error("Error al conectarse a la base de datos:", err);
-  });
+// Verificación de conexión a la base de datos
+sequelize.authenticate()
+  .then(() => console.log("✅ Conexión a PostgreSQL exitosa"))
+  .catch(err => console.error("❌ Error de conexión:", err));
+
 // Iniciar el servidor
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
 
-sequelize.sync({ force:false });
+sequelize.sync({ force: false });
