@@ -1,25 +1,20 @@
-// config/database.js
 const { Sequelize } = require("sequelize");
 require("dotenv").config();
 
-console.log("DB_PASSWORD:", process.env.DB_PASSWORD);
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
   dialect: "postgres",
   logging: false,
-  ssl: {
-    rejectUnauthorized: false,
-  },
-});
-// Probar la conexión
-async function testConnection() {
-  try {
-    await sequelize.authenticate();
-    console.log("Conexión a la base de datos establecida correctamente.");
-  } catch (error) {
-    console.error("No se pudo conectar a la base de datos:", error);
+  dialectOptions: {
+    ssl: { // Configura SSL aquí
+      require: true,
+      rejectUnauthorized: false // Obligatorio para Render
+    }
   }
-}
+});
 
-testConnection();
+// Verificación de conexión
+sequelize.authenticate()
+  .then(() => console.log("✅ Conexión a PostgreSQL exitosa"))
+  .catch(err => console.error("❌ Error de conexión:", err));
 
 module.exports = sequelize;
