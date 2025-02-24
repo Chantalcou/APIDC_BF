@@ -4,15 +4,13 @@ const { json } = require("express");
 const authRoutes = require("./routes/authRoutes");
 const sequelize = require("./config/db");
 
-// if (!process.env.DATABASE_URL || !process.env.PORT) {
-//   throw new Error("Faltan variables de entorno críticas");
-// }
-
 const express = require("express");
+const path = require("path");  // Para servir archivos estáticos
 
 const app = express();
 const PORT = process.env.PORT || 10000;
 
+// Configuración CORS
 app.use(
   cors({
     origin: "https://apidc-bf-2.onrender.com/",
@@ -21,9 +19,10 @@ app.use(
   })
 );
 
-app.use(json()); // Para manejar JSON sin usar bodyParser
+app.use(json()); // Para manejar JSON
 
-// Rutas
+// Sirve archivos estáticos de la carpeta build (frontend)
+app.use(express.static(path.join(__dirname, "build")));
 
 // Ruta básica de verificación
 app.get("/", (req, res) => {
@@ -34,7 +33,12 @@ app.get("/", (req, res) => {
 });
 
 // Rutas de autenticación
-app.use("/auth", authRoutes); 
+app.use("/auth", authRoutes);
+
+// Ruta para redirigir a frontend
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 
 // Middleware global para manejo de errores
 app.use((err, req, res, next) => {
