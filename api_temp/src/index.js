@@ -4,9 +4,9 @@ const { json } = require("express");
 const authRoutes = require("./routes/authRoutes");
 const sequelize = require("./config/db");
 
-if (!process.env.DATABASE_URL || !process.env.PORT) {
-  throw new Error("Faltan variables de entorno críticas");
-}
+// if (!process.env.DATABASE_URL || !process.env.PORT) {
+//   throw new Error("Faltan variables de entorno críticas");
+// }
 
 const express = require("express");
 
