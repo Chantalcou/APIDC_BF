@@ -19,10 +19,12 @@ app.use(
 );
 
 app.use(json()); // Para manejar JSON sin usar bodyParser
-app.use(express.static(path.join(__dirname, "client_temp/build")));
-// Ruta para todas las demás solicitudes (SPA)
+// Ruta CORRECTA para archivos estáticos
+app.use(express.static(path.join(__dirname, "../../client_temp/build")));
+
+// Ruta catch-all
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client_temp/build", "index.html"));
+  res.sendFile(path.join(__dirname, "../../client_temp/build", "index.html"));
 });
 
 // Rutas
