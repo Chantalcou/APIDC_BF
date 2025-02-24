@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 10000;
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://apidc-bf-2.onrender.com/",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
@@ -35,9 +35,10 @@ app.use((err, req, res, next) => {
 });
 
 // Verificación de conexión a la base de datos
-sequelize.authenticate()
+sequelize
+  .authenticate()
   .then(() => console.log("✅ Conexión a PostgreSQL exitosa"))
-  .catch(err => console.error("❌ Error de conexión:", err));
+  .catch((err) => console.error("❌ Error de conexión:", err));
 
 // Iniciar el servidor
 app.listen(PORT, () => {
