@@ -22,7 +22,7 @@ app.use(json()); // Para manejar JSON sin usar bodyParser
 app.use(express.static(path.join(__dirname, "client_temp/build")));
 // Ruta para todas las demás solicitudes (SPA)
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "frontend/build", "index.html"));
+  res.sendFile(path.join(__dirname, "client_temp/build", "index.html"));
 });
 
 // Rutas
