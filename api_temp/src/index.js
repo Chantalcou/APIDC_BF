@@ -1,3 +1,4 @@
+const path = require("path");
 require("dotenv").config();
 const cors = require("cors");
 const { json } = require("express");
@@ -9,16 +10,20 @@ const express = require("express");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-
 app.use(
   cors({
-    origin: "https://apidc-bf.onrender.com/",
+    origin: "https://apidc-bf.onrender.com",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
 
 app.use(json()); // Para manejar JSON sin usar bodyParser
+app.use(express.static(path.join(__dirname, "client_temp/build")));
+// Ruta para todas las demás solicitudes (SPA)
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend/build", "index.html"));
+});
 
 // Rutas
 app.use("/", authRoutes);
