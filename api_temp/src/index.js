@@ -24,7 +24,17 @@ app.use(
 app.use(json()); // Para manejar JSON sin usar bodyParser
 
 // Rutas
-app.use("/", authRoutes);
+
+// Ruta básica de verificación
+app.get("/", (req, res) => {
+  res.status(200).json({
+    message: "API de APIDC funcionando correctamente",
+    status: "OK"
+  });
+});
+
+// Rutas de autenticación
+app.use("/auth", authRoutes); 
 
 // Middleware global para manejo de errores
 app.use((err, req, res, next) => {
