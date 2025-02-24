@@ -37,6 +37,8 @@ const NavBar = () => {
   const [showModal, setShowModal] = useState(false);
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
+
+
   useEffect(() => {
     const fetchUserData = async () => {
       if (isAuthenticated && user) {
@@ -276,7 +278,7 @@ const NavBar = () => {
           <BreadCrumRoutes />
         </Container>
       </div>
-      <LoginModal show={showModal} handleClose={handleCloseModal} />
+      {/* <LoginModal show={showModal} handleClose={handleCloseModal} /> */}
     </>
   );
 };
