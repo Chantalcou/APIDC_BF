@@ -512,23 +512,23 @@ const Home = () => {
             loading="lazy"
           />
         </div>
-        <section id="ley" class="ley-container">
+        <section id="ley" className="ley-container">
           <h2 style={{ color: "#0a9d6d" }}>Conoce más sobre la Ley 27.350</h2>
-          <p class="ley-intro">
+          <p className="ley-intro">
             Sancionada en 2017, esta ley regula la investigación y el acceso al
             cannabis medicinal en Argentina, garantizando su uso seguro y
             terapéutico.
           </p>
 
-          <div class="ley-grid">
-            <div class="ley-card">
+          <div className="ley-grid">
+            <div className="ley-card">
               <h3>🔬 Investigación científica</h3>
               <p>
                 Impulsa estudios clínicos sobre los usos medicinales del
                 cannabis.
               </p>
             </div>
-            <div class="ley-card">
+            <div className="ley-card">
               <h3>⚕️ Acceso terapéutico</h3>
               <p>
                 Permite tratamientos con cannabis para pacientes con patologías

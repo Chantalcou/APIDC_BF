@@ -278,7 +278,7 @@ const NavBar = () => {
           <BreadCrumRoutes />
         </Container>
       </div>
-      {/* <LoginModal show={showModal} handleClose={handleCloseModal} /> */}
+      <LoginModal show={showModal} handleClose={handleCloseModal} />
     </>
   );
 };

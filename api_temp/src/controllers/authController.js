@@ -203,7 +203,6 @@ const updateUserRole = async (req, res) => {
     //   membershipType: user.membershipType,
     //   email: user.email
     // });
-    
 
     return res.status(200).json({ message: "Rol actualizado con éxito", user });
   } catch (error) {
@@ -211,7 +210,6 @@ const updateUserRole = async (req, res) => {
     return res.status(500).json({ message: "Error al actualizar el rol" });
   }
 };
-
 
 module.exports = {
   registerUser,
