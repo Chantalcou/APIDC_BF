@@ -11,7 +11,7 @@ export const registerUser = (userData, token) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(
-        "https://apidc-bf.onrender.com/register",
+        "http://localhost:5001/register",
         {
           email: userData.email,
           name: userData.name,
@@ -58,7 +58,7 @@ export const formInfo = (formData) => async (dispatch) => {
   try {
     // Enviar los datos al backend
     const response = await axios.post(
-      "https://apidc-bf.onrender.com/send/admin",
+      "http://localhost:5001/send/admin",
 
       formData,
       {
@@ -87,8 +87,8 @@ export const fetchUsers = (token) => {
   return async (dispatch) => {
     try {
       const response = await axios.get(
-        // "https://apidc-bf.onrender.com/users",
-        `https://apidc-bf.onrender.com/users`,
+        // "http://localhost:5001/users",
+        `http://localhost:5001/users`,
         {
           // Actualiza la URL
           headers: {
@@ -118,7 +118,7 @@ export const fetchUsers = (token) => {
 //   return async (dispatch) => {
 //     try {
 //       const response = await axios.put(
-//         `https://apidc-bf.onrender.com/users/${userId}`,
+//         `http://localhost:5001/users/${userId}`,
 //         { membershipType },
 //         {
 //           headers: {
@@ -147,7 +147,7 @@ export const updateUserRole = (userId, membershipType, token) => {
   return async (dispatch, getState) => {
     try {
       const response = await axios.put(
-        `https://apidc-bf.onrender.com/users/${userId}`,
+        `http://localhost:5001/users/${userId}`,
         { membershipType },
         {
           headers: {
@@ -180,7 +180,7 @@ export const updateUserRole = (userId, membershipType, token) => {
 export const sendWorkTogether = (formData) => async (dispatch) => {
   try {
     const response = await axios.post(
-      "https://apidc-bf.onrender.com/send/workWithUs",
+      "http://localhost:5001/send/workWithUs",
 
       formData,
       {

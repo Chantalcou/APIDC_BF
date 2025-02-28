@@ -6,8 +6,7 @@
 }
 
 body {
-  /* font-family: "Roboto", sans-serif; */
-  font-family: "Inconsolata" !important;
+  font-family: "Roboto", sans-serif;
   margin: 0;
   box-sizing: border-box;
   background-color: #f8f9fa;
@@ -85,11 +84,15 @@ body {
   justify-content: center;
   align-items: center;
 }
-
 .welcome-name {
-  color: #fff;
+  color: #f7d046; /* Color que propusiste */
+  font-size: 2.8rem; /* Tamaño grande para impacto */
+  text-align: center;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Sutil sombra para legibilidad */
+  letter-spacing: -0.05em; /* Espaciado compacto moderno */
+  margin: 1.5rem 0;
+  font-weight: 100; /* Semi-bold para mejor legibilidad */
 }
-
 .bg-video_top {
   width: 100%;
   height: 100%;
@@ -157,99 +160,195 @@ body {
 .btn-asociarte-custom_2 {
   margin-top: 20px;
 }
-/* 
-.asociarme-section{
-  font-size: "2.5rem";
-   font-weight: "bold" ;
-  color:#fff
-} */
-
-/* .bg-banner .bg-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-} */
-/* opacity: 0.6; */
-/* z-index: -1; */
-
-/* .bg-banner .d-flex {
-  z-index: 1;
-} */
 
 .content-cards {
   margin-bottom: 200px;
 }
-/* present section */
 
+
+/* Present */
 .present-section {
+  cursor:pointer;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: url("https://res.cloudinary.com/dqgjcfosx/image/upload/v1740758166/Dise%C3%B1o_sin_t%C3%ADtulo_6_t0c6jn.png") 
+    no-repeat center/cover;
   display: flex;
-  flex-direction: row; /* Cambia a columna en pantallas pequeñas */
-  align-items: center; /* Centra el contenido */
-  justify-content: center;
-  padding: 50px;
-
-  background-color: #f5f5f5;
-}
-
-/* Contenido textual a la izquierda */
-.present-content {
-  flex: 1; /* Ocupa la mitad de la pantalla */
-  padding: 20px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* Centra los textos verticalmente */
-}
-
-/* Estilo para la imagen a la derecha */
-.present-image {
-  flex: 1; /* Ocupa la otra mitad de la pantalla */
-  text-align: center;
-  display: flex;
-  justify-content: center;
   align-items: center;
-  margin-top: 20px;
+  justify-content: center;
+  text-align: center;
+  transition: background-image 0.5s ease-in-out; /* Transición suave */
 }
 
-.present-image img {
-  max-width: 100%;
-  height: 100%; /* Asegura que la imagen tenga la misma altura que el texto */
-  object-fit: cover; /* Asegura que la imagen cubra completamente el área */
-  border-radius: 8px;
+.present-section:hover {
+  background: url("https://res.cloudinary.com/dqgjcfosx/image/upload/v1740671754/Dise%C3%B1o_sin_t%C3%ADtulo_4_jikuc2.png") 
+    no-repeat center/cover;
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+}
+
+.content h2 {
+  font-size: 2.5rem;
+  color: #0a9d6d;
+  font-weight: 700;
+}
+
+.content p {
+  font-size: 1rem;
+  color: #333;
+  margin-top: 10px;
+}
+
+.btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #0a9d6d;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: #087f58;
 }
 
 /* about section */
 .content-about_section {
   width: 100vw;
+  background-color: white;
   padding: 0 20px;
+  padding-top: 50px;
 }
 .content-about_section p {
-  text-align: justify;
+  text-align: -webkit-center;
+  font-size: 16px;
 }
+
+/* Estilos profesionales */
 .about-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.about-hero {
+  position: relative;
+  height: 70vh;
+  min-height: 600px;
   display: flex;
-  justify-content: center;
   align-items: center;
-  text-align: center;
+  background: url("https://res.cloudinary.com/dqgjcfosx/image/upload/v1740660333/apidc-logo_hz26kf_1_cihpm6.png");
+  background-size: cover;
+  background-position: center top;
+  padding: 4rem 0;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-}
-.container-fluid {
-  padding: 0;
+.hero-content {
+  max-width: 800px;
   margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 2;
 }
 
-.present-section img {
-  width: 100%;
-  height: auto;
-  height: 60vh;
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  margin-bottom: 1.5rem;
 }
+
+.hero-text {
+  font-size: 1.5rem;
+  color: #fff;
+  opacity: 0.9;
+  margin-bottom: 2rem;
+}
+
+.about-content {
+  padding: 6rem 0;
+  background: #f9fbfa;
+}
+
+.about-image-wrap {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  transform: rotate(-2deg);
+  transition: transform 0.3s ease;
+}
+
+.about-image-wrap:hover {
+  transform: rotate(0deg);
+}
+
+.about-image {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  color: #0a9d6d;
+  margin-bottom: 1.5rem;
+  line-height: 1.3;
+}
+
+.section-description {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #4a5568;
+  margin-bottom: 2rem;
+}
+
+.cta-button {
+  background: #0a9d6d;
+  color: #fff;
+  padding: 1rem 2.5rem;
+  border-radius: 30px;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(10, 157, 109, 0.3);
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(10, 157, 109, 0.4);
+  background: #088f63;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .hero-text {
+    font-size: 1.2rem;
+  }
+
+  .about-content {
+    padding: 4rem 0;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+}
+
 .bg-video {
   width: 100%;
   height: auto;
@@ -555,3 +654,325 @@ img {
 .contact-card:hover .cta-text {
   color: #087a55;
 }
+
+/* Imagenes con triangulos */
+/* .triangle-normal {
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+} */
+/* Triángulo invertido */
+/* .triangle-inverted {
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+
+} */
+
+
+
+
+/* Fondo general con imagen */
+.about-section {
+  position: relative;
+  /* background: rgba(255, 255, 255, 0.9);  */
+}
+
+.about-section .col-md-4 {
+  /* background: rgba(255, 255, 255, 0.9); */
+  border-radius: 15px;
+  min-height: 650px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30%; /* Asegura que las tres entren en la misma fila */
+}
+
+
+/* Contenedor principal para posicionar elementos */
+.about-section > div {
+  position: relative;
+  z-index: 2; /* Asegura que el contenido esté sobre el fondo */
+}
+
+/* Cards con efecto flotante y transición */
+.about-section .col-md-4 {
+  /* background: rgba(255, 255, 255, 0.9); */
+  border-radius: 15px;
+
+  margin: 15px;
+  /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); */
+  transition: all 0.3s ease;
+  min-height: 650px; /* Altura uniforme */
+  display: flex;
+  flex-direction: column;
+  min-height: 450px;
+  padding: 15px;
+  justify-content: space-between;
+}
+
+
+
+/* Fondo especial para "Nuestro Camino" */
+.about-section .col-md-4:nth-child(2) {
+  background: rgba(123, 161, 45, 0.1);
+  border: 2px solid rgba(123, 161, 45, 0.2);
+}
+
+
+/* Estilo de la imagen circular con animación */
+.circle-image {
+  width: 250px;
+  height: 250px;
+  border: 3px solid #7ba12d;
+  padding: 5px;
+  margin: 0 auto 25px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.4s ease, box-shadow 0.4s ease, filter 0.3s ease;
+}
+
+.circle-image:hover {
+  transform: scale(1.1) rotate(10deg); /* Efecto de zoom y rotación */
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); /* Sombra suave */
+  filter: brightness(1.2); /* Aumenta el brillo de la imagen */
+}
+
+.circle-image:active {
+  transform: scale(1.05) rotate(5deg) blur(2px); /* Efecto de enfoque al hacer click */
+}
+
+@keyframes textEntrance {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.home-title_about_section,
+.about-section p {
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: textEntrance 1s ease-out forwards;
+}
+
+.home-title_about_section {
+  animation-delay: 0.3s;
+}
+
+.about-section p {
+  animation-delay: 0.5s;
+}
+
+/* Efectos de entrada para las tarjetas */
+[data-aos="fade-up"] {
+  transform: translateY(30px);
+  opacity: 0;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+[data-aos="fade-up"].aos-animate {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+[data-aos="fade-down"] {
+  transform: translateY(-30px);
+  opacity: 0;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+[data-aos="fade-down"].aos-animate {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.home-title_about_section {
+  font-size: 1.3rem; /* Reducido de 1.5rem */
+  margin-bottom: 15px;
+}
+
+
+.about-section p {
+  font-size: 0.9rem; /* Reducido de 1rem */
+  line-height: 1.5;
+}
+
+
+  /* Flecha de scroll */
+  .scroll-arrow {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+  }
+
+
+
+  
+/* .triangle-normal_two {
+  clip-path: polygon(20% 100%, 0% 0%, 100% 0%);
+} */
+
+/* Present section */
+.content-present {
+  margin-top: -250px;
+}
+/* about section */
+.content-about_section {
+  width: 100vw;
+  background-color: white;
+  padding: 0 20px;
+  padding-top: 50px;
+}
+.content-about_section p {
+  text-align: center;
+  font-size: 16px;
+}
+
+/* Flexbox Layout para móviles */
+@media (max-width: 767px) {
+  /* Contenedor principal de la sección */
+  .content-about_section {
+    padding: 10px;
+  }
+
+  /* Ajustes de las columnas */
+  .content-about_section .row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  /* Estilo de las imágenes dentro de cada tarjeta */
+  .content-about_section .col-md-4 {
+    width: 100%;
+    text-align: center;
+  }
+
+  .content-about_section .circle-image {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    border-radius: 50%;
+  }
+
+  /* Títulos */
+  .content-about_section .home-title_about_section {
+    font-size: 1.2rem;
+    color: #0a9d6d;
+    margin-top: 1rem;
+  }
+
+  /* Texto de los párrafos */
+  .content-about_section p {
+    font-size: 14px;
+    margin-top: 1rem;
+  }
+
+  /* Ajustes de los márgenes */
+  .content-about_section .col-12 {
+    margin-bottom: 30px;
+  }
+}
+
+/* Estilo general para pantallas más grandes */
+.about-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.about-hero {
+  position: relative;
+  height: 70vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  background: url("https://res.cloudinary.com/dqgjcfosx/image/upload/v1740660333/apidc-logo_hz26kf_1_cihpm6.png");
+  background-size: cover;
+  background-position: center top;
+  padding: 4rem 0;
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  margin-bottom: 1.5rem;
+}
+
+.hero-text {
+  font-size: 1.5rem;
+  color: #fff;
+  opacity: 0.9;
+  margin-bottom: 2rem;
+}
+
+.about-content {
+  padding: 6rem 0;
+  background: #f9fbfa;
+}
+
+.about-image-wrap {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  transform: rotate(-2deg);
+  transition: transform 0.3s ease;
+}
+
+.about-image-wrap:hover {
+  transform: rotate(0deg);
+}
+
+.about-image {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  color: #0a9d6d;
+  margin-bottom: 1.5rem;
+  line-height: 1.3;
+}
+
+.section-description {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #4a5568;
+  margin-bottom: 2rem;
+}
+
+.cta-button {
+  background: #0a9d6d;
+  color: #fff;
+  padding: 1rem 2.5rem;
+  border-radius: 30px;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(10, 157, 109, 0.3);
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(10, 157, 109, 0.4);
+  background: #088f63;
+}
+

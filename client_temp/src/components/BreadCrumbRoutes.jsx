@@ -25,7 +25,7 @@ const Breadcrumbs = () => {
     <nav aria-label="breadcrumbs">
       <ul style={{ display: "flex", listStyle: "none", gap: "8px" }}>
         <li>
-          <Link style={{ color: "#ffff" }} to="/">
+          <Link style={{ color: "#595959" }} to="/">
             Inicio
           </Link>{" "}
           {/* Siempre muestra el enlace a la raíz */}
@@ -35,7 +35,7 @@ const Breadcrumbs = () => {
           return (
             <li key={index}>
               <span style={{ margin: "0 5px" }}>/</span> {/* Separador */}
-              <Link style={{ color: "#ffff" }} to={accumulatedPath}>
+              <Link style={{ color: "#595959" }} to={accumulatedPath}>
                 {breadcrumbRoutes[accumulatedPath] || path}
               </Link>
             </li>

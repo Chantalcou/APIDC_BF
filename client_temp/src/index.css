@@ -1,13 +1,22 @@
+/* 
+<h1 style={{ color: "#0a9d6d" }}>Hola</h1>verde
+<h1 style={{ color: "#FFB74D" }}>Hola</h1>naranja
+<h1 style={{ color: "#f7d046" }}>Hola</h1>dorado
+<h1 style={{ color: "#7BA12D" }}>Hola</h1> musgo*/
+/* #282828 gris */
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: "Roboto", serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+* {
+  font-family: inherit;
 }

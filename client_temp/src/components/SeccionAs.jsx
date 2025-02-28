@@ -80,9 +80,9 @@ const SeccionAs = () => {
               src="https://mamacultivaargentina.org/wp-content/uploads/2024/10/1Recurso-1logo-mca-final.png"
               alt="Icon-flores"
             ></img>
-            <h3 className="associate-title-card">¡QUIERO FLORES!</h3>
+            <h3 className="associate-title-card">ASÓCIATE</h3>
             <p className="associate-text">
-              🌿 Accedé de forma segura a tus flores con Reprocann.
+              🌿 Accedé al cannabis medicinal de forma segura y legal con Reprocann.
               {/* Tus flores legales, a un clic de distancia - ¿List@ para
               empezar? */}
             </p>

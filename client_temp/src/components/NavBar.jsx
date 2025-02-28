@@ -38,7 +38,6 @@ const NavBar = () => {
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
 
-
   useEffect(() => {
     const fetchUserData = async () => {
       if (isAuthenticated && user) {
@@ -185,7 +184,7 @@ const NavBar = () => {
         <Container>
           <Navbar.Brand href="/">
             <img
-              src="https://res.cloudinary.com/dqgjcfosx/image/upload/v1725976604/APIDC-LOGO-01-121x121_qnzw4d.png"
+              src="https://res.cloudinary.com/dqgjcfosx/image/upload/v1725973641/apidc-logo_hz26kf.png"
               alt="Logo"
               width="60"
               height="60"
@@ -216,6 +215,10 @@ const NavBar = () => {
                   Asociate
                 </Nav.Link>
               )}
+              <Link to="/" className="nav-link_dona">
+                Dona ahora
+              </Link>
+
               {/* {isHome && (
                 <Nav.Link onClick={() => scrollToSection("work-together")}>
                   Trabaja con nosotros

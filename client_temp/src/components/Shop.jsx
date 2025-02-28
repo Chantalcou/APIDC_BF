@@ -105,7 +105,7 @@ const Shop = () => {
             />
             Your browser does not support the video tag.
           </video>
-          <div className="static-content d-flex flex-column justify-content-center align-items-center h-100">
+          <div className="static-content_shop d-flex flex-column justify-content-center align-items-center h-100">
             <div className="titles">
               <h1 className="product-title">NATURALEZA EN GOTAS</h1>
               {/* <h1 className="product-title">El arte de sanar naturalmente</h1> */}

@@ -120,10 +120,9 @@
   border-radius: 10px;
 }
 
-.static-content {
+.static-content_shop {
   position: relative; /* Asegura que el z-index funcione */
   text-align: center;
-
   padding: 20px;
   border-radius: 10px;
   z-index: 1; /* Asegura que esté detrás del título */

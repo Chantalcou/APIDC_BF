@@ -1,24 +1,21 @@
 .scroll-arrow {
   position: absolute;
-
   left: 50%;
+  bottom:613px;
   z-index: 133;
-  transform: translate(
-    -50%,
-    0
-  ); 
+  transform: translateX(-50%); /* Solo afecta la parte horizontal */
   cursor: pointer;
   font-size: 2rem;
-  /* color: */
-  animation: bounce 1s infinite; 
+  animation: bounce 1s infinite;
 }
 
 @keyframes bounce {
   0%,
   100% {
-    transform: translateY(0);
+    transform: translateX(-50%) translateY(0);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateX(-50%) translateY(-3px);
   }
 }
+

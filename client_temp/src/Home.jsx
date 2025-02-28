@@ -14,8 +14,10 @@ import MovingBanner from "./components/MovingBanner.jsx";
 import { WorkTogether } from "./components/WorkTogether.jsx";
 import SeccionAs from "./components/SeccionAs.jsx";
 import NewsletterBanner from "./components/NewsLetterBanner.jsx";
+import Donations from "./components/Donations.jsx";
 // Librerias de aniamcion
 import AOS from "aos";
+import { ParallaxProvider, Parallax } from "react-scroll-parallax";
 import "aos/dist/aos.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -113,6 +115,7 @@ const Home = () => {
       console.error("Error durante el login o el registro:", error);
     }
   };
+
   return (
     <>
       {/* Optimización SEO */}
@@ -146,7 +149,6 @@ const Home = () => {
         <meta property="og:url" content="https://example.com/" />
         <meta name="robots" content="index, follow" />
       </Helmet>
-
       <div>
         {loading}
         <div className="container-fluid p-0 main-content">
@@ -215,7 +217,7 @@ const Home = () => {
                   text="Asociate Ahora"
                   onClick={() => scrollToSection("asociate-ahora-2")}
                   color={{
-                    background: "white",
+                    ground: "white",
                     text: "#0a9d6d",
                     border: "2px solid #0a9d6d",
                   }}
@@ -229,48 +231,16 @@ const Home = () => {
             </div>
           </div>
         </div>
-        {/* 
-        <div id="beneficios" className="benefits-section py-5">
-          <h2 className="text-center mb-4">✨ ¿Por Qué Elegir APIDC?</h2>
-          <div className="row justify-content-center">
-            {[
-              {
-                icon: "⚖️",
-                title:
-                  "Seguridad jurídica: Todo bajo el marco de la Ley 27.350.",
-                text: "Médicos, abogados y cultivadores trabajando por vos.",
-              },
-              {
-                icon: "🌱",
-                title: "Cultivo Seguro",
-                text: "Acceso a espacios de cultivo supervisados",
-              },
-              {
-                icon: "💊",
-                title: "Productos Controlados",
-                text: "Cannabis medicinal con análisis de laboratorio",
-              },
-            ].map((item, index) => (
-              <div key={index} className="col-md-4 mb-4" data-aos="fade-up">
-                <div className="benefit-card p-4">
-                  <div className="icon-display">{item.icon}</div>
-                  <h5>{item.title}</h5>
-                  <p>{item.text}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div> */}
 
         <div className="about-section" id="about-section">
           <div>
-            <div className="content-about_section row text-center my-5 ">
+            <div className="content-about_section row text-center">
               <div data-aos="fade-up" className="col-md-4 col-12 mb-4">
                 <img
                   src="https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1726139381/imagen-3-apidc_sezunb.jpg"
                   loading="lazy"
                   alt="Quienes somos"
-                  className="img-fluid mb-3"
+                  className="img-fluid mb-3 circle-image"
                 />
 
                 <h3
@@ -293,10 +263,9 @@ const Home = () => {
                 <img
                   src="https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1726139381/imagen-2-apidc_jd0dnj.jpg"
                   alt="Nuestro camino"
-                  className="img-fluid mb-3"
+                  className="img-fluid mb-3 circle-image"
                   loading="lazy"
                 />
-
                 <h3
                   style={{ color: "#0a9d6d" }}
                   className="home-title_about_section"
@@ -318,7 +287,7 @@ const Home = () => {
                 <img
                   src="https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1726139381/imagen-1-apidc_vtapiq.jpg"
                   alt="A donde vamos"
-                  className="img-fluid mb-3"
+                  className="img-fluid mb-3 circle-image"
                   loading="lazy"
                 />
 
@@ -341,101 +310,43 @@ const Home = () => {
                 </p>
               </div>
             </div>
-            <div className="static-content d-flex flex-column justify-content-center align-items-center mt-5 h-100 position-relative">
+            <div>
               <ScrollArrow
-                onClick={() => scrollToSection("ley-section")}
+                onClick={() => scrollToSection("present-section")}
                 color=" #202020"
               />
             </div>
 
-            {/* <SeccionAs/> */}
-
-            <section
-              className="present-section"
-              id="present-section"
-              style={{ padding: "60px 20px" }}
-            >
-              <div className="container">
-                <div className="row align-items-center">
-                  <div className="col-md-6 mb-4">
-                    <header className="text-center">
-                      <h2
-                        style={{
-                          color: "#0a9d6d",
-                          fontSize: "2.5rem",
-                          fontWeight: "700",
-                        }}
-                      >
-                        Nuestro Presente
-                      </h2>
-                    </header>
-
-                    <div className="present-description">
-                      <p
-                        className="lead"
-                        style={{ fontSize: "1rem", color: "#333" }}
-                      >
-                        Brindamos apoyo integral a usuarios terapéuticos,
-                        ofreciendo un servicio de gestión, asesoramiento y
-                        vinculación con REPROCANN. Acompañamos a la comunidad
-                        con un enfoque profesional, garantizando eficiencia en
-                        cada paso del proceso.
-                      </p>
-
-                      {/* <h3
-                        style={{
-                          color: "#333",
-                          fontSize: "1.5rem",
-                          fontWeight: "300",
-                        }}
-                      >
-                        Lo que ofrecemos hoy
-                      </h3> */}
-                    </div>
-
-                    <div className="text-center mt-5">
-                      <ButtonComponent
-                        text="ASÓCIATE"
-                        onClick={() => scrollToSection("asociate-ahora-2")}
-                        color={{
-                          background: "#0a9d6d",
-                          text: "white",
-                          border: "2px solid #0a9d6d",
-                        }}
-                        customClass="hover-change-to-light"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="col-md-6">
-                    <div className="present-image">
-                      <img
-                        src="https://res.cloudinary.com/dqgjcfosx/image/upload/w_800,q_auto,f_auto/v1727005386/apidc-all_d15wow.jpg"
-                        alt="Imagen ilustrativa de nuestro servicio terapéutico"
-                        loading="lazy"
-                        style={{
-                          width: "100%",
-
-                          borderRadius: "15px",
-                          boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.1)",
-                        }}
-                      />
-                    </div>
-                  </div>
+            <section class="present-section" id="present-section">
+              <div class="overlay"></div>
+              <div class="container">
+                <div
+                  class="content-present"
+                  data-aos="fade-up"
+                  data-aos-duration="1000"
+                >
+                  <header class="section-header">
+                    <h2  class="section-title gradient-text">
+                      Nuestro Presente
+                    </h2>
+                    <div class="title-divider"></div>
+                  </header>
+                  <p class="section-description">
+                    Brindamos apoyo integral a usuarios terapéuticos, ofreciendo
+                    un servicio de gestión especializada, asesoramiento
+                    personalizado y vinculación certificada con REPROCANN.
+                    Acompañamos a la comunidad con excelencia profesional,
+                    garantizando máxima eficiencia en cada etapa del proceso.
+                  </p>
+                  <button class="cta-button">
+                    <span>ASÓCIATE HOY</span>
+                    <div class="hover-effect"></div>
+                  </button>
                 </div>
-                {/* <div className="static-content d-flex flex-column justify-content-center align-items-center h-100 position-relative mt-5">
-                  <ScrollArrow
-                  onClick={() => scrollToSection("membership-section")}
-                  color="#202020"
-                  />
-                  </div> */}
               </div>
             </section>
           </div>
         </div>
-
-        <div id="asociate-ahora-2"></div>
-        <SeccionAs />
 
         {/* ASOCIARME SECTION */}
         {/* <div className="container-video_2 my-1" id="membership-section">
@@ -496,9 +407,11 @@ const Home = () => {
           </div>
         </div> */}
       </div>
+      <Donations />
+      <div id="asociate-ahora-2"></div>
+      <SeccionAs />
 
       <ContactInfo />
-
       <div id="ley-section" className="ley-section text-center">
         <div
           data-aos="fade-right"
@@ -544,13 +457,13 @@ const Home = () => {
         <div className="static-content d-flex flex-column justify-content-center align-items-center mt-5 h-100 position-relative">
           <ScrollArrow
             onClick={() => scrollToSection("present-section")}
-            color=" #202020"
+            // color=" #202020"
           />
         </div>
       </div>
-
       <WorkTogether />
       <MovingBanner />
+      
       {/* 
       <div className="content-summary">
         <details className="toggleFaqs_faqsQuestions mt-1">
@@ -608,6 +521,10 @@ const Home = () => {
         </details>
       </div> */}
       <LoginModal show={showModal} handleClose={handleCloseModal} />
+      {/* <h1 style={{ color: "#0a9d6d" }}>Hola</h1>
+      <h1 style={{ color: "#FFB74D" }}>Hola</h1>
+      <h1 style={{ color: "#B59F3A" }}>Hola</h1>
+      <h1 style={{ color: "#7BA12D" }}>Hola</h1> */}
     </>
   );
 };
