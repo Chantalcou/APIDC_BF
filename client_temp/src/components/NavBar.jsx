@@ -76,7 +76,7 @@ const NavBar = () => {
   // Verification Captcha
   useEffect(() => {
     const script = document.createElement("script");
-    script.src = `https://www.google.com/recaptcha/api.js?render=6Lc8vrMqAAAAAPXaohW4mzMVw401_H9KGEZGt57I`;
+    script.src = `https://www.google.com/recaptcha/api.js?render=6LdEf-oqAAAAAIYnr9wd78kozSfH4PCl1oJomKCX`;
     script.async = true;
     document.head.appendChild(script);
 
