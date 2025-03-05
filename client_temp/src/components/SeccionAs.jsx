@@ -1,43 +1,68 @@
 import React, { useState } from "react";
 import { FiDroplet, FiPackage } from "react-icons/fi";
-import { Link } from "react-router-dom";
-import { registerUser, fetchUsers } from "../redux/actions/index";
+import { Link, useNavigate } from "react-router-dom";
+import { registerUser } from "../redux/actions/index";
 import { useSelector, useDispatch } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
+import { Nav } from "react-bootstrap";
 import { FaArrowRight } from "react-icons/fa";
+import LoginModal from "./LoginModal"; // Asegúrate de importar el modal de login
 import "./SeccionAs.css";
 
 const SeccionAs = () => {
   const dispatch = useDispatch();
   const handleShowModal = () => setShowModal(true);
+  const navigate = useNavigate();
 
   const [showModal, setShowModal] = useState(false);
   const [showCaptcha, setShowCaptcha] = useState(false);
   const [captchaVerified, setCaptchaVerified] = useState(false);
 
+  const { userFromRedux, memberShipType, isAdmin, userAdmin, users } =
+    useSelector((state) => state);
+
   const {
     isAuthenticated,
     loginWithRedirect,
-    // logout,
+    logout,
     user,
     getAccessTokenSilently,
   } = useAuth0();
 
+  // Maneja la verificación del CAPTCHA
+  const handleCaptchaVerify = (value) => {
+    if (value) {
+      setCaptchaVerified(true);
+      setShowCaptcha(false); // Cierra el modal de CAPTCHA al verificar
+    }
+  };
   const handleLogin = async () => {
     if (!captchaVerified) {
-      setShowCaptcha(true); // Muestra el modal si el CAPTCHA no está verificado
+      setShowCaptcha(true);
       return;
     }
 
     try {
       await loginWithRedirect();
+
       if (isAuthenticated && user) {
-        const token = await getAccessTokenSilently();
-        dispatch(registerUser(user, token)); // Llamamos a la acción `registerUser` solo después de la verificación
+        let token = localStorage.getItem("authToken");
+        if (!token) {
+          token = await getAccessTokenSilently();
+          localStorage.setItem("authToken", token);
+        }
+        dispatch(registerUser(user, token));
       }
     } catch (error) {
       console.error("Error durante el login o el registro:", error);
     }
+  };
+
+  const handleLogout = () => {
+    logout({ returnTo: window.location.origin });
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("isAdmin");
+    navigate("/");
   };
 
   return (
@@ -64,15 +89,15 @@ const SeccionAs = () => {
             <p className="associate-text">
               🌱 Tu bienestar comienza con una gota - Descubrí el camino
             </p>
-          
+
             <Link
-                to="/shop"
-                className="btn-asociate-custom"
-                aria-label="Explorar Membresías"
-              >
-               Tienda
-                <FaArrowRight className="btn-icon" />
-              </Link>
+              to="/shop"
+              className="btn-asociate-custom"
+              aria-label="Explorar Membresías"
+            >
+              Tienda
+              <FaArrowRight className="btn-icon" />
+            </Link>
           </div>
 
           <div className="associate-card">
@@ -80,36 +105,57 @@ const SeccionAs = () => {
               src="https://mamacultivaargentina.org/wp-content/uploads/2024/10/1Recurso-1logo-mca-final.png"
               alt="Icon-flores"
             ></img>
-            <h3 className="associate-title-card">ASÓCIATE</h3>
+            <h3 className="associate-title-card">ASOCIATE</h3>
             <p className="associate-text">
-              🌿 Accedé al cannabis medicinal de forma segura y legal con Reprocann.
-              {/* Tus flores legales, a un clic de distancia - ¿List@ para
-              empezar? */}
+              🌿 Accedé al cannabis medicinal de forma segura y legal con
+              Reprocann.
             </p>
-            {!isAuthenticated && !user ? (
+            {isAuthenticated && user ? (
               <>
-                <Link
-                  onClick={handleShowModal || handleLogin}
-                  className="btn-asociate-custom"
-                  aria-label="Explorar Membresías - ESTA AUTENTICADO"
-                >
-                  Asociate
-                  <FaArrowRight className="btn-icon" />
-                </Link>
+                {/* <Nav.Link href="/products">Productos</Nav.Link> */}
+                <Nav.Link href="#" className="d-flex align-items-center">
+                  <img
+                    src={user.picture}
+                    alt="Profile"
+                    className="profile-picture me-2"
+                  />
+                  <span className="user-name">
+                    {userFromRedux?.name || user?.name}
+                  </span>
+                </Nav.Link>
+
+                {isAuthenticated && user && isAdmin && (
+                  <Link to="/dashboard" className="nav-link">
+                    Dashboard
+                  </Link>
+                )}
+
+                <Nav.Link onClick={handleLogout}>Cerrar sesión</Nav.Link>
               </>
             ) : (
               <Link
-                to="/membershipSection"
                 className="btn-asociate-custom"
                 aria-label="Explorar Membresías"
+                onClick={handleShowModal || handleLogin}
               >
-               Asociate
+                Iniciar sesión
                 <FaArrowRight className="btn-icon" />
               </Link>
             )}
           </div>
         </div>
       </div>
+
+      {/* Mostrar Modal de CAPTCHA si aún no está verificado */}
+      {showCaptcha && (
+        <div className="captcha-modal">
+          {/* Tu implementación del CAPTCHA aquí */}
+          {/* Usa algún componente como reCAPTCHA de Google para la verificación */}
+        </div>
+      )}
+
+      {/* Modal de login */}
+      <LoginModal show={showModal} handleClose={() => setShowModal(false)} />
     </div>
   );
 };

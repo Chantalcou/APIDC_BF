@@ -161,14 +161,14 @@ const NavBar = () => {
   //   return () => newSocket.disconnect();
   // }, []);
 
-  const pruebadeSockerFunction = () => {
-    if (socket) {
-      // Emitir un evento de prueba al servidor
-      socket.emit("prueba_evento", { message: "Hola desde el cliente" });
-    } else {
-      console.error("Socket no está conectado");
-    }
-  };
+  // const pruebadeSockerFunction = () => {
+  //   if (socket) {
+  //     // Emitir un evento de prueba al servidor
+  //     socket.emit("prueba_evento", { message: "Hola desde el cliente" });
+  //   } else {
+  //     console.error("Socket no está conectado");
+  //   }
+  // };
 
   return (
     <>

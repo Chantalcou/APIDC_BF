@@ -13,6 +13,7 @@ import ContactInfo from "./components/ContactInfo.jsx";
 import MovingBanner from "./components/MovingBanner.jsx";
 import { WorkTogether } from "./components/WorkTogether.jsx";
 import SeccionAs from "./components/SeccionAs.jsx";
+import SpinnerComponent from "./components/SpinnerComponent.jsx";
 import NewsletterBanner from "./components/NewsLetterBanner.jsx";
 import Donations from "./components/Donations.jsx";
 // Librerias de aniamcion
@@ -60,7 +61,7 @@ const Home = () => {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 2000); // Simula una carga de 2 segundos
+    }, 3000);
   }, []);
 
   // if (loading) {
@@ -150,87 +151,90 @@ const Home = () => {
         <meta name="robots" content="index, follow" />
       </Helmet>
       <div>
-        {loading}
-        <div className="container-fluid p-0 main-content">
-          <div className="video-container">
-            {/* <video autoPlay muted loop className="home-bg-video">
+        {loading ? (
+          <SpinnerComponent />
+        ) : (
+          <div className="container-fluid p-0 main-content">
+            <div className="video-container">
+              {/* <video autoPlay muted loop className="home-bg-video">
               <source
                 src="https://res.cloudinary.com/dqgjcfosx/video/upload/w_720,q_auto,f_auto/v1234567/7667357-uhd_3840_2160_30fps_nm24my.mp4"
                 type="video/mp4"
               />
               Your browser does not support the video tag.
             </video> */}
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline // Mejor soporte móvil
-              preload="metadata" // Evita carga completa inicial
-              className="home-bg-video"
-              poster="https://res.cloudinary.com/dqgjcfosx/image/upload/w_720,q_auto,f_auto/v1234567/thumbnail_video.jpg" // Thumbnail de pre-carga
-            >
-              {/* Priorizar formato WebM (mejor compresión) */}
-              <source
-                src="https://res.cloudinary.com/dqgjcfosx/video/upload/f_webm,w_480,q_auto:good,vc_h265/v1234567/7667357-uhd_3840_2160_30fps_nm24my.mp4"
-                type="video/webm"
-              />
-
-              {/* Fallback para Safari */}
-              <source
-                src="https://res.cloudinary.com/dqgjcfosx/video/upload/w_720,q_auto,f_mp4,vc_h264/v1234567/7667357-uhd_3840_2160_30fps_nm24my.mp4"
-                type="video/mp4"
-              />
-
-              {/* Fallback texto para navegadores muy antiguos */}
-              <p>
-                Tu navegador no soporta videos HTML5. Te recomendamos actualizar
-                tu navegador.
-              </p>
-            </video>
-            <div className="static-content d-flex flex-column justify-content-center align-items-center h-100">
-              {/* Texto agregado sobre el logo */}
-              <h1 className="welcome-name">
-                {user
-                  ? `Bienvenid@ ${user.name}`
-                  : "Asociación de Cannabis Medicinal"}
-              </h1>
-
-              <img
-                alt="Logo APIDC"
-                src="https://res.cloudinary.com/dqgjcfosx/image/upload/v1725973641/apidc-logo_hz26kf.png"
-                className={`home-image_center d-inline-block align-top ${
-                  isSpinning ? "logo-spin" : ""
-                }`}
-                onClick={handleLogoClick}
-              />
-              <div className="d-flex flex-column flex-md-row gap-3">
-                <ButtonComponent
-                  text="Conocenos"
-                  onClick={() => scrollToSection("about-section")}
-                  color={{
-                    background: "transparent",
-                    text: "#ffffff",
-                    border: "2px solid white",
-                  }}
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline // Mejor soporte móvil
+                preload="metadata" // Evita carga completa inicial
+                className="home-bg-video"
+                poster="https://res.cloudinary.com/dqgjcfosx/image/upload/w_720,q_auto,f_auto/v1234567/thumbnail_video.jpg" // Thumbnail de pre-carga
+              >
+                {/* Priorizar formato WebM (mejor compresión) */}
+                <source
+                  src="https://res.cloudinary.com/dqgjcfosx/video/upload/f_webm,w_480,q_auto:good,vc_h265/v1234567/7667357-uhd_3840_2160_30fps_nm24my.mp4"
+                  type="video/webm"
                 />
-                <ButtonComponent
-                  text="Asociate Ahora"
-                  onClick={() => scrollToSection("asociate-ahora-2")}
-                  color={{
-                    ground: "white",
-                    text: "#0a9d6d",
-                    border: "2px solid #0a9d6d",
-                  }}
-                  icon={<FaArrowRight className="me-2" />}
+
+                {/* Fallback para Safari */}
+                <source
+                  src="https://res.cloudinary.com/dqgjcfosx/video/upload/w_720,q_auto,f_mp4,vc_h264/v1234567/7667357-uhd_3840_2160_30fps_nm24my.mp4"
+                  type="video/mp4"
                 />
-              </div>
-              {/* <p className="text-white mt-3 text-center">
+
+                {/* Fallback texto para navegadores muy antiguos */}
+                <p>
+                  Tu navegador no soporta videos HTML5. Te recomendamos
+                  actualizar tu navegador.
+                </p>
+              </video>
+              <div className="static-content d-flex flex-column justify-content-center align-items-center h-100">
+                {/* Texto agregado sobre el logo */}
+                <h1 className="welcome-name">
+                  {user
+                    ? `Bienvenid@ ${user.name}`
+                    : "Asociación de Cannabis Medicinal"}
+                </h1>
+
+                <img
+                  alt="Logo APIDC"
+                  src="https://res.cloudinary.com/dqgjcfosx/image/upload/v1725973641/apidc-logo_hz26kf.png"
+                  className={`home-image_center d-inline-block align-top ${
+                    isSpinning ? "logo-spin" : ""
+                  }`}
+                  onClick={handleLogoClick}
+                />
+                <div className="d-flex flex-column flex-md-row gap-3">
+                  <ButtonComponent
+                    text="Conocenos"
+                    onClick={() => scrollToSection("about-section")}
+                    color={{
+                      background: "transparent",
+                      text: "#ffffff",
+                      border: "2px solid white",
+                    }}
+                  />
+                  <ButtonComponent
+                    text="Asociate Ahora"
+                    onClick={() => scrollToSection("asociarme-section")}
+                    color={{
+                      ground: "white",
+                      text: "#0a9d6d",
+                      border: "2px solid #0a9d6d",
+                    }}
+                    icon={<FaArrowRight className="me-2" />}
+                  />
+                </div>
+                {/* <p className="text-white mt-3 text-center">
               ⭐️ +500 socios confían en nosotros | Registro REPROCANN 100%
               legal ⭐️
             </p> */}
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         <div className="about-section" id="about-section">
           <div>
@@ -326,7 +330,7 @@ const Home = () => {
                   data-aos-duration="1000"
                 >
                   <header class="section-header">
-                    <h2  class="section-title gradient-text">
+                    <h2 class="section-title gradient-text">
                       Nuestro Presente
                     </h2>
                     <div class="title-divider"></div>
@@ -338,16 +342,15 @@ const Home = () => {
                     Acompañamos a la comunidad con excelencia profesional,
                     garantizando máxima eficiencia en cada etapa del proceso.
                   </p>
-                  <button class="cta-button">
-                    <span>ASÓCIATE HOY</span>
+                  {/* <button class="cta-button">
+                    <span>ASOCIATE HOY</span>
                     <div class="hover-effect"></div>
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </section>
           </div>
         </div>
-
         {/* ASOCIARME SECTION */}
         {/* <div className="container-video_2 my-1" id="membership-section">
    
@@ -366,7 +369,7 @@ const Home = () => {
               />
               Your browser does not support the video tag.
             </video>
-
+            
             <div
               id="asociarme-seccion"
               className="d-flex flex-column justify-content-center align-items-center h-100 text-white"
@@ -376,8 +379,8 @@ const Home = () => {
                 ASOCIATE
               </h1>
               <p
-                className="sub-title_banner text-center mb-4"
-                style={{ maxWidth: "700px", lineHeight: "1.6" }}
+              className="sub-title_banner text-center mb-4"
+              style={{ maxWidth: "700px", lineHeight: "1.6" }}
               >
                 Descubre las opciones de categorías que ofrecemos y elige la que
                 mejor se adapte a tus necesidades.
@@ -393,8 +396,8 @@ const Home = () => {
                     <FaArrowRight className="btn-icon" />
                   </Link>
                 </>
-              ) : (
-                <Link
+                ) : (
+                  <Link
                   to="/membershipSection"
                   className="btn-asociate-custom"
                   aria-label="Explorar Membresías"
@@ -408,9 +411,8 @@ const Home = () => {
         </div> */}
       </div>
       <Donations />
-      <div id="asociate-ahora-2"></div>
+      <div id="asociarme-section"></div>
       <SeccionAs />
-
       <ContactInfo />
       <div id="ley-section" className="ley-section text-center">
         <div
@@ -463,7 +465,7 @@ const Home = () => {
       </div>
       <WorkTogether />
       <MovingBanner />
-      
+
       {/* 
       <div className="content-summary">
         <details className="toggleFaqs_faqsQuestions mt-1">
@@ -489,9 +491,9 @@ const Home = () => {
             ciertos documentos como tu identificación y completar un formulario
             de solicitud. Cada asociación tiene sus propios requisitos
             específicos, por lo que es recomendable contactarlos directamente.
-          </p>
-        </details>
-
+            </p>
+            </details>
+            
         <details className="toggleFaqs_faqsQuestions">
           <summary className="toggleFaqs_faqsQuestions__RozJk">
             ¿Cuáles son los beneficios de ser miembro de una asociación civil de
@@ -505,9 +507,9 @@ const Home = () => {
             cannabis, y el derecho a votar en decisiones dentro de la
             asociación.
           </p>
-        </details>
-
-        <details className="toggleFaqs_faqsQuestions">
+          </details>
+          
+          <details className="toggleFaqs_faqsQuestions">
           <summary className="toggleFaqs_faqsQuestions__RozJk">
             ¿Es legal formar una asociación civil de cannabis?
             <span className="toggleFaqs_faqsQuestions__arrow">➔</span>
@@ -520,11 +522,8 @@ const Home = () => {
           </p>
         </details>
       </div> */}
+
       <LoginModal show={showModal} handleClose={handleCloseModal} />
-      {/* <h1 style={{ color: "#0a9d6d" }}>Hola</h1>
-      <h1 style={{ color: "#FFB74D" }}>Hola</h1>
-      <h1 style={{ color: "#B59F3A" }}>Hola</h1>
-      <h1 style={{ color: "#7BA12D" }}>Hola</h1> */}
     </>
   );
 };
