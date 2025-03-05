@@ -9,6 +9,7 @@ import ProductsSection from "./ProductsSection";
 import LoginModal from "./LoginModal";
 import $ from "jquery";
 import io from "socket.io-client";
+import ReCAPTCHA from "react-google-recaptcha";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./NavBar.css";
 
@@ -72,6 +73,19 @@ const NavBar = () => {
     };
   }, [scrollPosition]);
 
+  // Verification Captcha
+  useEffect(() => {
+    // Cargar el script de Google reCAPTCHA dinámicamente
+    const script = document.createElement("script");
+    script.src = `https://www.google.com/recaptcha/api.js?render=${process.env.REACT_APP_RECAPTCHA_SITE_KEY}`;
+    script.async = true;
+    document.head.appendChild(script);
+
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, []);
+
   const handleLogin = async () => {
     if (!captchaVerified) {
       setShowCaptcha(true);
@@ -120,7 +134,11 @@ const NavBar = () => {
   const handleCaptchaVerify = (value) => {
     if (value) {
       setCaptchaVerified(true);
-      setShowCaptcha(false); // Cierra el modal al verificar
+      setShowCaptcha(false); 
+    }else {
+
+      console.error("Error de verificación del CAPTCHA");
+
     }
   };
 
@@ -266,14 +284,26 @@ const NavBar = () => {
                   <Nav.Link onClick={handleLogout}>Cerrar sesión</Nav.Link>
                 </>
               ) : (
-                <Nav.Link onClick={handleShowModal || handleLogin}>
-                  Iniciar sesión
-                </Nav.Link>
+                <Nav.Link onClick={handleShowModal}>Iniciar sesión</Nav.Link>
               )}
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      {/* Modal para mostrar el reCAPTCHA */}
+      {showCaptcha && (
+        <div className="captcha-modal">
+          <div className="modal-content">
+            <h2>Verificación CAPTCHA</h2>
+            <ReCAPTCHA
+              sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY} // Usa la clave del .env
+              onChange={handleCaptchaVerify} // Maneja la verificación
+            />
+            <button onClick={handleCaptchaClose}>Cerrar</button>
+          </div>
+        </div>
+      )}
+
       <div
         className={`breadcrumbs ${isScrolling ? "scroll-hide" : "scroll-show"}`}
       >

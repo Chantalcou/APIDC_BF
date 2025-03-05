@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FiDroplet, FiPackage } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../redux/actions/index";
 import { useSelector, useDispatch } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Nav } from "react-bootstrap";
+import ReCAPTCHA from "react-google-recaptcha";
 import { FaArrowRight } from "react-icons/fa";
 import LoginModal from "./LoginModal"; // Asegúrate de importar el modal de login
 import "./SeccionAs.css";
@@ -18,8 +19,7 @@ const SeccionAs = () => {
   const [showCaptcha, setShowCaptcha] = useState(false);
   const [captchaVerified, setCaptchaVerified] = useState(false);
 
-  const { userFromRedux, memberShipType, isAdmin, userAdmin, users } =
-    useSelector((state) => state);
+  const { userFromRedux, isAdmin } = useSelector((state) => state);
 
   const {
     isAuthenticated,
@@ -28,6 +28,18 @@ const SeccionAs = () => {
     user,
     getAccessTokenSilently,
   } = useAuth0();
+
+  useEffect(() => {
+    // Cargar el script de Google reCAPTCHA dinámicamente
+    const script = document.createElement("script");
+    script.src = `https://www.google.com/recaptcha/api.js?render=${process.env.REACT_APP_RECAPTCHA_SITE_KEY}`;
+    script.async = true;
+    document.head.appendChild(script);
+
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, []);
 
   // Maneja la verificación del CAPTCHA
   const handleCaptchaVerify = (value) => {
@@ -64,7 +76,9 @@ const SeccionAs = () => {
     localStorage.removeItem("isAdmin");
     navigate("/");
   };
-
+  const handleCaptchaClose = () => {
+    setShowCaptcha(false); // Cierra el modal sin verificar
+  };
   return (
     <div className="associate-section">
       {/* Video de fondo */}
@@ -113,24 +127,14 @@ const SeccionAs = () => {
             {isAuthenticated && user ? (
               <>
                 {/* <Nav.Link href="/products">Productos</Nav.Link> */}
-                <Nav.Link href="#" className="d-flex align-items-center">
-                  <img
-                    src={user.picture}
-                    alt="Profile"
-                    className="profile-picture me-2"
-                  />
-                  <span className="user-name">
-                    {userFromRedux?.name || user?.name}
-                  </span>
-                </Nav.Link>
-
-                {isAuthenticated && user && isAdmin && (
-                  <Link to="/dashboard" className="nav-link">
-                    Dashboard
-                  </Link>
-                )}
-
-                <Nav.Link onClick={handleLogout}>Cerrar sesión</Nav.Link>
+                <Link
+                  to="/membershipSection"
+                  className="btn-asociate-custom"
+                  aria-label="Explorar Membresías"
+                >
+                  Mas
+                  <FaArrowRight className="btn-icon" />
+                </Link>
               </>
             ) : (
               <Link
@@ -147,10 +151,17 @@ const SeccionAs = () => {
       </div>
 
       {/* Mostrar Modal de CAPTCHA si aún no está verificado */}
+      {/* Modal para mostrar el reCAPTCHA */}
       {showCaptcha && (
         <div className="captcha-modal">
-          {/* Tu implementación del CAPTCHA aquí */}
-          {/* Usa algún componente como reCAPTCHA de Google para la verificación */}
+          <div className="modal-content">
+            <h2>Verificación CAPTCHA</h2>
+            <ReCAPTCHA
+              sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY} // Usa la clave del .env
+              onChange={handleCaptchaVerify} // Maneja la verificación
+            />
+            <button onClick={handleCaptchaClose}>Cerrar</button>
+          </div>
         </div>
       )}
 
