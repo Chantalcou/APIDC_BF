@@ -32,7 +32,7 @@ const SeccionAs = () => {
   useEffect(() => {
     // Cargar el script de Google reCAPTCHA dinámicamente
     const script = document.createElement("script");
-    script.src = `https://www.google.com/recaptcha/api.js?render=${process.env.REACT_APP_RECAPTCHA_SITE_KEY}`;
+    script.src = `https://www.google.com/recaptcha/api.js?render=6Lc8vrMqAAAAAPXaohW4mzMVw401_H9KGEZGt57I`;;
     script.async = true;
     document.head.appendChild(script);
 

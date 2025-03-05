@@ -31,8 +31,8 @@ const NavBar = () => {
 
   const [isScrolling, setIsScrolling] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [showCaptcha, setShowCaptcha] = useState(false); // Estado para mostrar u ocultar el modal de CAPTCHA
-  const [captchaVerified, setCaptchaVerified] = useState(false); // Estado para verificar el CAPTCHA
+  const [showCaptcha, setShowCaptcha] = useState(false);
+  const [captchaVerified, setCaptchaVerified] = useState(false);
 
   // Estado del modal
   const [showModal, setShowModal] = useState(false);
@@ -44,7 +44,7 @@ const NavBar = () => {
       if (isAuthenticated && user) {
         try {
           const token = await getAccessTokenSilently();
-          localStorage.setItem("authToken", token); // Guardar el token
+          localStorage.setItem("authToken", token); // Guardo el token
           dispatch(registerUser(user, token));
           if (user.isAdmin) {
             dispatch(fetchUsers(token));
@@ -75,9 +75,8 @@ const NavBar = () => {
 
   // Verification Captcha
   useEffect(() => {
-    // Cargar el script de Google reCAPTCHA dinámicamente
     const script = document.createElement("script");
-    script.src = `https://www.google.com/recaptcha/api.js?render=${process.env.REACT_APP_RECAPTCHA_SITE_KEY}`;
+    script.src = `https://www.google.com/recaptcha/api.js?render=6Lc8vrMqAAAAAPXaohW4mzMVw401_H9KGEZGt57I`;
     script.async = true;
     document.head.appendChild(script);
 
