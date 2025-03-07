@@ -7,14 +7,14 @@ import {
   UPDATE_USER_ROLE_FAILURE,
   VERIFICAR_SOCIO_SUCCESS,
   FETCH_USERS_SUCCESS,
-  FETCH_USERS_SUCCESS_NOT_ADMIN
+  FETCH_USERS_SUCCESS_NOT_ADMIN,
 } from "../actions_types";
 
 export const registerUser = (userData, token) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(
-        "https://apidc-bf.onrender.com/api/register",
+        "https://apidc-bf.onrender.com/register",
         {
           email: userData.email,
           name: userData.name,
@@ -59,7 +59,7 @@ export const formInfo = (formData) => async (dispatch) => {
   try {
     // Enviar los datos al backend
     const response = await axios.post(
-      "https://apidc-bf.onrender.com/api/send/admin",
+      "https://apidc-bf.onrender.com/send/admin",
 
       formData,
       {
@@ -89,7 +89,7 @@ export const formInfo = (formData) => async (dispatch) => {
 //   return async (dispatch) => {
 //     try {
 //       const response = await axios.put(
-//         `https://apidc-bf.onrender.com/api/users/${userId}`,
+//         `https://apidc-bf.onrender.com/users/${userId}`,
 //         { membershipType },
 //         {
 //           headers: {
@@ -119,7 +119,7 @@ export const fetchUsers = (token) => {
   return async (dispatch) => {
     try {
       // usersNotAdmin
-      const response = await axios.get(`https://apidc-bf.onrender.com/api/users`, {
+      const response = await axios.get(`https://apidc-bf.onrender.com/users`, {
         headers: {
           Authorization: `Bearer ${token}`, // Token de autenticación
         },
@@ -144,10 +144,11 @@ export const getAllNotAdmins = (token) => {
   return async (dispatch) => {
     try {
       // usersNotAdmin
-      const response = await axios.get(`https://apidc-bf.onrender.com/api/usersNotAdmin`, {
+      const response = await axios.get(
+        `https://apidc-bf.onrender.com/usersNotAdmin`,
+        {}
+      );
 
-      });
-      
       dispatch({
         type: FETCH_USERS_SUCCESS_NOT_ADMIN,
         payload: response.data,
@@ -166,7 +167,7 @@ export const updateUserRole = (userId, membershipType, token) => {
   return async (dispatch, getState) => {
     try {
       const response = await axios.put(
-        `https://apidc-bf.onrender.com/api/users/${userId}`,
+        `https://apidc-bf.onrender.com/users/${userId}`,
         { membershipType },
         {
           headers: {
@@ -199,7 +200,7 @@ export const updateUserRole = (userId, membershipType, token) => {
 export const sendWorkTogether = (formData) => async (dispatch) => {
   try {
     const response = await axios.post(
-      "https://apidc-bf.onrender.com/api/send/workWithUs",
+      "https://apidc-bf.onrender.com/send/workWithUs",
 
       formData,
       {
@@ -222,10 +223,13 @@ export const sendWorkTogether = (formData) => async (dispatch) => {
 
 export const verifySocio = (email, id_socio) => async (dispatch) => {
   try {
-    const response = await axios.post(`https://apidc-bf.onrender.com/api/verifySocio`, {
-      email,
-      id_socio,
-    });
+    const response = await axios.post(
+      `https://apidc-bf.onrender.com/verifySocio`,
+      {
+        email,
+        id_socio,
+      }
+    );
     console.log("Respuesta del servidor:", response.data);
 
     if (response.data.success) {

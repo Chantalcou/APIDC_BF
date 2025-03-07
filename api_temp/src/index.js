@@ -75,7 +75,7 @@ app.use(
 app.use(express.json());
 
 // Rutas API
-app.use("/api", authRoutes); // Todas las rutas API empiezan con /api
+app.use("/", authRoutes); // Todas las rutas API empiezan con /api
 
 // Sirve el frontend React (solo en producción)
 if (process.env.NODE_ENV === "production") {
