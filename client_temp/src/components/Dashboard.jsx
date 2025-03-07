@@ -1,78 +1,53 @@
 import React, { useEffect, useState } from "react";
 import { Table, Container, Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUserRole } from "../redux/actions/index";
-import io from "socket.io-client";
+import { updateUserRole, fetchUsers } from "../redux/actions/index";
+import { useAuth0 } from "@auth0/auth0-react"; // Importa useAuth0
 import "./Dashboard.css";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
-  const { users, user } = useSelector((state) => state);
+  const { users = [] } = useSelector((state) => state);
+  const { user, getAccessTokenSilently } = useAuth0(); // Obtén el usuario y el token
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
-  const [socket, setSocket] = useState(null); // <- Estado para almacenar la instancia de Socket.IO
 
-  // Leer usuarios del localStorage solo una vez al montar el componente
   useEffect(() => {
-    const storedUsers = localStorage.getItem("users");
-    if (storedUsers) {
-      dispatch({
-        type: "SET_USERS_FROM_STORAGE",
-        payload: JSON.parse(storedUsers),
-      });
-    }
-  }, [dispatch]);
-
-  // Conexión Socket.IO
-  // useEffect(() => {
-  //   const newSocket = io("https://apidc-bf-2.onrender.com"); // Crear una nueva instancia de Socket.IO
-  //   setSocket(newSocket); // Guardar la instancia en el estado
-
-  //   newSocket.on("user_updated", (data) => {
-  //     console.log("Datos del usuario actualizados:", data);
-  //     // Verificar si el email del evento coincide con el email del usuario autenticado
-  //     if (user && data.email === user.email) {
-  //       dispatch(updateUserRoleNoToken(data.id, data.membershipType));
-  //     }
-  //   });
-
-  //   // Limpiar la conexión al desmontar el componente
-  //   return () => {
-  //     newSocket.disconnect();
-  //   };
-  // }, [dispatch, user]);
-
-  // // Guardar usuarios en localStorage cuando cambie la lista
-  useEffect(() => {
-    if (users && users.length > 0) {
-      localStorage.setItem("users", JSON.stringify(users));
-    }
-  }, [users]);
+    const loadUsers = async () => {
+      try {
+        const token = await getAccessTokenSilently(); // Obtén el token
+        await dispatch(fetchUsers(token)); // Pasa el token a fetchUsers
+      } catch (err) {
+        setError("Error cargando usuarios");
+      }
+    };
+    loadUsers();
+  }, [dispatch, getAccessTokenSilently]); // Agrega getAccessTokenSilently como dependencia
 
   const handleRoleUpdate = async (userId, membershipType) => {
-    const user = users.find((u) => u.id === userId);
-    const updatedMembershipType =
-      user.membershipType === membershipType ? "sinMembresia" : membershipType;
+    const originalUser = users.find((u) => u.id === userId);
 
     // Actualización optimista
     dispatch({
       type: "UPDATE_USER_ROLE_OPTIMISTIC",
-      payload: { userId, membershipType: updatedMembershipType },
+      payload: { userId, membershipType },
     });
 
     try {
-      await dispatch(updateUserRole(userId, updatedMembershipType));
-      setSuccess(
-        `Usuario ${userId} actualizado a ${
-          updatedMembershipType || "sin membresía"
-        }`
-      );
+      const token = await getAccessTokenSilently(); // Obtén el token
+      console.log(token, "token");
+      await dispatch(updateUserRole(userId, membershipType, token)); // Pasa el token
+      setSuccess(`Rol actualizado correctamente`);
+
+      // Recarga los usuarios desde el backend
+      await dispatch(fetchUsers(token)); // Pasa el token
     } catch (err) {
+      // Revertir en caso de error
       dispatch({
         type: "UPDATE_USER_ROLE_OPTIMISTIC",
-        payload: { userId, membershipType: user.membershipType },
+        payload: { userId, membershipType: originalUser.membershipType },
       });
-      setError("Error al actualizar el rol del usuario");
+      setError("Error al actualizar el rol");
     }
   };
 
@@ -82,7 +57,6 @@ const Dashboard = () => {
         <h1>Dashboard de Administración</h1>
         {error && <Alert variant="danger">{error}</Alert>}
         {success && <Alert variant="success">{success}</Alert>}
-
         <Table striped bordered hover>
           <thead>
             <tr>
@@ -96,7 +70,7 @@ const Dashboard = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
+            {users?.map((user) => (
               <tr key={user.id}>
                 <td>{user.id}</td>
                 <td>{user.name}</td>

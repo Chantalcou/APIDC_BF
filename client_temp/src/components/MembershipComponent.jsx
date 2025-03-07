@@ -97,7 +97,7 @@ const MembershipComponent = () => {
             </button>
           </div>
           <div className="card">
-            <h2 className="card-title">Socio Premium</h2>
+            <h2 className="card-title">Socio con Reprocan</h2>
             <p className="card-subtitle">
               Cultiva tu medicina con respaldo legal.
             </p>

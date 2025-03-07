@@ -22,27 +22,45 @@ const jwksUri = `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`;
 const JWKS = createRemoteJWKSet(new URL(jwksUri)); // Configuramos JWKS para el cliente
 
 // Middleware para verificar el JWT
-const verifyToken = async (req, res, next) => {
-  const authHeader = req.headers.authorization;
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    console.log("Token no proporcionado o mal formado");
-    return res
-      .status(401)
-      .json({ message: "Token no proporcionado o mal formado" });
+
+// const verifyToken = async (req, res, next) => {
+//   const authHeader = req.headers.authorization;
+//   if (!authHeader || !authHeader.startsWith("Bearer ")) {
+//     console.log("Token no proporcionado o mal formado");
+//     return res
+//       .status(401)
+//       .json({ message: "Token no proporcionado o mal formado" });
+//   }
+
+//   const token = authHeader.split(" ")[1];
+//   try {
+//     const { payload } = await jwtVerify(token, JWKS); // Verifica el token con el JWKS
+
+//     req.user = payload; // Adjunta el usuario al request
+//     next();
+//   } catch (err) {
+//     console.error("Error verificando el token:", err);
+//     return res.status(401).json({ message: "Token no válido o expirado" });
+//   }
+// };
+
+
+const verifyToken = (req, res, next) => {
+  const token = req.headers.authorization?.split(" ")[1]; // "Bearer <token>"
+  
+  if (!token) {
+    return res.status(401).json({ message: "Token no proporcionado" });
   }
 
-  const token = authHeader.split(" ")[1];
   try {
-    const { payload } = await jwtVerify(token, JWKS); // Verifica el token con el JWKS
-    console.log("Token válido, payload:", payload);
-    req.user = payload; // Adjunta el usuario al request
+    const decoded = jwt.verify(token, process.env.JWT_SECRET); // Asegúrate de usar el mismo secreto que en Auth0
+    req.user = decoded; // Adjunta el usuario decodificado
     next();
-  } catch (err) {
-    console.error("Error verificando el token:", err);
-    return res.status(401).json({ message: "Token no válido o expirado" });
+  } catch (error) {
+    console.error("Error verificando token:", error);
+    return res.status(401).json({ message: "Token inválido" });
   }
 };
-
 // Registro de usuario
 const registerUser = async (req, res) => {
   const { name, email } = req.body;
@@ -55,11 +73,11 @@ const registerUser = async (req, res) => {
       if (isAdmin) {
         const userAdmin = await User.findOne({
           where: { email: process.env.ADMIN_EMAIL },
-          attributes: ["id", "name", "email", "isAdmin"],
+          attributes: ["id", "name", "email", "isAdmin", "membershipType"],
         });
 
         const users = await User.findAll({
-          attributes: ["id", "name", "email", "isAdmin"],
+          attributes: ["id", "name", "email", "isAdmin", "membershipType"],
         });
 
         return res.status(200).json({
@@ -83,7 +101,7 @@ const registerUser = async (req, res) => {
 
     if (isAdmin) {
       const users = await User.findAll({
-        attributes: ["id", "name", "email", "isAdmin"],
+        attributes: ["id", "name", "email", "isAdmin", "membershipType"],
       });
       return res.status(201).json({
         message: "Usuario registrado con éxito y es admin",
@@ -127,6 +145,7 @@ const loginUser = async (req, res) => {
         name: user.name,
         email: user.email,
         isAdmin: user.isAdmin,
+        membershipType: user.membershipType,
       },
     });
   } catch (error) {
@@ -135,18 +154,37 @@ const loginUser = async (req, res) => {
   }
 };
 
-// Obtener todos los usuarios (solo admins)
+
 const getAllUsers = async (req, res) => {
+  console.log('entra aca????')
   try {
     const users = await User.findAll({
-      attributes: ["id", "name", "email", "isAdmin"],
+      attributes: ["id", "name", "email", "isAdmin", "membershipType"],
     });
+    console.log(users,'DESDE EL BACKEND USERS');
     res.status(200).json(users);
   } catch (error) {
     console.error("Error al obtener usuarios:", error);
     res.status(500).json({ message: "Error al obtener usuarios" });
   }
 };
+
+
+const getAllNotAdmin = async (req, res) => {
+  console.log('entra aca????')
+  try {
+    const users = await User.findAll({
+      attributes: ["id", "name", "email", "isAdmin", "membershipType"],
+    });
+    console.log(users,'DESDE EL BACKEND USERS');
+    res.status(200).json(users);
+  } catch (error) {
+    console.error("Error al obtener usuarios:", error);
+    res.status(500).json({ message: "Error al obtener usuarios" });
+  }
+};
+
+
 
 // Eliminar usuario por email
 const deleteUserByEmail = async (req, res) => {
@@ -172,7 +210,7 @@ const deleteUserByEmail = async (req, res) => {
 // Verificar si el usuario es admin
 const isAdmin = (req, res, next) => {
   if (!req.user || !req.user.isAdmin) {
-    console.log("Acceso denegado: Usuario no es admin");
+    // console.log("Acceso denegado: Usuario no es admin");
     return res
       .status(403)
       .json({ message: "Acceso denegado: no eres administrador" });
@@ -211,13 +249,47 @@ const updateUserRole = async (req, res) => {
   }
 };
 
+// Verificar si el socio coincide con el id y email, y si es un socio premium o gestor
+const verifySocio = async (req, res) => {
+  const { email, id_socio } = req.body;
+
+  try {
+    const user = await User.findOne({
+      where: { email: email },
+    });
+
+    if (!user) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+
+    //     // Verificar que el usuario sea un socio premium o gestor
+    if (user.membershipType !== "premium" && user.membershipType !== "gestor") {
+      return res.status(403).json({
+        message: "El usuario no es un socio premium ni gestor",
+      });
+    } else {
+      console.log("LA BSUQUEDA FUE EXITOSA", user);
+    }
+
+    return res.status(200).json({
+      success: true,
+      socio: user,
+    });
+  } catch (error) {
+    console.error("Error al verificar el socio:", error);
+    return res.status(500).json({ message: "Error al verificar el socio" });
+  }
+};
+
 module.exports = {
   registerUser,
   loginUser,
   verifyToken,
   isAdmin,
+  getAllNotAdmin,
   getAllUsers,
   deleteUserByEmail,
   // getPendingUsers,
   updateUserRole,
+  verifySocio,
 };

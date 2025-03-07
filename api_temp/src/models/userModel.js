@@ -32,7 +32,8 @@ const User = sequelize.define(
     // NUEVOS CAMPOS
     membershipType: {
       type: DataTypes.ENUM('sinMembresia', 'premium', 'gestor'),
-      defaultValue: 'sinMembresia'
+      defaultValue: 'sinMembresia',
+      field: 'membershipType' 
     },
     paymentProof: { // URL a comprobante de pago subido
       type: DataTypes.STRING,

@@ -1,3 +1,4 @@
+
 import {
   REGISTER_USER,
   SET_ERROR,
@@ -5,17 +6,24 @@ import {
   UPDATE_USER_ROLE_SUCCESS,
   UPDATE_USER_ROLE,
   UPDATE_USER_ROLE_FAIL,
+  FETCH_USERS_SUCCESS_NOT_ADMIN,
   UPDATE_USER_ROLE_FAILURE,
   SET_USERS_FROM_STORAGE,
+  VERIFICAR_SOCIO_SUCCESS,
+  VERIFICAR_SOCIO_FAIL,
+  FETCH_USERS_SUCCESS,
 } from "../actions_types";
 
 const initialState = {
   userFromRedux: {},
   isAuthenticated: false,
   isAdmin: false,
+  allNotAdmins:[],
   users: [],
   user: {},
   error: null,
+  isSocioVerified: null,
+  isSocio: {},
 };
 
 const reducer = (state = initialState, action) => {
@@ -30,6 +38,28 @@ const reducer = (state = initialState, action) => {
         userFromRedux: action.payload.user,
         error: null,
       };
+
+    case REGISTER_USER:
+      return {
+        ...state,
+        user: action.payload.user,
+        isAuthenticated: true,
+        isAdmin: action.payload.isAdmin,
+        users: action.payload.users,
+        userFromRedux: action.payload.user,
+        error: null,
+      };
+      case FETCH_USERS_SUCCESS_NOT_ADMIN:
+        return{
+          ...state,
+          getAllNotAdmin:action.payload
+        }
+    case FETCH_USERS_SUCCESS:
+      return {
+        ...state,
+        users: Array.isArray(action.payload) ? action.payload : [], // Forzar a que sea array
+        error: null,
+      };
     case UPDATE_USER_ROLE_SUCCESS:
       return {
         ...state,
@@ -39,10 +69,12 @@ const reducer = (state = initialState, action) => {
             : user
         ),
         userFromRedux:
-        state.userFromRedux && state.userFromRedux.id === action.payload.id
-          ? { ...state.userFromRedux, membershipType: action.payload.membershipType }
-          : state.userFromRedux,
-      
+          state.userFromRedux && state.userFromRedux.id === action.payload.id
+            ? {
+                ...state.userFromRedux,
+                membershipType: action.payload.membershipType,
+              }
+            : state.userFromRedux,
       };
 
     // case UPDATE_USER_ROLE_SUCCESS:
@@ -82,7 +114,18 @@ const reducer = (state = initialState, action) => {
         ...state,
         // Actualizamos la lista de usuarios
         users: action.payload,
-        // Y si ya tenías un usuario logueado, lo buscamos en la lista actualizada
+      };
+    case VERIFICAR_SOCIO_SUCCESS:
+      return {
+        ...state,
+        isSocioVerified: action.payload,
+        isSocio: action.socio,
+      };
+    case VERIFICAR_SOCIO_FAIL:
+      return {
+        ...state,
+        isSocioVerified: false, // En caso de fallo, lo marcamos como false
+        error: action.payload, // Guardamos el mensaje de error si es necesario
       };
 
     default:

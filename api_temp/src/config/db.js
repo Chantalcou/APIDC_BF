@@ -22,10 +22,9 @@ sequelize
 
 module.exports = sequelize;
 
-// Local
-
+// // Local
 // const { Sequelize } = require("sequelize");
-// require('dotenv').config();
+// require("dotenv").config();
 
 // console.log("DB_PASSWORD:", process.env.DB_PASSWORD);
 

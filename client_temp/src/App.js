@@ -1,4 +1,3 @@
-// App.js
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
@@ -11,30 +10,37 @@ import WhatsApp from "./components/WhatsApp";
 import Dashboard from "./components/Dashboard";
 import ContactForm from "./components/ContactForm";
 import ProtectedRoute from "./components/ProtectedRoute";
-import TermsAndPrivacy from './components/TermsAndPrivacy'
+import TermsAndPrivacy from "./components/TermsAndPrivacy";
 import Newsletter from "./components/Newsletter";
 import NewsletterBanner from "./components/NewsLetterBanner";
 import { ContactOptions } from "./components/ContactOptions";
 import Shop from "./components/Shop";
 import { HelmetProvider } from "react-helmet-async"; //Optimización SEO
-// import Admin from "./components/Admin";
-// import ProtectedRoute from "./components/ProtectedRoute";
-import "bootstrap/dist/css/bootstrap.min.css";
-import ProductsSection from "./components/ProductsSection";
 import MembershipComponent from "./components/MembershipComponent";
+import ProductsSection from "./components/ProductsSection";
+import SearchFormSocio from "./components/SearchFormSocio";
 
 const App = () => {
-  
   return (
     <>
       <HelmetProvider>
         <NavBar />
-        {/* <BreadcrumbsRoutes /> */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/membershipSection/gestor" element={<Gestor />} />
           <Route path="/products" element={<ProductsSection />} />
           <Route path="/membershipSection" element={<MembershipComponent />} />
+
+          {/* Usa ProtectedRoute en el elemento de la ruta */}
+          <Route
+            path="/socio"
+            element={
+              <ProtectedRoute requiredRole="socio">
+                <SearchFormSocio />
+              </ProtectedRoute>
+            }
+          />
+
           <Route
             path="/dashboard"
             element={
@@ -55,16 +61,6 @@ const App = () => {
           <Route path="/newsletter" element={<Newsletter />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/termsAndPrivacy" element={<TermsAndPrivacy />} />
-          
-          {/* <Route path="/loguin" element={<Loguin />} />  */}
-          {/* <Route
-          path="/admin"
-          element={
-            <ProtectedRoute isAdminRoute={true}>
-              <Admin />
-            </ProtectedRoute>
-          }
-        /> */}
         </Routes>
         <WhatsApp />
         <ContactOptions />

@@ -5,13 +5,16 @@ import {
   SUBMIT_FORM,
   UPDATE_USER_ROLE_SUCCESS,
   UPDATE_USER_ROLE_FAILURE,
+  VERIFICAR_SOCIO_SUCCESS,
+  FETCH_USERS_SUCCESS,
+  FETCH_USERS_SUCCESS_NOT_ADMIN
 } from "../actions_types";
 
 export const registerUser = (userData, token) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(
-        "https://apidc-bf.onrender.com/register",
+        "https://apidc-bf.onrender.com/api/register",
         {
           email: userData.email,
           name: userData.name,
@@ -29,8 +32,6 @@ export const registerUser = (userData, token) => {
 
       // Comprobar si userAdmin está definido antes de acceder a isAdmin
       const isAdmin = userAdmin?.isAdmin ?? false; // Si userAdmin es undefined, asigna false
-
-      console.log(isAdmin, "esto necesito saber desde el action");
 
       // Despachar acción para actualizar el estado
       dispatch({
@@ -58,7 +59,7 @@ export const formInfo = (formData) => async (dispatch) => {
   try {
     // Enviar los datos al backend
     const response = await axios.post(
-      "https://apidc-bf.onrender.com/send/admin",
+      "https://apidc-bf.onrender.com/api/send/admin",
 
       formData,
       {
@@ -82,43 +83,13 @@ export const formInfo = (formData) => async (dispatch) => {
   }
 };
 
-// Acción para obtener usuarios
-export const fetchUsers = (token) => {
-  return async (dispatch) => {
-    try {
-      const response = await axios.get(
-        // "https://apidc-bf.onrender.com/users",
-        `https://apidc-bf.onrender.com/users`,
-        {
-          // Actualiza la URL
-          headers: {
-            Authorization: `Bearer ${token}`, // Token de autenticación
-          },
-        }
-      );
-      console.log("Usuarios obtenidos - FETCH USERS:", response.data);
-
-      dispatch({
-        type: "FETCH_USERS_SUCCESS",
-        payload: response.data,
-      });
-    } catch (error) {
-      console.error("Error obteniendo usuarios:", error);
-      dispatch({
-        type: SET_ERROR,
-        payload: error.message,
-      });
-    }
-  };
-};
-
 // // Acción para actualizar el rol de un usuario
 // export const updateUserRole = (userId, membershipType, token) => {
 //   const id = userId.id;
 //   return async (dispatch) => {
 //     try {
 //       const response = await axios.put(
-//         `https://apidc-bf.onrender.com/users/${userId}`,
+//         `https://apidc-bf.onrender.com/api/users/${userId}`,
 //         { membershipType },
 //         {
 //           headers: {
@@ -143,11 +114,59 @@ export const fetchUsers = (token) => {
 //   };
 // };
 
+// Acción para obtener usuarios
+export const fetchUsers = (token) => {
+  return async (dispatch) => {
+    try {
+      // usersNotAdmin
+      const response = await axios.get(`https://apidc-bf.onrender.com/api/users`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Token de autenticación
+        },
+      });
+      console.log(response, "ME DEVUELVE ALGO CUANDO ENTRO AL DASHBARD?");
+      dispatch({
+        type: FETCH_USERS_SUCCESS,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.error("Error obteniendo usuarios:", error);
+      dispatch({
+        type: SET_ERROR,
+        payload: error.message,
+      });
+    }
+  };
+};
+
+// Acción para obtener usuarios
+export const getAllNotAdmins = (token) => {
+  return async (dispatch) => {
+    try {
+      // usersNotAdmin
+      const response = await axios.get(`https://apidc-bf.onrender.com/api/usersNotAdmin`, {
+
+      });
+      
+      dispatch({
+        type: FETCH_USERS_SUCCESS_NOT_ADMIN,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.error("Error obteniendo usuarios:", error);
+      dispatch({
+        type: SET_ERROR,
+        payload: error.message,
+      });
+    }
+  };
+};
+
 export const updateUserRole = (userId, membershipType, token) => {
   return async (dispatch, getState) => {
     try {
       const response = await axios.put(
-        `https://apidc-bf.onrender.com/users/${userId}`,
+        `https://apidc-bf.onrender.com/api/users/${userId}`,
         { membershipType },
         {
           headers: {
@@ -180,7 +199,7 @@ export const updateUserRole = (userId, membershipType, token) => {
 export const sendWorkTogether = (formData) => async (dispatch) => {
   try {
     const response = await axios.post(
-      "https://apidc-bf.onrender.com/send/workWithUs",
+      "https://apidc-bf.onrender.com/api/send/workWithUs",
 
       formData,
       {
@@ -197,6 +216,35 @@ export const sendWorkTogether = (formData) => async (dispatch) => {
     dispatch({
       type: "SEND_FORM_FAIL",
       payload: error.response ? error.response.data : "Error desconocido",
+    });
+  }
+};
+
+export const verifySocio = (email, id_socio) => async (dispatch) => {
+  try {
+    const response = await axios.post(`https://apidc-bf.onrender.com/api/verifySocio`, {
+      email,
+      id_socio,
+    });
+    console.log("Respuesta del servidor:", response.data);
+
+    if (response.data.success) {
+      console.log(response);
+      dispatch({
+        type: VERIFICAR_SOCIO_SUCCESS,
+        payload: response.data.success,
+        socio: response.data.socio,
+      });
+    } else {
+      dispatch({
+        type: "VERIFICAR_SOCIO_FAIL",
+        payload: response.data.message,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: "VERIFICAR_SOCIO_FAIL",
+      payload: error.response?.data.message || "Error desconocido",
     });
   }
 };

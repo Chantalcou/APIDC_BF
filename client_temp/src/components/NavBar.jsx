@@ -3,7 +3,11 @@ import { Navbar, Nav, Container } from "react-bootstrap";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { registerUser, fetchUsers } from "../redux/actions/index";
+import {
+  registerUser,
+  fetchUsers,
+  getAllNotAdmins,
+} from "../redux/actions/index";
 import BreadCrumRoutes from "./BreadCrumbRoutes";
 import ProductsSection from "./ProductsSection";
 import LoginModal from "./LoginModal";
@@ -18,8 +22,14 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const { userFromRedux, memberShipType, isAdmin, userAdmin, users } =
-    useSelector((state) => state);
+  const {
+    userFromRedux,
+    memberShipType,
+    isAdmin,
+    getAllNotAdmin,
+    userAdmin,
+    isSocioVerified,
+  } = useSelector((state) => state);
 
   const {
     isAuthenticated,
@@ -33,30 +43,51 @@ const NavBar = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [showCaptcha, setShowCaptcha] = useState(false);
   const [captchaVerified, setCaptchaVerified] = useState(false);
-
+  const [redirectPath, setRedirectPath] = useState(null);
   // Estado del modal
   const [showModal, setShowModal] = useState(false);
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
-
   useEffect(() => {
-    const fetchUserData = async () => {
+    const loadUsers = async () => {
+      try {
+        await dispatch(getAllNotAdmins()); // Pasa el token a fetchUsers
+      } catch (err) {
+        console.log("Error cargando usuarios");
+      }
+    };
+    loadUsers();
+  }, [dispatch, getAccessTokenSilently]);
+
+  // Actualizar el efecto de registro de usuario
+  useEffect(() => {
+    const registerAuthenticatedUser = async () => {
       if (isAuthenticated && user) {
         try {
           const token = await getAccessTokenSilently();
-          localStorage.setItem("authToken", token); // Guardo el token
-          dispatch(registerUser(user, token));
-          if (user.isAdmin) {
-            dispatch(fetchUsers(token));
+          localStorage.setItem("authToken", token);
+          await dispatch(registerUser(user, token));
+
+          // Redirigir después de registrar al usuario
+          if (redirectPath) {
+            navigate(redirectPath);
+            setRedirectPath(null);
           }
         } catch (error) {
-          console.error("Error obteniendo token:", error);
+          console.error("Error registrando usuario:", error);
         }
       }
     };
 
-    fetchUserData();
-  }, [isAuthenticated, user, getAccessTokenSilently, dispatch]);
+    registerAuthenticatedUser();
+  }, [
+    isAuthenticated,
+    user,
+    getAccessTokenSilently,
+    dispatch,
+    redirectPath,
+    navigate,
+  ]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -85,28 +116,21 @@ const NavBar = () => {
     };
   }, []);
 
-  const handleLogin = async () => {
-    if (!captchaVerified) {
-      setShowCaptcha(true);
-      return;
-    }
+  // const handleLogin = async () => {
+  //   try {
+  //     // Primero resolver la autenticación
+  //     await loginWithRedirect({
+  //       authorizationParams: {
+  //         redirect_uri: `${window.location.origin}${redirectPath || "/"}`,
+  //       },
+  //     });
 
-    try {
-      await loginWithRedirect();
-
-      if (isAuthenticated && user) {
-        let token = localStorage.getItem("authToken");
-        if (!token) {
-          token = await getAccessTokenSilently();
-          localStorage.setItem("authToken", token);
-        }
-        dispatch(registerUser(user, token));
-      }
-    } catch (error) {
-      console.error("Error durante el login o el registro:", error);
-    }
-  };
-
+  //     // Cerrar modal después de autenticar
+  //     handleCloseModal();
+  //   } catch (error) {
+  //     console.error("Error durante el login:", error);
+  //   }
+  // };
   const handleLogout = () => {
     logout({ returnTo: window.location.origin });
     localStorage.removeItem("authToken");
@@ -133,11 +157,17 @@ const NavBar = () => {
   const handleCaptchaVerify = (value) => {
     if (value) {
       setCaptchaVerified(true);
-      setShowCaptcha(false); 
-    }else {
-
+      setShowCaptcha(false);
+    } else {
       console.error("Error de verificación del CAPTCHA");
-
+    }
+  };
+  const handleSocioRedirect = () => {
+    if (!isAuthenticated) {
+      setRedirectPath("/socio"); // Guardar la ruta destino
+      handleShowModal();
+    } else {
+      navigate("/socio");
     }
   };
 
@@ -157,12 +187,12 @@ const NavBar = () => {
     return () => window.removeEventListener("storage", handleStorageChange);
   }, [dispatch]);
 
-  const showProductsLink =
-    isAuthenticated &&
-    userFromRedux?.membershipType &&
-    (userFromRedux.membershipType === "premium" ||
-      userFromRedux.membershipType === "gestor");
-  const [socket, setSocket] = useState(null);
+  // const showProductsLink =
+  //   isAuthenticated &&
+  //   userFromRedux?.membershipType &&
+  //   (userFromRedux.membershipType === "premium" ||
+  //     userFromRedux.membershipType === "gestor");
+  // const [socket, setSocket] = useState(null);
 
   // useEffect(() => {
   //   // Crear la conexión de Socket.IO una sola vez
@@ -186,6 +216,35 @@ const NavBar = () => {
   //     console.error("Socket no está conectado");
   //   }
   // };
+
+  const prueba = () => {
+    // Supongamos que 'user' es el objeto del usuario de Auth0
+    // y 'getAllNotAdmin' es el arreglo con usuarios obtenidos del backend.
+    if (!user || !getAllNotAdmin || !Array.isArray(getAllNotAdmin)) {
+      console.log("Faltan datos o getAllNotAdmin no es un array");
+      return;
+    }
+    const userEmail = user.email.toLowerCase();
+    // Buscar en el arreglo un usuario cuyo email coincida
+    const matchedUser = getAllNotAdmin.find(
+      (el) => el.email && el.email.toLowerCase() === userEmail
+    );
+
+    if (matchedUser) {
+      // Si se encuentra, obtenemos el membershipType
+      const membership = matchedUser.membershipType;
+      if (["gestor", "premium"].includes(membership)) {
+        const meberShipTypeProducts = membership;
+      } else {
+        console.log("El usuario es sinMembresia");
+      }
+    } else {
+      console.log("No se encontró coincidencia para el email:", user.email);
+    }
+
+    console.log("USER:", user);
+    console.log("GET NOT ADMIN:", getAllNotAdmin);
+  };
 
   return (
     <>
@@ -213,15 +272,46 @@ const NavBar = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="basic-navbar-nav-autentication-left">
               <Nav.Link href="/">Inicio</Nav.Link>
-              {/* Mostrar Productos solo si el rol NO es 'sinMembresia' */}
-              {showProductsLink && (
-                <li>
-                  <Link to="/products" className="nav-link">
-                    Productos
-                  </Link>
-                </li>
-              )}
-
+              {isAuthenticated ? (
+                <>
+                  {/* Enlace a Socio (siempre visible para autenticados) */}
+                  <Nav.Link onClick={handleSocioRedirect}>Soy socio</Nav.Link>
+                  {/* Enlace a Productos (solo para socios verificados) */}
+                  {/* {isSocioVerified && (
+                    <Link to="/products" className="nav-link me-3">
+                      Productos
+                    </Link>
+                  )}
+                 */}
+                  {isAuthenticated &&
+                    getAllNotAdmin.some(
+                      (u) =>
+                        u.email?.toLowerCase() === user?.email?.toLowerCase() &&
+                        ["gestor", "premium"].includes(u.membershipType)
+                    ) && (
+                      <Link to="/products" className="nav-link me-3">
+                        Productos
+                      </Link>
+                    )}
+                  {/* Botón de logout */}
+                  <Nav.Link onClick={prueba}>PRUEBA</Nav.Link>
+                </>
+              ) : (
+                // Sección para no autenticados
+                <>
+                  <Nav.Link
+                    onClick={() => {
+                      handleShowModal();
+                      navigate("/socio", {
+                        state: { from: location.pathname },
+                      });
+                    }}
+                  >
+                    Soy socio
+                  </Nav.Link>
+                  <Nav.Link onClick={handleShowModal}>Iniciar sesión</Nav.Link>
+                </>
+              )}{" "}
               {isHome && (
                 <Nav.Link onClick={() => scrollToSection("about-section")}>
                   Nosotros
@@ -235,7 +325,6 @@ const NavBar = () => {
               <Link to="/" className="nav-link_dona">
                 Dona ahora
               </Link>
-
               {/* {isHome && (
                 <Nav.Link onClick={() => scrollToSection("work-together")}>
                   Trabaja con nosotros
@@ -262,7 +351,7 @@ const NavBar = () => {
             <Nav className="basic-navbar-nav-autentication-2">
               {isAuthenticated && user ? (
                 <>
-                  {/* <Nav.Link href="/products">Productos</Nav.Link> */}
+                  {/*                 
                   <Nav.Link href="#" className="d-flex align-items-center">
                     <img
                       src={user.picture}
@@ -279,7 +368,27 @@ const NavBar = () => {
                       Dashboard
                     </Link>
                   )}
+                  {isSocioVerified && (
+                    <Link to="/products" className="nav-link">
+                      Productos
+                    </Link>
+                  )} */}
+                  {/* Dashboard para admins */}
+                  {isAdmin && (
+                    <Link to="/dashboard" className="nav-link me-3">
+                      Dashboard
+                    </Link>
+                  )}
 
+                  {/* Perfil del usuario */}
+                  <Nav.Link className="d-flex align-items-center me-3">
+                    <img
+                      src={user.picture}
+                      alt="Profile"
+                      className="profile-picture me-2"
+                    />
+                    <span>{userFromRedux?.name || user?.name}</span>
+                  </Nav.Link>
                   <Nav.Link onClick={handleLogout}>Cerrar sesión</Nav.Link>
                 </>
               ) : (
@@ -290,7 +399,7 @@ const NavBar = () => {
         </Container>
       </Navbar>
       {/* Modal para mostrar el reCAPTCHA */}
-      {showCaptcha && (
+      {/* {showCaptcha && (
         <div className="captcha-modal">
           <div className="modal-content">
             <h2>Verificación CAPTCHA</h2>
@@ -301,7 +410,7 @@ const NavBar = () => {
             <button onClick={handleCaptchaClose}>Cerrar</button>
           </div>
         </div>
-      )}
+      )} */}
 
       <div
         className={`breadcrumbs ${isScrolling ? "scroll-hide" : "scroll-show"}`}

@@ -2,7 +2,9 @@ const express = require("express");
 const {
   registerUser,
   loginUser,
+  verifySocio,
   getAllUsers,
+  getAllNotAdmin,
   verifyToken,
   isAdmin,
   updateUserRole,
@@ -15,14 +17,19 @@ router.post("/register", registerUser);
 // Ruta para iniciar sesión (no requiere autenticación)
 router.post("/login", loginUser);
 
+// Ruta para obtener todos los usuarios (requiere autenticación y ser admin)
 router.get("/users", verifyToken, isAdmin, getAllUsers);
 
-router.put("/users/:userId", updateUserRole); // Ruta para actualizar rol de usuario
+
+// Ruta para obtener todos los usuarios (requiere autenticación)
+router.get("/usersNotAdmin", getAllNotAdmin);
+
+// Ruta para actualizar el rol de un usuario
+router.put("/users/:userId", updateUserRole);
 
 
-// Rutas protegidas que requieren verificación del token
-// router.get("/protected-route", verifyToken, (req, res) => {
-//   res.json({ message: "Acceso autorizado", user: req.user });
-// });
+
+// Ruta para verificar socio
+router.post("/verifySocio", verifySocio);
 
 module.exports = router;

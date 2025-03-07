@@ -13,6 +13,7 @@ const breadcrumbRoutes = {
   "/membershipSection": "Categorías",
   "/products": "Productos",
   "/shop": "Tienda",
+  "/socio": "Socios",
 };
 
 const Breadcrumbs = () => {
