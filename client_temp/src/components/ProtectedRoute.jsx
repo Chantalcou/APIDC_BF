@@ -27,7 +27,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const ProtectedRoute = ({ children, requiredRole }) => {
   const { isAuthenticated } = useAuth0();
-  const { user, isSocioVerified, isAdmin } = useSelector((state) => state);
+  const { user, isSocioVerified, isAdmin,getAllNotAdmin } = useSelector((state) => state);
 
   // Estados de carga
   const [loading, setLoading] = useState(true);
@@ -63,11 +63,30 @@ const ProtectedRoute = ({ children, requiredRole }) => {
   }
 
 
+  if (
+    !isAuthenticated ||
+    !getAllNotAdmin.some(
+      (u) =>
+        u.email?.toLowerCase() === user?.email?.toLowerCase() &&
+        ["gestor", "premium"].includes(u.membershipType)
+    )
+  ) {
+    console.log('funciona la ruta???????')
+    return <Navigate to="/" replace />;
+  }
+  
+
+
+
   if (!isAuthenticated) {
     return <Navigate to="/" replace />;
   }
 
   if (requiredRole === "socio" && !isSocioVerified) {
+    return <Navigate to="/no-autorizado" replace />;
+  }
+
+  if (requiredRole === "products" ) {
     return <Navigate to="/no-autorizado" replace />;
   }
 

@@ -293,8 +293,7 @@ const NavBar = () => {
                         Productos
                       </Link>
                     )}
-                  {/* Botón de logout */}
-                  <Nav.Link onClick={prueba}>PRUEBA</Nav.Link>
+
                 </>
               ) : (
                 // Sección para no autenticados

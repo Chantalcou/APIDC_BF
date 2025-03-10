@@ -223,13 +223,10 @@ export const sendWorkTogether = (formData) => async (dispatch) => {
 
 export const verifySocio = (email, id_socio) => async (dispatch) => {
   try {
-    const response = await axios.post(
-      `https://apidc-bf.onrender.com/verifySocio`,
-      {
-        email,
-        id_socio,
-      }
-    );
+    const response = await axios.post(`https://apidc-bf.onrender.com/verifySocio`, {
+      email,
+      id_socio,
+    });
     console.log("Respuesta del servidor:", response.data);
 
     if (response.data.success) {

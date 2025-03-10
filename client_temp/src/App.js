@@ -11,6 +11,7 @@ import Dashboard from "./components/Dashboard";
 import ContactForm from "./components/ContactForm";
 import ProtectedRoute from "./components/ProtectedRoute";
 import TermsAndPrivacy from "./components/TermsAndPrivacy";
+import Unauthorized from "./components/Unauthorized";
 import Newsletter from "./components/Newsletter";
 import NewsletterBanner from "./components/NewsLetterBanner";
 import { ContactOptions } from "./components/ContactOptions";
@@ -28,8 +29,17 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/membershipSection/gestor" element={<Gestor />} />
-          <Route path="/products" element={<ProductsSection />} />
+          {/* Protegemos la ruta de productos */}
+          <Route
+            path="/products"
+            element={
+              <ProtectedRoute requiredRole="products">
+                <ProductsSection />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/membershipSection" element={<MembershipComponent />} />
+          <Route path="/no-autorizado" element={<Unauthorized />} />
 
           {/* Usa ProtectedRoute en el elemento de la ruta */}
           <Route
