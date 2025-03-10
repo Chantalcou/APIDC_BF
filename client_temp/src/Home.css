@@ -52,26 +52,6 @@ body {
   z-index: 0; /* Asegura que el video esté por debajo del contenido estático */
 }
 
-/* Estilos para la imagen en dispositivos móviles */
-@media (max-width: 768px) {
-  .video-container video {
-    display: none; /* Ocultamos el video en dispositivos móviles */
-  }
-
-  .video-container::before {
-    content: "";
-    background-image: url("https://res.cloudinary.com/dqgjcfosx/image/upload/v1726325124/pexels-alesiakozik-8327011_i8crb8.jpg");
-    background-size: cover;
-    background-position: center;
-    width: 100%;
-    height: 100vh;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 0; /* Asegura que la imagen de fondo no cubra otros elementos */
-  }
-}
-
 /* Asegura que el contenido estático (textos y botones) esté encima del video e imagen */
 .static-content {
   position: absolute;
@@ -831,53 +811,6 @@ body {
   font-size: 16px;
 }
 
-/* Flexbox Layout para móviles */
-@media (max-width: 767px) {
-  /* Contenedor principal de la sección */
-  .content-about_section {
-    padding: 10px;
-  }
-
-  /* Ajustes de las columnas */
-  .content-about_section .row {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-  }
-
-  /* Estilo de las imágenes dentro de cada tarjeta */
-  .content-about_section .col-md-4 {
-    width: 100%;
-    text-align: center;
-  }
-
-  .content-about_section .circle-image {
-    width: 100%;
-    max-width: 200px;
-    height: auto;
-    border-radius: 50%;
-  }
-
-  /* Títulos */
-  .content-about_section .home-title_about_section {
-    font-size: 1.2rem;
-    color: #0a9d6d;
-    margin-top: 1rem;
-  }
-
-  /* Texto de los párrafos */
-  .content-about_section p {
-    font-size: 14px;
-    margin-top: 1rem;
-  }
-
-  /* Ajustes de los márgenes */
-  .content-about_section .col-12 {
-    margin-bottom: 30px;
-  }
-}
-
 /* Estilo general para pantallas más grandes */
 .about-section {
   position: relative;
@@ -976,3 +909,75 @@ body {
   background: #088f63;
 }
 
+
+
+
+
+/* Flexbox Layout para móviles */
+@media (max-width: 767px) {
+  /* Contenedor principal de la sección */
+  .content-about_section {
+    padding: 10px;
+  }
+
+  /* Ajustes de las columnas */
+  .content-about_section .row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  /* Estilo de las imágenes dentro de cada tarjeta */
+  .content-about_section .col-md-4 {
+    width: 100%;
+    text-align: center;
+  }
+
+  .content-about_section .circle-image {
+    width: 100%;
+    max-width: 200px;
+    height: 30vh;
+    border-radius: 50%;
+  }
+
+  /* Títulos */
+  .content-about_section .home-title_about_section {
+    font-size: 1.2rem;
+    color: #0a9d6d;
+    margin-top: 1rem;
+  }
+
+  /* Texto de los párrafos */
+  .content-about_section p {
+    font-size: 14px;
+    margin-top: 1rem;
+  }
+
+  /* Ajustes de los márgenes */
+  .content-about_section .col-12 {
+    margin-bottom: 30px;
+  }
+}
+
+
+
+/* Estilos para la imagen en dispositivos móviles */
+@media (max-width: 768px) {
+  .video-container video {
+    display: none; /* Ocultamos el video en dispositivos móviles */
+  }
+
+  .video-container::before {
+    content: "";
+    background-image: url("https://res.cloudinary.com/dqgjcfosx/image/upload/v1736181510/pexels-mccutcheon-3676962_qzkerr.jpg");
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0; /* Asegura que la imagen de fondo no cubra otros elementos */
+  }
+}
