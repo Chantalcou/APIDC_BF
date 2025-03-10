@@ -275,7 +275,7 @@ const NavBar = () => {
               {isAuthenticated ? (
                 <>
                   {/* Enlace a Socio (siempre visible para autenticados) */}
-                  <Nav.Link onClick={handleSocioRedirect}>Soy socio</Nav.Link>
+                  {/* <Nav.Link onClick={handleSocioRedirect}>Soy socio</Nav.Link> */}
                   {/* Enlace a Productos (solo para socios verificados) */}
                   {/* {isSocioVerified && (
                     <Link to="/products" className="nav-link me-3">
@@ -284,7 +284,7 @@ const NavBar = () => {
                   )}
                  */}
                   {isAuthenticated &&
-                    getAllNotAdmin.some(
+                    getAllNotAdmin?.some(
                       (u) =>
                         u.email?.toLowerCase() === user?.email?.toLowerCase() &&
                         ["gestor", "premium"].includes(u.membershipType)
@@ -293,24 +293,13 @@ const NavBar = () => {
                         Productos
                       </Link>
                     )}
-
                 </>
               ) : (
                 // Sección para no autenticados
                 <>
-                  <Nav.Link
-                    onClick={() => {
-                      handleShowModal();
-                      navigate("/socio", {
-                        state: { from: location.pathname },
-                      });
-                    }}
-                  >
-                    Soy socio
-                  </Nav.Link>
-                  <Nav.Link onClick={handleShowModal}>Iniciar sesión</Nav.Link>
+       
                 </>
-              )}{" "}
+              )}
               {isHome && (
                 <Nav.Link onClick={() => scrollToSection("about-section")}>
                   Nosotros
