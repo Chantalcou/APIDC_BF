@@ -1,42 +1,52 @@
+
+
 /* Asegúrate de que el contenedor ocupa toda la pantalla */
 .content-dashboard {
-  max-width: 900px; /* Limita el ancho del contenido */
-  height: calc(100vh - 70px); /* Calcula el espacio restante debajo del navbar (ajusta según el alto real de tu navbar) */
-  margin: 0 auto; /* Centra horizontalmente */
-  display: flex; /* Habilita flexbox */
-  flex-direction: column; /* Alinea elementos en columna */
-  justify-content: center; /* Centra verticalmente */
-  align-items: center; /* Centra horizontalmente */
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+  margin-top:100px;
   padding: 20px;
-  box-sizing: border-box; /* Incluye padding en las dimensiones del contenedor */
+  box-sizing: border-box;
+  overflow-x: auto; /* Permite scroll horizontal en móviles */
 }
 
-h2 {
-  color: #343a40;
-  margin-bottom: 20px; /* Ajusta el espaciado debajo del título */
+.table-responsive {
+  min-width: 600px; /* Ancho mínimo antes de aparecer scroll */
 }
 
-table {
-  width: 100%; /* Tabla toma todo el ancho disponible */
-  max-width: 100%; /* Evita que se desborde */
-}
+/* En móviles, ocultamos la tabla y mostramos tarjetas */
+@media (max-width: 480px) {
+  .table-container table {
+    display: none; /* Oculta la tabla */
+  }
+  
+  .user-card {
+    border: 1px solid #ddd;
+    background: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  }
 
-thead {
-  background-color: #343a40;
-  color: white;
-}
+  .user-card h3 {
+    margin: 0;
+    font-size: 18px;
+  }
 
-td,
-th {
-  text-align: center;
-  padding: 10px;
-}
+  .user-card p {
+    margin: 4px 0;
+    font-size: 14px;
+  }
 
-table.table-striped tbody tr:nth-of-type(odd) {
-  background-color: #f2f2f2;
-}
+  .checkbox-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
 
-.table-bordered td,
-.table-bordered th {
-  border: 1px solid #dee2e6;
+  .checkbox-container label {
+    font-size: 12px;
+  }
 }

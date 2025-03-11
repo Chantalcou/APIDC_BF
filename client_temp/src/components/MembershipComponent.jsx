@@ -99,7 +99,8 @@ const MembershipComponent = () => {
           <div className="card">
             <h2 className="card-title">Socio con Reprocan</h2>
             <p className="card-subtitle">
-              Cultiva tu medicina con respaldo legal.
+            Realizá tus cultivos en nuestras instalaciones
+            Delegá el servicio de atención a tus cultivos con costos específicos dependiendo tu preferencia
             </p>
             <p className="price-container">
               <span className="price-old">$200.000</span>
@@ -122,7 +123,7 @@ const MembershipComponent = () => {
           <div className="card">
             <h2 className="card-title">Gestor</h2>
             <p className="card-subtitle">
-              Hacete parte de un movimiento que transforma vidas.
+            Comisiones de gestión y contención al socio adherente.
             </p>
             <p className="price-container">
               <span className="price-old">$300.000</span>
