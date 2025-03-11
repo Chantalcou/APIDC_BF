@@ -1,108 +1,125 @@
-/* Products Section */
-.products-section {
-  padding: 4rem 2rem;
-  background-color: #ffffff;
-  margin-top: 110px;
-}
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  text-align: center;
-}
+/* Container for the product section */
 
-.section-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 2rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: #000;
-}
-
-/* Product Grid */
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Tres columnas */
-  gap: 2rem;
-  padding: 0 1rem;
+  grid-template-columns: repeat(4, 1fr); /* 4 cards per row on larger screens */
+  gap: 20px;
+  margin-top: 30px;
 }
 
 .product-card {
-  position: relative;
+  background: #fff;
+  border-radius: 8px;
   overflow: hidden;
-  border-radius: 12px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
 }
 
 .product-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-10px);
 }
 
-/* Image Container */
 .image-container {
+  width: 100%;
+  height: 200px;
   overflow: hidden;
-  /* border-radius: 12px; */
-  position: relative;
 }
 
 .product-image {
   width: 100%;
-  height: 300px;
+  height: 100%;
   object-fit: cover;
-  transition: transform 0.4s ease;
 }
 
-.product-card:hover .product-image {
-  transform: scale(1.1);
-}
-
-/* Product Info */
 .product-info {
-  margin-top: 1rem;
-  text-align: center;
+  padding: 15px;
 }
 
 .product-title {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin: 0.5rem 0;
-  color: #333;
+  font-size: 3rem;
+  margin-bottom: 10px;
+  color: #ffff;
 }
 
 .product-description {
   font-size: 1rem;
-  color: #666;
-  margin: 0;
-  padding: 10px 10px;
-  text-align: justify;
-}
-.product-title {
-  color: #ffff;
-  font-size: 3rem;
-  text-align: center;
-  /* text-align: justify; */
+  color: #555;
 }
 
-.custom-scroll-arrow_products {
-  color: white !important; /* Color predeterminado */
-  font-size: 2rem; /* Ajusta el tamaño si es necesario */
-  transition: color 0.3s ease; /* Transición suave */
-}
-.custom-scroll-arrow_products:hover {
-  color: #0a9d6d;
-}
-/* Responsiveness */
-@media (max-width: 768px) {
+/* Make the grid responsive */
+@media screen and (max-width: 1200px) {
   .products-grid {
-    grid-template-columns: repeat(2, 1fr); /* Dos columnas en tablets */
+    grid-template-columns: repeat(3, 1fr); /* 3 cards per row on medium screens */
   }
 }
 
-@media (max-width: 480px) {
+@media screen and (max-width: 768px) {
   .products-grid {
-    grid-template-columns: 1fr; /* Una columna en móviles */
+    grid-template-columns: repeat(2, 1fr); /* 2 cards per row on smaller screens */
   }
+}
+
+@media screen and (max-width: 480px) {
+  .products-grid {
+    grid-template-columns: 1fr; /* 1 card per row on very small screens */
+  }
+
+  .product-title {
+    font-size: 1.1rem; /* Adjust title size for smaller screens */
+  }
+
+  .product-description {
+    font-size: 0.9rem; /* Adjust description size for smaller screens */
+  }
+}
+.cultivo-filters {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.cultivo-filter {
+  background-color: #0a9d6d;
+  color: white;
+  font-size: 1.1rem;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease-in-out;
+}
+
+.cultivo-filter:hover {
+  background-color: #079d5c;
+  transform: scale(1.1);
+}
+
+.cultivo-filter.active {
+  background-color: #f7d046;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.cultivo-filter .cultivo-icon {
+  font-size: 1.5rem;
+  transition: transform 0.3s;
+}
+
+.cultivo-filter.active .cultivo-icon {
+  transform: rotate(360deg);
+}
+
+.cultivo-filter span {
+  font-weight: bold;
+}
+
+
+.product-description {
+  font-size: 1rem;
+  color: #555;
 }

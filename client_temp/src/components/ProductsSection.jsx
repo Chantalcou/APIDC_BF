@@ -6,12 +6,57 @@ import "./ProductsSection.css";
 
 const ProductsSection = () => {
   const [loading, setLoading] = useState(true);
+  const [activeCultivo, setActiveCultivo] = useState("all"); // Estado inicial para mostrar todos los productos
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   const handleImageLoad = () => {
-    // Temporizador para garantizar que el spinner dure al menos 2 segundos
     setTimeout(() => {
-      setLoading(false); // Cambia el estado para ocultar el spinner
-    }, 2000); // 2000 ms (2 segundos)
+      setLoading(false);
+    }, 2000);
+  };
+
+  const cultivos = {
+    indoor: {
+      name: "Indoor",
+      description: "Cultivo en interiores con control total del ambiente.",
+      icon: "🏠",
+      products: [
+        {
+          image:
+            "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993399/pexels-kindelmedia-7773109_jh0l6n.jpg",
+          title: "White Widow",
+          description: "Híbrido equilibrado con efectos relajantes.",
+        },
+      ],
+    },
+    outdoor: {
+      name: "Outdoor",
+      description: "Cultivo en exteriores con luz natural.",
+      icon: "🌞",
+      products: [
+        {
+          image:
+            "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993398/pexels-perfect-lens-6536878_exlrcm.jpg",
+          title: "Blue Dream",
+          description: "Híbrido con efectos eufóricos y calmantes.",
+        },
+        // Otros productos outdoor...
+      ],
+    },
+    greenhouse: {
+      name: "Greenhouse",
+      description: "Cultivo en invernaderos con luz controlada.",
+      icon: "🌿",
+      products: [
+        {
+          image:
+            "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993398/pexels-printexstar-11652812_uuesob.jpg",
+          title: "OG Kush",
+          description: "Potente y relajante, con sabor a tierra y cítricos.",
+        },
+        // Otros productos greenhouse...
+      ],
+    },
   };
 
   const products = [
@@ -20,42 +65,120 @@ const ProductsSection = () => {
         "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993399/pexels-kindelmedia-7773109_jh0l6n.jpg",
       title: "White Widow",
       description:
-        "Una de las variedades más populares, conocida por su alto contenido de resina y efectos equilibrados. Es famosa por su potencia, sabor terroso y afrutado, y efectos relajantes.",
+        "Una de las variedades más populares, conocida por su alto contenido de resina y efectos equilibrados.",
+      cultivo: "outdoor", // Relacionamos el producto con outdoor
+    },
+    {
+      image:
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1737993398/pexels-perfect-lens-12967923_lgn2au.jpg",
+      title: "White Widow",
+      description:
+        "Una de las variedades más populares, conocida por su alto contenido de resina y efectos equilibrados.",
+      cultivo: "outdoor", // Relacionamos el producto con outdoor
+    },
+    {
+      image:
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1737993398/pexels-perfect-lens-6536878_exlrcm.jpg",
+      title: "White Widow",
+      description:
+        "Una de las variedades más populares, conocida por su alto contenido de resina y efectos equilibrados.",
+      cultivo: "outdoor", // Relacionamos el producto con outdoor
+    },
+    {
+      image:
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1737993398/pexels-perfect-lens-8263955_fg8e94.jpg",
+      title: "White Widow",
+      description:
+        "Una de las variedades más populares, conocida por su alto contenido de resina y efectos equilibrados.",
+      cultivo: "outdoor", // Relacionamos el producto con outdoor
+    },
+    {
+      image:
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993399/pexels-kindelmedia-7773109_jh0l6n.jpg",
+      title: "White Widow",
+      description:
+        "Una de las variedades más populares, conocida por su alto contenido de resina y efectos equilibrados.",
+      cultivo: "outdoor", // Relacionamos el producto con outdoor
     },
     {
       image:
         "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993398/pexels-perfect-lens-6536878_exlrcm.jpg",
       title: "Blue Dream",
       description:
-        "Híbrida entre la Blueberry y la Haze, esta cepa es conocida por sus efectos eufóricos y calmantes. Es ideal para aliviar el estrés y la ansiedad, con un sabor dulce y afrutado.",
+        "Híbrida entre la Blueberry y la Haze, esta cepa es conocida por sus efectos eufóricos y calmantes.",
+      cultivo: "greenhouse",
+    },
+    {
+      image:
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993398/pexels-perfect-lens-6536878_exlrcm.jpg",
+      title: "Blue Dream",
+      description:
+        "Híbrida entre la Blueberry y la Haze, esta cepa es conocida por sus efectos eufóricos y calmantes.",
+      cultivo: "greenhouse",
+    },
+    {
+      image:
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993398/pexels-perfect-lens-6536878_exlrcm.jpg",
+      title: "Blue Dream",
+      description:
+        "Híbrida entre la Blueberry y la Haze, esta cepa es conocida por sus efectos eufóricos y calmantes.",
+      cultivo: "greenhouse",
+    },
+    {
+      image:
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993398/pexels-perfect-lens-6536878_exlrcm.jpg",
+      title: "Blue Dream",
+      description:
+        "Híbrida entre la Blueberry y la Haze, esta cepa es conocida por sus efectos eufóricos y calmantes.",
+      cultivo: "greenhouse",
+    },
+    {
+      image:
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993398/pexels-perfect-lens-6536878_exlrcm.jpg",
+      title: "Blue Dream",
+      description:
+        "Híbrida entre la Blueberry y la Haze, esta cepa es conocida por sus efectos eufóricos y calmantes.",
+      cultivo: "greenhouse",
     },
     {
       image:
         "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993398/pexels-printexstar-11652812_uuesob.jpg",
       title: "OG Kush",
       description:
-        "Esta variedad es famosa por su potencia y efectos relajantes. Tiene un perfil de sabor a tierra y cítricos, y es utilizada por quienes buscan alivio para el dolor y la ansiedad.",
+        "Esta variedad es famosa por su potencia y efectos relajantes. Tiene un perfil de sabor a tierra y cítricos.",
+      cultivo: "indoor",
     },
     {
       image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993398/pexels-perfect-lens-8263955_fg8e94.jpg",
-      title: "Northern Lights",
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993398/pexels-printexstar-11652812_uuesob.jpg",
+      title: "OG Kush",
       description:
-        "Conocida por su resistencia y facilidad de cultivo, esta variedad índica tiene efectos profundamente relajantes. Su sabor es dulce y terroso, y es perfecta para la relajación nocturna.",
+        "Esta variedad es famosa por su potencia y efectos relajantes. Tiene un perfil de sabor a tierra y cítricos.",
+      cultivo: "indoor",
     },
     {
       image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993398/pexels-perfect-lens-12967923_lgn2au.jpg",
-      title: "Amnesia Haze",
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993398/pexels-printexstar-11652812_uuesob.jpg",
+      title: "OG Kush",
       description:
-        "Una variedad sativa que produce efectos cerebrales energizantes. Su sabor cítrico y afrutado la convierte en una opción popular entre quienes buscan elevar su ánimo y creatividad.",
+        "Esta variedad es famosa por su potencia y efectos relajantes. Tiene un perfil de sabor a tierra y cítricos.",
+      cultivo: "indoor",
     },
     {
       image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993398/pexels-perfect-lens-6536878_exlrcm.jpg",
-      title: "Green Crack",
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993398/pexels-printexstar-11652812_uuesob.jpg",
+      title: "OG Kush",
       description:
-        "Conocida por su efecto energizante, esta sativa es excelente para aumentar la productividad y la concentración. Tiene un sabor fresco y afrutado, ideal para empezar el día con energía.",
+        "Esta variedad es famosa por su potencia y efectos relajantes. Tiene un perfil de sabor a tierra y cítricos.",
+      cultivo: "indoor",
+    },
+    {
+      image:
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993398/pexels-printexstar-11652812_uuesob.jpg",
+      title: "OG Kush",
+      description:
+        "Esta variedad es famosa por su potencia y efectos relajantes. Tiene un perfil de sabor a tierra y cítricos.",
+      cultivo: "indoor",
     },
   ];
 
@@ -107,32 +230,60 @@ const ProductsSection = () => {
             Nuestros Productos
           </h2>
 
-          {/* Mostrar el spinner mientras se cargan las imágenes */}
           {loading && <LittleSpinner />}
 
-          <div id="products" className="products-grid">
-            {products.map((product, index) => (
-              <div className="product-card" key={index}>
-                <div className="image-container">
-                  <img
-                    src={product.image}
-                    alt={product.title}
-                    className="product-image"
-                    onLoad={handleImageLoad} // Al cargar la imagen, se cambia el estado
-                    loading="lazy" // Carga perezosa
-                  />
-                </div>
-                <div className="product-info">
-                  <h3
-                    className="product-title"
-                    style={{ color: "#0a9d6d", fontSize: "2rem" }}
-                  >
-                    {product.title}
-                  </h3>
-                  <p className="product-description">{product.description}</p>
-                </div>
-              </div>
+          <div className="cultivo-filters">
+            <button
+              className={`cultivo-filter ${
+                activeCultivo === "all" ? "active" : ""
+              }`}
+              onClick={() => setActiveCultivo("all")}
+            >
+              Ver Todos
+            </button>
+            {Object.keys(cultivos).map((key) => (
+              <button
+                key={key}
+                className={`cultivo-filter ${
+                  activeCultivo === key ? "active" : ""
+                }`}
+                onClick={() => setActiveCultivo(key)}
+              >
+                <span className="cultivo-icon">{cultivos[key].icon}</span>
+                <span className="cultivo-name">{cultivos[key].name}</span>
+              </button>
             ))}
+          </div>
+
+          <div id="products" className="products-grid">
+            {products
+              .filter(
+                (product) =>
+                  activeCultivo === "all" || product.cultivo === activeCultivo
+              ) // Mostrar todos si el filtro es "all"
+              .map((product, index) => (
+                <div className="product-card" key={index}>
+                  <div className="image-container">
+                    <img
+                      src={product.image}
+                      alt={product.title}
+                      className="product-image"
+                      onLoad={handleImageLoad}
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="product-info">
+                    <h3
+                      className="product-title"
+                      style={{ color: "#0a9d6d", fontSize: "2rem" }}
+                    >
+                      {product.title}
+                    </h3>
+                    <p className="product-description">{product.description}</p>
+                    <p  className="product-description" style={{color: "#0a9d6d"}}>{product.cultivo}</p>
+                  </div>
+                </div>
+              ))}
           </div>
         </div>
       </section>
