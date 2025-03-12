@@ -223,27 +223,12 @@
   border: none;
   border-radius: 25px;
   font-size: 1.1rem;
-  margin:auto;
+  margin: auto;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 10px;
   margin-top: 20px;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .product-detail-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .main-image {
-    height: 200px; /* Ajusta la altura de la imagen en dispositivos móviles */
-  }
-
-  .modal-content_products {
-    padding: 20px;
-  }
 }
 
 .modal-open {
@@ -318,7 +303,6 @@
   gap: 20px; /* Espaciado entre imagen y texto */
 }
 
-
 .info-section {
   display: flex;
   flex-direction: column;
@@ -346,11 +330,115 @@
   transform: scale(1.02); /* Escala ligeramente la imagen al pasar el mouse */
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); /* Aumenta la sombra para un efecto de elevación */
 }
+/* Media Queries Corregidas */
+@media (max-width: 1200px) {
+  .products-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 
-/* Ajustes para dispositivos móviles */
+@media (max-width: 992px) {
+  .product-title {
+    font-size: 2rem;
+  }
+
+  .cultivo-filter {
+    font-size: 1rem;
+    padding: 8px 15px;
+  }
+}
+
 @media (max-width: 768px) {
-  .botanical-illustration {
-    max-width: 100%; /* Ajusta el ancho máximo en dispositivos pequeños */
-    margin: 15px 0; /* Reduce el margen en móviles */
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .product-title {
+    font-size: 1.5rem;
+  }
+
+  .product-image_products {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .image-info-container {
+    flex-direction: column;
+  }
+
+  .info-section {
+    gap: 30px;
+    max-width: 100%;
+  }
+
+  .modal-content_products {
+    width: 95%;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .product-title {
+    font-size: 1.3rem;
+  }
+
+  .cultivo-filters {
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cultivo-filter {
+    flex: 1 1 48%;
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
+
+  .info-section {
+    gap: 20px;
+    font-size: 13px;
+  }
+
+  .section-item strong {
+    font-size: 14px;
+  }
+
+  .whatsapp-button_products {
+    padding: 12px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-card {
+    width: 80vw;
+  }
+  .product-title {
+    font-size: 1.2rem;
+  }
+
+  .product-description {
+    font-size: 0.85rem;
+  }
+
+  .main-image {
+    max-height: 250px;
+  }
+
+  .close-modal_products {
+    top: 5px;
+    right: 5px;
+    font-size: 1.5rem;
+  }
+
+  .cultivo-filters {
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
   }
 }
