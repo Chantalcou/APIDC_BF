@@ -7,7 +7,7 @@ import ButtonComponent from "./components/Button";
 import { useSelector, useDispatch } from "react-redux";
 import { Helmet } from "react-helmet-async"; //Optimizacion SEO
 import { useAuth0 } from "@auth0/auth0-react";
-import { FaArrowRight, FaSeedling, FaClipboardCheck } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
 import LoginModal from "./components/LoginModal.jsx";
 import ContactInfo from "./components/ContactInfo.jsx";
 import MovingBanner from "./components/MovingBanner.jsx";
@@ -17,7 +17,6 @@ import SpinnerComponent from "./components/SpinnerComponent.jsx";
 import Donations from "./components/Donations.jsx";
 // Librerias de aniamcion
 import AOS from "aos";
-import { ParallaxProvider, Parallax } from "react-scroll-parallax";
 import "aos/dist/aos.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";

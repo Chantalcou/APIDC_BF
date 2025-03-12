@@ -277,13 +277,133 @@
 }
 
 /* Responsive */
-@media (max-width: 480px) {
-  .modal-content {
+/* Añade estos media queries al final de tu CSS */
+@media (max-width: 768px) {
+  .donation-background_image {
+    width: 100%;
+    min-height: auto;
+    padding: 1rem 1rem;
+  }
+
+  .donacion-container {
+    padding: 2rem 1rem;
+    margin: 1rem auto;
+  }
+
+  .donacion-titulo {
+    font-size: 1.8rem;
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+
+  .icono-titulo {
+    font-size: 1.8rem;
+  }
+
+  .donacion-subtitulo {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+
+  .razones-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .razon-card {
     padding: 1.5rem;
+    margin: 0 0.5rem;
+  }
+
+  .razon-indicador {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+
+  .razon-content h3 {
+    font-size: 1.1rem;
+  }
+
+  .razon-content p {
+    font-size: 0.9rem;
+  }
+
+  .donar-button {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .button-badge {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+  }
+
+  .garantia-text {
+    flex-wrap: wrap;
+    font-size: 0.8rem;
+    text-align: center;
+    margin-top: 20px;
+    gap: 0.3rem;
+    padding: 0 1rem;
+  }
+
+  /* Modal adjustments */
+  .modal-content {
+    width: 95%;
+    padding: 1.5rem;
+  }
+
+  .bank-details {
+    padding: 1rem;
   }
 
   .cbu-container {
     flex-direction: column;
     align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .copy-button {
+    width: 100%;
+    justify-content: center;
+    padding: 0.5rem;
+  }
+
+  .whatsapp-button {
+    font-size: 0.9rem;
+    padding: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .donacion-titulo {
+    font-size: 1.5rem;
+  }
+
+  .donacion-subtitulo {
+    font-size: 0.9rem;
+  }
+
+  .razon-card {
+    padding: 1rem;
+  }
+
+  .razon-indicador {
+    width: 45px;
+    height: 45px;
+    font-size: 1rem;
+  }
+
+  .modal-content {
+    padding: 1rem;
+  }
+
+  .bank-details p {
+    font-size: 0.9rem;
   }
 }
