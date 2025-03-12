@@ -1,8 +1,23 @@
+/* Añade estos estilos al CSS existente */
 .donacion-container {
   padding: 3rem 1.5rem;
+
   border-radius: 20px;
   max-width: 1200px;
   margin: 2rem auto;
+}
+.donation-background_image {
+  background-image: url("https://res.cloudinary.com/dqgjcfosx/image/upload/v1740748433/Dise%C3%B1o_sin_t%C3%ADtulo_5_s272n0.png");
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  width: 50%; 
+  min-height: 50vh; 
+  display: flex;
+  
+  align-items: center;
+  justify-content: center;
+  margin: auto;
 }
 
 .donacion-header {
@@ -155,5 +170,120 @@
 
   .razones-grid {
     grid-template-columns: 1fr;
+  }
+}
+/* Modal de transferencia */
+.transfer-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+}
+
+.close-modal {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #4a6352;
+}
+
+.bank-details {
+  margin: 1.5rem 0;
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 10px;
+}
+
+.bank-details p {
+  margin: 0.8rem 0;
+  color: #1a4720;
+}
+
+.cbu-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
+  background: #ffffff;
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+}
+
+.copy-button {
+  background: #2e7d32;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.3s ease;
+}
+
+.copy-button:hover {
+  background: #1b5e20;
+}
+
+.whatsapp-button {
+  background: #25d366;
+  color: white;
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  transition: transform 0.3s ease;
+}
+
+.whatsapp-button:hover {
+  transform: scale(1.02);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .modal-content {
+    padding: 1.5rem;
+  }
+
+  .cbu-container {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }

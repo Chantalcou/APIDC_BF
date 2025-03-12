@@ -14,6 +14,7 @@ const breadcrumbRoutes = {
   "/products": "Productos",
   "/shop": "Tienda",
   "/socio": "Socios",
+  "/newsLetter":"News Letter"
 };
 
 const Breadcrumbs = () => {

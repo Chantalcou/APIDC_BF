@@ -14,7 +14,6 @@ import MovingBanner from "./components/MovingBanner.jsx";
 import { WorkTogether } from "./components/WorkTogether.jsx";
 import SeccionAs from "./components/SeccionAs.jsx";
 import SpinnerComponent from "./components/SpinnerComponent.jsx";
-import NewsletterBanner from "./components/NewsLetterBanner.jsx";
 import Donations from "./components/Donations.jsx";
 // Librerias de aniamcion
 import AOS from "aos";
@@ -52,9 +51,9 @@ const Home = () => {
   // ANIMACION
   useEffect(() => {
     AOS.init({
-      duration: 1000, // Duración de las animaciones
-      easing: "ease-in-out", // Efecto de animación
-      once: true, // La animación ocurre solo una vez cuando el elemento entra en la vista
+      duration: 1000, 
+      easing: "ease-in-out", 
+      once: true, 
     });
   }, []);
 
@@ -410,6 +409,7 @@ const Home = () => {
           </div>
         </div> */}
       </div>
+      <div id="donate-now"></div>
       <Donations />
       <div id="asociarme-section"></div>
       <SeccionAs />
@@ -456,12 +456,12 @@ const Home = () => {
                   </div> */}
           </div>
         </section>
-        <div className="static-content d-flex flex-column justify-content-center align-items-center mt-5 h-100 position-relative">
+        {/* <div className="static-content d-flex flex-column justify-content-center align-items-center mt-5 h-100 position-relative">
           <ScrollArrow
             onClick={() => scrollToSection("present-section")}
             // color=" #202020"
           />
-        </div>
+        </div> */}
       </div>
       <WorkTogether />
       <MovingBanner />

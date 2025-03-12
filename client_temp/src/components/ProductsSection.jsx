@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ScrollArrow from "./ScrollArrow.jsx";
 import LittleSpinner from "./LittleSpinner.jsx";
 import $ from "jquery";
+import SpinnerComponent from "./SpinnerComponent.jsx";
 import "./ProductsSection.css";
 
 const ProductsSection = () => {
@@ -182,6 +183,16 @@ const ProductsSection = () => {
     },
   ];
 
+  const openProductDetail = (product) => {
+    setSelectedProduct(product);
+    document.body.classList.add("modal-open"); // Bloquear scroll del fondo
+  };
+
+  const closeProductDetail = () => {
+    setSelectedProduct(null);
+    document.body.classList.remove("modal-open");
+  };
+
   const scrollToSection = (sectionId) => {
     $("html, body").animate(
       {
@@ -190,13 +201,17 @@ const ProductsSection = () => {
       1000
     );
   };
-
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
+  
   return (
     <>
+      {loading ? (
+        <SpinnerComponent />
+      ) : (
+            
       <div className="container-fluid p-0 main-content">
         <div className="video-container">
           <video autoPlay muted loop className="home-bg-video">
@@ -220,6 +235,7 @@ const ProductsSection = () => {
           </div>
         </div>
       </div>
+      )}
 
       <section id="product-section" className="products-section">
         <div className="container">
@@ -262,7 +278,11 @@ const ProductsSection = () => {
                   activeCultivo === "all" || product.cultivo === activeCultivo
               ) // Mostrar todos si el filtro es "all"
               .map((product, index) => (
-                <div className="product-card" key={index}>
+                <div
+                  className="product-card"
+                  key={index}
+                  onClick={() => openProductDetail(product)}
+                >
                   <div className="image-container">
                     <img
                       src={product.image}
@@ -280,15 +300,121 @@ const ProductsSection = () => {
                       {product.title}
                     </h3>
                     <p className="product-description">{product.description}</p>
-                    <p  className="product-description" style={{color: "#0a9d6d"}}>{product.cultivo}</p>
+                    <p
+                      className="product-description"
+                      style={{ color: "#0a9d6d" }}
+                    >
+                      {product.cultivo}
+                    </p>
                   </div>
                 </div>
               ))}
           </div>
         </div>
       </section>
-    </>
-  );
-};
+      {/* Product Detail Modal */}
+      {selectedProduct && (
+        <div className="product-detail-modal">
+          <div className="modal-content_products">
+            <div className="product-detail-grid">
+                <h2>{selectedProduct.title}</h2>
+              <div className="product-images">
+                <img
+                  src={selectedProduct.image}
+                  alt={selectedProduct.title}
+                  className="main-image"
+                />
+              </div>
+
+              <div className="product-info">
+                <div className="specifications">
+                  <div className="spec-item">
+                    <span className="spec-label">Tipo de cultivo:</span>
+                    <span className="spec-value">
+                      {selectedProduct.cultivo}
+                    </span>
+                  </div>
+                  <div className="spec-item">
+                    <span className="spec-label">THC:</span>
+                    <div className="spec-bar">
+                      <div
+                        className="bar-fill"
+                        style={{ width: `${selectedProduct.thc || "60%"}` }}
+                      ></div>
+                    </div>
+                  </div>
+                  <div className="spec-item">
+                    <span className="spec-label">CBD:</span>
+                    <div className="spec-bar">
+                      <div
+                        className="bar-fill"
+                        style={{ width: `${selectedProduct.cbd || "15%"}` }}
+                      ></div>
+                      </div>
+                      </div>
+                      </div>
+                      
+                <div className="description">
+                  <h3>Costo productivo</h3>
+                  <p>
+                    {selectedProduct.fullDescription ||
+                      selectedProduct.description}
+                  </p>
+                  <div className="image-info-container">
+                    <img
+                      src="https://res.cloudinary.com/dqgjcfosx/image/upload/v1741792652/A%C3%B1adir_un_t%C3%ADtulo_sbb4rz.png"
+                      alt={selectedProduct.title}
+                      className="product-image_products"
+                    />
+                    <div className="info-section">
+                      <div className="section-item">
+                        <strong>Parte alta</strong>
+                        <p>
+                          Son las flores más expuestas a la luz y suelen ser las
+                          más densas y potentes.
+                        </p>
+                      </div>
+                      <div className="section-item">
+                        <strong>Parte media</strong>
+                        <p>
+                          Estas flores reciben luz indirecta y tienen un tamaño
+                          intermedio.
+                        </p>
+                      </div>
+                      <div className="section-item">
+                        <strong>Parte baja</strong>
+                        <p>
+                          Son los cogollos menos desarrollados, ya que reciben
+                          menos luz.
+                          </p>
+                          </div>
+                          </div>
+                          </div>
+                          </div>
+
+                <button
+                  className="whatsapp-button_products"
+                  onClick={() =>
+                    window.open(
+                      `https://wa.me/+549TU_NUMERO?text=Hola, quiero más información sobre: ${selectedProduct.title}`
+                    )
+                  }
+                >
+                  Consultar por WhatsApp
+                </button>
+              </div>
+              <button
+              className="close-modal_products"
+                onClick={() => setSelectedProduct(null)}
+              >
+                &times;
+                </button>
+                </div>
+                </div>
+                </div>
+              )}
+              </>
+            );
+          };
 
 export default ProductsSection;

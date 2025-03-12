@@ -44,10 +44,9 @@ const JWKS = createRemoteJWKSet(new URL(jwksUri)); // Configuramos JWKS para el 
 //   }
 // };
 
-
 const verifyToken = (req, res, next) => {
   const token = req.headers.authorization?.split(" ")[1]; // "Bearer <token>"
-  
+
   if (!token) {
     return res.status(401).json({ message: "Token no proporcionado" });
   }
@@ -154,37 +153,32 @@ const loginUser = async (req, res) => {
   }
 };
 
-
 const getAllUsers = async (req, res) => {
-  console.log('entra aca????')
+  console.log("entra aca????");
   try {
     const users = await User.findAll({
       attributes: ["id", "name", "email", "isAdmin", "membershipType"],
     });
-    console.log(users,'DESDE EL BACKEND USERS');
+    console.log(users, "DESDE EL BACKEND USERS");
     res.status(200).json(users);
   } catch (error) {
     console.error("Error al obtener usuarios:", error);
     res.status(500).json({ message: "Error al obtener usuarios" });
   }
 };
-
 
 const getAllNotAdmin = async (req, res) => {
-  console.log('entra aca????')
   try {
     const users = await User.findAll({
       attributes: ["id", "name", "email", "isAdmin", "membershipType"],
     });
-    console.log(users,'DESDE EL BACKEND USERS');
+
     res.status(200).json(users);
   } catch (error) {
     console.error("Error al obtener usuarios:", error);
     res.status(500).json({ message: "Error al obtener usuarios" });
   }
 };
-
-
 
 // Eliminar usuario por email
 const deleteUserByEmail = async (req, res) => {

@@ -293,12 +293,19 @@ const NavBar = () => {
                         Productos
                       </Link>
                     )}
+                  {isAuthenticated &&
+                    getAllNotAdmin?.some(
+                      (u) =>
+                        u.email?.toLowerCase() === user?.email?.toLowerCase() &&
+                        ["gestor", "premium"].includes(u.membershipType)
+                    ) && (
+                      <Link to="/newsLetter" className="nav-link me-3">
+                        NesLetter
+                      </Link>
+                    )}
                 </>
               ) : (
-                // Sección para no autenticados
-                <>
-       
-                </>
+                <></>
               )}
               {isHome && (
                 <Nav.Link onClick={() => scrollToSection("about-section")}>
@@ -310,14 +317,14 @@ const NavBar = () => {
                   Asociate
                 </Nav.Link>
               )}
-              <Link to="/" className="nav-link_dona">
-                Dona ahora
-              </Link>
-              {/* {isHome && (
-                <Nav.Link onClick={() => scrollToSection("work-together")}>
-                  Trabaja con nosotros
-                </Nav.Link>
-              )} */}
+
+              {isHome && (
+                <Nav.Link onClick={() => scrollToSection("donate-now")} className="nav-link_dona">
+               
+                  Dona ahora
+                  </Nav.Link>
+              )}
+
               <Link to="/shop" className="nav-link">
                 Tienda
               </Link>

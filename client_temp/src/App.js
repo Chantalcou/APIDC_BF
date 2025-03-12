@@ -29,7 +29,16 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/membershipSection/gestor" element={<Gestor />} />
-          {/* Protegemos la ruta de productos */}
+          {/* Rutas NewsLetter y products protegidas*/}
+     
+          <Route
+            path="/newsletter"
+            element={
+              <ProtectedRoute requiredRole="newsletter">
+                <Newsletter />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/products"
             element={
@@ -68,7 +77,6 @@ const App = () => {
             path="/membershipSection/socioSinReprocan"
             element={<SocioSinReprocan />}
           />
-          <Route path="/newsletter" element={<Newsletter />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/termsAndPrivacy" element={<TermsAndPrivacy />} />
         </Routes>
