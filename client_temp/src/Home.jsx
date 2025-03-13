@@ -11,6 +11,7 @@ import { FaArrowRight } from "react-icons/fa";
 import LoginModal from "./components/LoginModal.jsx";
 import ContactInfo from "./components/ContactInfo.jsx";
 import MovingBanner from "./components/MovingBanner.jsx";
+import Reprocan from "./components/Reprocan.jsx";
 import { WorkTogether } from "./components/WorkTogether.jsx";
 import SeccionAs from "./components/SeccionAs.jsx";
 import SpinnerComponent from "./components/SpinnerComponent.jsx";
@@ -50,9 +51,9 @@ const Home = () => {
   // ANIMACION
   useEffect(() => {
     AOS.init({
-      duration: 1000, 
-      easing: "ease-in-out", 
-      once: true, 
+      duration: 1000,
+      easing: "ease-in-out",
+      once: true,
     });
   }, []);
 
@@ -462,6 +463,7 @@ const Home = () => {
           />
         </div> */}
       </div>
+      <Reprocan/>
       <WorkTogether />
       <MovingBanner />
 
