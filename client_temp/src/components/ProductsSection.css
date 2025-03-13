@@ -1,8 +1,157 @@
-/* Container for the product section */
+/* ProductsSection.css */
+
+/* Contenedor principal */
+.products-section {
+  background-color: #000000;
+  padding: 4rem 0;
+}
+
+/* Tarjetas de productos */
+.product-card {
+  background: #0a0a0a;
+  border: 1px solid rgba(218, 165, 32, 0.3);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  border-color: #D4AF37;
+  box-shadow: 0 10px 15px -3px rgba(218, 165, 32, 0.2);
+}
+
+/* Títulos y texto */
+.product-title {
+  color: #D4AF37 !important;
+  font-family: 'Avenir Next', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+}
+
+.product-description {
+  color: #c0c0c0 !important;
+  font-family: 'IBM Plex Sans', sans-serif;
+  line-height: 1.6;
+}
+
+/* Filtros */
+.cultivo-filters {
+  border-bottom: 2px solid #D4AF37;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.cultivo-filter {
+  background: rgba(212, 175, 55, 0.1);
+  color: #D4AF37;
+  border: 1px solid #D4AF37;
+  transition: all 0.3s ease;
+}
+
+.cultivo-filter.active {
+  background: #D4AF37;
+  color: #000;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+}
+
+/* Modal */
+.product-detail-modal {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.modal-content_products {
+  background: #111111;
+  border: 1px solid #D4AF37;
+  color: #D4AF37;
+}
+
+.close-modal_products {
+  color: #D4AF37;
+  transition: all 0.3s ease;
+}
+
+.close-modal_products:hover {
+  transform: scale(1.2);
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+/* Barras de especificaciones */
+.spec-bar {
+  background: #2a2a2a;
+}
+
+.bar-fill {
+  background: linear-gradient(90deg, #D4AF37, #FFD700);
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+}
+
+/* Botón de WhatsApp */
+.whatsapp-button_products {
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  color: #000;
+  border: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.whatsapp-button_products:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(18, 140, 126, 0.4);
+}
+
+/* Efecto metálico para títulos */
+@keyframes metallic-shine {
+  0% { text-shadow: 0 0 10px rgba(212, 175, 55, 0.3); }
+  50% { text-shadow: 0 0 20px rgba(212, 175, 55, 0.6); }
+  100% { text-shadow: 0 0 10px rgba(212, 175, 55, 0.3); }
+}
+
+.product-title {
+  animation: metallic-shine 3s ease-in-out infinite;
+}
+
+/* Mejoras responsive */
+@media (max-width: 768px) {
+  .product-card {
+    margin: 0 10px;
+  }
+  
+  .product-title {
+    font-size: 1.5rem;
+  }
+  
+  .cultivo-filter {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 cards per row on larger screens */
+  grid-template-columns: repeat(4, 1fr); /* 4 cards por ancho de pantalla*/
   gap: 20px;
   margin-top: 30px;
 }
@@ -47,36 +196,47 @@
   color: #555;
 }
 
-/* Make the grid responsive */
+/* Image card */
+.image-container_card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 200px; /* Mantén la altura definida */
+  overflow: hidden;
+}
+
+.product-image_card {
+  max-width: 100%;
+  max-height: 164%;
+  object-fit: contain; /* Cambiar a 'contain' en lugar de 'cover' */
+  display: block;
+}
+
+/* Responsive */
 @media screen and (max-width: 1200px) {
   .products-grid {
-    grid-template-columns: repeat(
-      3,
-      1fr
-    ); /* 3 cards per row on medium screens */
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media screen and (max-width: 768px) {
   .products-grid {
-    grid-template-columns: repeat(
-      2,
-      1fr
-    ); /* 2 cards per row on smaller screens */
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media screen and (max-width: 480px) {
   .products-grid {
-    grid-template-columns: 1fr; /* 1 card per row on very small screens */
+    grid-template-columns: 1fr;
   }
 
   .product-title {
-    font-size: 1.1rem; /* Adjust title size for smaller screens */
+    font-size: 1.1rem;
   }
 
   .product-description {
-    font-size: 0.9rem; /* Adjust description size for smaller screens */
+    font-size: 0.9rem;
   }
 }
 .cultivo-filters {
@@ -130,7 +290,6 @@
 }
 
 /* MODAL */
-
 .product-detail-modal {
   position: fixed;
   top: 0;
@@ -153,7 +312,7 @@
   border-radius: 15px;
   padding: 30px;
   max-height: 80vh;
-  overflow-y: auto; /* Permite el desplazamiento si el contenido es muy largo */
+  overflow-y: auto;
   position: relative;
 }
 
@@ -180,7 +339,7 @@
 .main-image {
   width: 100%;
   height: auto;
-  max-height: 300px; /* Limita el alto de la imagen */
+  max-height: 300px;
   object-fit: cover;
   border-radius: 10px;
 }
@@ -232,7 +391,7 @@
 }
 
 .modal-open {
-  overflow-y: auto; /* Permite el scroll vertical */
+  overflow-y: auto; /* Scroll vertical en el modal */
 }
 
 .close-modal {
@@ -249,6 +408,16 @@
 .close-modal:hover {
   color: #c9302c;
 }
+
+.product-detail-modal {
+  cursor: pointer;
+}
+
+.modal-content_products {
+  cursor: auto;
+  pointer-events: auto;
+}
+
 /* Imagen partes de la planta de canabis*/
 .product-image_products {
   width: 100%;
@@ -298,15 +467,15 @@
 /* ---------------------- */
 .image-info-container {
   display: flex;
-  align-items: center; /* Centra verticalmente el contenido */
-  justify-content: center; /* Centra horizontalmente */
-  gap: 20px; /* Espaciado entre imagen y texto */
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
 }
-
+/* popup */
 .info-section {
   display: flex;
   flex-direction: column;
-  gap: 92px; /* Espaciado entre cada sección */
+  gap: 40px;
   max-width: 300px;
   font-size: 14px;
 }

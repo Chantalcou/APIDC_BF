@@ -72,7 +72,7 @@ const MembershipComponent = () => {
         {/* Otras Cards (Distribuidas en tres columnas) */}
         <div className="cards-container">
           {/* Socio con Reprocan */}
-          <div className="card-first">
+          <div className="card">
             <h2 className="card-title">Socio adherente</h2>
             <p className="card-subtitle">
               Hacete parte de un movimiento que transforma vidas.

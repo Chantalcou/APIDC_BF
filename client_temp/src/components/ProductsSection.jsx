@@ -15,6 +15,17 @@ const ProductsSection = () => {
       setLoading(false);
     }, 2000);
   };
+// Cierre con ESC
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape" && selectedProduct) {
+        closeProductDetail();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [selectedProduct]);
 
   const cultivos = {
     indoor: {
@@ -24,8 +35,8 @@ const ProductsSection = () => {
       products: [
         {
           image:
-            "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993399/pexels-kindelmedia-7773109_jh0l6n.jpg",
-          title: "White Widow",
+            "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741884125/Flux_Dev_Patrn_abstracto_de_hojas_de_hibisco_en_degrad_de_verd_1_czvxpd.jpg",
+          title: "9-10 Juanita0G",
           description: "Híbrido equilibrado con efectos relajantes.",
         },
       ],
@@ -37,8 +48,8 @@ const ProductsSection = () => {
       products: [
         {
           image:
-            "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993398/pexels-perfect-lens-6536878_exlrcm.jpg",
-          title: "Blue Dream",
+            "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741884762/Flux_Dev_Fotografa_macro_de_pia_tropical_deshidratada_con_cris_0_kr5ho0.jpg",
+          title: "Tropical Kush",
           description: "Híbrido con efectos eufóricos y calmantes.",
         },
         // Otros productos outdoor...
@@ -63,24 +74,24 @@ const ProductsSection = () => {
   const products = [
     {
       image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993399/pexels-kindelmedia-7773109_jh0l6n.jpg",
-      title: "White Widow",
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741884125/Flux_Dev_Patrn_abstracto_de_hojas_de_hibisco_en_degrad_de_verd_1_czvxpd.jpg",
+      title: "9-10 Juanita0G",
       description:
         "Una de las variedades más populares, conocida por su alto contenido de resina y efectos equilibrados.",
       cultivo: "outdoor", // Relacionamos el producto con outdoor
     },
     {
       image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1737993398/pexels-perfect-lens-12967923_lgn2au.jpg",
-      title: "White Widow",
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741884762/Flux_Dev_Fotografa_macro_de_pia_tropical_deshidratada_con_cris_0_kr5ho0.jpg",
+      title: "Tropical Kush",
       description:
         "Una de las variedades más populares, conocida por su alto contenido de resina y efectos equilibrados.",
       cultivo: "outdoor", // Relacionamos el producto con outdoor
     },
     {
       image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1737993398/pexels-perfect-lens-6536878_exlrcm.jpg",
-      title: "White Widow",
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741884939/Flux_Dev_Composicin_de_semillas_de_cacao_en_primer_plano_con_p_1_dtxrkk.jpg",
+      title: "Dosi-dos",
       description:
         "Una de las variedades más populares, conocida por su alto contenido de resina y efectos equilibrados.",
       cultivo: "outdoor", // Relacionamos el producto con outdoor
@@ -201,40 +212,39 @@ const ProductsSection = () => {
       1000
     );
   };
-  
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  
+
   return (
     <>
       {loading ? (
         <SpinnerComponent />
       ) : (
-            
-      <div className="container-fluid p-0 main-content">
-        <div className="video-container">
-          <video autoPlay muted loop className="home-bg-video">
-            <source
-              src="https://res.cloudinary.com/dqgjcfosx/video/upload/v1737553912/12361112-uhd_3840_2160_30fps_ca2hwm.mp4"
-              type="video/mp4"
-            />
-            Your browser does not support the video tag.
-          </video>
-          <div className="static-content d-flex flex-column justify-content-center align-items-center h-100">
-            <h1 className="product-title">TERAPIAS QUE FLORECEN</h1>
-            <h1 className="hero-subtitle">Sanación que nace de la tierra</h1>
-          </div>
+        <div className="container-fluid p-0 main-content">
+          <div className="video-container">
+            <video autoPlay muted loop className="home-bg-video">
+              <source
+                src="https://res.cloudinary.com/dqgjcfosx/video/upload/v1737553912/12361112-uhd_3840_2160_30fps_ca2hwm.mp4"
+                type="video/mp4"
+              />
+              Your browser does not support the video tag.
+            </video>
+            <div className="static-content d-flex flex-column justify-content-center align-items-center h-100">
+              <h1 className="product-title">TERAPIAS QUE FLORECEN</h1>
+              <h1 className="hero-subtitle">Sanación que nace de la tierra</h1>
+            </div>
 
-          <div className="static-content d-flex flex-column justify-content-center align-items-center mt-5 h-100 position-relative">
-            <ScrollArrow
-              className="custom-scroll-arrow_products"
-              onClick={() => scrollToSection("products")}
-              color="#fff"
-            />
+            <div className="static-content d-flex flex-column justify-content-center align-items-center mt-5 h-100 position-relative">
+              <ScrollArrow
+                className="custom-scroll-arrow_products"
+                onClick={() => scrollToSection("products")}
+                color="#fff"
+              />
+            </div>
           </div>
         </div>
-      </div>
       )}
 
       <section id="product-section" className="products-section">
@@ -283,11 +293,11 @@ const ProductsSection = () => {
                   key={index}
                   onClick={() => openProductDetail(product)}
                 >
-                  <div className="image-container">
+                  <div className="image-container_card">
                     <img
                       src={product.image}
                       alt={product.title}
-                      className="product-image"
+                      className="product-image_card"
                       onLoad={handleImageLoad}
                       loading="lazy"
                     />
@@ -314,10 +324,15 @@ const ProductsSection = () => {
       </section>
       {/* Product Detail Modal */}
       {selectedProduct && (
-        <div className="product-detail-modal">
+        <div
+          className="product-detail-modal"
+          onClick={(e) => e.target === e.currentTarget && closeProductDetail()}
+          onKeyDown={(e) => e.key === "Escape" && closeProductDetail()}
+          tabIndex={0} // Necesario para que funcione el keydown
+        >
           <div className="modal-content_products">
             <div className="product-detail-grid">
-                <h2>{selectedProduct.title}</h2>
+              <h2>{selectedProduct.title}</h2>
               <div className="product-images">
                 <img
                   src={selectedProduct.image}
@@ -350,10 +365,10 @@ const ProductsSection = () => {
                         className="bar-fill"
                         style={{ width: `${selectedProduct.cbd || "15%"}` }}
                       ></div>
-                      </div>
-                      </div>
-                      </div>
-                      
+                    </div>
+                  </div>
+                </div>
+
                 <div className="description">
                   <h3>Costo productivo</h3>
                   <p>
@@ -362,7 +377,7 @@ const ProductsSection = () => {
                   </p>
                   <div className="image-info-container">
                     <img
-                      src="https://res.cloudinary.com/dqgjcfosx/image/upload/v1741792652/A%C3%B1adir_un_t%C3%ADtulo_sbb4rz.png"
+                      src="https://res.cloudinary.com/dqgjcfosx/image/upload/v1741882724/ALTA_z2qfwt.png"
                       alt={selectedProduct.title}
                       className="product-image_products"
                     />
@@ -373,6 +388,7 @@ const ProductsSection = () => {
                           Son las flores más expuestas a la luz y suelen ser las
                           más densas y potentes.
                         </p>
+                        <p>Cada 5gr $50.000</p>
                       </div>
                       <div className="section-item">
                         <strong>Parte media</strong>
@@ -380,17 +396,19 @@ const ProductsSection = () => {
                           Estas flores reciben luz indirecta y tienen un tamaño
                           intermedio.
                         </p>
+                        <p>Cada 5gr $30.000</p>
                       </div>
                       <div className="section-item">
                         <strong>Parte baja</strong>
                         <p>
                           Son los cogollos menos desarrollados, ya que reciben
                           menos luz.
-                          </p>
-                          </div>
-                          </div>
-                          </div>
-                          </div>
+                        </p>
+                        <p>Cada 5gr $15.000</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
                 <button
                   className="whatsapp-button_products"
@@ -404,17 +422,17 @@ const ProductsSection = () => {
                 </button>
               </div>
               <button
-              className="close-modal_products"
+                className="close-modal_products"
                 onClick={() => setSelectedProduct(null)}
               >
                 &times;
-                </button>
-                </div>
-                </div>
-                </div>
-              )}
-              </>
-            );
-          };
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
 
 export default ProductsSection;
