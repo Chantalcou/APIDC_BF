@@ -15,7 +15,7 @@ const ProductsSection = () => {
       setLoading(false);
     }, 2000);
   };
-// Cierre con ESC
+  // Cierre con ESC
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "Escape" && selectedProduct) {
@@ -35,7 +35,7 @@ const ProductsSection = () => {
       products: [
         {
           image:
-            "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741884125/Flux_Dev_Patrn_abstracto_de_hojas_de_hibisco_en_degrad_de_verd_1_czvxpd.jpg",
+            "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741956323/DALL_E_2025-03-14_09.41.56_-_A_natural-looking_cardboard_box_packaging_with_a_wood_texture_designed_to_be_more_organic_and_less_artificial._The_box_has_a_rustic_slightly_rough_w_wpgwlt.webp",
           title: "9-10 Juanita0G",
           description: "Híbrido equilibrado con efectos relajantes.",
         },
@@ -48,11 +48,10 @@ const ProductsSection = () => {
       products: [
         {
           image:
-            "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741884762/Flux_Dev_Fotografa_macro_de_pia_tropical_deshidratada_con_cris_0_kr5ho0.jpg",
+            "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741956322/DALL_E_2025-03-14_09.42.14_-_A_natural-looking_cardboard_box_packaging_with_a_wood_texture_designed_to_be_more_organic_and_less_artificial._The_box_has_a_rustic_slightly_rough_w_hkjclf.webp",
           title: "Tropical Kush",
           description: "Híbrido con efectos eufóricos y calmantes.",
         },
-        // Otros productos outdoor...
       ],
     },
     greenhouse: {
@@ -66,7 +65,6 @@ const ProductsSection = () => {
           title: "OG Kush",
           description: "Potente y relajante, con sabor a tierra y cítricos.",
         },
-        // Otros productos greenhouse...
       ],
     },
   };
@@ -74,123 +72,99 @@ const ProductsSection = () => {
   const products = [
     {
       image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741884125/Flux_Dev_Patrn_abstracto_de_hojas_de_hibisco_en_degrad_de_verd_1_czvxpd.jpg",
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741956323/DALL_E_2025-03-14_09.41.56_-_A_natural-looking_cardboard_box_packaging_with_a_wood_texture_designed_to_be_more_organic_and_less_artificial._The_box_has_a_rustic_slightly_rough_w_wpgwlt.webp",
       title: "9-10 Juanita0G",
       description:
         "Una de las variedades más populares, conocida por su alto contenido de resina y efectos equilibrados.",
-      cultivo: "outdoor", // Relacionamos el producto con outdoor
+      cultivo: "outdoor",
     },
     {
       image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741884762/Flux_Dev_Fotografa_macro_de_pia_tropical_deshidratada_con_cris_0_kr5ho0.jpg",
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741956322/DALL_E_2025-03-14_09.42.14_-_A_natural-looking_cardboard_box_packaging_with_a_wood_texture_designed_to_be_more_organic_and_less_artificial._The_box_has_a_rustic_slightly_rough_w_hkjclf.webp",
       title: "Tropical Kush",
       description:
         "Una de las variedades más populares, conocida por su alto contenido de resina y efectos equilibrados.",
-      cultivo: "outdoor", // Relacionamos el producto con outdoor
+      cultivo: "outdoor",
     },
     {
       image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741884939/Flux_Dev_Composicin_de_semillas_de_cacao_en_primer_plano_con_p_1_dtxrkk.jpg",
-      title: "Dosi-dos",
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741956323/DALL_E_2025-03-14_09.45.42_-_A_large_cardboard_box_with_a_wood-like_texture_designed_for_packaging_cannabis_buds._The_box_prominently_displays_the_brand_name_APIDC_on_the_front_oraoq8.webp",
+      title: "Dosi-chock",
       description:
         "Una de las variedades más populares, conocida por su alto contenido de resina y efectos equilibrados.",
-      cultivo: "outdoor", // Relacionamos el producto con outdoor
+      cultivo: "outdoor",
     },
     {
       image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1737993398/pexels-perfect-lens-8263955_fg8e94.jpg",
-      title: "White Widow",
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741956322/DALL_E_2025-03-14_09.46.54_-_A_large_cardboard_box_with_a_wood-like_texture_open_from_the_top_revealing_high-quality_cannabis_buds_inside._The_box_prominently_displays_the_brand_sv9il4.webp",
+      title: "Dosi-Dos",
       description:
         "Una de las variedades más populares, conocida por su alto contenido de resina y efectos equilibrados.",
-      cultivo: "outdoor", // Relacionamos el producto con outdoor
+      cultivo: "outdoor",
     },
     {
       image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993399/pexels-kindelmedia-7773109_jh0l6n.jpg",
-      title: "White Widow",
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741956323/DALL_E_2025-03-14_09.41.56_-_A_natural-looking_cardboard_box_packaging_with_a_wood_texture_designed_to_be_more_organic_and_less_artificial._The_box_has_a_rustic_slightly_rough_w_wpgwlt.webp",
+      title: "9-10 Juanita0G",
       description:
         "Una de las variedades más populares, conocida por su alto contenido de resina y efectos equilibrados.",
-      cultivo: "outdoor", // Relacionamos el producto con outdoor
-    },
-    {
-      image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993398/pexels-perfect-lens-6536878_exlrcm.jpg",
-      title: "Blue Dream",
-      description:
-        "Híbrida entre la Blueberry y la Haze, esta cepa es conocida por sus efectos eufóricos y calmantes.",
-      cultivo: "greenhouse",
-    },
-    {
-      image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993398/pexels-perfect-lens-6536878_exlrcm.jpg",
-      title: "Blue Dream",
-      description:
-        "Híbrida entre la Blueberry y la Haze, esta cepa es conocida por sus efectos eufóricos y calmantes.",
-      cultivo: "greenhouse",
-    },
-    {
-      image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993398/pexels-perfect-lens-6536878_exlrcm.jpg",
-      title: "Blue Dream",
-      description:
-        "Híbrida entre la Blueberry y la Haze, esta cepa es conocida por sus efectos eufóricos y calmantes.",
-      cultivo: "greenhouse",
-    },
-    {
-      image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993398/pexels-perfect-lens-6536878_exlrcm.jpg",
-      title: "Blue Dream",
-      description:
-        "Híbrida entre la Blueberry y la Haze, esta cepa es conocida por sus efectos eufóricos y calmantes.",
-      cultivo: "greenhouse",
-    },
-    {
-      image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993398/pexels-perfect-lens-6536878_exlrcm.jpg",
-      title: "Blue Dream",
-      description:
-        "Híbrida entre la Blueberry y la Haze, esta cepa es conocida por sus efectos eufóricos y calmantes.",
-      cultivo: "greenhouse",
-    },
-    {
-      image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993398/pexels-printexstar-11652812_uuesob.jpg",
-      title: "OG Kush",
-      description:
-        "Esta variedad es famosa por su potencia y efectos relajantes. Tiene un perfil de sabor a tierra y cítricos.",
       cultivo: "indoor",
     },
     {
       image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993398/pexels-printexstar-11652812_uuesob.jpg",
-      title: "OG Kush",
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741956322/DALL_E_2025-03-14_09.42.14_-_A_natural-looking_cardboard_box_packaging_with_a_wood_texture_designed_to_be_more_organic_and_less_artificial._The_box_has_a_rustic_slightly_rough_w_hkjclf.webp",
+      title: "Tropical Kush",
       description:
-        "Esta variedad es famosa por su potencia y efectos relajantes. Tiene un perfil de sabor a tierra y cítricos.",
+        "Una de las variedades más populares, conocida por su alto contenido de resina y efectos equilibrados.",
       cultivo: "indoor",
     },
     {
       image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993398/pexels-printexstar-11652812_uuesob.jpg",
-      title: "OG Kush",
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741956323/DALL_E_2025-03-14_09.45.42_-_A_large_cardboard_box_with_a_wood-like_texture_designed_for_packaging_cannabis_buds._The_box_prominently_displays_the_brand_name_APIDC_on_the_front_oraoq8.webp",
+      title: "Dosi-chock",
       description:
-        "Esta variedad es famosa por su potencia y efectos relajantes. Tiene un perfil de sabor a tierra y cítricos.",
+        "Una de las variedades más populares, conocida por su alto contenido de resina y efectos equilibrados.",
       cultivo: "indoor",
     },
     {
       image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993398/pexels-printexstar-11652812_uuesob.jpg",
-      title: "OG Kush",
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741956322/DALL_E_2025-03-14_09.46.54_-_A_large_cardboard_box_with_a_wood-like_texture_open_from_the_top_revealing_high-quality_cannabis_buds_inside._The_box_prominently_displays_the_brand_sv9il4.webp",
+      title: "Dosi-Dos",
       description:
-        "Esta variedad es famosa por su potencia y efectos relajantes. Tiene un perfil de sabor a tierra y cítricos.",
+        "Una de las variedades más populares, conocida por su alto contenido de resina y efectos equilibrados.",
       cultivo: "indoor",
     },
     {
       image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993398/pexels-printexstar-11652812_uuesob.jpg",
-      title: "OG Kush",
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741956323/DALL_E_2025-03-14_09.41.56_-_A_natural-looking_cardboard_box_packaging_with_a_wood_texture_designed_to_be_more_organic_and_less_artificial._The_box_has_a_rustic_slightly_rough_w_wpgwlt.webp",
+      title: "9-10 Juanita0G",
       description:
-        "Esta variedad es famosa por su potencia y efectos relajantes. Tiene un perfil de sabor a tierra y cítricos.",
-      cultivo: "indoor",
+        "Una de las variedades más populares, conocida por su alto contenido de resina y efectos equilibrados.",
+      cultivo: "greenhouse",
+    },
+    {
+      image:
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741956322/DALL_E_2025-03-14_09.42.14_-_A_natural-looking_cardboard_box_packaging_with_a_wood_texture_designed_to_be_more_organic_and_less_artificial._The_box_has_a_rustic_slightly_rough_w_hkjclf.webp",
+      title: "Tropical Kush",
+      description:
+        "Una de las variedades más populares, conocida por su alto contenido de resina y efectos equilibrados.",
+      cultivo: "greenhouse",
+    },
+    {
+      image:
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741956323/DALL_E_2025-03-14_09.45.42_-_A_large_cardboard_box_with_a_wood-like_texture_designed_for_packaging_cannabis_buds._The_box_prominently_displays_the_brand_name_APIDC_on_the_front_oraoq8.webp",
+      title: "Dosi-chock",
+      description:
+        "Una de las variedades más populares, conocida por su alto contenido de resina y efectos equilibrados.",
+      cultivo: "greenhouse",
+    },
+    {
+      image:
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741956322/DALL_E_2025-03-14_09.46.54_-_A_large_cardboard_box_with_a_wood-like_texture_open_from_the_top_revealing_high-quality_cannabis_buds_inside._The_box_prominently_displays_the_brand_sv9il4.webp",
+      title: "Dosi-Dos",
+      description:
+        "Una de las variedades más populares, conocida por su alto contenido de resina y efectos equilibrados.",
+      cultivo: "greenhouse",
     },
   ];
 
@@ -301,7 +275,18 @@ const ProductsSection = () => {
                       onLoad={handleImageLoad}
                       loading="lazy"
                     />
+                    {/* Nuevo overlay */}
+                    <div className="hover-overlay">
+                      <div className="hover-content">
+                        <span>Descubrí más</span>
+                        <div className="icon">➔</div>
+                        <small className="mt-2 d-block">
+                          Detalles del producto
+                        </small>
+                      </div>
+                    </div>
                   </div>
+
                   <div className="product-info">
                     <h3
                       className="product-title"
@@ -322,7 +307,7 @@ const ProductsSection = () => {
           </div>
         </div>
       </section>
-      {/* Product Detail Modal */}
+      {/* Product Detail Modal-popup */}
       {selectedProduct && (
         <div
           className="product-detail-modal"

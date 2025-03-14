@@ -116,21 +116,7 @@ const NavBar = () => {
     };
   }, []);
 
-  // const handleLogin = async () => {
-  //   try {
-  //     // Primero resolver la autenticación
-  //     await loginWithRedirect({
-  //       authorizationParams: {
-  //         redirect_uri: `${window.location.origin}${redirectPath || "/"}`,
-  //       },
-  //     });
 
-  //     // Cerrar modal después de autenticar
-  //     handleCloseModal();
-  //   } catch (error) {
-  //     console.error("Error durante el login:", error);
-  //   }
-  // };
   const handleLogout = () => {
     logout({ returnTo: window.location.origin });
     localStorage.removeItem("authToken");
@@ -147,11 +133,7 @@ const NavBar = () => {
     );
   };
 
-  // const shouldShowAsociate = ![
-  //   "/gestor",
-  //   "/SocioSinReprocan",
-  //   "/SocioConReprocan",
-  // ].includes(location.pathname);
+
   const isHome = location.pathname === "/";
   // Maneja la verificación de reCAPTCHA
   const handleCaptchaVerify = (value) => {
@@ -172,7 +154,7 @@ const NavBar = () => {
   };
 
   const handleCaptchaClose = () => {
-    setShowCaptcha(false); // Cierra el modal sin verificar
+    setShowCaptcha(false); 
   };
 
   useEffect(() => {
@@ -187,35 +169,6 @@ const NavBar = () => {
     return () => window.removeEventListener("storage", handleStorageChange);
   }, [dispatch]);
 
-  // const showProductsLink =
-  //   isAuthenticated &&
-  //   userFromRedux?.membershipType &&
-  //   (userFromRedux.membershipType === "premium" ||
-  //     userFromRedux.membershipType === "gestor");
-  // const [socket, setSocket] = useState(null);
-
-  // useEffect(() => {
-  //   // Crear la conexión de Socket.IO una sola vez
-  //   const newSocket = io("http://localhost:5001");
-  //   setSocket(newSocket);
-
-  //   // Escuchar eventos de Socket.IO
-  //   newSocket.on("user_updated", (data) => {
-  //     console.log("Datos del usuario actualizados:", data);
-  //   });
-
-  //   // Limpiar la conexión al desmontar el componente
-  //   return () => newSocket.disconnect();
-  // }, []);
-
-  // const pruebadeSockerFunction = () => {
-  //   if (socket) {
-  //     // Emitir un evento de prueba al servidor
-  //     socket.emit("prueba_evento", { message: "Hola desde el cliente" });
-  //   } else {
-  //     console.error("Socket no está conectado");
-  //   }
-  // };
 
   const prueba = () => {
     // Supongamos que 'user' es el objeto del usuario de Auth0
