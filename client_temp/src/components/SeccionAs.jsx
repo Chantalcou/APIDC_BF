@@ -99,9 +99,9 @@ const SeccionAs = () => {
               src="https://mamacultivaargentina.org/wp-content/uploads/2024/10/1Recurso-2logo-mca-final.png"
               alt="icon-aceite"
             ></img>
-            <h3 className="associate-title-card">¡QUIERO ACEITE!</h3>
+            <h3 className="associate-title-card">TIENDA</h3>
             <p className="associate-text">
-              🌱 Tu bienestar comienza con una gota - Descubrí el camino
+              🌱 Nuestros productos de la mejor calidad
             </p>
 
             <Link
@@ -109,7 +109,7 @@ const SeccionAs = () => {
               className="btn-asociate-custom"
               aria-label="Explorar Membresías"
             >
-              Tienda
+              Ir
               <FaArrowRight className="btn-icon" />
             </Link>
           </div>

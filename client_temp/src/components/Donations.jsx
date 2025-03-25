@@ -84,7 +84,7 @@ const Donations = () => {
           </div>
 
           <div className="razones-grid">
-            {/* ... mantén las tarjetas existentes igual ... */}
+   
           </div>
 
           <div className="cta-container">
@@ -93,7 +93,7 @@ const Donations = () => {
               onClick={() => setShowTransferModal(true)}
             >
               Quiero ser parte del cambio
-              <span className="button-badge">Impacto directo</span>
+              <span className="button-badge">Donaciones</span>
             </button>
             <p className="garantia-text">
               <span>✓</span> Transparencia certificada - Recibos digitales -

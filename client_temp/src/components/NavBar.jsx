@@ -68,10 +68,14 @@ const NavBar = () => {
           localStorage.setItem("authToken", token);
           await dispatch(registerUser(user, token));
 
-          // Redirigir después de registrar al usuario
           if (redirectPath) {
-            navigate(redirectPath);
-            setRedirectPath(null);
+            // Si la ruta es para /membershipSection, redirigir inmediatamente
+            if (redirectPath === "/membershipSection") {
+              navigate(redirectPath);
+            } else {
+              navigate(redirectPath);
+            }
+            setRedirectPath(null); // Limpiar la ruta después de la redirección
           }
         } catch (error) {
           console.error("Error registrando usuario:", error);
@@ -116,7 +120,6 @@ const NavBar = () => {
     };
   }, []);
 
-
   const handleLogout = () => {
     logout({ returnTo: window.location.origin });
     localStorage.removeItem("authToken");
@@ -132,7 +135,6 @@ const NavBar = () => {
       1000
     );
   };
-
 
   const isHome = location.pathname === "/";
   // Maneja la verificación de reCAPTCHA
@@ -154,7 +156,7 @@ const NavBar = () => {
   };
 
   const handleCaptchaClose = () => {
-    setShowCaptcha(false); 
+    setShowCaptcha(false);
   };
 
   useEffect(() => {
@@ -169,35 +171,34 @@ const NavBar = () => {
     return () => window.removeEventListener("storage", handleStorageChange);
   }, [dispatch]);
 
-
-  const prueba = () => {
-    // Supongamos que 'user' es el objeto del usuario de Auth0
-    // y 'getAllNotAdmin' es el arreglo con usuarios obtenidos del backend.
-    if (!user || !getAllNotAdmin || !Array.isArray(getAllNotAdmin)) {
-      console.log("Faltan datos o getAllNotAdmin no es un array");
-      return;
-    }
-    const userEmail = user.email.toLowerCase();
-    // Buscar en el arreglo un usuario cuyo email coincida
-    const matchedUser = getAllNotAdmin.find(
-      (el) => el.email && el.email.toLowerCase() === userEmail
-    );
-
-    if (matchedUser) {
-      // Si se encuentra, obtenemos el membershipType
-      const membership = matchedUser.membershipType;
-      if (["gestor", "premium"].includes(membership)) {
-        const meberShipTypeProducts = membership;
-      } else {
-        console.log("El usuario es sinMembresia");
-      }
+  const handleMembershipRedirect = () => {
+    if (!isAuthenticated) {
+      // Si no está autenticado, redirigir al login
+      setRedirectPath("/login"); 
+      handleShowModal(); 
     } else {
-      console.log("No se encontró coincidencia para el email:", user.email);
-    }
+     
+      // Si está autenticado, verificamos el tipo de membresía
+      const userMembership = getAllNotAdmin?.find(
+        (u) => u.email?.toLowerCase() === user?.email?.toLowerCase()
+      )?.membershipType;
 
-    console.log("USER:", user);
-    console.log("GET NOT ADMIN:", getAllNotAdmin);
+      if (userMembership && ["gestor", "premium"].includes(userMembership)) {
+        // Si tiene un tipo de membresía válido, redirigir a la sección de membresía
+        navigate("/membershipSection");
+      } else {
+        // Si no tiene una membresía válida, mostrar mensaje o redirigir a una página diferente
+        alert("No tienes acceso a la sección de membresía.");
+      }
+    }
   };
+
+  useEffect(() => {
+    if (isAuthenticated && redirectPath) {
+      navigate(redirectPath);
+      setRedirectPath(null);
+    }
+  }, [isAuthenticated, redirectPath, navigate]);
 
   return (
     <>
@@ -227,15 +228,6 @@ const NavBar = () => {
               <Nav.Link href="/">Inicio</Nav.Link>
               {isAuthenticated ? (
                 <>
-                  {/* Enlace a Socio (siempre visible para autenticados) */}
-                  {/* <Nav.Link onClick={handleSocioRedirect}>Soy socio</Nav.Link> */}
-                  {/* Enlace a Productos (solo para socios verificados) */}
-                  {/* {isSocioVerified && (
-                    <Link to="/products" className="nav-link me-3">
-                      Productos
-                    </Link>
-                  )}
-                 */}
                   {isAuthenticated &&
                     getAllNotAdmin?.some(
                       (u) =>
@@ -243,7 +235,7 @@ const NavBar = () => {
                         ["gestor", "premium"].includes(u.membershipType)
                     ) && (
                       <Link to="/products" className="nav-link me-3">
-                        Productos
+                        Tu Cultivo
                       </Link>
                     )}
                   {isAuthenticated &&
@@ -266,61 +258,28 @@ const NavBar = () => {
                 </Nav.Link>
               )}
               {isHome && (
-                <Nav.Link onClick={() => scrollToSection("asociarme-section")}>
-                  Asociate
-                </Nav.Link>
+                <Nav.Link onClick={handleMembershipRedirect}>Asociate</Nav.Link>
               )}
 
               {isHome && (
-                <Nav.Link onClick={() => scrollToSection("donate-now")} className="nav-link_dona">
-               
+                <Nav.Link
+                  onClick={() => scrollToSection("donate-now")}
+                  className="nav-link_dona"
+                >
                   Dona ahora
-                  </Nav.Link>
+                </Nav.Link>
               )}
 
               <Link to="/shop" className="nav-link">
                 Tienda
               </Link>
             </Nav>
-            {/* <button
-              onClick={() => console.log(userFromRedux, "QUE ME LLEGA A VER")}
-            >
-              BOTONNN
-            </button> */}
           </Navbar.Collapse>
-          {/* 
-          <button onClick={() => console.log(users, userFromRedux)}>
-            TIPO MEMBRESIA
-          </button> */}
-          {/* <button onClick={() => pruebadeSockerFunction()}>
-            Prueba de Socket
-          </button> */}
+
           <Navbar.Collapse id="basic-navbar-nav-autentication">
             <Nav className="basic-navbar-nav-autentication-2">
               {isAuthenticated && user ? (
                 <>
-                  {/*                 
-                  <Nav.Link href="#" className="d-flex align-items-center">
-                    <img
-                      src={user.picture}
-                      alt="Profile"
-                      className="profile-picture me-2"
-                    />
-                    <span className="user-name">
-                      {userFromRedux?.name || user?.name}
-                    </span>
-                  </Nav.Link>
-
-                  {isAuthenticated && user && isAdmin && (
-                    <Link to="/dashboard" className="nav-link">
-                      Dashboard
-                    </Link>
-                  )}
-                  {isSocioVerified && (
-                    <Link to="/products" className="nav-link">
-                      Productos
-                    </Link>
-                  )} */}
                   {/* Dashboard para admins */}
                   {isAdmin && (
                     <Link to="/dashboard" className="nav-link me-3">

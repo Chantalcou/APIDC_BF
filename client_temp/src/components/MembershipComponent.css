@@ -553,3 +553,45 @@
     width: 90%; /* Las cards ocupan un mayor porcentaje del ancho en pantallas pequeñas */
   }
 }
+
+
+
+/* Estilo tipo "McDonald's Drive-thru" */
+.whatsapp-cta-simple {
+  text-align: center;
+  margin: 40px 0;
+  padding: 25px;
+  background: #f8fff3;
+  border-radius: 15px;
+  border: 2px solid #8BBE45;
+}
+
+.whatsapp-minibutton {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 30px;
+  background: #25D366;
+  color: white !important;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: transform 0.3s;
+}
+
+.whatsapp-minibutton:hover {
+  transform: scale(1.05);
+}
+
+.whatsapp-minibutton i {
+  font-size: 1.5rem;
+}
+
+
+/* ContentButton membership */
+.content-buttons_memberShip{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+

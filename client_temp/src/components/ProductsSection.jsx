@@ -35,7 +35,7 @@ const ProductsSection = () => {
       products: [
         {
           image:
-            "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741956323/DALL_E_2025-03-14_09.41.56_-_A_natural-looking_cardboard_box_packaging_with_a_wood_texture_designed_to_be_more_organic_and_less_artificial._The_box_has_a_rustic_slightly_rough_w_wpgwlt.webp",
+            "https://res.cloudinary.com/dqgjcfosx/image/upload/v1742923889/Dise%C3%B1o_sin_t%C3%ADtulo_10_cmaf1r.png",
           title: "9-10 Juanita0G",
           description: "Híbrido equilibrado con efectos relajantes.",
         },
@@ -48,7 +48,7 @@ const ProductsSection = () => {
       products: [
         {
           image:
-            "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741956322/DALL_E_2025-03-14_09.42.14_-_A_natural-looking_cardboard_box_packaging_with_a_wood_texture_designed_to_be_more_organic_and_less_artificial._The_box_has_a_rustic_slightly_rough_w_hkjclf.webp",
+            "https://res.cloudinary.com/dqgjcfosx/image/upload/v1742923770/Dise%C3%B1o_sin_t%C3%ADtulo_9_faj7rl.png",
           title: "Tropical Kush",
           description: "Híbrido con efectos eufóricos y calmantes.",
         },
@@ -61,7 +61,7 @@ const ProductsSection = () => {
       products: [
         {
           image:
-            "https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1737993398/pexels-printexstar-11652812_uuesob.jpg",
+            "https://res.cloudinary.com/dqgjcfosx/image/upload/v1742923770/Dise%C3%B1o_sin_t%C3%ADtulo_9_faj7rl.png",
           title: "OG Kush",
           description: "Potente y relajante, con sabor a tierra y cítricos.",
         },
@@ -72,7 +72,7 @@ const ProductsSection = () => {
   const products = [
     {
       image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741956323/DALL_E_2025-03-14_09.41.56_-_A_natural-looking_cardboard_box_packaging_with_a_wood_texture_designed_to_be_more_organic_and_less_artificial._The_box_has_a_rustic_slightly_rough_w_wpgwlt.webp",
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1742923889/Dise%C3%B1o_sin_t%C3%ADtulo_10_cmaf1r.png",
       title: "9-10 Juanita0G",
       description:
         "Una de las variedades más populares, conocida por su alto contenido de resina y efectos equilibrados.",
@@ -80,7 +80,7 @@ const ProductsSection = () => {
     },
     {
       image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741956322/DALL_E_2025-03-14_09.42.14_-_A_natural-looking_cardboard_box_packaging_with_a_wood_texture_designed_to_be_more_organic_and_less_artificial._The_box_has_a_rustic_slightly_rough_w_hkjclf.webp",
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1742923770/Dise%C3%B1o_sin_t%C3%ADtulo_9_faj7rl.png",
       title: "Tropical Kush",
       description:
         "Una de las variedades más populares, conocida por su alto contenido de resina y efectos equilibrados.",
@@ -88,7 +88,7 @@ const ProductsSection = () => {
     },
     {
       image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741956323/DALL_E_2025-03-14_09.45.42_-_A_large_cardboard_box_with_a_wood-like_texture_designed_for_packaging_cannabis_buds._The_box_prominently_displays_the_brand_name_APIDC_on_the_front_oraoq8.webp",
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1742924075/Dise%C3%B1o_sin_t%C3%ADtulo_11_b2vndp.png",
       title: "Dosi-chock",
       description:
         "Una de las variedades más populares, conocida por su alto contenido de resina y efectos equilibrados.",
@@ -104,7 +104,7 @@ const ProductsSection = () => {
     },
     {
       image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741956323/DALL_E_2025-03-14_09.41.56_-_A_natural-looking_cardboard_box_packaging_with_a_wood_texture_designed_to_be_more_organic_and_less_artificial._The_box_has_a_rustic_slightly_rough_w_wpgwlt.webp",
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1742923889/Dise%C3%B1o_sin_t%C3%ADtulo_10_cmaf1r.png",
       title: "9-10 Juanita0G",
       description:
         "Una de las variedades más populares, conocida por su alto contenido de resina y efectos equilibrados.",
@@ -112,7 +112,7 @@ const ProductsSection = () => {
     },
     {
       image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741956322/DALL_E_2025-03-14_09.42.14_-_A_natural-looking_cardboard_box_packaging_with_a_wood_texture_designed_to_be_more_organic_and_less_artificial._The_box_has_a_rustic_slightly_rough_w_hkjclf.webp",
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1742923770/Dise%C3%B1o_sin_t%C3%ADtulo_9_faj7rl.png",
       title: "Tropical Kush",
       description:
         "Una de las variedades más populares, conocida por su alto contenido de resina y efectos equilibrados.",
@@ -120,7 +120,7 @@ const ProductsSection = () => {
     },
     {
       image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741956323/DALL_E_2025-03-14_09.45.42_-_A_large_cardboard_box_with_a_wood-like_texture_designed_for_packaging_cannabis_buds._The_box_prominently_displays_the_brand_name_APIDC_on_the_front_oraoq8.webp",
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1742924075/Dise%C3%B1o_sin_t%C3%ADtulo_11_b2vndp.png",
       title: "Dosi-chock",
       description:
         "Una de las variedades más populares, conocida por su alto contenido de resina y efectos equilibrados.",
@@ -136,7 +136,7 @@ const ProductsSection = () => {
     },
     {
       image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741956323/DALL_E_2025-03-14_09.41.56_-_A_natural-looking_cardboard_box_packaging_with_a_wood_texture_designed_to_be_more_organic_and_less_artificial._The_box_has_a_rustic_slightly_rough_w_wpgwlt.webp",
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1742923889/Dise%C3%B1o_sin_t%C3%ADtulo_10_cmaf1r.png",
       title: "9-10 Juanita0G",
       description:
         "Una de las variedades más populares, conocida por su alto contenido de resina y efectos equilibrados.",
@@ -144,7 +144,7 @@ const ProductsSection = () => {
     },
     {
       image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741956322/DALL_E_2025-03-14_09.42.14_-_A_natural-looking_cardboard_box_packaging_with_a_wood_texture_designed_to_be_more_organic_and_less_artificial._The_box_has_a_rustic_slightly_rough_w_hkjclf.webp",
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1742923770/Dise%C3%B1o_sin_t%C3%ADtulo_9_faj7rl.png",
       title: "Tropical Kush",
       description:
         "Una de las variedades más populares, conocida por su alto contenido de resina y efectos equilibrados.",
@@ -152,7 +152,7 @@ const ProductsSection = () => {
     },
     {
       image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741956323/DALL_E_2025-03-14_09.45.42_-_A_large_cardboard_box_with_a_wood-like_texture_designed_for_packaging_cannabis_buds._The_box_prominently_displays_the_brand_name_APIDC_on_the_front_oraoq8.webp",
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1742924075/Dise%C3%B1o_sin_t%C3%ADtulo_11_b2vndp.png",
       title: "Dosi-chock",
       description:
         "Una de las variedades más populares, conocida por su alto contenido de resina y efectos equilibrados.",
@@ -206,8 +206,12 @@ const ProductsSection = () => {
               Your browser does not support the video tag.
             </video>
             <div className="static-content d-flex flex-column justify-content-center align-items-center h-100">
-              <h1 className="product-title">TERAPIAS QUE FLORECEN</h1>
-              <h1 className="hero-subtitle">Sanación que nace de la tierra</h1>
+              <div className="titles">
+                <h1 className="product-title">TERAPIAS QUE FLORECEN</h1>
+                <h1 className="hero-subtitle">
+                  Sanación que nace de la tierra
+                </h1>
+              </div>
             </div>
 
             <div className="static-content d-flex flex-column justify-content-center align-items-center mt-5 h-100 position-relative">
@@ -227,8 +231,14 @@ const ProductsSection = () => {
             className="section-title"
             style={{ fontWeight: "bold", color: "#0a9d6d" }}
           >
-            Nuestros Productos
+            Nuestros Servicios
           </h2>
+          <h3
+            className="section-title"
+            style={{ fontSize: "1rem", color: "#0a9d6d" }}
+          >
+            Gestiona tu medicina
+          </h3>
 
           {loading && <LittleSpinner />}
 
@@ -362,7 +372,7 @@ const ProductsSection = () => {
                   </p>
                   <div className="image-info-container">
                     <img
-                      src="https://res.cloudinary.com/dqgjcfosx/image/upload/v1741882724/ALTA_z2qfwt.png"
+                      src="https://res.cloudinary.com/dqgjcfosx/image/upload/v1742922575/DALL_E_2025-03-25_14.11.31_-_A_detailed_botanical_morphology_illustration_of_a_female_cannabis_plant._The_image_should_depict_various_parts_of_the_plant_including_leaves_stems_qw7vwi.webp"
                       alt={selectedProduct.title}
                       className="product-image_products"
                     />
@@ -399,7 +409,7 @@ const ProductsSection = () => {
                   className="whatsapp-button_products"
                   onClick={() =>
                     window.open(
-                      `https://wa.me/+549TU_NUMERO?text=Hola, quiero más información sobre: ${selectedProduct.title}`
+                      `https://wa.me/+5491168824488?text=Hola, quiero más información sobre: ${selectedProduct.title}`
                     )
                   }
                 >

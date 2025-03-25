@@ -11,7 +11,7 @@ const breadcrumbRoutes = {
   "/membershipSection/socioSinReprocan": "Socio adherente",
   "/newsletter": "Newsletter",
   "/membershipSection": "Categorías",
-  "/products": "Productos",
+  "/products": "Cultivo",
   "/shop": "Tienda",
   "/socio": "Socios",
   "/newsLetter":"News Letter"

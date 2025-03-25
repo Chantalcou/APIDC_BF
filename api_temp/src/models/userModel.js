@@ -1,6 +1,5 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/db.js");
-const { v4: uuidv4 } = require("uuid"); // Para generar UUIDs
 
 const User = sequelize.define(
   "User",
@@ -26,37 +25,40 @@ const User = sequelize.define(
     },
     auth0Id: {
       type: DataTypes.STRING,
-      allowNull: true,   //Modificar a false apenas lo consiga
+      allowNull: true, //Modificar a false apenas lo consiga
       unique: true,
     },
     // NUEVOS CAMPOS
     membershipType: {
-      type: DataTypes.ENUM('sinMembresia', 'premium', 'gestor'),
-      defaultValue: 'sinMembresia',
-      field: 'membershipType' 
+      type: DataTypes.ENUM("sinMembresia", "premium", "gestor"),
+      defaultValue: "sinMembresia",
+      field: "membershipType",
     },
-    paymentProof: { // URL a comprobante de pago subido
+    paymentProof: {
+      // URL a comprobante de pago subido
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
     },
-    isApproved: { // Aprobación manual por admin
+    isApproved: {
+      // Aprobación manual por admin
       type: DataTypes.BOOLEAN,
-      defaultValue: false
+      defaultValue: false,
     },
-    gestorCode: { // Código único para referidos (si es gestor)
+    gestorCode: {
+      // Código único para referidos (si es gestor)
       type: DataTypes.STRING,
       unique: true,
-      allowNull: true
+      allowNull: true,
     },
-    referredBy: { // ID del gestor que lo refirió
-      type: DataTypes.INTEGER,
-      allowNull: true
-    }
-    // authProvider: {
-    //   type: DataTypes.STRING,
-    //   allowNull: false,
-    //   defaultValue: "auth0",
-    // },
+    // Cambiar tipo de referredBy para que coincida con UUID
+    referredBy: {
+      type: DataTypes.UUID,
+      allowNull: true,
+      references: {
+        model: "Gestores",
+        key: "id",
+      },
+    },
   },
   {
     tableName: "Users",

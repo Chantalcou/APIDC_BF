@@ -1,81 +1,96 @@
-@media (min-width: 768px) {
-    .container,
-    .container-md,
-    .container-sm {
-      max-width: 720px;
-    }
-  }
-  
-  @media (min-width: 576px) {
-    .container,
-    .container-sm {
-      max-width: 100vw;
-    }
-  }
-  
-  /* Segundo video container */
-  .container-video_gestor {
-    position: relative;
-    width: 100%;
-    background-color: #ffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 45vw;
-    overflow: hidden;
-    /* padding: 20px; */
-  }
-  
-  .bg-banner_gestor {
-    height: 100%;
-    position: relative;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: white;
-    z-index: 1;
-  }
-  
-  .bg-video_gestor {
-    border-radius: 5px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 150%;
-    object-fit: cover;
-    z-index: 0;
-  }
-  
-  .banner-title {
-    font-size: 3rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  .sub-title_banner {
-    font-size: 1.25rem;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  
-  /* Ajustes responsivos */
-  @media (max-width: 768px) {
-    .banner-title {
-      font-size: 2rem;
-    }
-  
-    .sub-title_banner {
-      font-size: 1rem;
-      padding: 0 20px;
-    }
-  }
-  
+/* ESTILOS BASE (MOBILE FIRST) */
+.container-video_gestor {
+  position: relative;
+  width: 100%;
+  background-color: #ffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 45vw;
+  overflow: hidden;
+  margin-top: 107px; /* Margen por defecto para mobile */
+}
 
-  
-  /* Beneficios */
+/* VERSIÓN DESKTOP (768px en adelante) */
+@media (min-width: 768px) {
+  .container-video_gestor {
+    margin-top: 0 !important; /* Elimina margen en desktop */
+    height: 65vw; /* Ajuste opcional de altura */
+  }
+
+  .container,
+  .container-md,
+  .container-sm {
+    max-width: 720px;
+  }
+}
+
+/* VERSIÓN MOBILE (hasta 767px) */
+@media (max-width: 767px) {
+  .container-video_gestor {
+    margin-top: 107px !important; /* Refuerza margen solo en mobile */
+    height: 65vw; /* Ajuste de altura para mobile */
+  }
+
+  .container,
+  .container-sm {
+    max-width: 100vw;
+  }
+}
+
+.bg-banner_gestor {
+  height: 100%;
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  z-index: 1;
+}
+
+.bg-video_gestor {
+  border-radius: 5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 150%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.banner-title {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.sub-title_banner {
+  font-size: 1.25rem;
+  max-width: 600px;
+  color: #ffff;
+  margin: 0 auto;
+}
+
+.gestor-scroll_arrow .fas {
+  color: white !important;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+  .banner-title {
+    font-size: 2rem;
+  }
+
+  .sub-title_banner {
+    font-size: 1rem;
+    padding: 0 20px;
+  }
+}
+
+/* Beneficios */
 .benefit-card {
   background-color: #ffffff;
   border-radius: 8px;
@@ -116,7 +131,7 @@
 
 /* Botón de envío */
 button[type="submit"] {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   padding: 10px 20px;
   border-radius: 5px;
@@ -127,4 +142,50 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
   background-color: #45a049;
+}
+
+/* popupestilos */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.popup-content button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.popup-content button:hover {
+  background-color: #0056b3;
+}
+
+.formulario-gestor {
+  margin-bottom: 10px;
+}
+
+textarea.form-control {
+  resize: none; /* Evita que el usuario cambie el tamaño */
+  width: 100%; /* Asegura que ocupe todo el ancho disponible */
+  padding: 10px;
+  border-radius: 5px;
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-import PaymentShipping from './PaymentShipping'
+import PaymentShipping from "./PaymentShipping";
 import "./MembershipComponent.css"; // Archivo CSS
 
 const MembershipComponent = () => {
@@ -47,26 +47,29 @@ const MembershipComponent = () => {
     <>
       {/* MEMBERSHIP SECTION */}
       <div className="membership-section">
-        <h1 className="section-title_title_membership">🌱 Tu Camino con APIDC</h1>
+        <h1 className="section-title_title_membership">
+          🌱 Tu Camino con APIDC
+        </h1>
         <p className="section-subtitle">
           Elegí el plan que impulse tu bienestar.
         </p>
         {/*  STEEPS*/}
         <p className="section-subtitle">
           Para acceder a nuestros servicios, comenza como Socio Adherente y
-          luego selecciona la opción que mejor se adapte a tus objetivos:
-          PREMIUM (cultivo personal REPROCAN) o Gestor (acompañamiento experto).
+          luego selecciona la opción que mejor se adapte a tus objetivos: SOCIO
+          REPROCAN (cultivo personal REPROCAN) o Gestor (acompañamiento
+          experto).
         </p>
         <h2>🚀 Pasos para Unirte</h2>
         <div className="steps-container">
           <div className="step">
             <div className="circle">1</div>
-            <p className="step-text">Unirse como Socio Adherente</p>
+            <p className="step-text">Uníte como Socio Adherente</p>
           </div>
           <div className="arrow">→</div>
           <div className="step">
             <div className="circle">2</div>
-            <p className="step-text">Elegir Premium o Gestor</p>
+            <p className="step-text">Elegí Reprocan o Gestor</p>
           </div>
         </div>{" "}
         {/* Otras Cards (Distribuidas en tres columnas) */}
@@ -82,25 +85,38 @@ const MembershipComponent = () => {
               <span className="price-new">10.000 / mes</span>
             </p>
             <ul className="benefits-list">
-              <li>✔ Participación en Investigación de Cultivo Medicinalo</li>
+              <li>✔ Participación en Investigación de Cultivo Medicinal</li>
               <li>
-                ✔ Colaboración en Distribución de Aceite Medicinal a Hospitales
-                de Gerontes
+                ✔ Programa de Acceso Solidario a Terapias Cannabinoides - Su
+                contribución subvenciona tratamientos medicinales para pacientes
+                en situación de vulnerabilidad socioeconómica, garantizando el
+                acceso equitativo a terapias esenciales.
               </li>
+
               <li>✔ Atención Personalizada Online para Gestión del REPROCAN</li>
             </ul>
-            <button
-              className="card-button"
-              onClick={() => handleRoleSelect("SocioSinReprocan")}
-            >
-              Más Información
-            </button>
+            <div className="content-buttons_memberShip">
+              <button
+                className="card-button"
+                onClick={() => window.open(url, "_blank")}
+              >
+                WhatsApp
+              </button>
+
+              <button
+                className="card-button"
+                onClick={() => handleRoleSelect("SocioSinReprocan")}
+              >
+                Completar Solicitud
+              </button>
+            </div>
           </div>
           <div className="card">
             <h2 className="card-title">Socio con Reprocan</h2>
             <p className="card-subtitle">
-            Realizá tus cultivos en nuestras instalaciones
-            Delegá el servicio de atención a tus cultivos con costos específicos dependiendo tu preferencia
+              Realizá tus cultivos en nuestras instalaciones y delegá su cuidado
+              a nuestro equipo. Ofrecemos un servicio personalizado con costos
+              específicos según tu preferencia.
             </p>
             <p className="price-container">
               <span className="price-old">$200.000</span>
@@ -111,19 +127,28 @@ const MembershipComponent = () => {
               <li>✔ Cultivo en Nuestros Campos(con Reprocan)</li>
               <li>✔ Asesoramiento Exclusivo Personalizado</li>
             </ul>
-            <button
-              className="card-button"
-              onClick={() => handleRoleSelect("SocioConReprocan")}
-            >
-              Más Información
-            </button>
+            <div className="content-buttons_memberShip">
+              <button
+                className="card-button"
+                onClick={() => window.open(url, "_blank")}
+              >
+                WhatsApp
+              </button>
+
+              <button
+                className="card-button"
+                onClick={() => handleRoleSelect("SocioConReprocan")}
+              >
+                Completar Solicitud
+              </button>
+            </div>
           </div>
 
           {/* Socio con Reprocan */}
           <div className="card">
             <h2 className="card-title">Gestor</h2>
             <p className="card-subtitle">
-            Comisiones de gestión y contención al socio adherente.
+              Comisiones de gestión y contención al socio adherente.
             </p>
             <p className="price-container">
               <span className="price-old">$300.000</span>
@@ -135,16 +160,24 @@ const MembershipComponent = () => {
               <li>✔ Capacitación para Gestores</li>
               <li>✔ Soporte Continuo y Asesoramiento Personalizado</li>
             </ul>
-            <button
-              className="card-button"
-              onClick={() => handleRoleSelect("Gestor")}
-            >
-              Más Información
-            </button>
+            <div className="content-buttons_memberShip">
+              <button
+                className="card-button"
+                onClick={() => window.open(url, "_blank")}
+              >
+                WhatsApp
+              </button>
+
+              <button
+                className="card-button"
+                onClick={() => handleRoleSelect("gestor")}
+              >
+                Completar Solicitud
+              </button>
+            </div>
           </div>
         </div>
-        <PaymentShipping/>
-        <div className="content-whatsApp">
+        {/* <div className="content-whatsApp">
           <p className="section-subtitle">
             ¿Tenés dudas? <strong>¡Chatea con nosotros!</strong>
             <a
@@ -156,7 +189,15 @@ const MembershipComponent = () => {
               <i className="fab fa-whatsapp"></i> ¡Chatea ahora!
             </a>
           </p>
+        </div> */}
+        <div className="whatsapp-cta-simple">
+          <h3>¿Necesitás ayuda para elegir?</h3>
+          <a href={url} className="whatsapp-minibutton">
+            <i className="fab fa-whatsapp"></i>
+            <span>Consulta rápida por WhatsApp</span>
+          </a>
         </div>
+        <PaymentShipping />
         {/* Tabla de beneficios */}
         <div className="benefits-table-container">
           <h2 className="benefits-title">Comparación de Beneficios</h2>
@@ -219,7 +260,6 @@ const MembershipComponent = () => {
                 <td>✖</td>
                 <td>✔</td>
               </tr>
-             
             </tbody>
           </table>
         </div>

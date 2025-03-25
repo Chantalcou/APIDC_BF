@@ -103,27 +103,7 @@ const SocioConReprocan = () => {
           delete newErrors.memberType;
         }
         break;
-      // case "birthDate":
-      //   if (!value) {
-      //     newErrors.birthDate = "La fecha de nacimiento es obligatoria.";
-      //   } else {
-      //     delete newErrors.birthDate;
-      //   }
-      //   break;
-      // case "termsAccepted":
-      //   if (!value) {
-      //     newErrors.termsAccepted = "Debes aceptar los términos y condiciones.";
-      //   } else {
-      //     delete newErrors.termsAccepted;
-      //   }
-      //   break;
-      // case "certReprocan":
-      //   if (!value) {
-      //     newErrors.certReprocan = "Debes adjuntar la certificación Reprocan.";
-      //   } else {
-      //     delete newErrors.certReprocan;
-      //   }
-      //   break;
+
       default:
         break;
     }
@@ -240,24 +220,19 @@ const SocioConReprocan = () => {
       </Helmet>
 
       <div>
+
         <div className="container-video_gestor my-1">
           <div className="bg-banner_gestor text-center position-relative">
-            <video
-              autoPlay
-              muted
-              loop
-              className="bg-video_gestor position-absolute w-100 h-100"
+            {/* Reemplaza el video por una imagen */}
+            <img
+              src="https://res.cloudinary.com/dqgjcfosx/image/upload/v1742914308/pexels-kindelmedia-7667838_xhpm1z.jpg"
+              alt="Imagen de fondo"
+              className="bg-image_gestor position-absolute w-100 h-100"
               style={{ objectFit: "cover", top: 0, left: 0 }}
-            >
-              <source
-                src="https://res.cloudinary.com/dqgjcfosx/video/upload/v1735911484/7667161-uhd_3840_2160_30fps_ry111a.mp4"
-                type="video/mp4"
-              />
-              Your browser does not support the video tag.
-            </video>
+            />
             <div
               id="asociarme-seccion"
-              className="d-flex flex-column justify-content-center align-items-center h-100"
+              className="d-flex flex-column justify-content-center align-items-center"
               style={{ zIndex: 99 }}
             >
               <h1 className="banner-title">Socio con Reprocan</h1>
@@ -270,17 +245,11 @@ const SocioConReprocan = () => {
                 posibilidades. Únete y juntos construyamos un camino hacia un
                 futuro prometedor.
               </p>
-
-              <div className="gestor-scroll_arrow static-content d-flex flex-column justify-content-center align-items-center  position-relative">
-                <ScrollArrow
-                  onClick={() => scrollToSection("formulario-asociacion")}
-                />
-              </div>
             </div>
           </div>
         </div>
 
-        <div className="row">
+        {/* <div className="row">
           {[
             "Gana un Porcentaje de las Ventas",
             "Expande tu Red de Contactos",
@@ -300,8 +269,9 @@ const SocioConReprocan = () => {
             </div>
           ))}
         </div>
-
-        <div
+ */}
+ 
+ <div
           id="formulario-asociacion"
           className="formulario-gestor my-5 container formulario-container "
         >
@@ -309,10 +279,10 @@ const SocioConReprocan = () => {
           <form className="formulario-form" onSubmit={handleSubmit}>
             <div>
               <label className="form-label" htmlFor="fullName">
-                Nombre Completo
+                Nombre
               </label>
               <input
-                placeholder="Ingresa tu nombre completo"
+                placeholder="Nombre..."
                 type="text"
                 id="fullName"
                 name="fullName"
@@ -331,7 +301,7 @@ const SocioConReprocan = () => {
                 Apellido
               </label>
               <input
-                placeholder="Ingresa apellido"
+                placeholder="Apellido..."
                 type="text"
                 id="lastName"
                 name="lastName"
@@ -350,7 +320,7 @@ const SocioConReprocan = () => {
                 Correo Electrónico
               </label>
               <input
-                placeholder="Ingresa tu correo electrónico"
+                placeholder="Email..."
                 type="email"
                 id="email"
                 name="email"
@@ -367,7 +337,7 @@ const SocioConReprocan = () => {
                 Teléfono
               </label>
               <input
-                placeholder="Ingresa tu celular"
+                placeholder="Celular..."
                 type="text"
                 id="phone"
                 name="phone"
@@ -384,7 +354,7 @@ const SocioConReprocan = () => {
                 Número de Certificado Reprocan
               </label>
               <input
-                placeholder="Ingresa tu número de Reprocan"
+                placeholder="Número de Reprocan..."
                 type="text"
                 id="reprocanNumber"
                 name="reprocanNumber"
@@ -403,7 +373,7 @@ const SocioConReprocan = () => {
                 Mensaje
               </label>
               <textarea
-                placeholder="Escribe tu mensaje aquí..."
+                placeholder="Dejá tu mensaje acá..."
                 id="message"
                 name="message"
                 rows="4" // Define el número de líneas visibles

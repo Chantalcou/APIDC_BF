@@ -215,7 +215,28 @@ const Home = () => {
                       border: "2px solid white",
                     }}
                   />
-                  <ButtonComponent
+                   {isAuthenticated && user ? (
+                                <>
+                                  {/* <Nav.Link href="/products">Productos</Nav.Link> */}
+                                  <Link
+                                    to="/membershipSection"
+                                    className="btn-asociate-custom"
+                                    aria-label="Explorar Membresías"
+                                  >
+                                    ASOCIATE
+                                 
+                                  </Link>
+                                </>
+                              ) : (
+                                <Link
+                                  className="btn-asociate-custom"
+                                  aria-label="Explorar Membresías"
+                                  onClick={handleShowModal || handleLogin}
+                                >
+                                 ASOCIATE
+                                </Link>
+                              )}
+                  {/* <ButtonComponent
                     text="Asociate Ahora"
                     onClick={() => scrollToSection("asociarme-section")}
                     color={{
@@ -224,7 +245,7 @@ const Home = () => {
                       border: "2px solid #0a9d6d",
                     }}
                     icon={<FaArrowRight className="me-2" />}
-                  />
+                  /> */}
                 </div>
                 {/* <p className="text-white mt-3 text-center">
               ⭐️ +500 socios confían en nosotros | Registro REPROCANN 100%
@@ -240,7 +261,7 @@ const Home = () => {
             <div className="content-about_section row text-center">
               <div data-aos="fade-up" className="col-md-4 col-12 mb-4">
                 <img
-                  src="https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1726139381/imagen-3-apidc_sezunb.jpg"
+                  src="https://res.cloudinary.com/dqgjcfosx/image/upload/v1740671503/Dise%C3%B1o_sin_t%C3%ADtulo_3_ocqnjy.png"
                   loading="lazy"
                   alt="Quienes somos"
                   className="img-fluid mb-3 circle-image"
@@ -264,7 +285,7 @@ const Home = () => {
               </div>
               <div data-aos="fade-down" className="col-md-4 col-12 mb-4">
                 <img
-                  src="https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1726139381/imagen-2-apidc_jd0dnj.jpg"
+                  src="https://res.cloudinary.com/dqgjcfosx/image/upload/v1742918567/WhatsApp_Image_2025-03-25_at_13.01.24_v5f9ul.jpg"
                   alt="Nuestro camino"
                   className="img-fluid mb-3 circle-image"
                   loading="lazy"
@@ -288,7 +309,7 @@ const Home = () => {
               </div>
               <div data-aos="fade-up" className="col-md-4 col-12 mb-4">
                 <img
-                  src="https://res.cloudinary.com/dqgjcfosx/image/upload/w_600,q_auto,f_auto/v1726139381/imagen-1-apidc_vtapiq.jpg"
+                  src="https://res.cloudinary.com/dqgjcfosx/image/upload/v1739811212/WhatsApp_Image_2025-02-07_at_19.28.59_1_etoozw.jpg"
                   alt="A donde vamos"
                   className="img-fluid mb-3 circle-image"
                   loading="lazy"
@@ -412,8 +433,7 @@ const Home = () => {
       <div id="donate-now"></div>
       <Donations />
       <div id="asociarme-section"></div>
-      <SeccionAs />
-      <ContactInfo />
+   
       <div id="ley-section" className="ley-section text-center">
         <div
           data-aos="fade-right"
@@ -450,22 +470,17 @@ const Home = () => {
                 específicas.
               </p>
             </div>
-            {/* <div class="ley-card">
-                    <h3>🌿 REPROCANN</h3>
-                    <p>Autoriza el cultivo controlado para uso medicinal.</p>
-                  </div> */}
+     
           </div>
         </section>
-        {/* <div className="static-content d-flex flex-column justify-content-center align-items-center mt-5 h-100 position-relative">
-          <ScrollArrow
-            onClick={() => scrollToSection("present-section")}
-            // color=" #202020"
-          />
-        </div> */}
+ 
       </div>
+      <SeccionAs />
       <Reprocan/>
       <WorkTogether />
       <MovingBanner />
+      <ContactInfo />
+
 
       {/* 
       <div className="content-summary">

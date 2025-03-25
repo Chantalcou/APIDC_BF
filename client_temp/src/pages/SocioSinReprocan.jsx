@@ -240,59 +240,52 @@ const SocioSinReprocan = () => {
       <div>
         <div className="container-video_gestor my-1">
           <div className="bg-banner_gestor text-center position-relative">
-            <video
-              autoPlay
-              muted
-              loop
-              className="bg-video_gestor position-absolute w-100 h-100"
+            {/* Reemplaza el video por una imagen */}
+            <img
+              src="https://res.cloudinary.com/dqgjcfosx/image/upload/v1742914308/pexels-kindelmedia-7667838_xhpm1z.jpg"
+              alt="Imagen de fondo"
+              className="bg-image_gestor position-absolute w-100 h-100"
               style={{ objectFit: "cover", top: 0, left: 0 }}
-            >
-              <source
-                src="https://res.cloudinary.com/dqgjcfosx/video/upload/v1735911484/7667161-uhd_3840_2160_30fps_ry111a.mp4"
-                type="video/mp4"
-              />
-              Your browser does not support the video tag.
-            </video>
+            />
             <div
               id="asociarme-seccion"
-              className="d-flex flex-column justify-content-center align-items-center h-100"
+              className="d-flex flex-column justify-content-center align-items-center"
               style={{ zIndex: 99 }}
             >
               <h1 className="banner-title">Socio Adherente</h1>
               <p className="sub-title_banner text-center mb-5">
-              Como socio adherente de nuestra asociación civil, tendrás acceso a información y recursos sobre el cultivo y uso medicinal del cannabis. Además, podrás optar por convertirte en socio premium a través del registro REPROCANN, lo que te permitirá cultivar en nuestro campo y gestionar la venta de productos, obteniendo un porcentaje de las ganancias.
+                Como socio adherente de nuestra asociación civil, tendrás acceso
+                a información y recursos sobre el cultivo y uso medicinal del
+                cannabis. Además, podrás optar por convertirte en socio premium
+                a través del registro REPROCANN, lo que te permitirá cultivar en
+                nuestro campo y gestionar la venta de productos, obteniendo un
+                porcentaje de las ganancias.
               </p>
-
-              <div className="gestor-scroll_arrow static-content d-flex flex-column justify-content-center align-items-center  position-relative">
-                <ScrollArrow
-                  onClick={() => scrollToSection("formulario-asociacion")}
-                />
-              </div>
             </div>
           </div>
         </div>
-
+{/* 
         <div className="row">
           {[
-            "Gana un Porcentaje de las Ventas",
-            "Expande tu Red de Contactos",
-            "Asesoría y Soporte Continuo",
+            "Investigación de cultivo medicinal",
+            "Acceso solidario a terapias cannabinoides",
+            "Atención Personalizada Online",
           ].map((benefit, index) => (
             <div className="col-md-4" key={index}>
               <div className="benefit-card">
                 <h3 className="benefit-title">{benefit}</h3>
                 <p>
                   {index === 0
-                    ? "Como gestor, podrás generar ingresos adicionales vendiendo productos de nuestra red, y recibirás un porcentaje por cada venta realizada, lo que te brinda una fuente de ingresos constante."
+                    ? "Contribuye activamente a proyectos de investigación y desarrollo en cultivo medicinal, siendo parte de una comunidad que avanza hacia soluciones innovadoras y sostenibles."
                     : index === 1
-                    ? "Ser parte de nuestra red de gestores te permitirá conectarte con otros profesionales del sector, expandiendo tu red de contactos y aumentando las oportunidades de negocio."
-                    : "Nuestro equipo te brindará todo el apoyo necesario para garantizar el éxito de tu negocio, con asesoría constante en ventas, marketing y estrategias comerciales para maximizar tus ganancias."}
+                    ? "Tu aporte mensual de $10.000 subvenciona tratamientos cannabinoides para pacientes en situación de vulnerabilidad, garantizando acceso equitativo a terapias esenciales."
+                    : "Recibe asesoramiento personalizado para gestionar trámites como el REPROCAN, con soporte online y seguimiento continuo para facilitar tu experiencia en la asociación."}
                 </p>
               </div>
             </div>
           ))}
-        </div>
-
+        </div> */}
+        
         <div
           id="formulario-asociacion"
           className="formulario-gestor my-5 container formulario-container "
@@ -301,10 +294,10 @@ const SocioSinReprocan = () => {
           <form className="formulario-form" onSubmit={handleSubmit}>
             <div>
               <label className="form-label" htmlFor="fullName">
-                Nombre Completo
+                Nombre
               </label>
               <input
-                placeholder="Ingresa tu nombre completo"
+                placeholder="Nombre..."
                 type="text"
                 id="fullName"
                 name="fullName"
@@ -323,7 +316,7 @@ const SocioSinReprocan = () => {
                 Apellido
               </label>
               <input
-                placeholder="Ingresa apellido"
+                placeholder="Apellido..."
                 type="text"
                 id="lastName"
                 name="lastName"
@@ -342,7 +335,7 @@ const SocioSinReprocan = () => {
                 Correo Electrónico
               </label>
               <input
-                placeholder="Ingresa tu correo electrónico"
+                placeholder="Email..."
                 type="email"
                 id="email"
                 name="email"
@@ -359,7 +352,7 @@ const SocioSinReprocan = () => {
                 Teléfono
               </label>
               <input
-                placeholder="Ingresa tu celular"
+                placeholder="Celular..."
                 type="text"
                 id="phone"
                 name="phone"
@@ -371,13 +364,31 @@ const SocioSinReprocan = () => {
                 <div className="invalid-feedback">{errors.phone}</div>
               )}
             </div>
-
+            <div>
+              <label className="form-label" htmlFor="reprocanNumber">
+                Número de Certificado Reprocan
+              </label>
+              <input
+                placeholder="Número de Reprocan..."
+                type="text"
+                id="reprocanNumber"
+                name="reprocanNumber"
+                className={`form-control ${
+                  errors.reprocanNumber ? "is-invalid" : ""
+                }`}
+                value={formData.reprocanNumber}
+                onChange={handleChange}
+              />
+              {errors.reprocanNumber && (
+                <div className="invalid-feedback">{errors.reprocanNumber}</div>
+              )}
+            </div>
             <div>
               <label className="form-label" htmlFor="message">
                 Mensaje
               </label>
               <textarea
-                placeholder="Escribe tu mensaje aquí..."
+                placeholder="Dejá tu mensaje acá..."
                 id="message"
                 name="message"
                 rows="4" // Define el número de líneas visibles
@@ -416,7 +427,7 @@ const SocioSinReprocan = () => {
             <label className="form-label" htmlFor="birthDate">
               Fecha de Nacimiento
             </label>
-            <input
+            <input 
               type="date"
               id="birthDate"
               name="birthDate"
@@ -429,11 +440,11 @@ const SocioSinReprocan = () => {
             )}
           </div> */}
             {/* <div className="form-check">
-            <input
+            <input 
               type="checkbox"
               id="termsAccepted"
               name="termsAccepted"
-              className="form-check-input"
+              className="form-check-input "
               checked={formData.termsAccepted}
               onChange={handleChange}
             />
@@ -448,7 +459,7 @@ const SocioSinReprocan = () => {
             <label className="form-label" htmlFor="certReprocan">
               Adjuntar Certificación Reprocan
             </label>
-            <input
+            <input 
               type="file"
               id="certReprocan"
               name="certReprocan"

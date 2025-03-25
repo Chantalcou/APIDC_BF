@@ -65,6 +65,7 @@
 .product-title {
   color: #ffffff; /* Mantiene el color actual */
   font-size: 2.5rem; /* Ajustado para mejor estética */
+  
   font-weight: 600; /* Reducido para evitar un efecto tosco */
   text-align: center;
   text-transform: uppercase; /* Opcional, da un toque más limpio */
