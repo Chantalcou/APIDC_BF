@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import PaymentShipping from "./PaymentShipping";
 import "./MembershipComponent.css"; // Archivo CSS
+import ButtonComponent from "./Button";
 
 const MembershipComponent = () => {
   const navigate = useNavigate();
@@ -77,12 +78,12 @@ const MembershipComponent = () => {
           {/* Socio con Reprocan */}
           <div className="card">
             <h2 className="card-title">Socio adherente</h2>
-            <p className="card-subtitle">
-              Hacete parte de un movimiento que transforma vidas.
-            </p>
-            <p className="price-container">
+            <p className="price-container_membership">
               {/* <span className="price-old">17.000</span> */}
               <span className="price-new">10.000 / mes</span>
+            </p>
+            <p className="card-subtitle">
+              Hacete parte de un movimiento que transforma vidas.
             </p>
             <ul className="benefits-list">
               <li>✔ Participación en Investigación de Cultivo Medicinal</li>
@@ -96,31 +97,41 @@ const MembershipComponent = () => {
               <li>✔ Atención Personalizada Online para Gestión del REPROCAN</li>
             </ul>
             <div className="content-buttons_memberShip">
-              <button
+            <ButtonComponent
                 className="card-button"
                 onClick={() => window.open(url, "_blank")}
-              >
-                WhatsApp
-              </button>
+                color={{
+                  background: "transparent",
+                  text: "#0a9d6d", // Color del texto
+                  border: "2px solid white",
+                  fontSize: ".8rem",
+                }}
+                text="WhatsApp"
+              />
 
-              <button
+              <ButtonComponent
                 className="card-button"
-                onClick={() => handleRoleSelect("SocioSinReprocan")}
-              >
-                Completar Solicitud
-              </button>
+                onClick={() => handleRoleSelect("gestor")}
+                color={{
+                  background: "transparent",
+                  text: "#ffff", // Color del texto
+                  border: "2px solid white",
+                  fontSize: ".8rem",
+                }}
+                text="  Completar Solicitud"
+              />
             </div>
           </div>
           <div className="card">
             <h2 className="card-title">Socio con Reprocan</h2>
+            <p className="price-container_membership">
+              <span className="price-old">$200.000</span>
+              <span className="price-new">150.000 / mes</span>
+            </p>
             <p className="card-subtitle">
               Realizá tus cultivos en nuestras instalaciones y delegá su cuidado
               a nuestro equipo. Ofrecemos un servicio personalizado con costos
               específicos según tu preferencia.
-            </p>
-            <p className="price-container">
-              <span className="price-old">$200.000</span>
-              <span className="price-new">150.000 / mes</span>
             </p>
             <ul className="benefits-list">
               <li>✔ Un Frasco Gratis de Cannabis Medicinal</li>
@@ -128,31 +139,41 @@ const MembershipComponent = () => {
               <li>✔ Asesoramiento Exclusivo Personalizado</li>
             </ul>
             <div className="content-buttons_memberShip">
-              <button
+            <ButtonComponent
                 className="card-button"
                 onClick={() => window.open(url, "_blank")}
-              >
-                WhatsApp
-              </button>
+                color={{
+                  background: "transparent",
+                  text: "#0a9d6d", // Color del texto
+                  border: "2px solid white",
+                  fontSize: ".8rem",
+                }}
+                text="WhatsApp"
+              />
 
-              <button
+              <ButtonComponent
                 className="card-button"
-                onClick={() => handleRoleSelect("SocioConReprocan")}
-              >
-                Completar Solicitud
-              </button>
+                onClick={() => handleRoleSelect("gestor")}
+                color={{
+                  background: "transparent",
+                  text: "#ffff", // Color del texto
+                  border: "2px solid white",
+                  fontSize: ".5rem",
+                }}
+                text="Completar Solicitud"
+              />
             </div>
           </div>
 
           {/* Socio con Reprocan */}
           <div className="card">
             <h2 className="card-title">Gestor</h2>
-            <p className="card-subtitle">
-              Comisiones de gestión y contención al socio adherente.
-            </p>
             <p className="price-container">
               <span className="price-old">$300.000</span>
               <span className="price-new">250.000 / mes</span>
+            </p>
+            <p className="card-subtitle">
+              Comisiones de gestión y contención al socio adherente.
             </p>
             <ul className="benefits-list">
               <li>✔ Cultivo en Nuestros Campos (Con Reprocan)</li>
@@ -161,37 +182,35 @@ const MembershipComponent = () => {
               <li>✔ Soporte Continuo y Asesoramiento Personalizado</li>
             </ul>
             <div className="content-buttons_memberShip">
-              <button
+              <ButtonComponent
                 className="card-button"
                 onClick={() => window.open(url, "_blank")}
-              >
-                WhatsApp
-              </button>
+                color={{
+                  background: "transparent",
+                  text: "#0a9d6d", // Color del texto
+                  border: "2px solid white",
+                  fontSize: ".5rem",
+                }}
+                text="WhatsApp"
+              />
 
-              <button
+              <ButtonComponent
                 className="card-button"
                 onClick={() => handleRoleSelect("gestor")}
-              >
-                Completar Solicitud
-              </button>
+                color={{
+                  background: "transparent",
+                  text: "#ffff", // Color del texto
+                  border: "2px solid white",
+                  fontSize: ".5rem",
+                }}
+                text="  Completar Solicitud"
+              />
             </div>
           </div>
         </div>
-        {/* <div className="content-whatsApp">
-          <p className="section-subtitle">
-            ¿Tenés dudas? <strong>¡Chatea con nosotros!</strong>
-            <a
-              href={url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="whatsapp-button"
-            >
-              <i className="fab fa-whatsapp"></i> ¡Chatea ahora!
-            </a>
-          </p>
-        </div> */}
+ 
         <div className="whatsapp-cta-simple">
-          <h3>¿Necesitás ayuda para elegir?</h3>
+          <h3 className="whatsapp-cta-simple_title">¿Necesitás ayuda para elegir?</h3>
           <a href={url} className="whatsapp-minibutton">
             <i className="fab fa-whatsapp"></i>
             <span>Consulta rápida por WhatsApp</span>

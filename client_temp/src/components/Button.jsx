@@ -2,15 +2,17 @@ import React from "react";
 // import { Button } from "react-bootstrap";
 import "./Button.css";
 
-const ButtonComponent = ({ text, onClick, color, customClass }) => {
+const ButtonComponent = ({ text, onClick, color, customClass,style,fontSize }) => {
   return (
     <button
       onClick={onClick}
       className={`custom-button-outline ${customClass || ""}`}
       style={{
-        backgroundColor: color.background,
-        color: color.text,
-        border: color.border,
+        background: color?.background || "transparent",
+        color: color?.text || "black",
+        border: color?.border || "none",
+        fontSize:fontSize,
+        ...style 
       }}
     >
       {text}

@@ -5,13 +5,14 @@ import './Reprocan.css';
 
 const Reprocan = () => {
   const [isMuted, setIsMuted] = useState(true);
+  const [showVideo, setShowVideo] = useState(false);
   const playerRef = useRef(null);
 
   const opts = {
     height: '675',
     width: '1200',
     playerVars: {
-      autoplay: 1,
+      autoplay: 1, 
       mute: 1,
       modestbranding: 1,
       rel: 0,
@@ -25,38 +26,45 @@ const Reprocan = () => {
 
   const toggleMute = () => {
     if (playerRef.current) {
-      if (isMuted) {
-        playerRef.current.unMute();
-      } else {
-        playerRef.current.mute();
-      }
+      isMuted ? playerRef.current.unMute() : playerRef.current.mute();
       setIsMuted(!isMuted);
     }
   };
 
   return (
     <div className="reprocan-section">
-    {/* Nuevo título agregado */}
-    <div className="reprocan-header">
-      <h1>¿Cómo gestiono mi REPROCAN?</h1>
-      {/* <p className="subtitle">Optimiza tus procesos con nuestra guía experta</p> */}
-    </div>
-    <div className="video-container_reprocan">
-      <YouTube
-        videoId="NyaSejlZka8"
-        opts={opts}
-        onReady={onReady}
-        className="youtube-iframe"
-      />
-      <div className="controls">
-        <button 
-          onClick={toggleMute}
-          className="audio-button"
-          aria-label={isMuted ? 'Activar sonido' : 'Silenciar'}
-        >
-          {isMuted ? <FaVolumeMute /> : <FaVolumeUp />}
-        </button>
+      <div className="reprocan-header">
+        <h1>¿Cómo gestiono mi REPROCAN?</h1>
       </div>
+      <div className="video-container_reprocan">
+        {!showVideo ? (
+          <div className="video-thumbnail" onClick={() => setShowVideo(true)}>
+            <img 
+              src="https://res.cloudinary.com/dqgjcfosx/image/upload/v1743000715/reprocan-2_yjmqbg.webp" 
+              alt="Miniatura del video"
+              className="thumbnail-img"
+            />
+            <button className="play-button">▶</button>
+          </div>
+        ) : (
+          <YouTube
+            videoId="NyaSejlZka8"
+            opts={opts}
+            onReady={onReady}
+            className="youtube-iframe"
+          />
+        )}
+        {showVideo && (
+          <div className="controls">
+            <button 
+              onClick={toggleMute}
+              className="audio-button"
+              aria-label={isMuted ? 'Activar sonido' : 'Silenciar'}
+            >
+              {isMuted ? <FaVolumeMute /> : <FaVolumeUp />}
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

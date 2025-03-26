@@ -96,7 +96,7 @@ const ProductsSection = () => {
     },
     {
       image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741956322/DALL_E_2025-03-14_09.46.54_-_A_large_cardboard_box_with_a_wood-like_texture_open_from_the_top_revealing_high-quality_cannabis_buds_inside._The_box_prominently_displays_the_brand_sv9il4.webp",
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1742996864/Dise%C3%B1o_sin_t%C3%ADtulo_1_p4p2pg.png",
       title: "Dosi-Dos",
       description:
         "Una de las variedades más populares, conocida por su alto contenido de resina y efectos equilibrados.",
@@ -128,7 +128,7 @@ const ProductsSection = () => {
     },
     {
       image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741956322/DALL_E_2025-03-14_09.46.54_-_A_large_cardboard_box_with_a_wood-like_texture_open_from_the_top_revealing_high-quality_cannabis_buds_inside._The_box_prominently_displays_the_brand_sv9il4.webp",
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1742996864/Dise%C3%B1o_sin_t%C3%ADtulo_1_p4p2pg.png",
       title: "Dosi-Dos",
       description:
         "Una de las variedades más populares, conocida por su alto contenido de resina y efectos equilibrados.",
@@ -160,7 +160,7 @@ const ProductsSection = () => {
     },
     {
       image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1741956322/DALL_E_2025-03-14_09.46.54_-_A_large_cardboard_box_with_a_wood-like_texture_open_from_the_top_revealing_high-quality_cannabis_buds_inside._The_box_prominently_displays_the_brand_sv9il4.webp",
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1742996864/Dise%C3%B1o_sin_t%C3%ADtulo_1_p4p2pg.png",
       title: "Dosi-Dos",
       description:
         "Una de las variedades más populares, conocida por su alto contenido de resina y efectos equilibrados.",
@@ -200,7 +200,8 @@ const ProductsSection = () => {
           <div className="video-container">
             <video autoPlay muted loop className="home-bg-video">
               <source
-                src="https://res.cloudinary.com/dqgjcfosx/video/upload/v1737553912/12361112-uhd_3840_2160_30fps_ca2hwm.mp4"
+                src="https://res.cloudinary.com/dqgjcfosx/video/upload/c_scale,w_1920,h_1080,f_mp4,q_auto/v1737553912/12361112-uhd_3840_2160_30fps_ca2hwm.mp4
+"
                 type="video/mp4"
               />
               Your browser does not support the video tag.
@@ -372,7 +373,7 @@ const ProductsSection = () => {
                   </p>
                   <div className="image-info-container">
                     <img
-                      src="https://res.cloudinary.com/dqgjcfosx/image/upload/v1742922575/DALL_E_2025-03-25_14.11.31_-_A_detailed_botanical_morphology_illustration_of_a_female_cannabis_plant._The_image_should_depict_various_parts_of_the_plant_including_leaves_stems_qw7vwi.webp"
+                      src="https://res.cloudinary.com/dqgjcfosx/image/upload/v1743003581/A%C3%B1adir_un_t%C3%ADtulo_wuswnc.png"
                       alt={selectedProduct.title}
                       className="product-image_products"
                     />
@@ -393,14 +394,7 @@ const ProductsSection = () => {
                         </p>
                         <p>Cada 5gr $30.000</p>
                       </div>
-                      <div className="section-item">
-                        <strong>Parte baja</strong>
-                        <p>
-                          Son los cogollos menos desarrollados, ya que reciben
-                          menos luz.
-                        </p>
-                        <p>Cada 5gr $15.000</p>
-                      </div>
+                     
                     </div>
                   </div>
                 </div>

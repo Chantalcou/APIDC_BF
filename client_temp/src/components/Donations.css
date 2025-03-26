@@ -1,4 +1,5 @@
-/* Añade estos estilos al CSS existente */
+
+
 .donacion-container {
   padding: 3rem 1.5rem;
 
@@ -6,6 +7,8 @@
   max-width: 1200px;
   margin: 2rem auto;
 }
+
+
 .donation-background_image {
   background-image: url("https://res.cloudinary.com/dqgjcfosx/image/upload/v1740748433/Dise%C3%B1o_sin_t%C3%ADtulo_5_s272n0.png");
   background-size: cover; 
@@ -27,7 +30,7 @@
 
 .donacion-titulo {
   font-size: 2.5rem;
-  color: #1a4720;
+  color: #0a9d6d;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -36,7 +39,7 @@
 }
 
 .icono-titulo {
-  color: #2e7d32;
+  color: #7BA12D;
   font-size: 2.2rem;
 }
 
@@ -123,7 +126,7 @@
 }
 
 .donar-button {
-  background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+  background: #7BA12D;
   color: white;
   padding: 1.2rem 2.5rem;
   border: none;
@@ -142,6 +145,7 @@
 .donar-button:hover {
   transform: scale(1.05);
   box-shadow: 0 10px 20px rgba(46, 125, 50, 0.3);
+  
 }
 
 .button-badge {

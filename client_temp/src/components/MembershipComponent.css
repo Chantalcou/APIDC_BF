@@ -62,7 +62,7 @@
 }
 
 .large-card .price-new {
-  color: #28a745;
+  color: #0a9d6d;
   font-weight: bold;
 }
 
@@ -83,9 +83,9 @@
 /* Cards de la parte inferior (distribuidas en tres columnas) */
 .cards-container {
   display: flex; /* Usamos flexbox para las cards */
-  justify-content: space-around; /* Alineamos las cards con espacio entre ellas */
+  justify-content: space-around;
   margin-top: 40px;
-  gap: 20px; /* Añadido para separar las cards entre sí */
+  /* gap: 20px; */
 }
 
 /* Card común */
@@ -111,10 +111,11 @@
     ),
     rgba(17, 17, 17, 0.07); /* Gradiente aplicado */
   box-shadow: 0px 4px 8px rgba(34, 13, 13, 0.1);
+  
 }
 .card-button {
   margin-top: auto; /* Esto asegura que el botón se pegue al fondo de la card */
-  background-color: #007bff;
+  background-color: #7BA12D;
   color: white;
   /* padding: 10px 20px; */
   border: none;
@@ -147,7 +148,7 @@
 }
 
 .card-first .price-new {
-  color: #28a745; /* Cambié el color a verde para resaltar el nuevo precio */
+  color: #0a9d6d; /* Cambié el color a verde para resaltar el nuevo precio */
   font-weight: bold;
   font-size: 2rem;
 }
@@ -166,7 +167,7 @@
 /* Estilo del botón dentro de las cards */
 
 .card-first .card-button:hover {
-  background-color: #175b44;
+  background-color: #7BA12D;
 }
 
 /* Estilo de la lista de beneficios dentro de las cards */
@@ -182,7 +183,7 @@
 
 /* Estilo del botón dentro de las cards - primer card*/
 .card-first .card-button {
-  background-color: #0a9d6d;
+  background-color: #7BA12D;
   color: white;
   padding: 8px 16px;
   border: none;
@@ -192,7 +193,7 @@
 }
 
 .card-first .card-button:hover {
-  background-color: #175b44;
+  background-color: #7BA12D;
 }
 
 /*  */
@@ -228,7 +229,7 @@
 }
 
 .card .price-new {
-  color: #28a745; /* Cambié el color a verde para resaltar el nuevo precio */
+  color: #0a9d6d; /* Cambié el color a verde para resaltar el nuevo precio */
   font-weight: bold;
   font-size: 2rem;
 }
@@ -261,7 +262,7 @@
 }
 
 .card .price-new {
-  color: #28a745;
+  color: #0a9d6d;
   font-weight: bold;
 }
 
@@ -275,7 +276,7 @@
 }
 
 .card .card-button {
-  background-color: #0a9d6d;
+  background-color: #7BA12D;
 
   color: white;
   padding: 8px 16px;
@@ -285,7 +286,7 @@
 }
 
 .card .card-button:hover {
-  background-color: #175b44;
+  background-color: #f7d046;
 }
 
 .card-subtitle {
@@ -565,7 +566,9 @@
   border-radius: 15px;
   border: 2px solid #8BBE45;
 }
-
+.whatsapp-cta-simple_title{
+  color:#0a9d6d
+}
 .whatsapp-minibutton {
   display: inline-flex;
   align-items: center;
@@ -592,6 +595,10 @@
 .content-buttons_memberShip{
   display: flex;
   flex-direction: row;
+  width: 28vw;
+  font-size: 1rem;
   gap: 10px;
+  justify-content: center;
+  align-items: center;
 }
 

@@ -215,27 +215,44 @@ const Home = () => {
                       border: "2px solid white",
                     }}
                   />
-                   {isAuthenticated && user ? (
-                                <>
-                                  {/* <Nav.Link href="/products">Productos</Nav.Link> */}
-                                  <Link
-                                    to="/membershipSection"
-                                    className="btn-asociate-custom"
-                                    aria-label="Explorar Membresías"
-                                  >
-                                    ASOCIATE
-                                 
-                                  </Link>
-                                </>
-                              ) : (
-                                <Link
-                                  className="btn-asociate-custom"
-                                  aria-label="Explorar Membresías"
-                                  onClick={handleShowModal || handleLogin}
-                                >
-                                 ASOCIATE
-                                </Link>
-                              )}
+                  {isAuthenticated && user ? (
+                    <>
+                      {/* <Nav.Link href="/products">Productos</Nav.Link> */}
+                      <Link
+                      style={{
+                        backgroundColor: "#7BA12D",
+                        color: "#ffffff",
+                        padding: "10px 20px",
+                        borderRadius: "5px",
+                        border: "2px solid #7BA12D",
+                        textDecoration: "none",
+                        textAlign: "center",
+                      }}
+                        to="/membershipSection"
+                        className="btn-asociate-custom"
+                        aria-label="Explorar Membresías"
+                      >
+                        ASOCIATE
+                      </Link>
+                    </>
+                  ) : (
+                    <Link
+                    style={{
+                      backgroundColor: "#7BA12D",
+                      color: "#ffffff",
+                      padding: "10px 20px",
+                      borderRadius: "5px",
+                      border: "2px solid #7BA12D",
+                      textDecoration: "none",
+                      textAlign: "center",
+                    }}
+                      className="btn-asociate-custom"
+                      aria-label="Explorar Membresías"
+                      onClick={handleShowModal || handleLogin}
+                    >
+                      ASOCIATE
+                    </Link>
+                  )}
                   {/* <ButtonComponent
                     text="Asociate Ahora"
                     onClick={() => scrollToSection("asociarme-section")}
@@ -309,9 +326,9 @@ const Home = () => {
               </div>
               <div data-aos="fade-up" className="col-md-4 col-12 mb-4">
                 <img
-                  src="https://res.cloudinary.com/dqgjcfosx/image/upload/v1739811212/WhatsApp_Image_2025-02-07_at_19.28.59_1_etoozw.jpg"
+                  src="https://res.cloudinary.com/dqgjcfosx/image/upload/v1742998116/Dise%C3%B1o_sin_t%C3%ADtulo_2_ojffzb.png"
                   alt="A donde vamos"
-                  className="img-fluid mb-3 circle-image"
+                  className="img-fluid mb-3 circle-image_3"
                   loading="lazy"
                 />
 
@@ -334,12 +351,7 @@ const Home = () => {
                 </p>
               </div>
             </div>
-            <div>
-              <ScrollArrow
-                onClick={() => scrollToSection("present-section")}
-                color=" #202020"
-              />
-            </div>
+   
 
             <section class="present-section" id="present-section">
               <div class="overlay"></div>
@@ -362,78 +374,17 @@ const Home = () => {
                     Acompañamos a la comunidad con excelencia profesional,
                     garantizando máxima eficiencia en cada etapa del proceso.
                   </p>
-                  {/* <button class="cta-button">
-                    <span>ASOCIATE HOY</span>
-                    <div class="hover-effect"></div>
-                  </button> */}
+          
                 </div>
               </div>
             </section>
           </div>
         </div>
-        {/* ASOCIARME SECTION */}
-        {/* <div className="container-video_2 my-1" id="membership-section">
-   
-          <div className="bg-banner text-center position-relative">
-            <video
-              autoPlay
-              muted
-              loop
-              className="bg-video position-absolute w-100 h-100"
-              style={{ objectFit: "cover", top: 0, left: 0 }}
-              poster="https://res.cloudinary.com/dqgjcfosx/image/upload/v1234567890/poster-image.jpg"
-            >
-              <source
-                src="https://res.cloudinary.com/dqgjcfosx/video/upload/v1726834753/7667101-uhd_3840_2160_30fps_tpxp07.mp4"
-                type="video/mp4"
-              />
-              Your browser does not support the video tag.
-            </video>
-            
-            <div
-              id="asociarme-seccion"
-              className="d-flex flex-column justify-content-center align-items-center h-100 text-white"
-              style={{ zIndex: 99 }} 
-            >
-              <h1 id="asociarme-section" className="banner-title mb-3">
-                ASOCIATE
-              </h1>
-              <p
-              className="sub-title_banner text-center mb-4"
-              style={{ maxWidth: "700px", lineHeight: "1.6" }}
-              >
-                Descubre las opciones de categorías que ofrecemos y elige la que
-                mejor se adapte a tus necesidades.
-              </p>
-              {!isAuthenticated && !user ? (
-                <>
-                  <Link
-                    onClick={handleShowModal || handleLogin}
-                    className="btn-asociate-custom"
-                    aria-label="Explorar Membresías - ESTA AUTENTICADO"
-                  >
-                    Explorar Categorías
-                    <FaArrowRight className="btn-icon" />
-                  </Link>
-                </>
-                ) : (
-                  <Link
-                  to="/membershipSection"
-                  className="btn-asociate-custom"
-                  aria-label="Explorar Membresías"
-                >
-                  Explorar Categorías
-                  <FaArrowRight className="btn-icon" />
-                </Link>
-              )}
-            </div>
-          </div>
-        </div> */}
       </div>
       <div id="donate-now"></div>
       <Donations />
       <div id="asociarme-section"></div>
-   
+
       <div id="ley-section" className="ley-section text-center">
         <div
           data-aos="fade-right"
@@ -470,17 +421,14 @@ const Home = () => {
                 específicas.
               </p>
             </div>
-     
           </div>
         </section>
- 
       </div>
       <SeccionAs />
-      <Reprocan/>
+      <Reprocan />
       <WorkTogether />
       <MovingBanner />
       <ContactInfo />
-
 
       {/* 
       <div className="content-summary">

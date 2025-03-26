@@ -12,7 +12,7 @@ const PaymentShipping = () => {
         <div className="payment-methods">
           <div className="icon-title">
             <FaMoneyBillWave className="method-icon" />
-            <h3>Medios de Pago</h3>
+            <h3 className='payment-subtitle'>Medios de Pago</h3>
           </div>
           <ul className="method-list">
             <li className="method-item">
@@ -30,7 +30,7 @@ const PaymentShipping = () => {
         <div className="shipping-methods">
           <div className="icon-title">
             <FaShippingFast className="method-icon" />
-            <h3>Envíos a Domicilio</h3>
+            <h3 className='payment-subtitle'>Envíos a Domicilio</h3>
           </div>
           <div className="shipping-details">
             <img 

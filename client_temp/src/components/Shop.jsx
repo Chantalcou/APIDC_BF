@@ -108,10 +108,7 @@ const Shop = () => {
           <div className="static-content_shop d-flex flex-column justify-content-center align-items-center h-100">
             <div className="titles">
               <h1 className="product-title">NATURALEZA EN GOTAS</h1>
-              {/* <h1 className="product-title">El arte de sanar naturalmente</h1> */}
-              {/* <h1 className="product-title">Bienestar en cada gota</h1> */}
-              {/* <h1 className="product-title">Tu camino hacia el equilibrio</h1> */}
-              {/* <h1 className="product-title">Transformá tu salud, naturalmente</h1> */}
+
               <span className="hero-subtitle">
                 Descubrí el poder de los aceites medicinales
               </span>
@@ -127,7 +124,10 @@ const Shop = () => {
           </div>
         </div>
       </div>
-
+      <div>
+        <img src="https://res.cloudinary.com/dqgjcfosx/image/upload/v1742999284/under-construction_jagbpx.jpg" alt="" />
+      </div>
+{/* 
       <section id="product-section" className="products-section">
         <div className="container">
           <h2
@@ -137,7 +137,6 @@ const Shop = () => {
             Nuestros Productos
           </h2>
 
-          {/* Mostrar el spinner mientras se cargan las imágenes */}
           {loading && <SpinnerComponent />}
 
           <div id="products" className="products-grid">
@@ -178,7 +177,7 @@ const Shop = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
     </>
   );
 };

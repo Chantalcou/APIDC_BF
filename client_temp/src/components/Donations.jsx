@@ -28,6 +28,7 @@ const Donations = () => {
 
   return (
     <>
+    
       <div className="donation-background_image">
         <section className="donacion-container">
           {/* Modal para transferencia */}
@@ -102,6 +103,7 @@ const Donations = () => {
           </div>
         </section>
       </div>
+
     </>
   );
 };

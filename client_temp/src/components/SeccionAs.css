@@ -64,6 +64,12 @@
   box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.3);
 }
 
+.associate-title-card{
+  color:#0a9d6d;
+}
+.btn-asociate-custom{
+  background-color: #7BA12D;
+}
 /* 🟢 ÍCONOS */
 .associate-icon {
   color: #38a169;

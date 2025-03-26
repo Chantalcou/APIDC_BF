@@ -285,6 +285,7 @@ body {
   line-height: 1.3;
 }
 
+
 .section-description {
   font-size: 1.1rem;
   line-height: 1.8;
@@ -545,7 +546,7 @@ body {
 /* ASOCIATE SECTION */
 /* Botón principal */
 .btn-asociate-custom {
-  background-color: #0a9d6d;
+  background-color: #7BA12D;
   color: white;
   padding: 12px 20px;
   font-size: 1.2rem;
@@ -559,7 +560,7 @@ body {
   transition: transform 0.2s ease, background-color 0.3s ease;
 }
 .btn-asociate-custom:hover {
-  background-color: #087d58;
+
   transform: scale(1.05);
 }
 
@@ -594,7 +595,7 @@ body {
 }
 
 .contact-card.whatsapp {
-  border-left: 4px solid #25d366;
+  border-left: 4px solid #0a9d6d;
 }
 
 .contact-card.email {
@@ -719,6 +720,34 @@ body {
   transform: scale(1.05) rotate(5deg) blur(2px); /* Efecto de enfoque al hacer click */
 }
 
+/* Tercer imagen centrada */
+.circle-image_3 {
+  width: 250px;
+
+  height: 250px;
+  border: 3px solid #7ba12d;
+  padding: 5px;
+  margin: 0 auto 25px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.4s ease, box-shadow 0.4s ease, filter 0.3s ease;
+
+
+    object-fit: cover;
+    object-position: right; /* Esto mostrará la parte izquierda */
+
+}
+
+.circle-image_3:hover {
+  transform: scale(1.1) rotate(10deg); /* Efecto de zoom y rotación */
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); /* Sombra suave */
+  filter: brightness(1.2); /* Aumenta el brillo de la imagen */
+}
+
+.circle-image_3:active {
+  transform: scale(1.05) rotate(5deg) blur(2px); /* Efecto de enfoque al hacer click */
+}
+
 @keyframes textEntrance {
   from {
     opacity: 0;
@@ -775,7 +804,7 @@ body {
 
 
 .about-section p {
-  font-size: 0.9rem; /* Reducido de 1rem */
+  font-size: 1rem; /* Reducido de 1rem */
   line-height: 1.5;
 }
 
@@ -878,12 +907,6 @@ body {
   border-radius: 20px;
 }
 
-.section-title {
-  font-size: 2.5rem;
-  color: #0a9d6d;
-  margin-bottom: 1.5rem;
-  line-height: 1.3;
-}
 
 .section-description {
   font-size: 1.1rem;

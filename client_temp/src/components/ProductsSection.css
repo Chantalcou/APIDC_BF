@@ -407,8 +407,8 @@
 /* Imagen partes de la planta de canabis*/
 .product-image_products {
   width: 100%;
-  max-width: 347px;
-  height: 33%;
+  max-width: 260px;
+  height: 13%;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   margin: 20px 0;
@@ -436,7 +436,7 @@
 .product-details {
   margin-top: 20px;
 }
-
+/* 
 .image-info-container {
   display: flex;
   align-items: center;
@@ -444,7 +444,7 @@
   flex-direction: row;
   align-items: center;
   gap: 20px;
-}
+} */
 
 .product-image {
   width: 50vw;
@@ -461,7 +461,7 @@
 .info-section {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 120px;
   max-width: 300px;
   font-size: 14px;
 }

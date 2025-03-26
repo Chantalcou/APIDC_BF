@@ -30,7 +30,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/membershipSection/gestor" element={<Gestor />} />
           {/* Rutas NewsLetter y products protegidas*/}
-     
+
           <Route
             path="/newsletter"
             element={
@@ -82,7 +82,7 @@ const App = () => {
         </Routes>
         <WhatsApp />
         <ContactOptions />
-        <NewsletterBanner />
+        {/* <NewsletterBanner /> */}
         <Footer />
       </HelmetProvider>
     </>
