@@ -1,5 +1,4 @@
 // Produccion
-
 const { Sequelize } = require("sequelize");
 require("dotenv").config();
 
@@ -22,8 +21,7 @@ sequelize
   .catch((err) => console.error("❌ Error de conexión:", err));
 
 module.exports = sequelize;
-
-// // Local
+ // Local
 // const { Sequelize } = require("sequelize");
 // require("dotenv").config();
 

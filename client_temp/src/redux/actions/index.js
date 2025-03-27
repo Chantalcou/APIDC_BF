@@ -14,7 +14,7 @@ export const registerUser = (userData, token) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/register",
+        "https://apidc-bf.onrender.com/register",
         {
           email: userData.email,
           name: userData.name,
@@ -59,7 +59,7 @@ export const formInfo = (formData) => async (dispatch) => {
   try {
     // Enviar los datos al backend
     const response = await axios.post(
-      "http://localhost:3000/send/admin",
+      "https://apidc-bf.onrender.com/send/admin",
 
       formData,
       {
@@ -89,7 +89,7 @@ export const formInfo = (formData) => async (dispatch) => {
 //   return async (dispatch) => {
 //     try {
 //       const response = await axios.put(
-//         `http://localhost:3000/users/${userId}`,
+//         `https://apidc-bf.onrender.com/users/${userId}`,
 //         { membershipType },
 //         {
 //           headers: {
@@ -119,7 +119,7 @@ export const fetchUsers = (token) => {
   return async (dispatch) => {
     try {
       // usersNotAdmin
-      const response = await axios.get(`http://localhost:3000/users`, {
+      const response = await axios.get(`https://apidc-bf.onrender.com/users`, {
         headers: {
           Authorization: `Bearer ${token}`, // Token de autenticación
         },
@@ -145,7 +145,7 @@ export const getAllNotAdmins = (token) => {
     try {
       // usersNotAdmin
       const response = await axios.get(
-        `http://localhost:3000/usersNotAdmin`,
+        `https://apidc-bf.onrender.com/usersNotAdmin`,
         {}
       );
 
@@ -167,7 +167,7 @@ export const updateUserRole = (userId, membershipType, token) => {
   return async (dispatch, getState) => {
     try {
       const response = await axios.put(
-        `http://localhost:3000/users/${userId}`,
+        `https://apidc-bf.onrender.com/users/${userId}`,
         { membershipType },
         {
           headers: {
@@ -199,8 +199,9 @@ export const updateUserRole = (userId, membershipType, token) => {
 // Este formulario nos va a enviar 'Trabajemos juntos'
 export const sendWorkTogether = (formData) => async (dispatch) => {
   try {
+    console.log("entra a esta funcion=");
     const response = await axios.post(
-      "http://localhost:3000/send/workWithUs",
+      "https://apidc-bf.onrender.com/send/workWithUs",
 
       formData,
       {
@@ -209,6 +210,7 @@ export const sendWorkTogether = (formData) => async (dispatch) => {
         },
       }
     );
+    console.log(response)
     dispatch({
       type: "SEND_FORM_SUCCESS",
       payload: response.data,
@@ -223,7 +225,7 @@ export const sendWorkTogether = (formData) => async (dispatch) => {
 
 export const verifySocio = (email, id_socio) => async (dispatch) => {
   try {
-    const response = await axios.post(`http://localhost:3000/verifySocio`, {
+    const response = await axios.post(`https://apidc-bf.onrender.com/verifySocio`, {
       email,
       id_socio,
     });

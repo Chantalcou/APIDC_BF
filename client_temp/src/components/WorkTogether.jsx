@@ -77,7 +77,7 @@ export const WorkTogether = () => {
 
     if (!hasErrors) {
       dispatch(sendWorkTogether(formData));
-      setIsSubmitted(true); // Esto indica que el formulario fue enviado
+      setIsSubmitted(true); 
     }
   };
 
