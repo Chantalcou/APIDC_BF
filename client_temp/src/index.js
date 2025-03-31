@@ -22,7 +22,7 @@ root.render(
         authorizationParams={{
           redirect_uri: `${window.location.origin}`,
           // audience: "http://localhost:3000/",
-          audience: "https://apidc-bf.onrender.com",
+          // audience: "https://apidc-bf.onrender.com",
         }}
       >
         <Router>
