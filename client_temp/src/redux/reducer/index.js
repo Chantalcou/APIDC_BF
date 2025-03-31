@@ -1,4 +1,3 @@
-
 import {
   REGISTER_USER,
   SET_ERROR,
@@ -6,11 +5,13 @@ import {
   UPDATE_USER_ROLE_SUCCESS,
   UPDATE_USER_ROLE,
   UPDATE_USER_ROLE_FAIL,
+  DELETE_USER_ERROR,
   FETCH_USERS_SUCCESS_NOT_ADMIN,
   UPDATE_USER_ROLE_FAILURE,
   SET_USERS_FROM_STORAGE,
   VERIFICAR_SOCIO_SUCCESS,
   VERIFICAR_SOCIO_FAIL,
+  DELETE_USER_SUCCESS,
   FETCH_USERS_SUCCESS,
 } from "../actions_types";
 
@@ -18,7 +19,7 @@ const initialState = {
   userFromRedux: {},
   isAuthenticated: false,
   isAdmin: false,
-  allNotAdmins:[],
+  allNotAdmins: [],
   users: [],
   user: {},
   error: null,
@@ -49,11 +50,11 @@ const reducer = (state = initialState, action) => {
         userFromRedux: action.payload.user,
         error: null,
       };
-      case FETCH_USERS_SUCCESS_NOT_ADMIN:
-        return{
-          ...state,
-          getAllNotAdmin:action.payload
-        }
+    case FETCH_USERS_SUCCESS_NOT_ADMIN:
+      return {
+        ...state,
+        getAllNotAdmin: action.payload,
+      };
     case FETCH_USERS_SUCCESS:
       return {
         ...state,
@@ -76,17 +77,6 @@ const reducer = (state = initialState, action) => {
               }
             : state.userFromRedux,
       };
-
-    // case UPDATE_USER_ROLE_SUCCESS:
-    //   return {
-    //     ...state,
-    //     users: state.users.map((u) =>
-    //       u.id === action.payload.id
-    //         ? { ...u, membershipType: action.payload.membershipType }
-    //         : u
-    //     ),
-    //     userFromRedux: action.payload,  // Aquí estamos sobreescribiendo completamente `userFromRedux`
-    //   };
 
     case UPDATE_USER_ROLE_FAILURE:
       return {
@@ -127,7 +117,22 @@ const reducer = (state = initialState, action) => {
         isSocioVerified: false, // En caso de fallo, lo marcamos como false
         error: action.payload, // Guardamos el mensaje de error si es necesario
       };
+    // DELETE USER
+    // Agrega estos nuevos casos al switch
+  
+    case DELETE_USER_SUCCESS:
+      return {
+        ...state,
+        users: state.users.filter((user) => user.id !== action.payload),
+        error: null,
+      };
 
+    case DELETE_USER_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+        users: [...state.users], // Mantiene los usuarios actuales
+      };
     default:
       return state;
   }

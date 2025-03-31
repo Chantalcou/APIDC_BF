@@ -169,14 +169,7 @@ const Home = () => {
                 playsInline // Mejor soporte móvil
                 preload="metadata" // Evita carga completa inicial
                 className="home-bg-video"
-                poster="https://res.cloudinary.com/dqgjcfosx/image/upload/w_720,q_auto,f_auto/v1234567/thumbnail_video.jpg" // Thumbnail de pre-carga
               >
-                {/* Priorizar formato WebM (mejor compresión) */}
-                <source
-                  src="https://res.cloudinary.com/dqgjcfosx/video/upload/f_webm,w_480,q_auto:good,vc_h265/v1234567/7667357-uhd_3840_2160_30fps_nm24my.mp4"
-                  type="video/webm"
-                />
-
                 {/* Fallback para Safari */}
                 <source
                   src="https://res.cloudinary.com/dqgjcfosx/video/upload/w_720,q_auto,f_mp4,vc_h264/v1234567/7667357-uhd_3840_2160_30fps_nm24my.mp4"
@@ -353,21 +346,21 @@ const Home = () => {
             </div>
    
 
-            <section class="present-section" id="present-section">
-              <div class="overlay"></div>
-              <div class="container">
+            <section className="present-section" id="present-section">
+              <div className="overlay"></div>
+              <div className="container">
                 <div
-                  class="content-present"
+                  className="content-present"
                   data-aos="fade-up"
                   data-aos-duration="1000"
                 >
-                  <header class="section-header">
-                    <h2 class="section-title gradient-text">
+                  <header className="section-header">
+                    <h2 className="section-title gradient-text">
                       Nuestro Presente
                     </h2>
-                    <div class="title-divider"></div>
+                    <div className="title-divider"></div>
                   </header>
-                  <p class="section-description">
+                  <p className="section-description">
                     Brindamos apoyo integral a usuarios terapéuticos, ofreciendo
                     un servicio de gestión especializada, asesoramiento
                     personalizado y vinculación certificada con REPROCANN.

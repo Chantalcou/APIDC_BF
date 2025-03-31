@@ -3,6 +3,7 @@ const {
   registerUser,
   loginUser,
   verifySocio,
+  deleteUser,
   getAllUsers,
   getAllNotAdmin,
   verifyToken,
@@ -20,16 +21,17 @@ router.post("/login", loginUser);
 // Ruta para obtener todos los usuarios (requiere autenticación y ser admin)
 router.get("/users", verifyToken, isAdmin, getAllUsers);
 
-
 // Ruta para obtener todos los usuarios (requiere autenticación)
 router.get("/usersNotAdmin", getAllNotAdmin);
 
 // Ruta para actualizar el rol de un usuario
 router.put("/users/:userId", updateUserRole);
 
-
-
 // Ruta para verificar socio
 router.post("/verifySocio", verifySocio);
+
+// Ruta para elimianr usuarios del dashboard
+
+router.delete("/users/:userId", verifyToken, deleteUser);
 
 module.exports = router;

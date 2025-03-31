@@ -64,9 +64,12 @@ const NavBar = () => {
     const registerAuthenticatedUser = async () => {
       if (isAuthenticated && user) {
         try {
-          const token = await getAccessTokenSilently();
-          localStorage.setItem("authToken", token);
-          await dispatch(registerUser(user, token));
+          const idTokenObject = JSON.parse(localStorage.getItem("@@auth0spajs@@::8KX5NG5JLM5pdOJYuYkFZTRGtOs53t2v::@@user@@"));
+          // console.log(idTokenObject); // Esto te mostrará el objeto completo
+          
+          // Ahora puedes acceder a las propiedades del objeto
+          const idToken = idTokenObject.id_token;
+          // console.log(idToken); 
 
           if (redirectPath) {
             // Si la ruta es para /membershipSection, redirigir inmediatamente
@@ -174,10 +177,9 @@ const NavBar = () => {
   const handleMembershipRedirect = () => {
     if (!isAuthenticated) {
       // Si no está autenticado, redirigir al login
-      setRedirectPath("/login"); 
-      handleShowModal(); 
+      setRedirectPath("/login");
+      handleShowModal();
     } else {
-     
       // Si está autenticado, verificamos el tipo de membresía
       const userMembership = getAllNotAdmin?.find(
         (u) => u.email?.toLowerCase() === user?.email?.toLowerCase()

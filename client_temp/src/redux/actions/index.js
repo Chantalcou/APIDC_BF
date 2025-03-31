@@ -7,6 +7,8 @@ import {
   UPDATE_USER_ROLE_FAILURE,
   VERIFICAR_SOCIO_SUCCESS,
   FETCH_USERS_SUCCESS,
+  DELETE_USER_SUCCESS,
+  DELETE_USER_ERROR,
   FETCH_USERS_SUCCESS_NOT_ADMIN,
 } from "../actions_types";
 
@@ -249,5 +251,28 @@ export const verifySocio = (email, id_socio) => async (dispatch) => {
       type: "VERIFICAR_SOCIO_FAIL",
       payload: error.response?.data.message || "Error desconocido",
     });
+  }
+};
+
+export const deleteUser = (userId, token) => async (dispatch) => {
+  try {
+    const response = await fetch(`https://apidc-bf.onrender.com/users/${userId}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Error al eliminar');
+    }
+
+    dispatch({ type: "DELETE_USER_SUCCESS", payload: userId });
+    
+  } catch (error) {
+    dispatch({ type: "DELETE_USER_ERROR", payload: error.message });
+    throw error;
   }
 };

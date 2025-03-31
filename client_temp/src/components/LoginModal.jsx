@@ -19,6 +19,7 @@ const LoginModal = ({ show, handleClose }) => {
     }
     loginWithRedirect();
   };
+  
 
   return (
     <Modal show={show} onHide={handleClose} centered>
