@@ -21,6 +21,8 @@ root.render(
         cacheLocation="localstorage"
         authorizationParams={{
           redirect_uri: `${window.location.origin}`,
+             audience: "https://apidc-bf.onrender.com", // Vuelve a activar esta línea
+    scope: "openid profile email offline_access"
           // audience: "http://localhost:3000/",
           // audience: "https://apidc-bf.onrender.com",
         }}
