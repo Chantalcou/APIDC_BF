@@ -212,7 +212,7 @@ export const sendWorkTogether = (formData) => async (dispatch) => {
         },
       }
     );
-    console.log(response)
+    console.log(response);
     dispatch({
       type: "SEND_FORM_SUCCESS",
       payload: response.data,
@@ -256,21 +256,24 @@ export const verifySocio = (email, id_socio) => async (dispatch) => {
 
 export const deleteUser = (userId, token) => async (dispatch) => {
   try {
-    const response = await fetch(`https://apidc-bf.onrender.com/users/${userId}`, {
-      method: 'DELETE',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
+    const response = await fetch(
+      `https://apidc-bf.onrender.com/usersDelete/${userId}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
       }
-    });
+    );
+    console.log(response);
 
     if (!response.ok) {
       const errorData = await response.json();
-      throw new Error(errorData.message || 'Error al eliminar');
+      throw new Error(errorData.message || "Error al eliminar");
     }
 
     dispatch({ type: "DELETE_USER_SUCCESS", payload: userId });
-    
   } catch (error) {
     dispatch({ type: "DELETE_USER_ERROR", payload: error.message });
     throw error;

@@ -32,6 +32,6 @@ router.post("/verifySocio", verifySocio);
 
 // Ruta para elimianr usuarios del dashboard
 
-router.delete("/users/:userId", verifyToken, deleteUser);
+router.delete("/usersDelete/:userId", deleteUser);
 
 module.exports = router;

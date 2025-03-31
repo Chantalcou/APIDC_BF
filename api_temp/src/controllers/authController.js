@@ -165,7 +165,7 @@
 
 //   try {
 //     const user = await User.findOne({ where: { email } });
-    
+
 //     if (!user) {
 //       return res.status(400).json({ message: "Credenciales incorrectas" });
 //     }
@@ -359,27 +359,43 @@ const jwksUri = `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`;
 // Configuramos JWKS para Auth0
 const JWKS = createRemoteJWKSet(new URL(jwksUri));
 
-// Middleware para verificar el JWT con jose
+// // Middleware para verificar el JWT con jose
+// const verifyToken = async (req, res, next) => {
+//   const authHeader = req.headers.authorization;
+
+//   if (!authHeader || !authHeader.startsWith("Bearer ")) {
+//     console.log("Token no proporcionado o mal formado");
+//     return res.status(401).json({ message: "Token no proporcionado o mal formado" });
+//   }
+
+//   const token = authHeader.split(" ")[1];
+
+//   try {
+//     const { payload } = await jwtVerify(token, JWKS, {
+//       issuer: `https://${process.env.AUTH0_DOMAIN}/`,
+//       audience: process.env.AUTH0_AUDIENCE,
+//     });
+//     req.user = payload;
+//     next();
+//   } catch (err) {
+//     console.error("Error verificando el token:", err);
+//     return res.status(401).json({ message: "Token inválido o expirado" });
+//   }
+// };
 const verifyToken = async (req, res, next) => {
-  const authHeader = req.headers.authorization;
-  
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    console.log("Token no proporcionado o mal formado");
-    return res.status(401).json({ message: "Token no proporcionado o mal formado" });
+  const token = req.headers.authorization?.split(" ")[1];
+
+  if (!token) {
+    return res.status(401).json({ message: "Token no proporcionado" });
   }
-  
-  const token = authHeader.split(" ")[1];
-  
+
   try {
-    const { payload } = await jwtVerify(token, JWKS, {
-      issuer: `https://${process.env.AUTH0_DOMAIN}/`,
-      audience: process.env.AUTH0_AUDIENCE,
-    });
+    const { payload } = await jwtVerify(token, JWKS);
     req.user = payload;
     next();
-  } catch (err) {
-    console.error("Error verificando el token:", err);
-    return res.status(401).json({ message: "Token inválido o expirado" });
+  } catch (error) {
+    console.error("Error verificando token:", error);
+    return res.status(401).json({ message: "Token inválido" });
   }
 };
 
@@ -445,7 +461,7 @@ const loginUser = async (req, res) => {
 
   try {
     const user = await User.findOne({ where: { email } });
-    
+
     if (!user) {
       return res.status(400).json({ message: "Credenciales incorrectas" });
     }
@@ -464,7 +480,6 @@ const loginUser = async (req, res) => {
     res.status(500).json({ message: "Error en el inicio de sesión" });
   }
 };
-
 
 const getAllUsers = async (req, res) => {
   try {
@@ -576,38 +591,25 @@ const verifySocio = async (req, res) => {
     console.error("Error al verificar el socio:", error);
     return res.status(500).json({ message: "Error al verificar el socio" });
   }
-};
-
-const deleteUser = async (req, res) => {
+};const deleteUser = async (req, res) => {
   const { userId } = req.params;
 
   try {
     const user = await User.findByPk(userId);
-    if (!user) {
-      return res
-        .status(404)
-        .json({ message: `Usuario con ID ${userId} no encontrado` });
-    }
+    if (!user) return res.status(404).json({ message: `Usuario no encontrado` });
 
     if (user.email === process.env.ADMIN_EMAIL) {
-      return res
-        .status(403)
-        .json({ message: "No se puede eliminar al administrador principal" });
+      return res.status(403).json({ message: "No se puede eliminar al administrador principal" });
     }
 
     await user.destroy();
-    res.status(200).json({
-      message: `Usuario con ID ${userId} eliminado correctamente`,
-      userDeleted: user,
-    });
+    res.status(200).json({ message: `Usuario eliminado correctamente`, userDeleted: user });
   } catch (error) {
-    console.error("Error al eliminar el usuario:", error);
-    res.status(500).json({
-      message: "Error al eliminar el usuario",
-      error: error.message,
-    });
+    console.error("Error:", error);
+    res.status(500).json({ message: "Error al eliminar el usuario", error: error.message });
   }
 };
+
 
 module.exports = {
   registerUser,
