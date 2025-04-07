@@ -6,9 +6,12 @@ const Gestor = sequelize.define(
   "Gestor",
   {
     id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      primaryKey: true,
+            type: DataTypes.UUID, // Cambia el tipo de dato a UUID
+            defaultValue: DataTypes.UUIDV4, // Genera un UUID v4 automáticamente
+            primaryKey: true,
+
+
+
     },
     nombre: {
       type: DataTypes.STRING,

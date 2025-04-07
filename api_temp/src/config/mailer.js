@@ -1,28 +1,36 @@
+
 const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
-  service: "gmail", // Servicio que voy a utilizar
+  host: "mail.apidc.ong",  // o el SMTP de tu proveedor (ej: "smtp.zoho.com")
+  port: 465,               // Usualmente 465 (SSL) o 587 (TLS)
+  secure: true,            // true para 465, false para 587
   auth: {
-    user: process.env.EMAIL_USER, // Configurado en tu archivo .env /EMAIL DE APIDC
-    pass: process.env.EMAIL_PASSWORD, // Configurado en tu archivo .env - Password APIDC -
+    user: process.env.EMAIL_USER,     // info@apidc.ong
+    pass: process.env.EMAIL_PASSWORD  // Contraseña del correo (no de Gmail)
   },
+  tls: {
+    rejectUnauthorized: false // Solo para desarrollo (quitar en producción)
+  }
 });
-console.log("Email User:", process.env.EMAIL_USER); // Debería imprimir el correo configurado
-console.log("Email Password:", process.env.EMAIL_PASSWORD); // Debería imprimir la contraseña
 
+// Función para enviar correo
 const sendMail = async (to, subject, text) => {
+
+
   try {
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER, // Dirección del remitente
-      to, // Dirección del destinatario
-      subject, // Asunto del correo
-      text, // Contenido del correo
+    const info = await transporter.sendMail({
+      from: `"APIDC" <${process.env.EMAIL_USER}>`, 
+      to,
+      subject,
+      text,
     });
-    console.log("Correo enviado exitosamente");
+
   } catch (error) {
     console.error("Error al enviar el correo:", error);
-    throw error;
   }
 };
+
+
 
 module.exports = sendMail;

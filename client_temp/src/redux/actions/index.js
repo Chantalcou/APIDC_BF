@@ -10,6 +10,7 @@ import {
   DELETE_USER_SUCCESS,
   DELETE_USER_ERROR,
   FETCH_USERS_SUCCESS_NOT_ADMIN,
+  GET_JOTFORM_SUBMISSIONS_SUCCESS,
 } from "../actions_types";
 
 export const registerUser = (userData, token) => {
@@ -201,9 +202,8 @@ export const updateUserRole = (userId, membershipType, token) => {
 // Este formulario nos va a enviar 'Trabajemos juntos'
 export const sendWorkTogether = (formData) => async (dispatch) => {
   try {
-    console.log("entra a esta funcion=");
     const response = await axios.post(
-      "https://apidc-bf.onrender.com/send/workWithUs",
+      "https://apidc-bf.onrender.com/workWithUs",
 
       formData,
       {
@@ -212,7 +212,7 @@ export const sendWorkTogether = (formData) => async (dispatch) => {
         },
       }
     );
-    console.log(response);
+
     dispatch({
       type: "SEND_FORM_SUCCESS",
       payload: response.data,
@@ -279,3 +279,38 @@ export const deleteUser = (userId, token) => async (dispatch) => {
     throw error;
   }
 };
+
+// export const webhookJotform = () => async (dispatch) => {
+//   try {
+//     const response = await axios.post("https://apidc-bf.onrender.com/webhook-jotform");
+//     console.log(response, "ESTO ME LLEGA AL ACTIONS");
+//     // dispatch({
+//     //   type: "SEND_FORM_SUCCESS",
+//     //   payload: response.data,
+//     // });
+//   } catch (error) {
+//     dispatch({
+//       type: "SEND_FORM_FAIL",
+//       payload: error.response ? error.response.data : "Error desconocido",
+//     });
+//   }
+// };
+
+// export const getJotformSubmissions = () => async (dispatch) => {
+//   try {
+//     const response = await axios.get(
+//       "https://apidc-bf.onrender.com/jotform-submissions"
+//     );
+//     console.log("Datos recibidos desde el backend:", response.data);
+
+//     dispatch({
+//       type: GET_JOTFORM_SUBMISSIONS_SUCCESS,
+//       payload: response.data,
+//     });
+//   } catch (error) {
+//     dispatch({
+//       type: "GET_JOTFORM_SUBMISSIONS_FAIL",
+//       payload: error.response ? error.response.data : "Error desconocido",
+//     });
+//   }
+// };

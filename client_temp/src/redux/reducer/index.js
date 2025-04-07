@@ -12,6 +12,7 @@ import {
   VERIFICAR_SOCIO_SUCCESS,
   VERIFICAR_SOCIO_FAIL,
   DELETE_USER_SUCCESS,
+  GET_JOTFORM_SUBMISSIONS_SUCCESS,
   FETCH_USERS_SUCCESS,
 } from "../actions_types";
 
@@ -25,6 +26,7 @@ const initialState = {
   error: null,
   isSocioVerified: null,
   isSocio: {},
+  jotformSubmissions: [], // nuevo
 };
 
 const reducer = (state = initialState, action) => {
@@ -119,7 +121,7 @@ const reducer = (state = initialState, action) => {
       };
     // DELETE USER
     // Agrega estos nuevos casos al switch
-  
+
     case DELETE_USER_SUCCESS:
       return {
         ...state,
@@ -133,6 +135,13 @@ const reducer = (state = initialState, action) => {
         error: action.payload,
         users: [...state.users], // Mantiene los usuarios actuales
       };
+
+    // case GET_JOTFORM_SUBMISSIONS_SUCCESS:
+    //   return {
+    //     ...state,
+    //     jotformSubmissions: action.payload,
+    //     error: null,
+    //   };
     default:
       return state;
   }

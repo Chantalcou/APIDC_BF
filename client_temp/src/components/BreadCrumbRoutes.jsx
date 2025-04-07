@@ -7,7 +7,7 @@ const breadcrumbRoutes = {
   "/membershipSection/gestor": "Gestor",
   "/dashboard": "Dashboard",
   "/contacto": "Contacto",
-  "/membershipSection/SocioConReprocan": "Socio Premiun",
+  "/membershipSection/SocioConReprocan": "Socio con Reprocann",
   "/membershipSection/socioSinReprocan": "Socio adherente",
   "/newsletter": "Newsletter",
   "/membershipSection": "Categorías",

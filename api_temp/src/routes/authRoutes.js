@@ -9,8 +9,11 @@ const {
   verifyToken,
   isAdmin,
   updateUserRole,
+  // handleJotFormWebhook,getJotformSubmissions
 } = require("../controllers/authController");
 const router = express.Router();
+const multer = require("multer");
+const upload = multer();
 
 // Ruta para registrar usuario (no requiere autenticación)
 router.post("/register", registerUser);
@@ -33,5 +36,10 @@ router.post("/verifySocio", verifySocio);
 // Ruta para elimianr usuarios del dashboard
 
 router.delete("/usersDelete/:userId", deleteUser);
+
+// router.post("/webhook-jotform", upload.none(), handleJotFormWebhook);
+
+// Nuevo endpoint (GET)
+// router.get("/jotform-submissions", getJotformSubmissions);
 
 module.exports = router;

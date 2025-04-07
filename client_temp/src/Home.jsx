@@ -13,6 +13,7 @@ import ContactInfo from "./components/ContactInfo.jsx";
 import MovingBanner from "./components/MovingBanner.jsx";
 import Reprocan from "./components/Reprocan.jsx";
 import { WorkTogether } from "./components/WorkTogether.jsx";
+import QrSection from './components/QrSection.jsx'
 import SeccionAs from "./components/SeccionAs.jsx";
 import SpinnerComponent from "./components/SpinnerComponent.jsx";
 import Donations from "./components/Donations.jsx";
@@ -374,6 +375,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <QrSection/>
       <div id="donate-now"></div>
       <Donations />
       <div id="asociarme-section"></div>
@@ -418,6 +420,7 @@ const Home = () => {
         </section>
       </div>
       <SeccionAs />
+
       <Reprocan />
       <WorkTogether />
       <MovingBanner />

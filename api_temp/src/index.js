@@ -1,19 +1,18 @@
-
-
 const path = require("path");
 require("dotenv").config();
 const cors = require("cors");
 const express = require("express");
 const authRoutes = require("./routes/authRoutes");
-const fetch = require('node-fetch');
+const emailRoutes = require("./routes/nodeMailerRoutes");
+const fetch = require("node-fetch");
+const bodyParser = require("body-parser");
 global.fetch = fetch;
 global.Headers = fetch.Headers;
-
 const sequelize = require("./config/db");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-
+app.use(express.urlencoded({ extended: true }));
 // Middlewares
 app.use(
   cors({
@@ -24,9 +23,15 @@ app.use(
   })
 );
 app.use(express.json());
+// 🔥 Agregá estos:
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.text({ type: "application/json" })); // Por si viene como texto
+app.use(bodyParser.raw({ type: "application/octet-stream" }));
 
 // Rutas API
-app.use("/", authRoutes); // Todas las rutas API empiezan con /api
+app.use("/", authRoutes);
+// Ruta mailer
+app.use("/", emailRoutes);
 
 // Sirve el frontend React (solo en producción)
 if (process.env.NODE_ENV === "production") {
@@ -65,3 +70,8 @@ app.listen(PORT, () => {
 
 // Sincronizar modelos con la base de datos
 sequelize.sync({ force: false });
+
+// sequelize
+//   .sync({ alter: true })
+//   .then(() => console.log("Base de datos sincronizada"))
+//   .catch((err) => console.error("Error al sincronizar la base de datos:", err));

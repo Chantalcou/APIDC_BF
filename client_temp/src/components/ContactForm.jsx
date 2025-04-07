@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import emailjs from "emailjs-com";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Container, Row, Col, Form, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import ButtonComponent from "./Button";
 import Swal from "sweetalert2";
-
 import { FaRegCheckCircle } from "react-icons/fa";
+import { sendWorkTogether } from "../redux/actions/index";
 import "./ContactForm.css";
 
 const ContactForm = () => {
@@ -14,74 +13,128 @@ const ContactForm = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const dispatch = useDispatch();
   const userFromRedux = useSelector((state) => state.user);
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    from_name: "",
-    to_name: "", //  (en este caso el destinatario)
+    fullName: "",
+    email: "",
     message: "",
+    areaOfInterest: "",
   });
 
-  const [status, setStatus] = useState("");
-  const [statusVariant, setStatusVariant] = useState("success");
-  const [errors, setErrors] = useState(false); // Estado para manejar los errores
+  const [errors, setErrors] = useState({});
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const validateField = (name, value) => {
+    const newErrors = { ...errors };
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+    switch (name) {
+      case "fullName":
+        if (!value.trim()) {
+          newErrors.fullName = "Por favor escriba su nombre.";
+        } else {
+          delete newErrors.fullName;
+        }
+        break;
+      case "email":
+        if (!emailRegex.test(value)) {
+          newErrors.email = "Por favor, escriba un email válido.";
+        } else {
+          delete newErrors.email;
+        }
+        break;
+      case "message":
+        if (!value.trim()) {
+          newErrors.message = "El mensaje no puede estar vacío.";
+        } else {
+          delete newErrors.message;
+        }
+        break;
+      case "areaOfInterest":
+        if (!value) {
+          newErrors.areaOfInterest =
+            "Por favor, selecciona un área de interés.";
+        } else {
+          delete newErrors.areaOfInterest;
+        }
+        break;
+      default:
+        break;
+    }
+
+    setErrors(newErrors);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevState) => ({ ...prevState, [name]: value }));
+    setFormData({ ...formData, [name]: value });
+    validateField(name, value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
 
-    // Validación de campos
-    if (!formData.from_name || !formData.to_name || !formData.message) {
-      setErrors(true); // Mostrar mensaje de error si hay campos vacíos
-      setStatus("Por favor, completa todos los campos.");
-      setStatusVariant("danger");
+    // Validación final antes de enviar
+    Object.keys(formData).forEach((field) => {
+      validateField(field, formData[field]);
+    });
+
+    if (Object.keys(errors).length > 0) {
+      setIsSubmitting(false);
       return;
     }
-
-    // Si está logueado, continúa con el envío del mensaje
-    setStatus("Enviando...");
-    setStatusVariant("info");
 
     // Verifica si el usuario está logueado
     if (!userFromRedux || !userFromRedux.email) {
-      setStatus("No estás logueado. Por favor, inicia sesión.");
-      setStatusVariant("danger");
-
-      // Redirige al usuario a la página de login
-      navigate("/login");
+      Swal.fire({
+        title: "Acceso requerido",
+        text: "Debes iniciar sesión para enviar el formulario",
+        icon: "warning",
+        confirmButtonText: "Ir a login",
+      }).then(() => {
+        navigate("/login");
+      });
+      setIsSubmitting(false);
       return;
     }
 
-    const emailRecipient = userFromRedux.email || "chantiicou@gmail.com"; // Correo por defecto
-    setFormData((prevState) => ({ ...prevState, to_name: emailRecipient })); // Asigna el destinatario
-
-    // Envío del formulario a EmailJS
-    emailjs
-      .sendForm(
-        "service_n7iprht", // ID del servicio
-        "template_rqqmprl", // ID de la plantilla
-        e.target, // Formulario que estás enviando
-        "CfDbaVqLjMAHH6wYo" // Public Key
-      )
-      .then(
-        (result) => {
-          setStatus("Mensaje enviado correctamente");
-          setStatusVariant("success");
-          setFormData({ from_name: "", to_name: "", message: "" });
-          setErrors(false); // Limpiar errores si el envío fue exitoso
-          Swal.fire("Gracias por comunicarte con nosotros. A la brevedad nos pondremos en contacto.");
-        },
-        (error) => {
-          console.log(error);
-          setStatus("Hubo un error al enviar el mensaje");
-          setStatusVariant("danger");
-        }
-      );
+    // Enviar mediante Redux Action
+    dispatch(
+      sendWorkTogether({
+        ...formData,
+        userEmail: userFromRedux.email, // Agregamos el email del usuario logueado
+      })
+    )
+      .then(() => {
+        Swal.fire(
+          "¡Gracias!",
+          "Tu mensaje ha sido enviado correctamente.",
+          "success"
+        );
+        setFormData({
+          fullName: "",
+          email: "",
+          message: "",
+          areaOfInterest: "",
+        });
+        setIsSubmitted(true);
+      })
+      .catch((error) => {
+        console.error("Error al enviar:", error);
+        Swal.fire(
+          "Error",
+          "No se pudo enviar el mensaje. Por favor intenta nuevamente.",
+          "error"
+        );
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+      });
   };
 
   return (
@@ -91,67 +144,72 @@ const ContactForm = () => {
           <Col md={6}>
             <h2 className="text-center mb-4">Formulario de Contacto</h2>
 
-            {status && (
-              <Alert variant={statusVariant} className="text-center">
-                   <FaRegCheckCircle size={15}/> {status}
+            {isSubmitted ? (
+              <Alert variant="success" className="text-center">
+                <FaRegCheckCircle size={15} /> ¡Gracias por tu mensaje! Nos
+                pondremos en contacto contigo pronto.
               </Alert>
+            ) : (
+              <Form onSubmit={handleSubmit}>
+                <Form.Group className="mb-3">
+                  <Form.Label>Nombre Completo</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="fullName"
+                    value={formData.fullName}
+                    onChange={handleChange}
+                    isInvalid={!!errors.fullName}
+                    placeholder="Tu nombre completo"
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    {errors.fullName}
+                  </Form.Control.Feedback>
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                  <Form.Label>Correo electrónico</Form.Label>
+                  <Form.Control
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    isInvalid={!!errors.email}
+                    placeholder="tu@email.com"
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    {errors.email}
+                  </Form.Control.Feedback>
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                  <Form.Label>Mensaje</Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    isInvalid={!!errors.message}
+                    rows={4}
+                    placeholder="Escribe tu mensaje aquí..."
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    {errors.message}
+                  </Form.Control.Feedback>
+                </Form.Group>
+
+                <div className="d-grid">
+                  <ButtonComponent
+                    text={isSubmitting ? "Enviando..." : "Enviar"}
+                    color={{
+                      background: "transparent",
+                      text: "black",
+                      border: "2px solid black",
+                    }}
+                    disabled={isSubmitting}
+                  />
+                </div>
+              </Form>
             )}
-
-            <Form onSubmit={handleSubmit}>
-              <Form.Group className="mb-3">
-                <Form.Label>Nombre</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="from_name" // Cambiado para que coincida con la plantilla
-                  value={formData.from_name}
-                  onChange={handleChange}
-                  required
-                  placeholder="Nombre"
-                />
-              </Form.Group>
-
-              <Form.Group className="mb-3">
-                <Form.Label>Correo electrónico</Form.Label>
-                <Form.Control
-                  type="email"
-                  name="to_name" // Cambiado para que coincida con la plantilla
-                  value={formData.to_name}
-                  onChange={handleChange}
-                  required
-                  placeholder="Correo electrónico"
-                />
-              </Form.Group>
-
-              <Form.Group className="mb-3">
-                <Form.Label>Mensaje</Form.Label>
-                <Form.Control
-                  as="textarea"
-                  name="message" // Cambiado para que coincida con la plantilla
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows={4}
-                  placeholder="Mensaje"
-                />
-              </Form.Group>
-
-              {errors && (
-                <Alert variant="danger" className="text-center">
-                  Por favor, completa todos los campos.
-                </Alert>
-              )}
-
-              <div className="d-grid">
-                <ButtonComponent
-                  text="Enviar"
-                  color={{
-                    background: "transparent",
-                    text: "black",
-                    border: "2px solid black",
-                  }}
-                />
-              </div>
-            </Form>
           </Col>
         </Row>
       </Container>

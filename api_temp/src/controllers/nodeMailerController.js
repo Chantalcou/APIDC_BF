@@ -2,7 +2,6 @@ const sendMail = require("../config/mailer");
 
 const sendEmailToUser = async (req, res) => {
   const { email, message } = req.body;
-  console.log(email, message);
 
   if (!email || !message) {
     return res
@@ -24,21 +23,8 @@ const sendEmailToUser = async (req, res) => {
 
 //Email que le llega a APIDC con la info del usuario
 const sendEmailToAdmin = async (req, res) => {
-  console.log("Ruta /send/workWithUs alcanzada");
+
   try {
-    console.log("Datos recibidos:", req.body);
-
-    const {
-      fullName,
-      lastName,
-      email,
-      phone,
-      reprocanNumber,
-      memberType,
-      message,
-    } = req.body;
-    console.log("Datos recibidos en el backend:", req.body);
-
     if (!fullName || !lastName || !email || !phone) {
       console.error("Faltan datos obligatorios:", {
         fullName,
@@ -56,7 +42,6 @@ const sendEmailToAdmin = async (req, res) => {
       `Has recibido un mensaje de ${email}: Nombre completo: ${fullName} ${lastName}, Teléfono: ${phone}, Número Reprocan: ${reprocanNumber}, Tipo de socio: ${memberType}, mensaje: ${message}`
     );
 
-    console.log("Correo enviado exitosamente");
     res
       .status(200)
       .json({ message: "Correo enviado exitosamente al administrador" });
@@ -70,12 +55,10 @@ const sendEmailToAdmin = async (req, res) => {
 
 //Email que le llega a APIDC-work with us
 const sendEmailWorkTogether = async (req, res) => {
-  console.log("Ruta /send/workWithUs alcanzada");
-  try {
-    console.log("Datos recibidos:", req.body);
 
+  try {
     const { email, fullName, message } = req.body;
-    console.log("Datos recibidos en el backend:", req.body);
+
 
     if (!email || !fullName || !message) {
       console.error("Faltan datos obligatorios:", {
@@ -89,10 +72,9 @@ const sendEmailWorkTogether = async (req, res) => {
     await sendMail(
       process.env.EMAIL_USER,
       "Nuevo mensaje recibido",
-      `Has recibido un mensaje para trabajar con nosotros de: Email: ${email}: Nombre completo: ${fullName} , Email: ${email}, mensaje: ${message}`
+      `Has recibido un mensaje de: Email: ${email}: Nombre completo: ${fullName} , Email: ${email}, mensaje: ${message}`
     );
 
-    console.log("Correo enviado exitosamente");
     res
       .status(200)
       .json({ message: "Correo enviado exitosamente al administrador" });

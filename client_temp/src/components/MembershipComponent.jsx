@@ -80,7 +80,6 @@ const MembershipComponent = () => {
             <h2 className="card-title">Socio adherente</h2>
             <p className="price-container_membership">
               {/* <span className="price-old">17.000</span> */}
-              <span className="price-new">10.000 / mes</span>
             </p>
             <p className="card-subtitle">
               Hacete parte de un movimiento que transforma vidas.
@@ -97,7 +96,7 @@ const MembershipComponent = () => {
               <li>✔ Atención Personalizada Online para Gestión del REPROCAN</li>
             </ul>
             <div className="content-buttons_memberShip">
-            <ButtonComponent
+              <ButtonComponent
                 className="card-button"
                 onClick={() => window.open(url, "_blank")}
                 color={{
@@ -111,23 +110,20 @@ const MembershipComponent = () => {
 
               <ButtonComponent
                 className="card-button"
-                onClick={() => handleRoleSelect("gestor")}
+                onClick={() => handleRoleSelect("socioSinReprocan")}
                 color={{
                   background: "transparent",
                   text: "#ffff", // Color del texto
                   border: "2px solid white",
                   fontSize: ".8rem",
                 }}
-                text="  Completar Solicitud"
+                text="Completar Solicitud"
               />
             </div>
           </div>
           <div className="card">
             <h2 className="card-title">Socio con Reprocan</h2>
-            <p className="price-container_membership">
-              <span className="price-old">$200.000</span>
-              <span className="price-new">150.000 / mes</span>
-            </p>
+            <p className="price-container_membership"></p>
             <p className="card-subtitle">
               Realizá tus cultivos en nuestras instalaciones y delegá su cuidado
               a nuestro equipo. Ofrecemos un servicio personalizado con costos
@@ -139,7 +135,7 @@ const MembershipComponent = () => {
               <li>✔ Asesoramiento Exclusivo Personalizado</li>
             </ul>
             <div className="content-buttons_memberShip">
-            <ButtonComponent
+              <ButtonComponent
                 className="card-button"
                 onClick={() => window.open(url, "_blank")}
                 color={{
@@ -153,7 +149,7 @@ const MembershipComponent = () => {
 
               <ButtonComponent
                 className="card-button"
-                onClick={() => handleRoleSelect("gestor")}
+                onClick={() => handleRoleSelect("socioConReprocan")}
                 color={{
                   background: "transparent",
                   text: "#ffff", // Color del texto
@@ -168,10 +164,7 @@ const MembershipComponent = () => {
           {/* Socio con Reprocan */}
           <div className="card">
             <h2 className="card-title">Gestor</h2>
-            <p className="price-container">
-              <span className="price-old">$300.000</span>
-              <span className="price-new">250.000 / mes</span>
-            </p>
+            <p className="price-container"></p>
             <p className="card-subtitle">
               Comisiones de gestión y contención al socio adherente.
             </p>
@@ -208,9 +201,10 @@ const MembershipComponent = () => {
             </div>
           </div>
         </div>
- 
         <div className="whatsapp-cta-simple">
-          <h3 className="whatsapp-cta-simple_title">¿Necesitás ayuda para elegir?</h3>
+          <h3 className="whatsapp-cta-simple_title">
+            ¿Necesitás ayuda para elegir?
+          </h3>
           <a href={url} className="whatsapp-minibutton">
             <i className="fab fa-whatsapp"></i>
             <span>Consulta rápida por WhatsApp</span>

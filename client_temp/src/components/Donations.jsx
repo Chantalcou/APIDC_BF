@@ -61,7 +61,7 @@ const Donations = () => {
                   <p>
                     <strong>Alias:</strong>
                   </p>
-                  <p>ASOC.CANNABICA</p>
+                  <p>APIDC.ONG</p>
                 </div>
                 <button
                   className="whatsapp-button"

@@ -20,7 +20,7 @@ const Footer = () => (
         </div>
 
         <div className="footer-social">
-          <a
+          {/* <a
             href="https://facebook.com"
             target="_blank"
             rel="noopener noreferrer"
@@ -30,8 +30,8 @@ const Footer = () => (
               alt="Facebook"
               className="footer-icon"
             />
-          </a>
-          <a
+          </a> */}
+          {/* <a
             href="https://twitter.com"
             target="_blank"
             rel="noopener noreferrer"
@@ -41,7 +41,7 @@ const Footer = () => (
               alt="X (Twitter)"
               className="footer-icon"
             />
-          </a>
+          </a> */}
           <a
             href="https://www.instagram.com/apidc.ong/"
             target="_blank"

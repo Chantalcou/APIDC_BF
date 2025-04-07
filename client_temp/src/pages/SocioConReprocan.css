@@ -15,8 +15,9 @@
 @media (min-width: 768px) {
   .container-video_gestor {
     margin-top: 0 !important; /* Elimina margen en desktop */
-    height: 65vw; /* Ajuste opcional de altura */
-  }
+    height: 44vw;
+  }/* Ajuste opcional de altura */
+  
 
   .container,
   .container-md,

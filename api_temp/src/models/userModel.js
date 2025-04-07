@@ -1,6 +1,6 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/db.js");
-
+const { Gestor } = require("./gestorModel.js"); // 🔥 IMPORTA EL MODELO
 const User = sequelize.define(
   "User",
   {
@@ -21,8 +21,9 @@ const User = sequelize.define(
     isAdmin: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      // defaultValue: false,
+      defaultValue: false, // 👈 Esto evita el error
     },
+
     auth0Id: {
       type: DataTypes.STRING,
       allowNull: true, //Modificar a false apenas lo consiga
@@ -50,6 +51,22 @@ const User = sequelize.define(
       unique: true,
       allowNull: true,
     },
+    address: {
+      type: DataTypes.STRING, // O JSON si quieres guardarlo estructurado
+      allowNull: true,
+    },
+    city: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    state: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    postalCode: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     // Cambiar tipo de referredBy para que coincida con UUID
     referredBy: {
       type: DataTypes.UUID,
@@ -62,13 +79,16 @@ const User = sequelize.define(
     createdAt: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: DataTypes.NOW
-    }
+      defaultValue: DataTypes.NOW,
+    },
   },
   {
     tableName: "Users",
     timestamps: true,
   }
 );
+
+User.belongsTo(Gestor, { foreignKey: "referredBy" }); // 🔥 ESTABLECE LA RELACIÓN
+Gestor.hasMany(User, { foreignKey: "referredBy" });
 
 module.exports = User;

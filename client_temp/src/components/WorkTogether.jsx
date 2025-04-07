@@ -74,10 +74,9 @@ export const WorkTogether = () => {
 
     // Verificar si hay errores
     const hasErrors = Object.keys(errors).length > 0;
-
     if (!hasErrors) {
       dispatch(sendWorkTogether(formData));
-      setIsSubmitted(true); 
+      setIsSubmitted(true);
     }
   };
 

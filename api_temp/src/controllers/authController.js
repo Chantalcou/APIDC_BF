@@ -591,25 +591,134 @@ const verifySocio = async (req, res) => {
     console.error("Error al verificar el socio:", error);
     return res.status(500).json({ message: "Error al verificar el socio" });
   }
-};const deleteUser = async (req, res) => {
+};
+const deleteUser = async (req, res) => {
   const { userId } = req.params;
 
   try {
     const user = await User.findByPk(userId);
-    if (!user) return res.status(404).json({ message: `Usuario no encontrado` });
+    if (!user)
+      return res.status(404).json({ message: `Usuario no encontrado` });
 
     if (user.email === process.env.ADMIN_EMAIL) {
-      return res.status(403).json({ message: "No se puede eliminar al administrador principal" });
+      return res
+        .status(403)
+        .json({ message: "No se puede eliminar al administrador principal" });
     }
 
     await user.destroy();
-    res.status(200).json({ message: `Usuario eliminado correctamente`, userDeleted: user });
+    res
+      .status(200)
+      .json({ message: `Usuario eliminado correctamente`, userDeleted: user });
   } catch (error) {
     console.error("Error:", error);
-    res.status(500).json({ message: "Error al eliminar el usuario", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Error al eliminar el usuario", error: error.message });
   }
 };
 
+
+
+// const handleJotFormWebhook = async (req, res) => {
+//   try {
+//     if (req.method === "OPTIONS") {
+//       res.setHeader("Access-Control-Allow-Origin", "*");
+//       res.setHeader("Access-Control-Allow-Methods", "POST");
+//       res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+//       return res.status(204).end();
+//     }
+
+//     const { formID, submissionID, rawRequest } = req.body;
+//     const YOUR_FORM_ID = 250913776216662;
+
+//     if (!rawRequest) {
+//       return res.status(400).json({ message: "Falta rawRequest" });
+//     }
+
+//     let formData;
+//     try {
+//       formData = JSON.parse(rawRequest);
+//     } catch (error) {
+//       return res.status(400).json({ message: "rawRequest inválido (JSON)" });
+//     }
+
+//     if (parseInt(formID) !== YOUR_FORM_ID || !submissionID) {
+//       return res
+//         .status(200)
+//         .json({ message: "Webhook recibido pero no válido" });
+//     }
+
+//     // Armado de datos
+//     const userData = {
+//       name: `${formData.q3_fullName3?.first ?? ""} ${
+//         formData.q3_fullName3?.last ?? ""
+//       }`.trim(),
+//       birthdate: new Date(
+//         `${formData.q31_fechaDe?.year}-${formData.q31_fechaDe?.month.padStart(
+//           2,
+//           "0"
+//         )}-${formData.q31_fechaDe?.day.padStart(2, "0")}`
+//       ),
+//       dni: formData.q32_dni?.toString().replace(/\D/g, "") ?? null,
+//       email: formData.q33_email?.toLowerCase().trim() ?? null,
+//       phone: formData.q34_telefono?.full?.replace(/\D/g, "") ?? null,
+//       address: [
+//         formData.q4_address4?.addr_line1,
+//         formData.q4_address4?.addr_line2,
+//         formData.q4_address4?.city,
+//         formData.q4_address4?.state,
+//         formData.q4_address4?.postal,
+//       ]
+//         .filter(Boolean)
+//         .join(", "),
+//       hasReprocann: formData.q45_poseeReprocann === "Sí",
+//       reprocannNumber: formData.q36_numeroDe?.toString().trim() ?? null,
+//       reprocannExpiry: formData.q37_fechaDe37?.year
+//         ? new Date(
+//             `${
+//               formData.q37_fechaDe37.year
+//             }-${formData.q37_fechaDe37.month.padStart(
+//               2,
+//               "0"
+//             )}-${formData.q37_fechaDe37.day.padStart(2, "0")}`
+//           )
+//         : null,
+//       gestorAsociado: formData.q41_gestorAsociado41 === "Sí",
+//       isAdmin: ["chantiicou@gmail.com", process.env.ADMIN_EMAIL].includes(
+//         formData.q33_email?.toLowerCase()
+//       ),
+//     };
+
+//     // Guardar o actualizar
+//     let user = await User.findOne({ where: { email: userData.email } });
+//     const isNew = !user;
+
+//     if (isNew) {
+//       user = await User.create(userData);
+//     } else {
+//       await user.update(userData);
+//       await user.reload();
+//     }
+
+//     return res.status(isNew ? 201 : 200).json({
+//       message: isNew ? "Usuario creado" : "Usuario actualizado",
+//       user,
+//     });
+//   } catch (error) {
+//     console.error("Error webhook:", error);
+//     return res.status(500).json({ message: "Error interno del servidor" });
+//   }
+// };
+// const getJotformSubmissions = async (req, res) => {
+//   try {
+//     const users = await User.findAll();
+//     res.status(200).json(users);
+//   } catch (error) {
+//     console.error("Error al obtener usuarios:", error);
+//     res.status(500).json({ message: "Error interno del servidor" });
+//   }
+// };
 
 module.exports = {
   registerUser,
@@ -622,4 +731,6 @@ module.exports = {
   deleteUserByEmail,
   updateUserRole,
   verifySocio,
+  // handleJotFormWebhook,
+  // getJotformSubmissions,
 };
