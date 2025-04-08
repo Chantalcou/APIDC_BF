@@ -4,16 +4,11 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  registerUser,
-  fetchUsers,
   getAllNotAdmins,
 } from "../redux/actions/index";
 import BreadCrumRoutes from "./BreadCrumbRoutes";
-import ProductsSection from "./ProductsSection";
 import LoginModal from "./LoginModal";
 import $ from "jquery";
-import io from "socket.io-client";
-import ReCAPTCHA from "react-google-recaptcha";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./NavBar.css";
 

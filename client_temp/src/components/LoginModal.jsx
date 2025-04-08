@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import { Modal, Button } from "react-bootstrap";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -12,6 +12,13 @@ const LoginModal = ({ show, handleClose }) => {
     setCaptchaVerified(!!value);
   };
 
+  useEffect(() => {
+    console.log(
+      "🔑 RECAPTCHA site key:",
+      process.env.REACT_APP_RECAPTCHA_SITE_KEY
+    );
+  }, []);
+
   const handleLogin = () => {
     if (!captchaVerified) {
       alert("Por favor, verifica el CAPTCHA.");
@@ -19,18 +26,17 @@ const LoginModal = ({ show, handleClose }) => {
     }
     loginWithRedirect();
   };
-  
 
   return (
     <Modal show={show} onHide={handleClose} centered>
       <Modal.Header closeButton>
-        <Modal.Title className='btn-captcha'>Iniciar Sesión</Modal.Title>
+        <Modal.Title className="btn-captcha">Iniciar Sesión</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <p>Por favor, verifica el CAPTCHA para continuar.</p>
         <div className="captcha-container">
           <ReCAPTCHA
-            sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+            sitekey='6LdEf-oqAAAAAIYnr9wd78kozSfH4PCl1oJomKCX'
             onChange={handleCaptchaChange}
           />
         </div>
