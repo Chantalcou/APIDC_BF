@@ -1,4 +1,4 @@
-import React, { useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -11,13 +11,6 @@ const LoginModal = ({ show, handleClose }) => {
   const handleCaptchaChange = (value) => {
     setCaptchaVerified(!!value);
   };
-
-  useEffect(() => {
-    console.log(
-      "🔑 RECAPTCHA site key:",
-      process.env.REACT_APP_RECAPTCHA_SITE_KEY
-    );
-  }, []);
 
   const handleLogin = () => {
     if (!captchaVerified) {
@@ -36,7 +29,7 @@ const LoginModal = ({ show, handleClose }) => {
         <p>Por favor, verifica el CAPTCHA para continuar.</p>
         <div className="captcha-container">
           <ReCAPTCHA
-            sitekey='6LdEf-oqAAAAAIYnr9wd78kozSfH4PCl1oJomKCX'
+            sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
             onChange={handleCaptchaChange}
           />
         </div>

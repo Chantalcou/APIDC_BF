@@ -46,7 +46,7 @@ const NavBar = () => {
   useEffect(() => {
     const loadUsers = async () => {
       try {
-        await dispatch(getAllNotAdmins()); // Pasa el token a fetchUsers
+        await dispatch(getAllNotAdmins()); 
       } catch (err) {
         console.log("Error cargando usuarios");
       }
@@ -54,7 +54,7 @@ const NavBar = () => {
     loadUsers();
   }, [dispatch, getAccessTokenSilently]);
 
-  // Actualizar el efecto de registro de usuario
+
   useEffect(() => {
     const registerAuthenticatedUser = async () => {
       if (isAuthenticated && user) {
@@ -64,7 +64,6 @@ const NavBar = () => {
               "@@auth0spajs@@::8KX5NG5JLM5pdOJYuYkFZTRGtOs53t2v::@@user@@"
             )
           );
-          // console.log(idTokenObject); // Esto te mostrará el objeto completo
 
           // Ahora puedes acceder a las propiedades del objeto
           const idToken = idTokenObject.id_token;
