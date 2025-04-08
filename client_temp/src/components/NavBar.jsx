@@ -117,11 +117,12 @@ const NavBar = () => {
     script.src = `https://www.google.com/recaptcha/api.js?render=6Lc8vrMqAAAAAPXaohW4mzMVw401_H9KGEZGt57I`;
     script.async = true;
     document.head.appendChild(script);
-
+  
     return () => {
       document.head.removeChild(script);
     };
   }, []);
+  
 
   const handleLogout = () => {
     logout({ returnTo: window.location.origin });
