@@ -16,14 +16,14 @@ app.use(express.urlencoded({ extended: true }));
 // Middlewares
 app.use(
   cors({
-    origin: "https://apidc-bf.onrender.com",
+    origin: "https://apidc.ong",
     // origin: "http://localhost:3000",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
 app.use(express.json());
-// 🔥 Agregá estos:
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text({ type: "application/json" })); // Por si viene como texto
 app.use(bodyParser.raw({ type: "application/octet-stream" }));

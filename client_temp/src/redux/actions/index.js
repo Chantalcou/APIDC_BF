@@ -17,7 +17,7 @@ export const registerUser = (userData, token) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(
-        "https://apidc-bf.onrender.com/register",
+        "https://apidc.ong/register",
         {
           email: userData.email,
           name: userData.name,
@@ -62,7 +62,7 @@ export const formInfo = (formData) => async (dispatch) => {
   try {
     // Enviar los datos al backend
     const response = await axios.post(
-      "https://apidc-bf.onrender.com/send/admin",
+      "https://apidc.ong/send/admin",
 
       formData,
       {
@@ -92,7 +92,7 @@ export const formInfo = (formData) => async (dispatch) => {
 //   return async (dispatch) => {
 //     try {
 //       const response = await axios.put(
-//         `https://apidc-bf.onrender.com/users/${userId}`,
+//         `https://apidc.ong/users/${userId}`,
 //         { membershipType },
 //         {
 //           headers: {
@@ -122,7 +122,7 @@ export const fetchUsers = (token) => {
   return async (dispatch) => {
     try {
       // usersNotAdmin
-      const response = await axios.get(`https://apidc-bf.onrender.com/users`, {
+      const response = await axios.get(`https://apidc.ong/users`, {
         headers: {
           Authorization: `Bearer ${token}`, // Token de autenticación
         },
@@ -148,7 +148,7 @@ export const getAllNotAdmins = (token) => {
     try {
       // usersNotAdmin
       const response = await axios.get(
-        `https://apidc-bf.onrender.com/usersNotAdmin`,
+        `https://apidc.ong/usersNotAdmin`,
         {}
       );
 
@@ -170,7 +170,7 @@ export const updateUserRole = (userId, membershipType, token) => {
   return async (dispatch, getState) => {
     try {
       const response = await axios.put(
-        `https://apidc-bf.onrender.com/users/${userId}`,
+        `https://apidc.ong/users/${userId}`,
         { membershipType },
         {
           headers: {
@@ -203,7 +203,7 @@ export const updateUserRole = (userId, membershipType, token) => {
 export const sendWorkTogether = (formData) => async (dispatch) => {
   try {
     const response = await axios.post(
-      "https://apidc-bf.onrender.com/workWithUs",
+      "https://apidc.ong/workWithUs",
 
       formData,
       {
@@ -227,7 +227,7 @@ export const sendWorkTogether = (formData) => async (dispatch) => {
 
 export const verifySocio = (email, id_socio) => async (dispatch) => {
   try {
-    const response = await axios.post(`https://apidc-bf.onrender.com/verifySocio`, {
+    const response = await axios.post(`https://apidc.ong/verifySocio`, {
       email,
       id_socio,
     });
@@ -257,7 +257,7 @@ export const verifySocio = (email, id_socio) => async (dispatch) => {
 export const deleteUser = (userId, token) => async (dispatch) => {
   try {
     const response = await fetch(
-      `https://apidc-bf.onrender.com/usersDelete/${userId}`,
+      `https://apidc.ong/usersDelete/${userId}`,
       {
         method: "DELETE",
         headers: {
@@ -282,7 +282,7 @@ export const deleteUser = (userId, token) => async (dispatch) => {
 
 // export const webhookJotform = () => async (dispatch) => {
 //   try {
-//     const response = await axios.post("https://apidc-bf.onrender.com/webhook-jotform");
+//     const response = await axios.post("https://apidc.ong/webhook-jotform");
 //     console.log(response, "ESTO ME LLEGA AL ACTIONS");
 //     // dispatch({
 //     //   type: "SEND_FORM_SUCCESS",
@@ -299,7 +299,7 @@ export const deleteUser = (userId, token) => async (dispatch) => {
 // export const getJotformSubmissions = () => async (dispatch) => {
 //   try {
 //     const response = await axios.get(
-//       "https://apidc-bf.onrender.com/jotform-submissions"
+//       "https://apidc.ong/jotform-submissions"
 //     );
 //     console.log("Datos recibidos desde el backend:", response.data);
 
