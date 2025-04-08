@@ -64,12 +64,16 @@ const NavBar = () => {
     const registerAuthenticatedUser = async () => {
       if (isAuthenticated && user) {
         try {
-          const idTokenObject = JSON.parse(localStorage.getItem("@@auth0spajs@@::8KX5NG5JLM5pdOJYuYkFZTRGtOs53t2v::@@user@@"));
+          const idTokenObject = JSON.parse(
+            localStorage.getItem(
+              "@@auth0spajs@@::8KX5NG5JLM5pdOJYuYkFZTRGtOs53t2v::@@user@@"
+            )
+          );
           // console.log(idTokenObject); // Esto te mostrará el objeto completo
-          
+
           // Ahora puedes acceder a las propiedades del objeto
           const idToken = idTokenObject.id_token;
-          // console.log(idToken); 
+          // console.log(idToken);
 
           if (redirectPath) {
             // Si la ruta es para /membershipSection, redirigir inmediatamente
@@ -114,15 +118,14 @@ const NavBar = () => {
   // Verification Captcha
   useEffect(() => {
     const script = document.createElement("script");
-    script.src = `https://www.google.com/recaptcha/api.js?render=6Lc8vrMqAAAAAPXaohW4mzMVw401_H9KGEZGt57I`;
+    script.src = `https://www.google.com/recaptcha/api.js?render=6Lfxug4rAAAAAAbgHilGD7UcIa4MZhY5DWEaCSl7`;
     script.async = true;
     document.head.appendChild(script);
-  
+
     return () => {
       document.head.removeChild(script);
     };
   }, []);
-  
 
   const handleLogout = () => {
     logout({ returnTo: window.location.origin });
