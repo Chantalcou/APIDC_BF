@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import PaymentShipping from "./PaymentShipping";
-import "./MembershipComponent.css"; // Archivo CSS
 import ButtonComponent from "./Button";
+import "./MembershipComponent.css";
 
 const MembershipComponent = () => {
   const navigate = useNavigate();
@@ -26,10 +26,10 @@ const MembershipComponent = () => {
 
   const handleLogin = async () => {
     if (isAuthenticated) {
-      if (selectedRole === "SocioConReprocan") {
-        navigate("/membershipSection/SocioConReprocan");
-      } else if (selectedRole === "SocioSinReprocan") {
-        navigate("/membershipSection/socioSinReprocan");
+      if (selectedRole === "SocioConReprocann") {
+        navigate("/membershipSection/SocioConReprocann");
+      } else if (selectedRole === "SocioSinReprocann") {
+        navigate("/membershipSection/socioSinReprocann");
       } else {
         navigate("/membershipSection/gestor");
       }
@@ -56,9 +56,9 @@ const MembershipComponent = () => {
         </p>
         {/*  STEEPS*/}
         <p className="section-subtitle">
-          Para acceder a nuestros servicios, comenza como Socio Adherente y
-          luego selecciona la opción que mejor se adapte a tus objetivos: SOCIO
-          REPROCAN (cultivo personal REPROCAN) o Gestor (acompañamiento
+          Para acceder a nuestros servicios, comenzá como Socio Adherente y
+          luego seleccioná la opción que mejor se adapte a tus objetivos: SOCIO
+          REPROCANn (cultivo personal REPROCANn) o Gestor (acompañamiento
           experto).
         </p>
         <h2>🚀 Pasos para Unirte</h2>
@@ -70,12 +70,12 @@ const MembershipComponent = () => {
           <div className="arrow">→</div>
           <div className="step">
             <div className="circle">2</div>
-            <p className="step-text">Elegí Reprocan o Gestor</p>
+            <p className="step-text">Elegí Reprocann o Gestor</p>
           </div>
         </div>{" "}
         {/* Otras Cards (Distribuidas en tres columnas) */}
         <div className="cards-container">
-          {/* Socio con Reprocan */}
+          {/* Socio con Reprocann */}
           <div className="card">
             <h2 className="card-title">Socio adherente</h2>
             <p className="price-container_membership">
@@ -87,13 +87,13 @@ const MembershipComponent = () => {
             <ul className="benefits-list">
               <li>✔ Participación en Investigación de Cultivo Medicinal</li>
               <li>
-                ✔ Programa de Acceso Solidario a Terapias Cannabinoides - Su
+                ✔ Programa de Acceso Solidario a Terapias Cannabinoides - Tu
                 contribución subvenciona tratamientos medicinales para pacientes
                 en situación de vulnerabilidad socioeconómica, garantizando el
                 acceso equitativo a terapias esenciales.
               </li>
 
-              <li>✔ Atención Personalizada Online para Gestión del REPROCAN</li>
+              <li>✔ Atención Personalizada Online para Gestión del REPROCANn</li>
             </ul>
             <div className="content-buttons_memberShip">
               <ButtonComponent
@@ -101,7 +101,7 @@ const MembershipComponent = () => {
                 onClick={() => window.open(url, "_blank")}
                 color={{
                   background: "transparent",
-                  text: "#0a9d6d", // Color del texto
+                  text: "#0a9d6d", 
                   border: "2px solid white",
                   fontSize: ".8rem",
                 }}
@@ -110,10 +110,10 @@ const MembershipComponent = () => {
 
               <ButtonComponent
                 className="card-button"
-                onClick={() => handleRoleSelect("socioSinReprocan")}
+                onClick={() => handleRoleSelect("socioSinReprocann")}
                 color={{
                   background: "transparent",
-                  text: "#ffff", // Color del texto
+                  text: "#ffff", 
                   border: "2px solid white",
                   fontSize: ".8rem",
                 }}
@@ -122,7 +122,7 @@ const MembershipComponent = () => {
             </div>
           </div>
           <div className="card">
-            <h2 className="card-title">Socio con Reprocan</h2>
+            <h2 className="card-title">Socio con Reprocann</h2>
             <p className="price-container_membership"></p>
             <p className="card-subtitle">
               Realizá tus cultivos en nuestras instalaciones y delegá su cuidado
@@ -131,7 +131,7 @@ const MembershipComponent = () => {
             </p>
             <ul className="benefits-list">
               <li>✔ Un Frasco Gratis de Cannabis Medicinal</li>
-              <li>✔ Cultivo en Nuestros Campos(con Reprocan)</li>
+              <li>✔ Cultivo en Nuestros Campos(con Reprocann)</li>
               <li>✔ Asesoramiento Exclusivo Personalizado</li>
             </ul>
             <div className="content-buttons_memberShip">
@@ -140,7 +140,7 @@ const MembershipComponent = () => {
                 onClick={() => window.open(url, "_blank")}
                 color={{
                   background: "transparent",
-                  text: "#0a9d6d", // Color del texto
+                  text: "#0a9d6d", 
                   border: "2px solid white",
                   fontSize: ".8rem",
                 }}
@@ -149,10 +149,10 @@ const MembershipComponent = () => {
 
               <ButtonComponent
                 className="card-button"
-                onClick={() => handleRoleSelect("socioConReprocan")}
+                onClick={() => handleRoleSelect("socioConReprocann")}
                 color={{
                   background: "transparent",
-                  text: "#ffff", // Color del texto
+                  text: "#ffff", 
                   border: "2px solid white",
                   fontSize: ".5rem",
                 }}
@@ -161,7 +161,7 @@ const MembershipComponent = () => {
             </div>
           </div>
 
-          {/* Socio con Reprocan */}
+          {/* Socio con Reprocann */}
           <div className="card">
             <h2 className="card-title">Gestor</h2>
             <p className="price-container"></p>
@@ -169,7 +169,7 @@ const MembershipComponent = () => {
               Comisiones de gestión y contención al socio adherente.
             </p>
             <ul className="benefits-list">
-              <li>✔ Cultivo en Nuestros Campos (Con Reprocan)</li>
+              <li>✔ Cultivo en Nuestros Campos (Con Reprocann)</li>
               <li>✔ Comisión de 10% por Nuevos Socios Activos</li>
               <li>✔ Capacitación para Gestores</li>
               <li>✔ Soporte Continuo y Asesoramiento Personalizado</li>
@@ -180,7 +180,7 @@ const MembershipComponent = () => {
                 onClick={() => window.open(url, "_blank")}
                 color={{
                   background: "transparent",
-                  text: "#0a9d6d", // Color del texto
+                  text: "#0a9d6d",
                   border: "2px solid white",
                   fontSize: ".5rem",
                 }}
@@ -192,7 +192,7 @@ const MembershipComponent = () => {
                 onClick={() => handleRoleSelect("gestor")}
                 color={{
                   background: "transparent",
-                  text: "#ffff", // Color del texto
+                  text: "#ffff", 
                   border: "2px solid white",
                   fontSize: ".5rem",
                 }}
@@ -219,7 +219,7 @@ const MembershipComponent = () => {
               <tr>
                 <th>Beneficio</th>
                 <th>Socio Adherente</th>
-                <th>Socio Premium / con Reprocan</th>
+                <th>Socio Premium / con Reprocann</th>
                 <th>Socio Gestor</th>
               </tr>
             </thead>
@@ -237,17 +237,12 @@ const MembershipComponent = () => {
                 <td>✔</td>
               </tr>
               <tr>
-                <td>Atención personalizada online para gestión de Reprocan</td>
+                <td>Atención personalizada online para gestión de Reprocann</td>
                 <td>✔</td>
                 <td>✔</td>
                 <td>✔</td>
               </tr>
-              <tr>
-                <td>Acceso a newsletter mensual con noticias</td>
-                <td>✔</td>
-                <td>✔</td>
-                <td>✔</td>
-              </tr>
+            
               <tr>
                 <td>Asesoramiento exclusivo</td>
                 <td>✔</td>
@@ -261,7 +256,7 @@ const MembershipComponent = () => {
                 <td>✔</td>
               </tr>
               <tr>
-                <td>Cultivo en nuestro campo (Con Reprocan)</td>
+                <td>Cultivo en nuestro campo (Con Reprocann)</td>
                 <td>✖</td>
                 <td>✔</td>
                 <td>✔</td>

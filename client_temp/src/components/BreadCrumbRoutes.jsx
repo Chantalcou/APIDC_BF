@@ -30,13 +30,13 @@ const Breadcrumbs = () => {
           <Link style={{ color: "#595959" }} to="/">
             Inicio
           </Link>{" "}
-          {/* Siempre muestra el enlace a la raíz */}
+
         </li>
         {paths.map((path, index) => {
           accumulatedPath += `/${path}`;
           return (
             <li key={index}>
-              <span style={{ margin: "0 5px" }}>/</span> {/* Separador */}
+              <span style={{ margin: "0 5px" }}>/</span>
               <Link style={{ color: "#595959" }} to={accumulatedPath}>
                 {breadcrumbRoutes[accumulatedPath] || path}
               </Link>

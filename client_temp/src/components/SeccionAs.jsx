@@ -99,7 +99,7 @@ const SeccionAs = () => {
               src="https://mamacultivaargentina.org/wp-content/uploads/2024/10/1Recurso-2logo-mca-final.png"
               alt="icon-aceite"
             ></img>
-            <h3 className="associate-title-card">TIENDA</h3>
+            <h3 className="associate-title-card">CONOCÉ NUNESTRA TIENDA</h3>
             <p className="associate-text">
               🌱 Nuestros productos de la mejor calidad
             </p>
@@ -132,7 +132,7 @@ const SeccionAs = () => {
                   className="btn-asociate-custom"
                   aria-label="Explorar Membresías"
                 >
-                  Mas
+                  Conocer más
                   <FaArrowRight className="btn-icon" />
                 </Link>
               </>
@@ -142,7 +142,7 @@ const SeccionAs = () => {
                 aria-label="Explorar Membresías"
                 onClick={handleShowModal || handleLogin}
               >
-                Iniciar sesión
+                Ingresar
                 <FaArrowRight className="btn-icon" />
               </Link>
             )}

@@ -3,7 +3,6 @@ import { Table, Container, Alert, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserRole, fetchUsers,deleteUser } from "../redux/actions/index";
 import { useAuth0 } from "@auth0/auth0-react";
-
 import "./Dashboard.css";
 
 const Dashboard = () => {
@@ -63,6 +62,7 @@ const Dashboard = () => {
   // useEffect(() => {
   //   dispatch(webhookJotform());
   // }, []);
+
   const handleRoleUpdate = async (userId, membershipType) => {
     const originalUser = users.find((u) => u.id === userId);
 
@@ -209,7 +209,7 @@ const Dashboard = () => {
       default:
         return (
           <Alert variant="info">
-            Seleccione una sección del menú para comenzar
+            Selecciona una sección del menú para comenzar
           </Alert>
         );
     }

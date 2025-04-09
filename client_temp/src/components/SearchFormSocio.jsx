@@ -45,23 +45,13 @@ const SearchFormSocio = () => {
     }
   };
 
-  // useEffect(() => {
-  //   if (isSocioVerified) {
-  //     Swal.fire(
-  //       `Bienvenido, ${isSocio?.name} !`,
-  //       "Accede a los productos a continuación.",
-  //       "success"
-  //     );
-  //     navigate("/products"); // Redirige automáticamente
-  //   }
-  // }, [isSocioVerified, socioData, navigate]);
 
   return (
     <div className="full-height">
       <Container className="my-5">
         <Row className="justify-content-center">
           <Col md={6}>
-            <h2 className="text-center mb-4">Formulario Socio</h2>
+            <h2 className="text-center mb-4">Formulario del Socio</h2>
             {status && (
               <Alert variant={statusVariant} className="text-center">
                 {status}
@@ -82,14 +72,14 @@ const SearchFormSocio = () => {
               </Form.Group>
 
               <Form.Group className="mb-3">
-                <Form.Label>ID Usuario</Form.Label>
+                <Form.Label>Número de socio</Form.Label>
                 <Form.Control
                   type="text"
                   name="id_socio"
                   value={formData.id_socio}
                   onChange={handleChange}
                   required
-                  placeholder="ID..."
+                  placeholder="Número de socio..."
                 />
               </Form.Group>
 

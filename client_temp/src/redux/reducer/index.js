@@ -42,16 +42,7 @@ const reducer = (state = initialState, action) => {
         error: null,
       };
 
-    case REGISTER_USER:
-      return {
-        ...state,
-        user: action.payload.user,
-        isAuthenticated: true,
-        isAdmin: action.payload.isAdmin,
-        users: action.payload.users,
-        userFromRedux: action.payload.user,
-        error: null,
-      };
+   
     case FETCH_USERS_SUCCESS_NOT_ADMIN:
       return {
         ...state,

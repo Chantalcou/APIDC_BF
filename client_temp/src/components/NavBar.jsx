@@ -3,9 +3,7 @@ import { Navbar, Nav, Container } from "react-bootstrap";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getAllNotAdmins,
-} from "../redux/actions/index";
+import { getAllNotAdmins } from "../redux/actions/index";
 import BreadCrumRoutes from "./BreadCrumbRoutes";
 import LoginModal from "./LoginModal";
 import $ from "jquery";
@@ -17,14 +15,9 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const {
-    userFromRedux,
-    memberShipType,
-    isAdmin,
-    getAllNotAdmin,
-    userAdmin,
-    isSocioVerified,
-  } = useSelector((state) => state);
+  const { userFromRedux, isAdmin, getAllNotAdmin } = useSelector(
+    (state) => state
+  );
 
   const {
     isAuthenticated,
@@ -46,14 +39,13 @@ const NavBar = () => {
   useEffect(() => {
     const loadUsers = async () => {
       try {
-        await dispatch(getAllNotAdmins()); 
+        await dispatch(getAllNotAdmins());
       } catch (err) {
         console.log("Error cargando usuarios");
       }
     };
     loadUsers();
   }, [dispatch, getAccessTokenSilently]);
-
 
   useEffect(() => {
     const registerAuthenticatedUser = async () => {
@@ -65,9 +57,8 @@ const NavBar = () => {
             )
           );
 
-          // Ahora puedes acceder a las propiedades del objeto
           const idToken = idTokenObject.id_token;
-          // console.log(idToken);
+         
 
           if (redirectPath) {
             // Si la ruta es para /membershipSection, redirigir inmediatamente
@@ -138,6 +129,7 @@ const NavBar = () => {
   };
 
   const isHome = location.pathname === "/";
+
   // Maneja la verificación de reCAPTCHA
   const handleCaptchaVerify = (value) => {
     if (value) {
@@ -149,7 +141,7 @@ const NavBar = () => {
   };
   const handleSocioRedirect = () => {
     if (!isAuthenticated) {
-      setRedirectPath("/socio"); // Guardar la ruta destino
+      setRedirectPath("/socio"); 
       handleShowModal();
     } else {
       navigate("/socio");
@@ -238,7 +230,7 @@ const NavBar = () => {
                         Tu Cultivo
                       </Link>
                     )}
-                  {isAuthenticated &&
+                  {/* {isAuthenticated &&
                     getAllNotAdmin?.some(
                       (u) =>
                         u.email?.toLowerCase() === user?.email?.toLowerCase() &&
@@ -247,7 +239,7 @@ const NavBar = () => {
                       <Link to="/newsLetter" className="nav-link me-3">
                         NesLetter
                       </Link>
-                    )}
+                    )} */}
                 </>
               ) : (
                 <></>
@@ -266,7 +258,7 @@ const NavBar = () => {
                   onClick={() => scrollToSection("donate-now")}
                   className="nav-link_dona"
                 >
-                  Dona ahora
+                 Doná ahora
                 </Nav.Link>
               )}
 

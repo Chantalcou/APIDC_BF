@@ -4,10 +4,11 @@ import "./TermsAndPrivacy.css";
 const TermsAndPrivacy = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
+    document.title = "Política de Privacidad y Términos de Servicio | APIDC";
   }, []);
-
+  
   return (
-    <div className="terms-privacy-container">
+    <main className="terms-privacy-container">
       <h1>Política de Privacidad y Términos de Servicio</h1>
 
       <section className="privacy-policy">
@@ -116,7 +117,7 @@ const TermsAndPrivacy = () => {
           de comunicación disponibles, como WhatsApp o correo electrónico.
         </p>
       </section>
-    </div>
+    </main>
   );
 };
 

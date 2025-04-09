@@ -25,21 +25,21 @@ export const WorkTogether = () => {
     switch (name) {
       case "fullName":
         if (!value.trim()) {
-          newErrors.fullName = "Por favor escriba su nombre.";
+          newErrors.fullName = "Por favor, escribinos tu nombre.";
         } else {
           delete newErrors.fullName;
         }
         break;
       case "email":
         if (!emailRegex.test(value)) {
-          newErrors.email = "Por favor, escriba un email válido.";
+          newErrors.email = "Por favor, escribí un email válido.";
         } else {
           delete newErrors.email;
         }
         break;
       case "message":
         if (!value.trim()) {
-          newErrors.message = "El mensaje no puede estar vacío.";
+          newErrors.message = "No te olvides de escribir un mensaje.";
         } else {
           delete newErrors.message;
         }
@@ -47,7 +47,7 @@ export const WorkTogether = () => {
       case "areaOfInterest":
         if (!value) {
           newErrors.areaOfInterest =
-            "Por favor, selecciona un área de interés.";
+            "Elegí un área de interés, por favor.";
         } else {
           delete newErrors.areaOfInterest;
         }
@@ -87,18 +87,18 @@ export const WorkTogether = () => {
           src="https://res.cloudinary.com/dqgjcfosx/video/upload/v1737463914/8243034-uhd_2160_3840_24fps_bsifnn.mp4"
           type="video/mp4"
         />
-        Tu navegador no soporta videos HTML5.
+Tu navegador no admite videos HTML5
       </video>
       <div className="content-work_together">
         <h2 className="work-together-title">¡Trabajemos juntos!</h2>
         {isSubmitted ? (
           <div className="success-message">
-            ¡Gracias por contactarte con nosotros!
+          ¡Gracias por escribirnos!
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="work-together-form">
             <div className="form-group">
-              <label htmlFor="fullName">Nombre Completo</label>
+              <label htmlFor="fullName">Nombre completo</label>
               <input
                 type="text"
                 id="fullName"
@@ -149,7 +149,7 @@ export const WorkTogether = () => {
                 onChange={handleChange}
                 className={errors.areaOfInterest ? "error" : ""}
               >
-                <option value="">Selecciona una opción</option>
+                <option value="">Elegí una opción</option>
                 <option value="medicos">Médicos</option>
                 <option value="ingenierosAgronomos">
                   Ingenieros Agrónomos
@@ -164,7 +164,7 @@ export const WorkTogether = () => {
             </div>
 
             <ButtonComponent
-              text="Enviar"
+              text="Enviar mensaje"
               color={{
                 background: "transparent",
                 text: "#ffffff",

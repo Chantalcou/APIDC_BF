@@ -26,7 +26,7 @@ const LoginModal = ({ show, handleClose }) => {
         <Modal.Title className="btn-captcha">Iniciar Sesión</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>Por favor, verifica el CAPTCHA para continuar.</p>
+        <p>Por favor, verificá el CAPTCHA para continuar.</p>
         <div className="captcha-container">
           <ReCAPTCHA
             sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}

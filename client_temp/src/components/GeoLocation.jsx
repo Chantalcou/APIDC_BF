@@ -5,8 +5,8 @@ const GeoLocation = () => {
   const [viewport, setViewport] = useState({
     width: "100%",
     height: 400,
-    latitude: 37.7577, // Valor inicial de latitud (ejemplo: San Francisco)
-    longitude: -122.4376, // Valor inicial de longitud (ejemplo: San Francisco)
+    latitude: 37.7577,
+    longitude: -122.4376, 
     zoom: 8,
   });
 
@@ -20,7 +20,7 @@ const GeoLocation = () => {
             ...viewport,
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
-            zoom: 12, // Puedes ajustar el zoom según lo que necesites
+            zoom: 12, 
           });
         },
         (error) => {
@@ -30,7 +30,7 @@ const GeoLocation = () => {
     } else {
       console.log("La geolocalización no es compatible con este navegador.");
     }
-  }, []); // Solo se ejecuta una vez, cuando se monta el componente
+  }, []); 
 
   return (
     <ReactMapGL

@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  FaHandsHelping,
-  FaLeaf,
-  FaBalanceScale,
-  FaCopy,
-  FaWhatsapp,
-} from "react-icons/fa";
+import { FaLeaf, FaCopy, FaWhatsapp } from "react-icons/fa";
 import "./Donations.css";
 
 const Donations = () => {
@@ -28,7 +22,6 @@ const Donations = () => {
 
   return (
     <>
-    
       <div className="donation-background_image">
         <section className="donacion-container">
           {/* Modal para transferencia */}
@@ -84,9 +77,7 @@ const Donations = () => {
             </p>
           </div>
 
-          <div className="razones-grid">
-   
-          </div>
+          <div className="razones-grid"></div>
 
           <div className="cta-container">
             <button
@@ -103,7 +94,6 @@ const Donations = () => {
           </div>
         </section>
       </div>
-
     </>
   );
 };

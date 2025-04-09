@@ -26,7 +26,8 @@ const AsociateButton = ({ onClick }) => {
       onMouseLeave={(e) => (e.target.style.background = "#0a9d6d")}
     >
       <FaHandHoldingHeart style={{ fontSize: "20px" }} /> {/* Ícono de mano */}
-      ¡Asóciate Ahora!
+      ¡Asociate ahora!
+
     </button>
   );
 };

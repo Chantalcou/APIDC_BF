@@ -2,12 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import $ from "jquery";
 import { registerUser, fetchUsers } from "./redux/actions/index.js";
-import ScrollArrow from "./components/ScrollArrow.jsx";
 import ButtonComponent from "./components/Button";
 import { useSelector, useDispatch } from "react-redux";
 import { Helmet } from "react-helmet-async"; //Optimizacion SEO
 import { useAuth0 } from "@auth0/auth0-react";
-import { FaArrowRight } from "react-icons/fa";
 import LoginModal from "./components/LoginModal.jsx";
 import ContactInfo from "./components/ContactInfo.jsx";
 import MovingBanner from "./components/MovingBanner.jsx";
@@ -26,11 +24,10 @@ import "./Home.css";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const userFromRedux = useSelector((state) => state.user);
+
   const {
     isAuthenticated,
     loginWithRedirect,
-    // logout,
     user,
     getAccessTokenSilently,
   } = useAuth0();
@@ -43,13 +40,12 @@ const Home = () => {
   const handleCloseModal = () => setShowModal(false);
 
   const [showModal, setShowModal] = useState(false);
-  const [showCaptcha, setShowCaptcha] = useState(false);
   const [loading, setLoading] = useState(true);
   const [isSpinning, setIsSpinning] = useState(false);
-  const [selectedRole, setSelectedRole] = useState(null);
   const [captchaVerified, setCaptchaVerified] = useState(false);
+  const [showCaptcha, setShowCaptcha] = useState(false);
+  const [selectedRole, setSelectedRole] = useState(null);
 
-  // ANIMACION
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -64,9 +60,6 @@ const Home = () => {
     }, 3000);
   }, []);
 
-  // if (loading) {
-  //   return <SpinnerComponent />;
-  // }
 
   const handleLogoClick = () => {
     setIsSpinning(true);
@@ -87,10 +80,9 @@ const Home = () => {
       if (isAuthenticated && user) {
         try {
           const token = await getAccessTokenSilently();
-          dispatch(registerUser(user, token)); // Despacha la acción de registro
-          // Si es admin, realizar la acción de obtener usuarios
+          dispatch(registerUser(user, token));
           if (user.isAdmin) {
-            dispatch(fetchUsers(token)); // Solo llamar si el usuario es admin
+            dispatch(fetchUsers(token)); 
           }
         } catch (error) {
           console.error("Error obteniendo token:", error);
@@ -110,7 +102,7 @@ const Home = () => {
       await loginWithRedirect();
       if (isAuthenticated && user) {
         const token = await getAccessTokenSilently();
-        dispatch(registerUser(user, token)); // Llamamos a la acción `registerUser` solo después de la verificación
+        dispatch(registerUser(user, token)); 
       }
     } catch (error) {
       console.error("Error durante el login o el registro:", error);
@@ -147,7 +139,7 @@ const Home = () => {
         />
         {/* Esta etiqueta le dice a las redes sociales cuál es la URL de tu página cuando se comparte en ellas. */}
         {/* Si estás en tu página de inicio, la URL sería algo como https://tu-dominio.com/ (reemplazando "tu-dominio" por el dominio real de tu sitio web). */}
-        <meta property="og:url" content="https://example.com/" />
+        <meta property="og:url" content="https://apidc.ong" />
         <meta name="robots" content="index, follow" />
       </Helmet>
       <div>
@@ -156,13 +148,7 @@ const Home = () => {
         ) : (
           <div className="container-fluid p-0 main-content">
             <div className="video-container">
-              {/* <video autoPlay muted loop className="home-bg-video">
-              <source
-                src="https://res.cloudinary.com/dqgjcfosx/video/upload/w_720,q_auto,f_auto/v1234567/7667357-uhd_3840_2160_30fps_nm24my.mp4"
-                type="video/mp4"
-              />
-              Your browser does not support the video tag.
-            </video> */}
+         
               <video
                 autoPlay
                 muted
@@ -211,7 +197,7 @@ const Home = () => {
                   />
                   {isAuthenticated && user ? (
                     <>
-                      {/* <Nav.Link href="/products">Productos</Nav.Link> */}
+                   
                       <Link
                       style={{
                         backgroundColor: "#7BA12D",
@@ -247,21 +233,9 @@ const Home = () => {
                       ASOCIATE
                     </Link>
                   )}
-                  {/* <ButtonComponent
-                    text="Asociate Ahora"
-                    onClick={() => scrollToSection("asociarme-section")}
-                    color={{
-                      ground: "white",
-                      text: "#0a9d6d",
-                      border: "2px solid #0a9d6d",
-                    }}
-                    icon={<FaArrowRight className="me-2" />}
-                  /> */}
+              
                 </div>
-                {/* <p className="text-white mt-3 text-center">
-              ⭐️ +500 socios confían en nosotros | Registro REPROCANN 100%
-              legal ⭐️
-            </p> */}
+            
               </div>
             </div>
           </div>
@@ -394,27 +368,28 @@ const Home = () => {
           />
         </div>
         <section id="ley" className="ley-container">
-          <h2 style={{ color: "#0a9d6d" }}>Conoce más sobre la Ley 27.350</h2>
-          <p className="ley-intro">
-            Sancionada en 2017, esta ley regula la investigación y el acceso al
-            cannabis medicinal en Argentina, garantizando su uso seguro y
-            terapéutico.
-          </p>
+        <h2 style={{ color: "#0a9d6d" }}>Conocé más sobre la Ley 27.350</h2>
+<p className="ley-intro">
+  Sancionada en 2017, esta ley regula la investigación y el acceso al
+  cannabis medicinal en Argentina, garantizando su uso seguro y
+  terapéutico.
+</p>
+
 
           <div className="ley-grid">
             <div className="ley-card">
               <h3>🔬 Investigación científica</h3>
               <p>
-                Impulsa estudios clínicos sobre los usos medicinales del
-                cannabis.
-              </p>
+  Fomenta estudios clínicos sobre cómo se puede usar el cannabis con fines medicinales.
+</p>
             </div>
             <div className="ley-card">
-              <h3>⚕️ Acceso terapéutico</h3>
-              <p>
-                Permite tratamientos con cannabis para pacientes con patologías
-                específicas.
-              </p>
+            <h3>⚕️ Acceso terapéutico</h3>
+<p>
+  Permite tratamientos con cannabis para pacientes con patologías
+  específicas.
+</p>
+
             </div>
           </div>
         </section>
@@ -425,64 +400,6 @@ const Home = () => {
       <WorkTogether />
       <MovingBanner />
       <ContactInfo />
-
-      {/* 
-      <div className="content-summary">
-        <details className="toggleFaqs_faqsQuestions mt-1">
-          <summary className="toggleFaqs_faqsQuestions__RozJk">
-            ¿Qué es una asociación civil de cannabis?
-            <span className="toggleFaqs_faqsQuestions__arrow">➔</span>
-          </summary>
-          <p className="summary-p">
-            Una asociación civil de cannabis es una organización sin fines de
-            lucro que promueve la investigación, educación y el uso responsable
-            de la planta de cannabis, tanto para fines medicinales como
-            recreativos, según las normativas locales.
-          </p>
-        </details>
-
-        <details className="toggleFaqs_faqsQuestions">
-          <summary className="toggleFaqs_faqsQuestions__RozJk">
-            ¿Cómo puedo asociarme a una asociación civil de cannabis?
-            <span className="toggleFaqs_faqsQuestions__arrow">➔</span>
-          </summary>
-          <p className="summary-p">
-            Para asociarte, generalmente debes ser mayor de edad, presentar
-            ciertos documentos como tu identificación y completar un formulario
-            de solicitud. Cada asociación tiene sus propios requisitos
-            específicos, por lo que es recomendable contactarlos directamente.
-            </p>
-            </details>
-            
-        <details className="toggleFaqs_faqsQuestions">
-          <summary className="toggleFaqs_faqsQuestions__RozJk">
-            ¿Cuáles son los beneficios de ser miembro de una asociación civil de
-            cannabis?
-            <span className="toggleFaqs_faqsQuestions__arrow">➔</span>
-          </summary>
-          <p className="summary-p">
-            Los beneficios pueden incluir acceso a productos de cannabis de
-            calidad controlada, participación en programas educativos, la
-            posibilidad de influir en políticas públicas relacionadas con el
-            cannabis, y el derecho a votar en decisiones dentro de la
-            asociación.
-          </p>
-          </details>
-          
-          <details className="toggleFaqs_faqsQuestions">
-          <summary className="toggleFaqs_faqsQuestions__RozJk">
-            ¿Es legal formar una asociación civil de cannabis?
-            <span className="toggleFaqs_faqsQuestions__arrow">➔</span>
-          </summary>
-          <p className="summary-p">
-            La legalidad depende del país y de las leyes locales sobre el
-            cannabis. En muchos lugares, es legal formar asociaciones civiles
-            con el objetivo de promover el uso medicinal del cannabis, pero en
-            otros lugares aún puede ser ilegal.
-          </p>
-        </details>
-      </div> */}
-
       <LoginModal show={showModal} handleClose={handleCloseModal} />
     </>
   );

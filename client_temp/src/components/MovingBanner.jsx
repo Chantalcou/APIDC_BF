@@ -8,7 +8,6 @@ const MovingBanner = () => {
     "https://res.cloudinary.com/dqgjcfosx/image/upload/v1736345698/ministerio_arg_o5onnp.jpg",
     "https://res.cloudinary.com/dqgjcfosx/image/upload/v1736345614/andreani_e9flk9.png",
     "https://res.cloudinary.com/dqgjcfosx/image/upload/v1736344234/conicet_eg7ncj.jpg",
-
     "https://res.cloudinary.com/dqgjcfosx/image/upload/v1736345698/ministerio_arg_o5onnp.jpg",
     "https://res.cloudinary.com/dqgjcfosx/image/upload/v1736345614/andreani_e9flk9.png",
     "https://res.cloudinary.com/dqgjcfosx/image/upload/v1736344234/conicet_eg7ncj.jpg",

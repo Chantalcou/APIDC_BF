@@ -42,7 +42,7 @@ const ContactForm = () => {
         break;
       case "email":
         if (!emailRegex.test(value)) {
-          newErrors.email = "Por favor, escriba un email válido.";
+          newErrors.email = "Por favor, escribí un email válido.";
         } else {
           delete newErrors.email;
         }
@@ -102,8 +102,6 @@ const ContactForm = () => {
       setIsSubmitting(false);
       return;
     }
-
-    // Enviar mediante Redux Action
     dispatch(
       sendWorkTogether({
         ...formData,
@@ -111,11 +109,7 @@ const ContactForm = () => {
       })
     )
       .then(() => {
-        Swal.fire(
-          "¡Gracias!",
-          "Tu mensaje ha sido enviado correctamente.",
-          "success"
-        );
+        Swal.fire("¡Gracias!", "Tu mensaje se envió correctamente.", "success");
         setFormData({
           fullName: "",
           email: "",
@@ -146,8 +140,8 @@ const ContactForm = () => {
 
             {isSubmitted ? (
               <Alert variant="success" className="text-center">
-                <FaRegCheckCircle size={15} /> ¡Gracias por tu mensaje! Nos
-                pondremos en contacto contigo pronto.
+                <FaRegCheckCircle size={15} /> ¡Gracias por tu mensaje! En breve nos pondremos en contacto.
+
               </Alert>
             ) : (
               <Form onSubmit={handleSubmit}>
@@ -190,7 +184,7 @@ const ContactForm = () => {
                     onChange={handleChange}
                     isInvalid={!!errors.message}
                     rows={4}
-                    placeholder="Escribe tu mensaje aquí..."
+                    placeholder="Escribe tu mensaje..."
                   />
                   <Form.Control.Feedback type="invalid">
                     {errors.message}

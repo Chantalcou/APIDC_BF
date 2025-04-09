@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import ScrollArrow from "./ScrollArrow.jsx";
-import SpinnerComponent from "./SpinnerComponent.jsx";
 import $ from "jquery";
 import "./Shop.css";
 
@@ -9,10 +8,10 @@ const Shop = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   const handleImageLoad = () => {
-    // Temporizador para garantizar que el spinner dure al menos 2 segundos
+
     setTimeout(() => {
-      setLoading(false); // Cambia el estado para ocultar el spinner
-    }, 2000); // 2000 ms (2 segundos)
+      setLoading(false); 
+    }, 2000); 
   };
   const optimizedImage = (url, width = 600, blur = 0, px = 0) =>
     `${url}?f=auto&q=auto&w=${width}${blur ? `&blur=${blur}&px=${px}` : ""}`;

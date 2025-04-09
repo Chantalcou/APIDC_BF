@@ -6,7 +6,8 @@ const Footer = () => (
   <footer className="footer">
     <div className="footer-content">
       <div className="footer-section footer-info">
-        <p>© 2024 Tu Empresa. Todos los derechos reservados.</p>
+      <p>© 1995–2025 Tu Empresa. 30 años de trayectoria. Todos los derechos reservados.</p>
+
       </div>
 
       <div className="footer-section footer-links-social">

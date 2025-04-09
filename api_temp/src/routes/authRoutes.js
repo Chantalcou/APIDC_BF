@@ -13,7 +13,7 @@ const {
 } = require("../controllers/authController");
 const router = express.Router();
 const multer = require("multer");
-const upload = multer();
+// const upload = multer();
 
 // Ruta para registrar usuario (no requiere autenticación)
 router.post("/register", registerUser);

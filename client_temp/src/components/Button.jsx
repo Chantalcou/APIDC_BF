@@ -1,5 +1,4 @@
 import React from "react";
-// import { Button } from "react-bootstrap";
 import "./Button.css";
 
 const ButtonComponent = ({ text, onClick, color, customClass,style,fontSize }) => {
