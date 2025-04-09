@@ -17,7 +17,7 @@ export const registerUser = (userData, token) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(
-        "https://apidc.ong/register",
+        "http://localhost:5001/register",
         {
           email: userData.email,
           name: userData.name,
@@ -35,7 +35,7 @@ export const registerUser = (userData, token) => {
 
       // Comprobar si userAdmin está definido antes de acceder a isAdmin
       const isAdmin = userAdmin?.isAdmin ?? false; // Si userAdmin es undefined, asigna false
-
+      console.log(isAdmin, "ACA DEBERIA LLEGARME TRUE, ESTAMOS EN EL ACTIONS");
       // Despachar acción para actualizar el estado
       dispatch({
         type: REGISTER_USER,
@@ -62,7 +62,7 @@ export const formInfo = (formData) => async (dispatch) => {
   try {
     // Enviar los datos al backend
     const response = await axios.post(
-      "https://apidc.ong/send/admin",
+      "http://localhost:5001/send/admin",
 
       formData,
       {
@@ -92,7 +92,7 @@ export const formInfo = (formData) => async (dispatch) => {
 //   return async (dispatch) => {
 //     try {
 //       const response = await axios.put(
-//         `https://apidc.ong/users/${userId}`,
+//         `http://localhost:5001/users/${userId}`,
 //         { membershipType },
 //         {
 //           headers: {
@@ -122,7 +122,7 @@ export const fetchUsers = (token) => {
   return async (dispatch) => {
     try {
       // usersNotAdmin
-      const response = await axios.get(`https://apidc.ong/users`, {
+      const response = await axios.get(`http://localhost:5001/users`, {
         headers: {
           Authorization: `Bearer ${token}`, // Token de autenticación
         },
@@ -148,7 +148,7 @@ export const getAllNotAdmins = (token) => {
     try {
       // usersNotAdmin
       const response = await axios.get(
-        `https://apidc.ong/usersNotAdmin`,
+        `http://localhost:5001/usersNotAdmin`,
         {}
       );
 
@@ -170,7 +170,7 @@ export const updateUserRole = (userId, membershipType, token) => {
   return async (dispatch, getState) => {
     try {
       const response = await axios.put(
-        `https://apidc.ong/users/${userId}`,
+        `http://localhost:5001/users/${userId}`,
         { membershipType },
         {
           headers: {
@@ -203,7 +203,7 @@ export const updateUserRole = (userId, membershipType, token) => {
 export const sendWorkTogether = (formData) => async (dispatch) => {
   try {
     const response = await axios.post(
-      "https://apidc.ong/workWithUs",
+      "http://localhost:5001/workWithUs",
 
       formData,
       {
@@ -227,7 +227,7 @@ export const sendWorkTogether = (formData) => async (dispatch) => {
 
 export const verifySocio = (email, id_socio) => async (dispatch) => {
   try {
-    const response = await axios.post(`https://apidc.ong/verifySocio`, {
+    const response = await axios.post(`http://localhost:5001/verifySocio`, {
       email,
       id_socio,
     });
@@ -257,7 +257,7 @@ export const verifySocio = (email, id_socio) => async (dispatch) => {
 export const deleteUser = (userId, token) => async (dispatch) => {
   try {
     const response = await fetch(
-      `https://apidc.ong/usersDelete/${userId}`,
+      `http://localhost:5001/usersDelete/${userId}`,
       {
         method: "DELETE",
         headers: {
@@ -282,7 +282,7 @@ export const deleteUser = (userId, token) => async (dispatch) => {
 
 // export const webhookJotform = () => async (dispatch) => {
 //   try {
-//     const response = await axios.post("https://apidc.ong/webhook-jotform");
+//     const response = await axios.post("http://localhost:5001/webhook-jotform");
 //     console.log(response, "ESTO ME LLEGA AL ACTIONS");
 //     // dispatch({
 //     //   type: "SEND_FORM_SUCCESS",
@@ -299,7 +299,7 @@ export const deleteUser = (userId, token) => async (dispatch) => {
 // export const getJotformSubmissions = () => async (dispatch) => {
 //   try {
 //     const response = await axios.get(
-//       "https://apidc.ong/jotform-submissions"
+//       "http://localhost:5001/jotform-submissions"
 //     );
 //     console.log("Datos recibidos desde el backend:", response.data);
 
