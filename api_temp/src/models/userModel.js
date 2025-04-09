@@ -51,22 +51,7 @@ const User = sequelize.define(
       unique: true,
       allowNull: true,
     },
-    address: {
-      type: DataTypes.STRING, // O JSON si quieres guardarlo estructurado
-      allowNull: true,
-    },
-    city: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    state: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    postalCode: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
+
     // Cambiar tipo de referredBy para que coincida con UUID
     referredBy: {
       type: DataTypes.UUID,
