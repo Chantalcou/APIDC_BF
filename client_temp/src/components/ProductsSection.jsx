@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ScrollArrow from "./ScrollArrow.jsx";
 import LittleSpinner from "./LittleSpinner.jsx";
-import $ from "jquery";
 import SpinnerComponent from "./SpinnerComponent.jsx";
+import $ from "jquery";
 import "./ProductsSection.css";
 
 const ProductsSection = () => {
@@ -10,6 +10,7 @@ const ProductsSection = () => {
   const [activeCultivo, setActiveCultivo] = useState("all");
   const [selectedProduct, setSelectedProduct] = useState(null);
 
+  // Función para simular la carga y cambiar el estado de loading a false después de 2 segundos
   const handleImageLoad = () => {
     try {
       setTimeout(() => {
@@ -18,11 +19,9 @@ const ProductsSection = () => {
     } catch (error) {
       console.error("Error loading image:", error);
     } finally {
-      // Esto se ejecutará sin importar si hay error o no
       console.log("Imagen cargada o error manejado");
     }
   };
-  
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -35,6 +34,7 @@ const ProductsSection = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [selectedProduct]);
 
+  // Definición de cultivos
   const cultivos = {
     indoor: {
       name: "Indoor",
@@ -143,9 +143,11 @@ const ProductsSection = () => {
     },
   };
 
+  // Arreglo de productos
   const products = [
     {
-      image: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1742923889/Dise%C3%B1o_sin_t%C3%ADtulo_10_cmaf1r.png",
+      image:
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1742923889/Dise%C3%B1o_sin_t%C3%ADtulo_10_cmaf1r.png",
       title: "9-10 Juanita0G",
       description: "Híbrido equilibrado con efectos relajantes.",
       details: {
@@ -157,7 +159,8 @@ const ProductsSection = () => {
       }
     },
     {
-      image: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1742923770/Dise%C3%B1o_sin_t%C3%ADtulo_9_faj7rl.png",
+      image:
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1742923770/Dise%C3%B1o_sin_t%C3%ADtulo_9_faj7rl.png",
       title: "Tropical Kush",
       description: "Híbrido con efectos eufóricos y calmantes.",
       details: {
@@ -169,7 +172,8 @@ const ProductsSection = () => {
       }
     },
     {
-      image: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1742924075/Dise%C3%B1o_sin_t%C3%ADtulo_11_b2vndp.png",
+      image:
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1742924075/Dise%C3%B1o_sin_t%C3%ADtulo_11_b2vndp.png",
       title: "Dosi-chock",
       description: "Variedad premium con alto contenido de resina.",
       details: {
@@ -181,7 +185,8 @@ const ProductsSection = () => {
       }
     },
     {
-      image: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1742996864/Dise%C3%B1o_sin_t%C3%ADtulo_1_p4p2pg.png",
+      image:
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1742996864/Dise%C3%B1o_sin_t%C3%ADtulo_1_p4p2pg.png",
       title: "Dosi-Dos",
       description: "Potente efecto físico y mental equilibrado.",
       details: {
@@ -191,9 +196,10 @@ const ProductsSection = () => {
         flowering: "8-9 semanas",
         yield: "450g/m²"
       }
-    },
+    }
   ];
 
+  // Componente para mostrar la descripción de un cultivo
   const CultivoDescription = ({ cultivo }) => {
     const current = cultivos[cultivo];
     return (
@@ -207,6 +213,7 @@ const ProductsSection = () => {
     );
   };
 
+  // Funciones para abrir y cerrar el detalle de un producto
   const openProductDetail = (product) => {
     setSelectedProduct(product);
     document.body.classList.add("modal-open");
@@ -217,22 +224,24 @@ const ProductsSection = () => {
     document.body.classList.remove("modal-open");
   };
 
+  // Función de scroll con jQuery
   const scrollToSection = (sectionId) => {
     $("html, body").animate(
       {
-        scrollTop: $("#" + sectionId).offset().top,
+        scrollTop: $("#" + sectionId).offset().top
       },
       1000
     );
   };
+
+  // Forzar que 'loading' sea false después de 2 segundos
   useEffect(() => {
-    // Forzar que 'loading' sea false después de 2 segundos
     const timer = setTimeout(() => {
       setLoading(false);
     }, 2000);
     return () => clearTimeout(timer);
   }, []);
-  
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -248,7 +257,7 @@ const ProductsSection = () => {
               <source
                 src="https://res.cloudinary.com/dqgjcfosx/video/upload/c_scale,w_1280,h_720,f_auto,q_auto/v1737553912/12361112-uhd_3840_2160_30fps_ca2hwm.mp4"
                 type="video/mp4"
-                onLoadedData={handleImageLoad} 
+                onLoadedData={handleImageLoad}
               />
               Tu navegador no soporta la etiqueta de video.
             </video>
@@ -258,7 +267,6 @@ const ProductsSection = () => {
                 <h1 className="hero-subtitle">Sanación que nace de la tierra</h1>
               </div>
             </div>
-
             <div className="static-content d-flex flex-column justify-content-center align-items-center mt-5 h-100 position-relative">
               <ScrollArrow
                 className="custom-scroll-arrow_products"
@@ -300,7 +308,30 @@ const ProductsSection = () => {
             ))}
           </div>
 
-          {activeCultivo !== "all" && (
+          {/* Si el filtro es "all", se muestran todos los productos */}
+          {activeCultivo === "all" ? (
+            <div className="products-grid">
+              {products.map((product) => (
+  <div
+    key={product.title}
+    className="product-card"
+    onClick={() => openProductDetail(product)}
+  >
+    <div className="image-container_card">
+      <img
+        src={product.image}
+        alt={product.title}
+        className="product-image_card"
+      />
+    </div>
+    <h4 className="product-title-card">{product.title}</h4>
+    <p className="product-description">{product.description}</p>
+  </div>
+))}
+
+            </div>
+          ) : (
+            // Si se selecciona un cultivo específico, se muestra la descripción del cultivo.
             <CultivoDescription cultivo={activeCultivo} />
           )}
         </div>
