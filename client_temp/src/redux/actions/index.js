@@ -2,15 +2,11 @@ import axios from "axios";
 import {
   REGISTER_USER,
   SET_ERROR,
-  SUBMIT_FORM,
   UPDATE_USER_ROLE_SUCCESS,
   UPDATE_USER_ROLE_FAILURE,
   VERIFICAR_SOCIO_SUCCESS,
   FETCH_USERS_SUCCESS,
-  DELETE_USER_SUCCESS,
-  DELETE_USER_ERROR,
   FETCH_USERS_SUCCESS_NOT_ADMIN,
-  GET_JOTFORM_SUBMISSIONS_SUCCESS,
 } from "../actions_types";
 
 export const registerUser = (userData, token) => {

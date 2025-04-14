@@ -51,3 +51,14 @@
 .footer-icon:hover {
   transform: scale(1.1);
 }
+.footer-signature {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+.footer-signature .heart {
+  color: #e25555;
+  font-size: 1rem;
+  vertical-align: middle;
+}

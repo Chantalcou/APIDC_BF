@@ -11,10 +11,18 @@ const ProductsSection = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   const handleImageLoad = () => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
+    try {
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
+    } catch (error) {
+      console.error("Error loading image:", error);
+    } finally {
+      // Esto se ejecutará sin importar si hay error o no
+      console.log("Imagen cargada o error manejado");
+    }
   };
+  
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -217,7 +225,14 @@ const ProductsSection = () => {
       1000
     );
   };
-
+  useEffect(() => {
+    // Forzar que 'loading' sea false después de 2 segundos
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -233,6 +248,7 @@ const ProductsSection = () => {
               <source
                 src="https://res.cloudinary.com/dqgjcfosx/video/upload/c_scale,w_1280,h_720,f_auto,q_auto/v1737553912/12361112-uhd_3840_2160_30fps_ca2hwm.mp4"
                 type="video/mp4"
+                onLoadedData={handleImageLoad} 
               />
               Tu navegador no soporta la etiqueta de video.
             </video>
