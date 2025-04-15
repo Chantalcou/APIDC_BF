@@ -13,7 +13,7 @@ export const ContactOptions = () => {
             <div className="col-md-8">
               <div className="contact-cards d-flex justify-content-center gap-4 flex-wrap">
                 <a
-                  href="https://wa.me/TUNUMERO"
+                  href="https://wa.me/1568824488"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="contact-card whatsapp"
@@ -26,10 +26,7 @@ export const ContactOptions = () => {
                   </div>
                 </a>
 
-                <a
-                  href="mailto:contacto@tuasociacion.com"
-                  className="contact-card email"
-                >
+                <a href="mailto:info@apidc.ong" className="contact-card email">
                   <FaEnvelope className="contact-icon" />
                   <div>
                     <h3>Correo Electrónico</h3>

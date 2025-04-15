@@ -34,7 +34,7 @@ const ContactInfo = () => {
         </div>
         <div className="contact-image-container">
           <img
-            src="https://apidc.ong/wp-content/uploads/2023/08/local.jpeg"
+            src="https://res.cloudinary.com/dqgjcfosx/image/upload/v1744730705/Dise%C3%B1o_sin_t%C3%ADtulo_3_o3h9vp.png"
             alt="Ubicación"
             className="contact-image"
           />

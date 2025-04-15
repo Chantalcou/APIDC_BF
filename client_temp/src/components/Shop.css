@@ -63,14 +63,14 @@
 }
 
 .product-title {
-  color: #ffffff; /* Mantiene el color actual */
-  font-size: 2.5rem; /* Ajustado para mejor estética */
+  color: #ffffff; 
+  font-size: 2.5rem;
   
-  font-weight: 600; /* Reducido para evitar un efecto tosco */
+  font-weight: 600; 
   text-align: center;
-  text-transform: uppercase; /* Opcional, da un toque más limpio */
-  letter-spacing: 1px; /* Espaciado entre letras para mejor legibilidad */
-  text-shadow: none; /* Eliminar efecto tridimensional */
+  text-transform: uppercase; 
+  letter-spacing: 1px; 
+  text-shadow: none; 
 }
 
 .product-description {
@@ -82,9 +82,9 @@
 }
 
 .custom-scroll-arrow_products {
-  color: white !important; /* Color predeterminado */
-  font-size: 2rem; /* Ajusta el tamaño si es necesario */
-  transition: color 0.3s ease; /* Transición suave */
+  color: white !important; 
+  font-size: 2rem; 
+  transition: color 0.3s ease; 
 }
 .custom-scroll-arrow_products:hover {
   color: #0a9d6d;
@@ -92,13 +92,13 @@
 /* Responsiveness */
 @media (max-width: 768px) {
   .products-grid {
-    grid-template-columns: repeat(2, 1fr); /* Dos columnas en tablets */
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 480px) {
   .products-grid {
-    grid-template-columns: 1fr; /* Una columna en móviles */
+    grid-template-columns: 1fr; 
   }
 }
 
@@ -113,18 +113,18 @@
 .hero-content {
   position: absolute;
   text-align: center;
-  color: white; /* Asegura contraste */
+  color: white; 
   padding: 20px;
-  background: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente */
+  background: rgba(0, 0, 0, 0.5); 
   border-radius: 10px;
 }
 
 .static-content_shop {
-  position: relative; /* Asegura que el z-index funcione */
+  position: relative;
   text-align: center;
   padding: 20px;
   border-radius: 10px;
-  z-index: 1; /* Asegura que esté detrás del título */
+  z-index: 1;
 }
 /* Estilos para el contenedor de títulos */
 .titles {
@@ -137,7 +137,7 @@
   width: 90%;
   max-width: 800px;
   padding: 20px;
-  background: rgba(0, 0, 0, 0.3); /* Fondo oscuro semitransparente */
+  background: rgba(0, 0, 0, 0.3); 
   border-radius: 15px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
@@ -226,4 +226,17 @@
     padding: 15px;
     width: 95%;
   }
+}
+
+.under-construction-img {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  display: block;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+.under-construction-wrapper {
+  padding: 1rem;
+  text-align: center;
 }

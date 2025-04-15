@@ -69,7 +69,7 @@ const ProductsSection = () => {
             </p>
           </div>
         </div>
-      )
+      ),
     },
     outdoor: {
       name: "Outdoor",
@@ -104,7 +104,7 @@ const ProductsSection = () => {
             </p>
           </div>
         </div>
-      )
+      ),
     },
     greenhouse: {
       name: "Greenhouse",
@@ -139,7 +139,7 @@ const ProductsSection = () => {
             </p>
           </div>
         </div>
-      )
+      ),
     },
   };
 
@@ -155,8 +155,8 @@ const ProductsSection = () => {
         cbd: "1%",
         genetics: "OG Kush x Blueberry",
         flowering: "8-9 semanas",
-        yield: "500g/m²"
-      }
+        yield: "500g/m²",
+      },
     },
     {
       image:
@@ -168,8 +168,8 @@ const ProductsSection = () => {
         cbd: "2%",
         genetics: "Hawaiian x Skunk",
         flowering: "10-12 semanas",
-        yield: "800g/planta"
-      }
+        yield: "800g/planta",
+      },
     },
     {
       image:
@@ -181,8 +181,8 @@ const ProductsSection = () => {
         cbd: "0.5%",
         genetics: "Girl Scout Cookies x OG Kush",
         flowering: "9-10 semanas",
-        yield: "700g/m²"
-      }
+        yield: "700g/m²",
+      },
     },
     {
       image:
@@ -194,9 +194,9 @@ const ProductsSection = () => {
         cbd: "1%",
         genetics: "Do-Si-Dos x OGKB",
         flowering: "8-9 semanas",
-        yield: "450g/m²"
-      }
-    }
+        yield: "450g/m²",
+      },
+    },
   ];
 
   // Componente para mostrar la descripción de un cultivo
@@ -228,7 +228,7 @@ const ProductsSection = () => {
   const scrollToSection = (sectionId) => {
     $("html, body").animate(
       {
-        scrollTop: $("#" + sectionId).offset().top
+        scrollTop: $("#" + sectionId).offset().top,
       },
       1000
     );
@@ -264,7 +264,9 @@ const ProductsSection = () => {
             <div className="static-content d-flex flex-column justify-content-center align-items-center h-100">
               <div className="titles">
                 <h1 className="product-title">TERAPIAS QUE FLORECEN</h1>
-                <h1 className="hero-subtitle">Sanación que nace de la tierra</h1>
+                <h1 className="hero-subtitle">
+                  Sanación que nace de la tierra
+                </h1>
               </div>
             </div>
             <div className="static-content d-flex flex-column justify-content-center align-items-center mt-5 h-100 position-relative">
@@ -280,10 +282,16 @@ const ProductsSection = () => {
 
       <section id="product-section" className="products-section">
         <div className="container">
-          <h2 className="section-title" style={{ fontWeight: "bold", color: "#0a9d6d" }}>
+          <h2
+            className="section-title"
+            style={{ fontWeight: "bold", color: "#0a9d6d" }}
+          >
             Nuestros servicios
           </h2>
-          <h3 className="section-title" style={{ fontSize: "1rem", color: "#0a9d6d" }}>
+          <h3
+            className="section-title"
+            style={{ fontSize: "1rem", color: "#0a9d6d" }}
+          >
             Gestioná tu medicina
           </h3>
 
@@ -291,7 +299,9 @@ const ProductsSection = () => {
 
           <div className="cultivo-filters">
             <button
-              className={`cultivo-filter ${activeCultivo === "all" ? "active" : ""}`}
+              className={`cultivo-filter ${
+                activeCultivo === "all" ? "active" : ""
+              }`}
               onClick={() => setActiveCultivo("all")}
             >
               Ver todos
@@ -299,7 +309,9 @@ const ProductsSection = () => {
             {Object.keys(cultivos).map((key) => (
               <button
                 key={key}
-                className={`cultivo-filter ${activeCultivo === key ? "active" : ""}`}
+                className={`cultivo-filter ${
+                  activeCultivo === key ? "active" : ""
+                }`}
                 onClick={() => setActiveCultivo(key)}
               >
                 <span className="cultivo-icon">{cultivos[key].icon}</span>
@@ -312,23 +324,22 @@ const ProductsSection = () => {
           {activeCultivo === "all" ? (
             <div className="products-grid">
               {products.map((product) => (
-  <div
-    key={product.title}
-    className="product-card"
-    onClick={() => openProductDetail(product)}
-  >
-    <div className="image-container_card">
-      <img
-        src={product.image}
-        alt={product.title}
-        className="product-image_card"
-      />
-    </div>
-    <h4 className="product-title-card">{product.title}</h4>
-    <p className="product-description">{product.description}</p>
-  </div>
-))}
-
+                <div
+                  key={product.title}
+                  className="product-card"
+                  onClick={() => openProductDetail(product)}
+                >
+                  <div className="image-container_card">
+                    <img
+                      src={product.image}
+                      alt={product.title}
+                      className="product-image_card"
+                    />
+                  </div>
+                  <h4 className="product-title-card">{product.title}</h4>
+                  <p className="product-description">{product.description}</p>
+                </div>
+              ))}
             </div>
           ) : (
             // Si se selecciona un cultivo específico, se muestra la descripción del cultivo.
