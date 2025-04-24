@@ -20,6 +20,7 @@ import { HelmetProvider } from "react-helmet-async"; //Optimización SEO
 import MembershipComponent from "./components/MembershipComponent";
 import ProductsSection from "./components/ProductsSection";
 import SearchFormSocio from "./components/SearchFormSocio";
+import ChatBot from "./components/ChatBot";
 
 const App = () => {
   return (
@@ -78,11 +79,12 @@ const App = () => {
             element={<SocioSinReprocan />}
           />
           <Route path="/shop" element={<Shop />} />
-          
+
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/termsAndPrivacy" element={<TermsAndPrivacy />} />
         </Routes>
         <WhatsApp />
+        <ChatBot />
         <ContactOptions />
         {/* <NewsletterBanner /> */}
         <Footer />

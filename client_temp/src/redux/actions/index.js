@@ -6,6 +6,7 @@ import {
   UPDATE_USER_ROLE_FAILURE,
   VERIFICAR_SOCIO_SUCCESS,
   FETCH_USERS_SUCCESS,
+  SEND_FORM_FAILURE,
   FETCH_USERS_SUCCESS_NOT_ADMIN,
 } from "../actions_types";
 
@@ -275,6 +276,35 @@ export const deleteUser = (userId, token) => async (dispatch) => {
     throw error;
   }
 };
+
+
+export const sendChatMessage = (formData) => async (dispatch) => {
+  try {
+    const response = await axios.post("https://apidc.ong/chatbot", formData, {
+      headers: { "Content-Type": "application/json" },
+    });
+
+    dispatch({
+      type: "SEND_FORM_SUCCESS",
+      payload: response.data,
+    });
+
+    return response.data.reply; // 👈 AGREGÁ ESTA LÍNEA
+  } catch (error) {
+    console.error("Error en el envío del mensaje:", error);
+    const errorMsg = !error.response
+      ? "Error de red. Por favor, intente más tarde."
+      : error.response?.data?.message || "Error desconocido";
+
+    dispatch({
+      type: SEND_FORM_FAILURE,
+      payload: errorMsg,
+    });
+
+    throw new Error(errorMsg); // también importante para capturarlo en el componente
+  }
+};
+
 
 // export const webhookJotform = () => async (dispatch) => {
 //   try {

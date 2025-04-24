@@ -4,7 +4,6 @@ import {
   UPDATE_CURRENT_USER,
   UPDATE_USER_ROLE_SUCCESS,
   UPDATE_USER_ROLE,
-  UPDATE_USER_ROLE_FAIL,
   DELETE_USER_ERROR,
   FETCH_USERS_SUCCESS_NOT_ADMIN,
   UPDATE_USER_ROLE_FAILURE,
@@ -12,8 +11,9 @@ import {
   VERIFICAR_SOCIO_SUCCESS,
   VERIFICAR_SOCIO_FAIL,
   DELETE_USER_SUCCESS,
-  GET_JOTFORM_SUBMISSIONS_SUCCESS,
   FETCH_USERS_SUCCESS,
+  SEND_FORM_SUCCESS,
+  SEND_FORM_FAILURE,
 } from "../actions_types";
 
 const initialState = {
@@ -42,7 +42,6 @@ const reducer = (state = initialState, action) => {
         error: null,
       };
 
-   
     case FETCH_USERS_SUCCESS_NOT_ADMIN:
       return {
         ...state,
@@ -133,6 +132,19 @@ const reducer = (state = initialState, action) => {
     //     jotformSubmissions: action.payload,
     //     error: null,
     //   };
+
+    // CHATBOT
+    case SEND_FORM_SUCCESS:
+      return {
+        ...state,
+        chatbotReply: action.payload.reply, // Guardamos la respuesta del bot en el estado
+      };
+
+    case SEND_FORM_FAILURE:
+      return {
+        ...state,
+        error: action.payload, // Guardamos el error en caso de fallo
+      };
     default:
       return state;
   }

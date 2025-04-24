@@ -1,0 +1,229 @@
+/* ChatBot.css */
+.chatbot-container {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 400px;
+    background: #0F172A;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(2, 8, 32, 0.3);
+    overflow: hidden;
+    border: 1px solid #1E293B;
+    z-index: 500000;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+.chatbot-header {
+    padding: 1rem 1.5rem;
+    background: linear-gradient(135deg, #1E3A8A 0%, #0F172A 100%);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #334155;
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.status-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.status-indicator {
+    width: 10px;
+    height: 10px;
+    background: #38BDF8;
+    border-radius: 50%;
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+    animation: pulse 1.5s infinite;
+}
+
+.chatbot-messages {
+    height: 500px;
+    overflow-y: auto;
+    padding: 1.5rem;
+    background: #0F172A;
+    background-image: 
+        radial-gradient(circle at 1px 1px, #334155 1px, transparent 0),
+        radial-gradient(circle at 1px 1px, #334155 1px, transparent 0);
+    background-size: 20px 20px;
+}
+
+.message {
+    margin: 1rem 0;
+    display: flex;
+}
+
+.message.user {
+    justify-content: flex-end;
+}
+
+.message-content {
+    max-width: 80%;
+    padding: 1rem 1.25rem;
+    border-radius: 15px;
+    line-height: 1.5;
+    background: #38BDF8;
+    color: #E0F2FE;
+    box-shadow: 0 2px 8px rgba(17, 94, 89, 0.1);
+}
+
+.message.bot .message-content {
+    background: #1E293B;
+    border: 1px solid #334155;
+    color: #CBD5E1;
+}
+
+.typing-indicator {
+    display: flex;
+    padding: 1rem;
+    justify-content: center;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    margin: 0 4px;
+    background: #38BDF8;
+    border-radius: 50%;
+    animation: typing 1.4s infinite;
+}
+
+.chatbot-input {
+    display: flex;
+    padding: 1.2rem;
+    background: #1E293B;
+    border-top: 1px solid #334155;
+    gap: 0.8rem;
+}
+
+.chatbot-input input {
+    flex: 1;
+    background: #334155;
+    border: none;
+    padding: 0.8rem 1.2rem;
+    border-radius: 12px;
+    color: #E2E8F0;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.chatbot-input input::placeholder {
+    color: #94A3B8;
+}
+
+.chatbot-input input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #38BDF8;
+}
+
+.send-btn {
+    background: #2563EB;
+    border: none;
+    padding: 0.8rem 1rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.send-btn:hover {
+    background: #1D4ED8;
+    transform: translateY(-1px);
+}
+
+.send-btn svg {
+    width: 22px;
+    height: 22px;
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.close-btn svg {
+    width: 24px;
+    height: 24px;
+    color: #94A3B8;
+}
+
+@keyframes typing {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Scrollbar personalizada */
+.chatbot-messages::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chatbot-messages::-webkit-scrollbar-track {
+    background: #1E293B;
+}
+
+.chatbot-messages::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 4px;
+}
+
+.chatbot-messages::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+}
+.floating-button {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #2563EB;
+    border: none;
+    cursor: pointer;
+    color: white;
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .floating-button svg {
+    width: 28px;
+    height: 28px;
+  }
+  
+  /* Animación de flotación */
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0px); }
+  }
+  
+  .floating-button:hover {
+    animation: float 2s ease-in-out infinite;
+  }

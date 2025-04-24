@@ -4,6 +4,7 @@ const cors = require("cors");
 const express = require("express");
 const authRoutes = require("./routes/authRoutes");
 const emailRoutes = require("./routes/nodeMailerRoutes");
+const chatBotRoutes = require("./routes/chatBotRoutes");
 const fetch = require("node-fetch");
 const bodyParser = require("body-parser");
 global.fetch = fetch;
@@ -32,6 +33,8 @@ app.use(bodyParser.raw({ type: "application/octet-stream" }));
 app.use("/", authRoutes);
 // Ruta mailer
 app.use("/", emailRoutes);
+// Ruta ChatBot
+app.use("/", chatBotRoutes);
 
 // Sirve el frontend React (solo en producción)
 if (process.env.NODE_ENV === "production") {
