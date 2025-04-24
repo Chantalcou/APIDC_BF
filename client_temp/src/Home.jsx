@@ -11,7 +11,7 @@ import ContactInfo from "./components/ContactInfo.jsx";
 import MovingBanner from "./components/MovingBanner.jsx";
 import Reprocan from "./components/Reprocan.jsx";
 import { WorkTogether } from "./components/WorkTogether.jsx";
-import QrSection from './components/QrSection.jsx'
+import QrSection from "./components/QrSection.jsx";
 import SeccionAs from "./components/SeccionAs.jsx";
 import SpinnerComponent from "./components/SpinnerComponent.jsx";
 import Donations from "./components/Donations.jsx";
@@ -25,12 +25,8 @@ import "./Home.css";
 const Home = () => {
   const dispatch = useDispatch();
 
-  const {
-    isAuthenticated,
-    loginWithRedirect,
-    user,
-    getAccessTokenSilently,
-  } = useAuth0();
+  const { isAuthenticated, loginWithRedirect, user, getAccessTokenSilently } =
+    useAuth0();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -60,7 +56,6 @@ const Home = () => {
     }, 3000);
   }, []);
 
-
   const handleLogoClick = () => {
     setIsSpinning(true);
     setTimeout(() => setIsSpinning(false), 2000);
@@ -82,7 +77,7 @@ const Home = () => {
           const token = await getAccessTokenSilently();
           dispatch(registerUser(user, token));
           if (user.isAdmin) {
-            dispatch(fetchUsers(token)); 
+            dispatch(fetchUsers(token));
           }
         } catch (error) {
           console.error("Error obteniendo token:", error);
@@ -102,7 +97,7 @@ const Home = () => {
       await loginWithRedirect();
       if (isAuthenticated && user) {
         const token = await getAccessTokenSilently();
-        dispatch(registerUser(user, token)); 
+        dispatch(registerUser(user, token));
       }
     } catch (error) {
       console.error("Error durante el login o el registro:", error);
@@ -148,7 +143,6 @@ const Home = () => {
         ) : (
           <div className="container-fluid p-0 main-content">
             <div className="video-container">
-         
               <video
                 autoPlay
                 muted
@@ -170,13 +164,6 @@ const Home = () => {
                 </p>
               </video>
               <div className="static-content d-flex flex-column justify-content-center align-items-center h-100">
-                {/* Texto agregado sobre el logo */}
-                <h1 className="welcome-name">
-                  {user
-                    ? `Bienvenid@ ${user.name}`
-                    : "Asociación de Cannabis Medicinal"}
-                </h1>
-
                 <img
                   alt="Logo APIDC"
                   src="https://res.cloudinary.com/dqgjcfosx/image/upload/v1725973641/apidc-logo_hz26kf.png"
@@ -197,17 +184,16 @@ const Home = () => {
                   />
                   {isAuthenticated && user ? (
                     <>
-                   
                       <Link
-                      style={{
-                        backgroundColor: "#7BA12D",
-                        color: "#ffffff",
-                        padding: "10px 20px",
-                        borderRadius: "5px",
-                        border: "2px solid #7BA12D",
-                        textDecoration: "none",
-                        textAlign: "center",
-                      }}
+                        style={{
+                          backgroundColor: "#7BA12D",
+                          color: "#ffffff",
+                          padding: "10px 20px",
+                          borderRadius: "5px",
+                          border: "2px solid #7BA12D",
+                          textDecoration: "none",
+                          textAlign: "center",
+                        }}
                         to="/membershipSection"
                         className="btn-asociate-custom"
                         aria-label="Explorar Membresías"
@@ -217,15 +203,15 @@ const Home = () => {
                     </>
                   ) : (
                     <Link
-                    style={{
-                      backgroundColor: "#7BA12D",
-                      color: "#ffffff",
-                      padding: "10px 20px",
-                      borderRadius: "5px",
-                      border: "2px solid #7BA12D",
-                      textDecoration: "none",
-                      textAlign: "center",
-                    }}
+                      style={{
+                        backgroundColor: "#7BA12D",
+                        color: "#ffffff",
+                        padding: "10px 20px",
+                        borderRadius: "5px",
+                        border: "2px solid #7BA12D",
+                        textDecoration: "none",
+                        textAlign: "center",
+                      }}
                       className="btn-asociate-custom"
                       aria-label="Explorar Membresías"
                       onClick={handleShowModal || handleLogin}
@@ -233,9 +219,7 @@ const Home = () => {
                       ASOCIATE
                     </Link>
                   )}
-              
                 </div>
-            
               </div>
             </div>
           </div>
@@ -319,7 +303,6 @@ const Home = () => {
                 </p>
               </div>
             </div>
-   
 
             <section className="present-section" id="present-section">
               <div className="overlay"></div>
@@ -342,14 +325,13 @@ const Home = () => {
                     Acompañamos a la comunidad con excelencia profesional,
                     garantizando máxima eficiencia en cada etapa del proceso.
                   </p>
-          
                 </div>
               </div>
             </section>
           </div>
         </div>
       </div>
-      <QrSection/>
+      <QrSection />
       <div id="donate-now"></div>
       <Donations />
       <div id="asociarme-section"></div>
@@ -368,28 +350,27 @@ const Home = () => {
           />
         </div>
         <section id="ley" className="ley-container">
-        <h2 style={{ color: "#0a9d6d" }}>Conocé más sobre la Ley 27.350</h2>
-<p className="ley-intro">
-  Sancionada en 2017, esta ley regula la investigación y el acceso al
-  cannabis medicinal en Argentina, garantizando su uso seguro y
-  terapéutico.
-</p>
-
+          <h2 style={{ color: "#0a9d6d" }}>Conocé más sobre la Ley 27.350</h2>
+          <p className="ley-intro">
+            Sancionada en 2017, esta ley regula la investigación y el acceso al
+            cannabis medicinal en Argentina, garantizando su uso seguro y
+            terapéutico.
+          </p>
 
           <div className="ley-grid">
             <div className="ley-card">
               <h3>🔬 Investigación científica</h3>
               <p>
-  Fomenta estudios clínicos sobre cómo se puede usar el cannabis con fines medicinales.
-</p>
+                Fomenta estudios clínicos sobre cómo se puede usar el cannabis
+                con fines medicinales.
+              </p>
             </div>
             <div className="ley-card">
-            <h3>⚕️ Acceso terapéutico</h3>
-<p>
-  Permite tratamientos con cannabis para pacientes con patologías
-  específicas.
-</p>
-
+              <h3>⚕️ Acceso terapéutico</h3>
+              <p>
+                Permite tratamientos con cannabis para pacientes con patologías
+                específicas.
+              </p>
             </div>
           </div>
         </section>

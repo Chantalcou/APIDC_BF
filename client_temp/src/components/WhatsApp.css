@@ -1,7 +1,7 @@
 .whatsapp-link {
   position: fixed;
-  bottom: 0px;
-  right: -10px;
+  bottom: 100px;
+  right: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
