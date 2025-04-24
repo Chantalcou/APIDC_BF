@@ -9,10 +9,6 @@ const Gallery = () => {
       topMain: true,
     },
     {
-      src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1745345453/WhatsApp_Image_2025-04-22_at_13.59.20_1_o8bvhu.jpg",
-      buttom: true,
-    },
-    {
       src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1745343363/WhatsApp_Image_2025-04-22_at_14.10.01_bxsz30.jpg",
     },
     {
@@ -37,21 +33,28 @@ const Gallery = () => {
       src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1745336538/WhatsApp_Image_2025-04-01_at_11.51.01_z2ed2k.jpg",
     },
     {
-      src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1745336538/WhatsApp_Image_2025-04-01_at_11.51.01_2_qobhew.jpg",
-    },
-    {
-      src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1745336538/WhatsApp_Image_2025-04-01_at_11.51.01_2_qobhew.jpg",
-    },
-    {
-      src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1745336538/WhatsApp_Image_2025-04-01_at_11.51.01_2_qobhew.jpg",
-    },
-    {
-      src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1745336538/WhatsApp_Image_2025-04-01_at_11.51.01_2_qobhew.jpg",
-    },
-    {
       src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1745343364/WhatsApp_Image_2025-04-22_at_14.10.43_vwr4rq.jpg",
       main: true,
     },
+    // Últimas 3 imágenes con bottom: true
+    {
+      src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1745345453/WhatsApp_Image_2025-04-22_at_13.59.20_1_o8bvhu.jpg",
+      bottom: true,
+    },
+    {
+      src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1745345453/WhatsApp_Image_2025-04-22_at_13.59.20_1_o8bvhu.jpg",
+      bottom: true,
+    },
+    {
+      src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1745345453/WhatsApp_Image_2025-04-22_at_13.59.20_1_o8bvhu.jpg",
+      bottom: true,
+    },
+  ];
+
+  // Ordenar imágenes: las bottom al final
+  const sortedImages = [
+    ...images.filter(img => !img.bottom),
+    ...images.filter(img => img.bottom)
   ];
 
   return (
@@ -67,13 +70,13 @@ const Gallery = () => {
       </motion.h2>
 
       <div className="gallery-grid">
-        {images.map((image, index) => (
+        {sortedImages.map((image, index) => (
           <motion.div
             key={index}
             className={`gallery-item 
               ${image.main ? "main" : ""} 
-              ${image.topMain ? "top-main" : ""}`}
-              
+              ${image.topMain ? "top-main" : ""}
+              ${image.bottom ? "bottom" : ""}`}
             whileHover={{ scale: image.main || image.topMain ? 1.02 : 1.05 }}
             transition={{ duration: 0.3 }}
           >

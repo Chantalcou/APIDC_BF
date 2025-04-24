@@ -14,7 +14,8 @@ const breadcrumbRoutes = {
   "/products": "Cultivo",
   "/shop": "Tienda",
   "/socio": "Socios",
-  "/newsLetter":"News Letter"
+  "/newsLetter":"News Letter",
+  "/gallery":"Galeria"
 };
 
 const Breadcrumbs = () => {
