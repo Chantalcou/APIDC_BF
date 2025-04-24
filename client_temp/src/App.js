@@ -13,8 +13,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import TermsAndPrivacy from "./components/TermsAndPrivacy";
 import Unauthorized from "./components/Unauthorized";
 import Newsletter from "./components/Newsletter";
-import NewsletterBanner from "./components/NewsLetterBanner";
 import { ContactOptions } from "./components/ContactOptions";
+import Gallery from "./components/Gallery";
 import Shop from "./components/Shop";
 import { HelmetProvider } from "react-helmet-async"; //Optimización SEO
 import MembershipComponent from "./components/MembershipComponent";
@@ -78,6 +78,8 @@ const App = () => {
             element={<SocioSinReprocan />}
           />
           <Route path="/shop" element={<Shop />} />
+          
+          <Route path="/gallery" element={<Gallery />} />
           <Route path="/termsAndPrivacy" element={<TermsAndPrivacy />} />
         </Routes>
         <WhatsApp />
