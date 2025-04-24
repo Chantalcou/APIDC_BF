@@ -227,3 +227,108 @@
   .floating-button:hover {
     animation: float 2s ease-in-out infinite;
   }
+
+
+  @media (max-width: 768px) {
+    .chatbot-container {
+      width: 100%;
+      max-width: 100%;
+      right: 1rem;
+      left: 1rem;
+      bottom: 1rem;
+      border-radius: 16px;
+    }
+  
+    .chatbot-header {
+      padding: 0.8rem 1.2rem;
+    }
+  
+    .chatbot-messages {
+      height: 60vh;
+      min-height: 300px;
+      max-height: 70vh;
+      padding: 1rem;
+    }
+  
+    .message-content {
+      max-width: 90%;
+      padding: 0.8rem 1rem;
+      font-size: 0.9rem;
+    }
+  
+    .chatbot-input {
+      padding: 1rem;
+      flex-wrap: wrap;
+    }
+  
+    .chatbot-input input {
+      font-size: 0.9rem;
+      padding: 0.7rem 1rem;
+      width: 100%;
+      order: 1;
+    }
+  
+    .send-btn {
+      order: 2;
+      margin-top: 0.5rem;
+      padding: 0.7rem;
+      width: 100%;
+      justify-content: center;
+    }
+  
+    .send-btn svg {
+      width: 20px;
+      height: 20px;
+    }
+  
+    .floating-button {
+      width: 50px;
+      height: 50px;
+      bottom: 1rem;
+      right: 1rem;
+    }
+  
+    .floating-button svg {
+      width: 24px;
+      height: 24px;
+    }
+  
+    /* Ajustes específicos para pantallas pequeñas */
+    .message {
+      margin: 0.5rem 0;
+    }
+  
+    .message-content p {
+      line-height: 1.4;
+    }
+  
+    .status-indicator {
+      width: 8px;
+      height: 8px;
+    }
+  
+    .header-content h3 {
+      font-size: 1rem;
+    }
+  
+    .header-content small {
+      font-size: 0.7rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .chatbot-container {
+      bottom: 0;
+      right: 0;
+      left: 0;
+      border-radius: 0;
+      border-bottom-left-radius: 16px;
+      border-bottom-right-radius: 16px;
+    }
+  
+    .floating-button {
+      bottom: 0.5rem;
+      right: 0.5rem;
+    }
+  }
+  
