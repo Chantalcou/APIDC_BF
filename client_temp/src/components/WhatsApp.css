@@ -1,7 +1,7 @@
 .whatsapp-link {
   position: fixed;
   bottom: 100px;
-  right: 12px;
+  right: 0px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10,10 +10,10 @@
   color: #fff;
   border-radius: 50px;
   text-decoration: none;
-  z-index: 50000;
+  z-index: 500000000000000;
 }
 
 .whatsapp-link img {
-  margin-right: -10px;
+  margin-right: 0px;
   width: 100px;
 }

@@ -3,14 +3,14 @@
   padding: 4rem 2rem;
   max-width: 2000px;
   margin: 0 auto;
-  margin-top: 107px;
+  margin-top: 127px;
   background-color: black;
 }
 
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(7, 350px);
+  grid-template-rows: repeat(5, 350px);
   gap: 0.5rem;
 }
 

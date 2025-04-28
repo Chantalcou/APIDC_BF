@@ -84,7 +84,7 @@ const App = () => {
           <Route path="/termsAndPrivacy" element={<TermsAndPrivacy />} />
         </Routes>
         <WhatsApp />
-        <ChatBot />
+        {/* <ChatBot /> */}
         <ContactOptions />
         {/* <NewsletterBanner /> */}
         <Footer />

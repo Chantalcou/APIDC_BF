@@ -20,18 +20,7 @@ const Gallery = () => {
     {
       src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1745336538/WhatsApp_Image_2025-04-01_at_11.51.01_2_qobhew.jpg",
     },
-    {
-      src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1745336538/WhatsApp_Image_2025-04-01_at_11.51.01_2_qobhew.jpg",
-    },
-    {
-      src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1745345453/WhatsApp_Image_2025-04-22_at_13.59.20_1_o8bvhu.jpg",
-    },
-    {
-      src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1745336538/WhatsApp_Image_2025-04-01_at_11.51.01_1_mpo3tm.jpg",
-    },
-    {
-      src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1745336538/WhatsApp_Image_2025-04-01_at_11.51.01_z2ed2k.jpg",
-    },
+
     {
       src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1745343364/WhatsApp_Image_2025-04-22_at_14.10.43_vwr4rq.jpg",
       main: true,

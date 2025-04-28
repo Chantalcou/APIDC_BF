@@ -4,7 +4,19 @@ import { Link, useLocation } from "react-router-dom";
 import "./BreadCrumRoutes.css";
 
 const breadcrumbRoutes = {
-  // ... (mantener tus rutas existentes)
+  "/": "Inicio",
+  "/membershipSection/gestor": "Gestor",
+  "/dashboard": "Dashboard",
+  "/contacto": "Contacto",
+  "/membershipSection/SocioConReprocan": "Socio con Reprocann",
+  "/membershipSection/socioSinReprocan": "Socio adherente",
+  "/newsletter": "Newsletter",
+  "/membershipSection": "Categorías",
+  "/products": "Cultivo",
+  "/shop": "Tienda",
+  "/socio": "Socios",
+  "/newsLetter": "News Letter",
+  "/gallery": "Galeria",
 };
 
 const Breadcrumbs = () => {
@@ -33,7 +45,7 @@ const Breadcrumbs = () => {
           })}
         </ul>
       </nav>
-      
+
       {isAuthenticated && user && (
         <div className="welcome-container">
           <span className="welcome-message">¡Bienvenido, {user.name}!</span>
