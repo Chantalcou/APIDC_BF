@@ -17,8 +17,8 @@ const breadcrumbRoutes = {
   "/socio": "Socios",
   "/newsLetter": "News Letter",
   "/gallery": "Galeria",
+  "/learnWithUs": "Capacitaciones",
 };
-
 const Breadcrumbs = () => {
   const { isAuthenticated, user } = useAuth0();
   const location = useLocation();

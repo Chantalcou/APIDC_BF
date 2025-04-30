@@ -16,11 +16,12 @@ import Newsletter from "./components/Newsletter";
 import { ContactOptions } from "./components/ContactOptions";
 import Gallery from "./components/Gallery";
 import Shop from "./components/Shop";
+import LearnWithUs from "./components/LearnWithUs";
 import { HelmetProvider } from "react-helmet-async"; //Optimización SEO
 import MembershipComponent from "./components/MembershipComponent";
 import ProductsSection from "./components/ProductsSection";
 import SearchFormSocio from "./components/SearchFormSocio";
-import ChatBot from "./components/ChatBot";
+// import ChatBot from "./components/ChatBot";
 
 const App = () => {
   return (
@@ -82,6 +83,7 @@ const App = () => {
 
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/termsAndPrivacy" element={<TermsAndPrivacy />} />
+          <Route path="/learnWithUs" element={<LearnWithUs />} />
         </Routes>
         <WhatsApp />
         {/* <ChatBot /> */}
