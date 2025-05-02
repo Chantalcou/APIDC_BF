@@ -21,7 +21,7 @@ import { HelmetProvider } from "react-helmet-async"; //Optimización SEO
 import MembershipComponent from "./components/MembershipComponent";
 import ProductsSection from "./components/ProductsSection";
 import SearchFormSocio from "./components/SearchFormSocio";
-// import ChatBot from "./components/ChatBot";
+import ChatBot from "./components/ChatBot";
 
 const App = () => {
   return (
@@ -86,7 +86,7 @@ const App = () => {
           <Route path="/learnWithUs" element={<LearnWithUs />} />
         </Routes>
         <WhatsApp />
-        {/* <ChatBot /> */}
+        <ChatBot />
         <ContactOptions />
         {/* <NewsletterBanner /> */}
         <Footer />
