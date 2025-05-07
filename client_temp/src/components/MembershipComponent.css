@@ -1,7 +1,7 @@
 /* Estilo principal para la sección */
 .membership-section {
   text-align: center;
-  margin-top: 108px;
+  margin-top: 127px;
   padding: 50px 20px;
   background-color: rgba(0, 0, 0, 0.9);
 }
@@ -111,11 +111,10 @@
     ),
     rgba(17, 17, 17, 0.07); /* Gradiente aplicado */
   box-shadow: 0px 4px 8px rgba(34, 13, 13, 0.1);
-  
 }
 .card-button {
   margin-top: auto; /* Esto asegura que el botón se pegue al fondo de la card */
-  background-color: #7BA12D;
+  background-color: #7ba12d;
   color: white;
   /* padding: 10px 20px; */
   border: none;
@@ -167,7 +166,7 @@
 /* Estilo del botón dentro de las cards */
 
 .card-first .card-button:hover {
-  background-color: #7BA12D;
+  background-color: #7ba12d;
 }
 
 /* Estilo de la lista de beneficios dentro de las cards */
@@ -183,7 +182,7 @@
 
 /* Estilo del botón dentro de las cards - primer card*/
 .card-first .card-button {
-  background-color: #7BA12D;
+  background-color: #7ba12d;
   color: white;
   padding: 8px 16px;
   border: none;
@@ -193,7 +192,7 @@
 }
 
 .card-first .card-button:hover {
-  background-color: #7BA12D;
+  background-color: #7ba12d;
 }
 
 /*  */
@@ -276,7 +275,7 @@
 }
 
 .card .card-button {
-  background-color: #7BA12D;
+  background-color: #7ba12d;
 
   color: white;
   padding: 8px 16px;
@@ -292,7 +291,6 @@
 .card-subtitle {
   color: #ffff;
 }
-
 
 /* steeps section */
 /* Contenedor principal */
@@ -457,7 +455,6 @@
   text-transform: uppercase;
 }
 
-
 /* Tabla en tamaño responsive */
 /* Estilo para ocultar la tabla en pantallas pequeñas */
 /* Ocultar la tabla en dispositivos móviles */
@@ -465,7 +462,7 @@
   .benefits-table-container {
     display: none; /* Oculta la tabla en móviles */
   }
-}/* Cards de la parte inferior (distribuidas en tres columnas) */
+} /* Cards de la parte inferior (distribuidas en tres columnas) */
 .cards-container {
   display: flex; /* Usamos flexbox para las cards */
   justify-content: space-around; /* Alineamos las cards con espacio entre ellas */
@@ -476,7 +473,8 @@
 
 /* Card común */
 /* socio adherente */
-.card-first, .card {
+.card-first,
+.card {
   display: flex;
   flex-direction: column; /* Asegura que los elementos estén en columna */
   justify-content: space-between; /* Esto asegura que las cards se estiren para ocupar el espacio */
@@ -504,29 +502,31 @@
     align-items: center; /* Centra las cards */
   }
 
-  .card-first, .card {
+  .card-first,
+  .card {
     width: 80%; /* Las cards ocupan el 80% del ancho de la pantalla */
     margin-bottom: 20px; /* Separación entre las cards */
   }
 }
 
 @media (max-width: 480px) {
-  .content-buttons_memberShip{
+  .content-buttons_memberShip {
     display: flex;
-    flex-direction: column!important;
+    flex-direction: column !important;
     width: 28vw;
     font-size: 1rem;
     gap: 10px;
     justify-content: center;
     align-items: center;
   }
-  
+
   .cards-container {
     flex-direction: column; /* En pantallas muy pequeñas, las cards se siguen mostrando en columna */
     align-items: center;
   }
 
-  .card-first, .card {
+  .card-first,
+  .card {
     width: 90%; /* Las cards ocupan un mayor porcentaje del ancho en pantallas pequeñas */
   }
   .section-title {
@@ -562,8 +562,6 @@
   }
 }
 
-
-
 /* Estilo tipo "McDonald's Drive-thru" */
 .whatsapp-cta-simple {
   text-align: center;
@@ -571,17 +569,17 @@
   padding: 25px;
   background: #f8fff3;
   border-radius: 15px;
-  border: 2px solid #8BBE45;
+  border: 2px solid #8bbe45;
 }
-.whatsapp-cta-simple_title{
-  color:#0a9d6d
+.whatsapp-cta-simple_title {
+  color: #0a9d6d;
 }
 .whatsapp-minibutton {
   display: inline-flex;
   align-items: center;
   gap: 12px;
   padding: 15px 30px;
-  background: #25D366;
+  background: #25d366;
   color: white !important;
   border-radius: 50px;
   text-decoration: none;
@@ -597,9 +595,8 @@
   font-size: 1.5rem;
 }
 
-
 /* ContentButton membership */
-.content-buttons_memberShip{
+.content-buttons_memberShip {
   display: flex;
   flex-direction: row;
   width: 28vw;
@@ -608,4 +605,3 @@
   justify-content: center;
   align-items: center;
 }
-
