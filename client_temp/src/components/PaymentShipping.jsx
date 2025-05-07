@@ -20,12 +20,12 @@ const PaymentShipping = () => {
               <span className="method-detail">(Datos por WhatsApp)</span>
             </li>
           </ul>
-          <ul className="method-list">
+          {/* <ul className="method-list">
             <li className="method-item">
               <span className="method-name">Tarjeta de crédito</span>
               <span className="method-detail">(pago mediante link)</span>
             </li>
-          </ul>
+          </ul> */}
         </div>
 
         {/* Sección de Envíos */}
