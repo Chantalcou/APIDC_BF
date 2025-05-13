@@ -15,7 +15,7 @@ const Donations = () => {
   };
 
   const handleCopyCBU = () => {
-    navigator.clipboard.writeText("0000000000000000000000");
+    navigator.clipboard.writeText("0000003100085976480946");
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -54,7 +54,7 @@ const Donations = () => {
                   <p>
                     <strong>Alias:</strong>
                   </p>
-                  <p>APIDC.ONG</p>
+                  <p>apidc.ong.mp</p>
                 </div>
                 <button
                   className="whatsapp-button"
