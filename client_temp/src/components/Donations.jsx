@@ -45,7 +45,7 @@ const Donations = () => {
                     <strong>CBU:</strong>
                   </p>
                   <div className="cbu-container">
-                    <span>0000000000000000000000</span>
+                    <span>0000003100085976480946</span>
                     <button onClick={handleCopyCBU} className="copy-button">
                       <FaCopy /> {copied ? "¡Copiado!" : "Copiar"}
                     </button>
