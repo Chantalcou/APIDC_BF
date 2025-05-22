@@ -108,17 +108,20 @@ const MembershipComponent = () => {
                 text="WhatsApp"
               />
 
-              <ButtonComponent
-                className="card-button"
-                onClick={() => handleRoleSelect("socioSinReprocann")}
-                color={{
-                  background: "transparent",
-                  text: "#ffff", 
-                  border: "2px solid white",
-                  fontSize: ".8rem",
-                }}
-                text="Completar Solicitud"
-              />
+            <ButtonComponent
+  className="card-button"
+  onClick={() =>
+    window.open("https://form.jotform.com/apidcasociacion/formulario-registro-APIDC-REPROCANN", "_blank")
+  }
+  color={{
+    background: "transparent",
+    text: "#ffff", 
+    border: "2px solid white",
+    fontSize: ".8rem",
+  }}
+  text="Completar Solicitud"
+/>
+
             </div>
           </div>
           <div className="card">
@@ -147,17 +150,20 @@ const MembershipComponent = () => {
                 text="WhatsApp"
               />
 
-              <ButtonComponent
-                className="card-button"
-                onClick={() => handleRoleSelect("socioConReprocann")}
-                color={{
-                  background: "transparent",
-                  text: "#ffff", 
-                  border: "2px solid white",
-                  fontSize: ".5rem",
-                }}
-                text="Completar Solicitud"
-              />
+            <ButtonComponent
+  className="card-button"
+  onClick={() =>
+    window.open("https://form.jotform.com/apidcasociacion/formulario-registro-APIDC-REPROCANN", "_blank")
+  }
+  color={{
+    background: "transparent",
+    text: "#ffff", 
+    border: "2px solid white",
+    fontSize: ".8rem",
+  }}
+  text="Completar Solicitud"
+/>
+
             </div>
           </div>
 
@@ -187,17 +193,20 @@ const MembershipComponent = () => {
                 text="WhatsApp"
               />
 
-              <ButtonComponent
-                className="card-button"
-                onClick={() => handleRoleSelect("gestor")}
-                color={{
-                  background: "transparent",
-                  text: "#ffff", 
-                  border: "2px solid white",
-                  fontSize: ".5rem",
-                }}
-                text="  Completar Solicitud"
-              />
+             <ButtonComponent
+  className="card-button"
+  onClick={() =>
+    window.open("https://form.jotform.com/apidcasociacion/formulario-registro-APIDC-REPROCANN", "_blank")
+  }
+  color={{
+    background: "transparent",
+    text: "#ffff", 
+    border: "2px solid white",
+    fontSize: ".8rem",
+  }}
+  text="Completar Solicitud"
+/>
+
             </div>
           </div>
         </div>
