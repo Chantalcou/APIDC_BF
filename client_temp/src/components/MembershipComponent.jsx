@@ -93,7 +93,9 @@ const MembershipComponent = () => {
                 acceso equitativo a terapias esenciales.
               </li>
 
-              <li>✔ Atención Personalizada Online para Gestión del REPROCANn</li>
+              <li>
+                ✔ Atención Personalizada Online para Gestión del REPROCANn
+              </li>
             </ul>
             <div className="content-buttons_memberShip">
               <ButtonComponent
@@ -101,27 +103,29 @@ const MembershipComponent = () => {
                 onClick={() => window.open(url, "_blank")}
                 color={{
                   background: "transparent",
-                  text: "#0a9d6d", 
+                  text: "#0a9d6d",
                   border: "2px solid white",
                   fontSize: ".8rem",
                 }}
                 text="WhatsApp"
               />
 
-            <ButtonComponent
-  className="card-button"
-  onClick={() =>
-    window.open("https://form.jotform.com/apidcasociacion/formulario-registro-APIDC-REPROCANN", "_blank")
-  }
-  color={{
-    background: "transparent",
-    text: "#ffff", 
-    border: "2px solid white",
-    fontSize: ".8rem",
-  }}
-  text="Completar Solicitud"
-/>
-
+              <ButtonComponent
+                className="card-button"
+                onClick={() =>
+                  window.open(
+                    "https://form.jotform.com/apidcasociacion/formulario-registro-APIDC-REPROCANN",
+                    "_blank"
+                  )
+                }
+                color={{
+                  background: "transparent",
+                  text: "#ffff",
+                  border: "2px solid white",
+                  fontSize: ".8rem",
+                }}
+                text="Completar Solicitud"
+              />
             </div>
           </div>
           <div className="card">
@@ -143,27 +147,29 @@ const MembershipComponent = () => {
                 onClick={() => window.open(url, "_blank")}
                 color={{
                   background: "transparent",
-                  text: "#0a9d6d", 
+                  text: "#0a9d6d",
                   border: "2px solid white",
                   fontSize: ".8rem",
                 }}
                 text="WhatsApp"
               />
 
-            <ButtonComponent
-  className="card-button"
-  onClick={() =>
-    window.open("https://form.jotform.com/apidcasociacion/formulario-registro-APIDC-REPROCANN", "_blank")
-  }
-  color={{
-    background: "transparent",
-    text: "#ffff", 
-    border: "2px solid white",
-    fontSize: ".8rem",
-  }}
-  text="Completar Solicitud"
-/>
-
+              <ButtonComponent
+                className="card-button"
+                onClick={() =>
+                  window.open(
+                    "https://form.jotform.com/apidcasociacion/formulario-registro-APIDC-REPROCANN",
+                    "_blank"
+                  )
+                }
+                color={{
+                  background: "transparent",
+                  text: "#ffff",
+                  border: "2px solid white",
+                  fontSize: ".8rem",
+                }}
+                text="Completar Solicitud"
+              />
             </div>
           </div>
 
@@ -193,20 +199,22 @@ const MembershipComponent = () => {
                 text="WhatsApp"
               />
 
-             <ButtonComponent
-  className="card-button"
-  onClick={() =>
-    window.open("https://form.jotform.com/apidcasociacion/formulario-registro-APIDC-REPROCANN", "_blank")
-  }
-  color={{
-    background: "transparent",
-    text: "#ffff", 
-    border: "2px solid white",
-    fontSize: ".8rem",
-  }}
-  text="Completar Solicitud"
-/>
-
+              <ButtonComponent
+                className="card-button"
+                onClick={() =>
+                  window.open(
+                    "https://form.jotform.com/apidcasociacion/formulario-registro-APIDC-REPROCANN",
+                    "_blank"
+                  )
+                }
+                color={{
+                  background: "transparent",
+                  text: "#ffff",
+                  border: "2px solid white",
+                  fontSize: ".8rem",
+                }}
+                text="Completar Solicitud"
+              />
             </div>
           </div>
         </div>
@@ -218,7 +226,7 @@ const MembershipComponent = () => {
             <i className="fab fa-whatsapp"></i>
             <span>Consulta rápida por WhatsApp</span>
           </a>
-        </div>
+        </div>cd ..
         <PaymentShipping />
         {/* Tabla de beneficios */}
         <div className="benefits-table-container">
@@ -251,7 +259,7 @@ const MembershipComponent = () => {
                 <td>✔</td>
                 <td>✔</td>
               </tr>
-            
+
               <tr>
                 <td>Asesoramiento exclusivo</td>
                 <td>✔</td>
