@@ -6,10 +6,10 @@ const trainingsData = [
   {
     title: "",
     subtitle: "",
-    date: "15 DE MAYO 2025",
+    date: "23 DE AGOSTO 2025",
     image:
-      "https://res.cloudinary.com/dqgjcfosx/image/upload/v1746019968/tama%C3%B1o-chico_w0os5l.jpg",
-    link: "https://docs.google.com/forms/d/e/1FAIpQLSfYiD8Jf5buuzb_jF7OYIwxtPg5QbtsQ43nYAtjw8UfwCCsoA/viewform",
+      "https://res.cloudinary.com/dqgjcfosx/image/upload/v1748275343/WhatsApp_Image_2025-05-23_at_15.05.01_nhhfkc.jpg",
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSe_ZrM875U6pam1I9hJ97PO_hgEOJNTHgPr9bhbRDGHwxsyEQ/viewform?usp=dialog",
   },
   // {
   //   title: "",
