@@ -40,7 +40,7 @@ const MembershipComponent = () => {
     }
   };
 
-  const phoneNumber = "1568824488";
+  const phoneNumber = " 1555655766";
 
   const url = `https://wa.me/${phoneNumber}`;
 

@@ -8,7 +8,7 @@ const Donations = () => {
 
   const handleWhatsappDonation = () => {
     const message = `Hola, quiero realizar una donación y necesito información para completar la transferencia.`;
-    const whatsappUrl = `https://wa.me/+5491112345678?text=${encodeURIComponent(
+    const whatsappUrl = `https://wa.me/+5491155655766?text=${encodeURIComponent(
       message
     )}`;
     window.open(whatsappUrl, "_blank");

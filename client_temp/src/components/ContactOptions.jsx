@@ -13,7 +13,7 @@ export const ContactOptions = () => {
             <div className="col-md-8">
               <div className="contact-cards d-flex justify-content-center gap-4 flex-wrap">
                 <a
-                  href="https://wa.me/1568824488"
+                  href="https://wa.me/1555655766"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="contact-card whatsapp"
