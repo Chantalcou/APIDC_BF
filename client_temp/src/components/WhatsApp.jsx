@@ -1,7 +1,7 @@
 import "./WhatsApp.css";
 
 const WhatsApp = () => {
-  const phoneNumber = " 1155655766";
+  const phoneNumber = "1155655766";
 
   const url = `https://wa.me/${phoneNumber}`;
 
