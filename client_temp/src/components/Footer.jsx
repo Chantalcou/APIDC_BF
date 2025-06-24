@@ -36,7 +36,7 @@ const Footer = () => (
       </div>
 
       <div className="footer-signature">
-      <p>Desarrollado con pasión por Chantal Denise Coutenceau · Full Stack Developer</p>
+      <p>Desarrollado por Chantal Denise Coutenceau · Full Stack Developer</p>
 
       </div>
     </div>
