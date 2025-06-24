@@ -184,22 +184,24 @@ const Home = () => {
                   />
                   {isAuthenticated && user ? (
                     <>
-                      <Link
-                        style={{
-                          backgroundColor: "#7BA12D",
-                          color: "#ffffff",
-                          padding: "10px 20px",
-                          borderRadius: "5px",
-                          border: "2px solid #7BA12D",
-                          textDecoration: "none",
-                          textAlign: "center",
-                        }}
-                        to="/membershipSection"
-                        className="btn-asociate-custom"
-                        aria-label="Explorar Membresías"
-                      >
-                        ASOCIATE
-                      </Link>
+                      <a
+  href="https://form.jotform.com/apidcasociacion/formulario-registro-APIDC-REPROCANN"
+  target="_blank"
+  rel="noopener noreferrer"
+  style={{
+    backgroundColor: "#7BA12D",
+    color: "#ffffff",
+    padding: "10px 20px",
+    borderRadius: "5px",
+    border: "2px solid #7BA12D",
+    textDecoration: "none",
+    textAlign: "center",
+  }}
+  className="btn-asociate-custom"
+>
+  ASOCIATE
+</a>
+
                     </>
                   ) : (
                     <Link
