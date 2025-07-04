@@ -1,16 +1,15 @@
-/* ChatBot.css - Versión Final Corregida */
 .chatbot-container {
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  width: 400px;
+  bottom: .5rem;
+  right: .5rem;
+  width: 300px;
   background: #ffffff;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   border: 1px solid #e0e0e0;
-  z-index: 2147483647; /* Máximo z-index posible */
-  font-family: 'Segoe UI', system-ui, sans-serif;
+  z-index: 2147483647;
+  font-family: "Segoe UI", system-ui, sans-serif;
   transform: translateZ(0); /* Optimización de renderizado */
 }
 
@@ -48,7 +47,7 @@
 }
 
 .chatbot-messages {
-  height: 500px;
+  height: 380px;
   overflow-y: auto;
   padding: 1.5rem;
   background: #ffffff;
@@ -65,13 +64,14 @@
 }
 
 .message-content {
-  max-width: 80%;
+  max-width: 100%;
   padding: 0.8rem 1.2rem;
   border-radius: 8px;
   line-height: 1.5;
   background: #0a9d6d;
   color: white;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  padding: 0.6rem 1rem;
 }
 
 .message.bot .message-content {
@@ -110,7 +110,7 @@
   padding: 0.8rem 1.2rem;
   border-radius: 8px;
   color: #2d3436;
-  font-size: 0.95rem;
+  font-size: 0.8rem;
   transition: all 0.2s ease;
 }
 
@@ -165,8 +165,8 @@
   position: fixed;
   bottom: 90px; /* Suficiente para dejar espacio al botón WhatsApp */
   right: 2rem;
-  width: 56px;
-  height: 56px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   background: #0a9d6d;
   border: none;
@@ -191,13 +191,23 @@
 }
 
 @keyframes typing {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-3px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
 }
 
 .chatbot-messages::-webkit-scrollbar {
@@ -220,11 +230,11 @@
     bottom: 1rem;
     z-index: 2147483647; /* Mantener máximo en móvil */
   }
-  
+
   .chatbot-messages {
     height: 60vh;
   }
-  
+
   .floating-button {
     z-index: 2147483646; /* Mantener debajo del chat en móvil */
   }
@@ -238,7 +248,7 @@
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
   }
-  
+
   .floating-button {
     bottom: 90px;
     right: 2rem;
