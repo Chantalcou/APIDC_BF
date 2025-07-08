@@ -3,15 +3,15 @@ import React from "react";
 import "./LearnWithUs.css";
 
 const trainingsData = [
-
   {
     title: "",
     subtitle: "",
     date: "24 DE JULIO 2025",
-    image: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1750435460/Flyer_Charla_Gen%C3%A9tica_t18vjq.png",
-    link: "https://docs.google.com/forms/d/e/1FAIpQLSfMxYKxAjCIKn8L-kwlwhKO8ervAWdf9DL65Yu9r3MRFoOAlA/viewform?usp=header"
+    image:
+      "https://res.cloudinary.com/dqgjcfosx/image/upload/v1751993782/Copia_de_Copia_de_Flyer_Charla_Gen%C3%A9tica_6_wk6uhw.png",
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSfMxYKxAjCIKn8L-kwlwhKO8ervAWdf9DL65Yu9r3MRFoOAlA/viewform?usp=header",
   },
-    {
+  {
     title: "",
     subtitle: "",
     date: "23 DE AGOSTO 2025",

@@ -13,7 +13,7 @@
 .trainings-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 22rem;
+  gap: 10rem;
   justify-items: center;
   max-width: 1400px;
   margin: 0 auto;
@@ -23,7 +23,7 @@
   position: relative;
   border-radius: 20px;
   overflow: hidden;
-  min-height: 600px;
+  min-height: 520px;
   width: 143%;
   max-width: 650px;
   background-size: cover;
