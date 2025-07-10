@@ -1,4 +1,5 @@
 /* LearnWithUs.css */
+/* ———————————————————  Contenedor general  ——————————————————— */
 .learn-section {
   padding: 6rem 2rem;
   background: #f8f9fa;
@@ -10,61 +11,103 @@
   justify-content: center;
 }
 
+/* ———————————————————  Grilla responsiva  ——————————————————— */
 .trainings-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10rem;
-  justify-items: center;
-  max-width: 1400px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* 3-2-1 cols */
+  gap: 3rem;
+  max-width: 1300px;
   margin: 0 auto;
+  width: 100%;
+  justify-items: center;
 }
 
+/* ———————————————————  Card  ——————————————————— */
 .learn-card {
   position: relative;
+  width: 100%; /* ocupa toda la celda */
+  aspect-ratio: 3/4; /* alto ≈ 133 % del ancho */
+  max-width: 420px; /* nunca crece más que esto */
   border-radius: 20px;
   overflow: hidden;
-  min-height: 520px;
-  width: 143%;
-  max-width: 650px;
   background-size: cover;
   background-position: center;
-  transition: transform 0.3s ease;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
-/* Botón de inscripción */
+.learn-card:hover {
+  transform: scale(1.03);
+}
+
+/* ——— Oscurece la imagen para que el texto siempre sea legible ——— */
+.learn-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.55) 80%
+  ); */
+}
+
+/* ———————————————————  Contenido interno  ——————————————————— */
+.learn-card__content {
+  position: absolute;
+  inset: 0;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* queda pegado abajo */
+  color: #fff;
+  z-index: 1;
+}
+
+.training-date {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.training-title {
+  font-size: 2rem;
+  margin: 0 0 0.75rem;
+}
+
+.training-subtitle {
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* ———————————————————  Botón  ——————————————————— */
 .enroll-button {
   position: absolute;
   top: 1.5rem;
   right: 1.5rem;
   padding: 0.6rem 1.2rem;
   font-size: 0.85rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
   background: linear-gradient(135deg, #ffb74d 0%, #f7d046 100%);
   color: #282828;
+  border: none;
   border-radius: 8px;
   font-weight: 700;
   text-decoration: none;
-  transition: all 0.3s ease;
-  border: none;
-  cursor: pointer;
-  overflow: hidden;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   box-shadow: 0 8px 24px rgba(255, 183, 77, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 2;
 }
 
 .enroll-button::after {
   content: "";
-  display: inline-block;
   width: 18px;
   height: 18px;
   background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23282828"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>')
-    no-repeat center;
-  background-size: contain;
+    no-repeat center/contain;
   transition: transform 0.3s ease;
 }
 
@@ -81,77 +124,7 @@
   transform: scale(0.97);
 }
 
-/* Contenido dentro de la card */
-.learn-card__content {
-  padding: 3rem;
-}
-
-.training-date {
-  font-size: 1.1rem;
-  padding: 0.75rem 1.5rem;
-}
-
-.training-title {
-  font-size: 2.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.training-subtitle {
-  font-size: 1rem;
-  max-width: 100%;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .trainings-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem!important;
-  }
-
-  .learn-card {
-    min-height: 450px;
-  }
-
-  .enroll-button {
-    top: 1rem;
-    right: 1rem;
-    padding: 0.5rem 1rem;
-    font-size: 0.8rem;
-  }
-
-  .enroll-button::after {
-    width: 16px;
-    height: 16px;
-  }
-
-  .learn-card__content {
-    padding: 2rem;
-  }
-
-  .training-title {
-    font-size: 1.8rem;
-  }
-
-  .training-date {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .learn-card {
-    min-height: 400px;
-  }
-
-  .training-title {
-    font-size: 1.6rem;
-  }
-
-  .training-subtitle {
-    font-size: 0.95rem;
-  }
-}
-
-/* LearnWithUs.css - Título y encabezado */
+/* ———————————————————  Encabezado de sección  ——————————————————— */
 .section-header_learn {
   text-align: center;
   margin: 0 auto 6rem;
@@ -166,9 +139,7 @@
   letter-spacing: -0.03em;
   line-height: 1.05;
   position: relative;
-  display: inline-block;
   margin: 0;
-  font-family: "Inter", sans-serif;
 }
 
 .section-title_learn::after {
@@ -181,23 +152,36 @@
   opacity: 0.8;
 }
 
+/* ———————————————————  Media queries  ——————————————————— */
+@media (max-width: 992px) {
+  /* tablets en vertical */
+  .section-title_learn {
+    font-size: 2.8rem;
+  }
+}
+
 @media (max-width: 768px) {
+  /* móviles grandes */
   .section-title_learn {
     font-size: 2.4rem;
   }
-
-  .section-title_learn::after {
-    width: 60%;
-    margin-top: 1rem;
+  .training-title {
+    font-size: 1.6rem;
+  }
+  .learn-card__content {
+    padding: 2rem;
   }
 }
 
 @media (max-width: 480px) {
+  /* móviles chicos */
   .section-title_learn {
     font-size: 2rem;
   }
-
-  .section-title_learn::after {
-    width: 70%;
+  .training-title {
+    font-size: 1.4rem;
+  }
+  .training-subtitle {
+    font-size: 0.95rem;
   }
 }
