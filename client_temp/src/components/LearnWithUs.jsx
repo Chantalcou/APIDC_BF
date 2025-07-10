@@ -6,7 +6,7 @@ const trainingsData = [
   {
     title: "",
     subtitle: "",
-    date: "24 DE JULIO 2025",
+    // date: "24 DE JULIO 2025",
     image:
       "https://res.cloudinary.com/dqgjcfosx/image/upload/v1751993782/Copia_de_Copia_de_Flyer_Charla_Gen%C3%A9tica_6_wk6uhw.png",
     link: "https://docs.google.com/forms/d/e/1FAIpQLSfMxYKxAjCIKn8L-kwlwhKO8ervAWdf9DL65Yu9r3MRFoOAlA/viewform?usp=header",
@@ -14,10 +14,18 @@ const trainingsData = [
   {
     title: "",
     subtitle: "",
-    date: "23 DE AGOSTO 2025",
+    // date: "23 DE AGOSTO 2025",
     image:
       "https://res.cloudinary.com/dqgjcfosx/image/upload/v1749052414/Flyer_Charla_Gen%C3%A9tica_1_hl1cda.png",
     link: "https://docs.google.com/forms/d/e/1FAIpQLSe_ZrM875U6pam1I9hJ97PO_hgEOJNTHgPr9bhbRDGHwxsyEQ/viewform?usp=dialog",
+  },
+  {
+    title: "",
+    subtitle: "",
+    // date: "23 DE AGOSTO 2025",
+    image:
+      "https://res.cloudinary.com/dqgjcfosx/image/upload/v1752160615/WhatsApp_Image_2025-07-10_at_11.42.37_j37q24.jpg",
+    link: "https://docs.google.com/forms/d/e/1FAIpQLScVeo8TLldryp9FjPZksKw0eZ9UZMcku2_HYZ3nfUN3JlTwDA/viewform?usp=header",
   },
 ];
 
