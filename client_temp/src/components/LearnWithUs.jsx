@@ -16,7 +16,7 @@ const trainingsData = [
     subtitle: "",
     // date: "23 DE AGOSTO 2025",
     image:
-      "https://res.cloudinary.com/dqgjcfosx/image/upload/v1749052414/Flyer_Charla_Gen%C3%A9tica_1_hl1cda.png",
+      "https://res.cloudinary.com/dqgjcfosx/image/upload/v1752591009/WhatsApp_Image_2025-07-15_at_11.37.49_AM_zyg75b.jpg",
     link: "https://docs.google.com/forms/d/e/1FAIpQLSe_ZrM875U6pam1I9hJ97PO_hgEOJNTHgPr9bhbRDGHwxsyEQ/viewform?usp=dialog",
   },
   {
