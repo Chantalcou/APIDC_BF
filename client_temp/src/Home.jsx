@@ -319,6 +319,7 @@ const Home = () => {
                     </h2>
                     <div className="title-divider"></div>
                   </header>
+                  <div className="content-header__home">
                   <p className="section-description">
                     Brindamos apoyo integral a usuarios terapéuticos, ofreciendo
                     un servicio de gestión especializada, asesoramiento
@@ -326,6 +327,7 @@ const Home = () => {
                     Acompañamos a la comunidad con excelencia profesional,
                     garantizando máxima eficiencia en cada etapa del proceso.
                   </p>
+                </div>
                 </div>
               </div>
             </section>

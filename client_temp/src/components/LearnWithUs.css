@@ -1,4 +1,3 @@
-/* LearnWithUs.css */
 /* ———————————————————  Contenedor general  ——————————————————— */
 .learn-section {
   padding: 6rem 2rem;
@@ -14,7 +13,7 @@
 /* ———————————————————  Grilla responsiva  ——————————————————— */
 .trainings-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* 3-2-1 cols */
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 3rem;
   max-width: 1300px;
   margin: 0 auto;
@@ -25,9 +24,9 @@
 /* ———————————————————  Card  ——————————————————— */
 .learn-card {
   position: relative;
-  width: 100%; /* ocupa toda la celda */
-  aspect-ratio: 3/4; /* alto ≈ 133 % del ancho */
-  max-width: 420px; /* nunca crece más que esto */
+  width: 100%;
+  aspect-ratio: 3/4;
+  max-width: 420px;
   border-radius: 20px;
   overflow: hidden;
   background-size: cover;
@@ -35,21 +34,35 @@
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
 }
+.learn-card:hover { transform: scale(1.03); }
 
-.learn-card:hover {
-  transform: scale(1.03);
-}
-
-/* ——— Oscurece la imagen para que el texto siempre sea legible ——— */
-.learn-card::before {
+/* oscurece más si ya pasó */
+.learn-card.past::before {
   content: "";
   position: absolute;
   inset: 0;
-  /* background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.1) 0%,
-    rgba(0, 0, 0, 0.55) 80%
-  ); */
+  background: rgba(0, 0, 0, 0.55);
+}
+
+/* ———————————————————  CINTA DIAGONAL CENTRAL  ——————————————————— */
+.ribbon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: black;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  background: linear-gradient(135deg, #ffb74d 0%, #f7d046 100%);
+  transform: translate(-50%, -50%) rotate(-45deg);
+  box-shadow: 0 4px 12px rgba(0,0,0,.25);
+  z-index: 3;
 }
 
 /* ———————————————————  Contenido interno  ——————————————————— */
@@ -59,129 +72,217 @@
   padding: 2.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end; /* queda pegado abajo */
+  justify-content: flex-end;
   color: #fff;
   z-index: 1;
 }
+.training-date { font-size: 1rem; margin-bottom: .5rem; }
+.training-title { font-size: 2rem; margin: 0 0 .75rem; }
+.training-subtitle { font-size: 1rem; margin: 0; }
 
-.training-date {
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-}
-
-.training-title {
-  font-size: 2rem;
-  margin: 0 0 0.75rem;
-}
-
-.training-subtitle {
-  font-size: 1rem;
-  margin: 0;
-}
-
-/* ———————————————————  Botón  ——————————————————— */
+/* ———————————————————  Botón de inscripción  ——————————————————— */
 .enroll-button {
   position: absolute;
   top: 1.5rem;
   right: 1.5rem;
-  padding: 0.6rem 1.2rem;
-  font-size: 0.85rem;
-  background: linear-gradient(135deg, #ffb74d 0%, #f7d046 100%);
+  padding: .6rem 1.2rem;
+  font-size: .85rem;
+  background: linear-gradient(135deg,#ffb74d 0%,#f7d046 100%);
   color: #282828;
   border: none;
   border-radius: 8px;
   font-weight: 700;
   text-decoration: none;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: .5px;
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  box-shadow: 0 8px 24px rgba(255, 183, 77, 0.3);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  gap: .5rem;
+  box-shadow: 0 8px 24px rgba(255,183,77,.3);
+  transition: transform .3s ease, box-shadow .3s ease;
   z-index: 2;
 }
-
-.enroll-button::after {
-  content: "";
-  width: 18px;
-  height: 18px;
-  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23282828"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>')
-    no-repeat center/contain;
-  transition: transform 0.3s ease;
+.enroll-button::after{
+  content:"";
+  width:18px;height:18px;
+  background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23282828"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>') no-repeat center/contain;
+  transition:transform .3s ease;
 }
+.enroll-button:hover{ transform:translateY(-2px); box-shadow:0 10px 28px rgba(255,183,77,.4);}
+.enroll-button:hover::after{ transform:rotate(360deg);}
+.enroll-button:active{ transform:scale(.97); }
 
-.enroll-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 28px rgba(255, 183, 77, 0.4);
-}
-
-.enroll-button:hover::after {
-  transform: rotate(360deg);
-}
-
-.enroll-button:active {
-  transform: scale(0.97);
-}
-
-/* ———————————————————  Encabezado de sección  ——————————————————— */
-.section-header_learn {
-  text-align: center;
-  margin: 0 auto 6rem;
-  max-width: 1200px;
-  padding: 0 2rem;
-}
-
-.section-title_learn {
-  color: #282828;
-  font-size: 3.5rem;
+/* ———————————————————  Botón de testimonios  ——————————————————— */
+.testimonials-button {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 2.5rem;
+  padding: .6rem 1.2rem;
+  font-size: .85rem;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(5px);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
   font-weight: 600;
-  letter-spacing: -0.03em;
-  line-height: 1.05;
-  position: relative;
-  margin: 0;
+  text-decoration: none;
+  letter-spacing: .5px;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  transition: all 0.3s ease;
+  z-index: 2;
+  cursor: pointer;
+}
+.testimonials-button:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+.testimonials-button::before {
+  content: "💬";
+  margin-right: 0.3rem;
 }
 
-.section-title_learn::after {
+/* ———————————————————  Modal de testimonios  ——————————————————— */
+.testimonial-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+.testimonial-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+.testimonial-content {
+  background: white;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 700px;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 2.5rem;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+.close-modal {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.3s ease;
+}
+.close-modal:hover {
+  color: #282828;
+}
+.testimonial-title {
+  color: #282828;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  position: relative;
+}
+.testimonial-title::after {
   content: "";
   display: block;
-  width: 45%;
-  height: 2px;
-  background: #0a9d6d;
-  margin: 1.2rem auto 0;
-  opacity: 0.8;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(135deg, #ffb74d 0%, #f7d046 100%);
+  margin: 0.8rem auto 0;
+}
+.testimonial-item {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
+}
+.testimonial-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.testimonial-text {
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 0.8rem;
+  font-style: italic;
+}
+.testimonial-author {
+  color: #282828;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.testimonial-author::before {
+  content: "—";
 }
 
-/* ———————————————————  Media queries  ——————————————————— */
-@media (max-width: 992px) {
-  /* tablets en vertical */
-  .section-title_learn {
-    font-size: 2.8rem;
-  }
+/* ———————————————————  Encabezado  ——————————————————— */
+.section-header_learn{
+  text-align:center;
+  margin:0 auto 6rem;
+  max-width:1200px;
+  padding:0 2rem;
+}
+.section-title_learn{
+  color:#282828;
+  font-size:3.5rem;
+  font-weight:600;
+  letter-spacing:-.03em;
+  line-height:1.05;
+  position:relative;
+  margin:0;
+}
+.section-title_learn::after{
+  content:"";
+  display:block;
+  width:45%;
+  height:2px;
+  background:#0a9d6d;
+  margin:1.2rem auto 0;
+  opacity:.8;
 }
 
-@media (max-width: 768px) {
-  /* móviles grandes */
-  .section-title_learn {
-    font-size: 2.4rem;
-  }
-  .training-title {
-    font-size: 1.6rem;
-  }
-  .learn-card__content {
-    padding: 2rem;
+/* ———————————————————  Media Queries  ——————————————————— */
+@media (max-width:992px){ 
+  .section-title_learn{font-size:2.8rem;} 
+  .testimonial-content {
+    padding: 2rem 1.5rem;
   }
 }
-
-@media (max-width: 480px) {
-  /* móviles chicos */
-  .section-title_learn {
-    font-size: 2rem;
+@media (max-width:768px){
+  .section-title_learn{font-size:2.4rem;}
+  .training-title{font-size:1.6rem;}
+  .learn-card__content{padding:2rem;}
+  .testimonials-button {
+    bottom: 2rem;
+    left: 2rem;
   }
-  .training-title {
-    font-size: 1.4rem;
+}
+@media (max-width:480px){
+  .section-title_learn{font-size:2rem;}
+  .training-title{font-size:1.4rem;}
+  .training-subtitle{font-size:.95rem;}
+  .testimonials-button {
+    bottom: 1.5rem;
+    left: 1.5rem;
+    font-size: .75rem;
+    padding: .5rem 1rem;
   }
-  .training-subtitle {
-    font-size: 0.95rem;
+  .testimonial-title {
+    font-size: 1.5rem;
   }
 }
