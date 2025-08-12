@@ -32,7 +32,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/membershipSection/gestor" element={<Gestor />} />
           {/* Rutas NewsLetter y products protegidas*/}
-          <Route path="/blog" element={<CannabisBenefitsSection />} />
+          {/* <Route path="/blog" element={<CannabisBenefitsSection />} /> */}
         
           <Route
             path="/products"

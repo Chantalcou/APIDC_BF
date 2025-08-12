@@ -268,9 +268,9 @@ const NavBar = () => {
               <Link to="/gallery" className="nav-link">
                 Galeria
               </Link>
-              <Link to="/blog" className="nav-link">
+              {/* <Link to="/blog" className="nav-link">
                 Blog
-              </Link>
+              </Link> */}
               <Link to="/learnWithUs" className="nav-link">
               Aprende con Nosotros
               </Link>
