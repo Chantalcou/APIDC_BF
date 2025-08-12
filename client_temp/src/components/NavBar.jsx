@@ -268,6 +268,9 @@ const NavBar = () => {
               <Link to="/gallery" className="nav-link">
                 Galeria
               </Link>
+              <Link to="/blog" className="nav-link">
+                Blog
+              </Link>
               <Link to="/learnWithUs" className="nav-link">
               Aprende con Nosotros
               </Link>

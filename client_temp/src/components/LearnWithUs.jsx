@@ -44,7 +44,7 @@ const trainingsData = [
     title: "",
     subtitle: "",
     image:
-      "https://res.cloudinary.com/dqgjcfosx/image/upload/v1752586473/WhatsApp_Image_2025-07-14_at_3.16.26_PM_db6uyl.jpg",
+      "https://res.cloudinary.com/dqgjcfosx/image/upload/v1755010021/WhatsApp_Image_2025-08-11_at_2.25.10_PM_v6a9rl.jpg",
     link: "https://docs.google.com/forms/d/e/1FAIpQLScVeo8TLldryp9FjPZksKw0eZ9UZMcku2_HYZ3nfUN3JlTwDA/viewform?usp=header",
     isPast: false,
     testimonials: [

@@ -15,6 +15,7 @@ import QrSection from "./components/QrSection.jsx";
 import SeccionAs from "./components/SeccionAs.jsx";
 import SpinnerComponent from "./components/SpinnerComponent.jsx";
 import Donations from "./components/Donations.jsx";
+import CannabisBenefits from './components/CannabisBenefits.jsx'
 // Librerias de aniamcion
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -319,7 +320,6 @@ const Home = () => {
                     </h2>
                     <div className="title-divider"></div>
                   </header>
-                  <div className="content-header__home">
                   <p className="section-description">
                     Brindamos apoyo integral a usuarios terapéuticos, ofreciendo
                     un servicio de gestión especializada, asesoramiento
@@ -327,7 +327,6 @@ const Home = () => {
                     Acompañamos a la comunidad con excelencia profesional,
                     garantizando máxima eficiencia en cada etapa del proceso.
                   </p>
-                </div>
                 </div>
               </div>
             </section>
@@ -379,7 +378,6 @@ const Home = () => {
         </section>
       </div>
       <SeccionAs />
-
       <Reprocan />
       <WorkTogether />
       <MovingBanner />

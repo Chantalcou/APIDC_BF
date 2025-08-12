@@ -12,7 +12,7 @@ import ContactForm from "./components/ContactForm";
 import ProtectedRoute from "./components/ProtectedRoute";
 import TermsAndPrivacy from "./components/TermsAndPrivacy";
 import Unauthorized from "./components/Unauthorized";
-import Newsletter from "./components/Newsletter";
+import CannabisBenefitsSection from "./components/CannabisBenefits";
 import { ContactOptions } from "./components/ContactOptions";
 import Gallery from "./components/Gallery";
 import Shop from "./components/Shop";
@@ -32,15 +32,8 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/membershipSection/gestor" element={<Gestor />} />
           {/* Rutas NewsLetter y products protegidas*/}
-
-          <Route
-            path="/newsletter"
-            element={
-              <ProtectedRoute requiredRole="newsletter">
-                <Newsletter />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/blog" element={<CannabisBenefitsSection />} />
+        
           <Route
             path="/products"
             element={
