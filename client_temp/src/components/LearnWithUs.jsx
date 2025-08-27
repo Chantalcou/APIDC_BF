@@ -29,6 +29,7 @@ const trainingsData = [
       "https://res.cloudinary.com/dqgjcfosx/image/upload/v1752591009/WhatsApp_Image_2025-07-15_at_11.37.49_AM_zyg75b.jpg",
     link: "https://docs.google.com/forms/d/e/1FAIpQLSe_ZrM875U6pam1I9hJ97PO_hgEOJNTHgPr9bhbRDGHwxsyEQ/viewform?usp=dialog",
     isPast: false,
+    badgeText: "¡GRACIAS!", // 👈 agregado para mostrar cinta amarilla en el segundo flyer
     testimonials: [
       {
         text: "Excelente contenido técnico, muy relevante para las necesidades actuales del mercado.",
@@ -40,24 +41,24 @@ const trainingsData = [
       },
     ],
   },
-  {
-    title: "",
-    subtitle: "",
-    image:
-      "https://res.cloudinary.com/dqgjcfosx/image/upload/v1755010021/WhatsApp_Image_2025-08-11_at_2.25.10_PM_v6a9rl.jpg",
-    link: "https://docs.google.com/forms/d/e/1FAIpQLScVeo8TLldryp9FjPZksKw0eZ9UZMcku2_HYZ3nfUN3JlTwDA/viewform?usp=header",
-    isPast: false,
-    testimonials: [
-      {
-        text: "El enfoque práctico de esta capacitación hizo que los conceptos complejos fueran fáciles de entender.",
-        author: "Lucía Fernández, DevOps Engineer",
-      },
-      {
-        text: "Recomendaría este curso a cualquier profesional que quiera actualizar sus habilidades técnicas.",
-        author: "Roberto Sánchez, Full Stack Developer",
-      },
-    ],
-  },
+  // {
+  //   title: "",
+  //   subtitle: "",
+  //   image:
+  //     "https://res.cloudinary.com/dqgjcfosx/image/upload/v1755010021/WhatsApp_Image_2025-08-11_at_2.25.10_PM_v6a9rl.jpg",
+  //   link: "https://docs.google.com/forms/d/e/1FAIpQLScVeo8TLldryp9FjPZksKw0eZ9UZMcku2_HYZ3nfUN3JlTwDA/viewform?usp=header",
+  //   isPast: false,
+  //   testimonials: [
+  //     {
+  //       text: "El enfoque práctico de esta capacitación hizo que los conceptos complejos fueran fáciles de entender.",
+  //       author: "Lucía Fernández, DevOps Engineer",
+  //     },
+  //     {
+  //       text: "Recomendaría este curso a cualquier profesional que quiera actualizar sus habilidades técnicas.",
+  //       author: "Roberto Sánchez, Full Stack Developer",
+  //     },
+  //   ],
+  // },
 ];
 
 const LearnWithUs = () => {
@@ -88,11 +89,9 @@ const LearnWithUs = () => {
             className={`learn-card ${training.isPast ? "past" : ""}`}
             style={{ backgroundImage: `url(${training.image})` }}
           >
-            {/* Cinta diagonal para eventos pasados */}
-            {training.isPast && (
-              <span className="ribbon">
-                {training.badgeText || "Evento finalizado"}
-              </span>
+            {/* Cinta diagonal */}
+            {training.badgeText && (
+              <span className="ribbon">{training.badgeText}</span>
             )}
 
             <div className="learn-card__overlay"></div>
@@ -107,7 +106,7 @@ const LearnWithUs = () => {
                 <p className="training-subtitle">{training.subtitle}</p>
               </div>
 
-              {/* ▶️  SOLO la primera card muestra el botón de testimonios */}
+              {/* ▶️ SOLO la primera card muestra el botón de testimonios */}
               {index === 0 && (
                 <button
                   className="testimonials-button"
