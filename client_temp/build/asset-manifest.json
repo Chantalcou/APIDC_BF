@@ -1,11 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.7bd38954.css",
-<<<<<<< HEAD
     "main.js": "/static/js/main.ad425c5e.js",
-=======
-    "main.js": "/static/js/main.fea8f27c.js",
->>>>>>> bb0a0b9 (Update flyers)
     "static/media/fa-solid-900.ttf": "/static/media/fa-solid-900.07ed6d5fa32c1d54af0f.ttf",
     "static/media/fa-brands-400.ttf": "/static/media/fa-brands-400.0ff70dcbf135d859ebf3.ttf",
     "static/media/fa-solid-900.woff2": "/static/media/fa-solid-900.93f719f4d62bfa3e748c.woff2",
@@ -16,18 +12,10 @@
     "static/media/fa-v4compatibility.woff2": "/static/media/fa-v4compatibility.6cfec8414be20e2c3426.woff2",
     "index.html": "/index.html",
     "main.7bd38954.css.map": "/static/css/main.7bd38954.css.map",
-<<<<<<< HEAD
     "main.ad425c5e.js.map": "/static/js/main.ad425c5e.js.map"
   },
   "entrypoints": [
     "static/css/main.7bd38954.css",
     "static/js/main.ad425c5e.js"
-=======
-    "main.fea8f27c.js.map": "/static/js/main.fea8f27c.js.map"
-  },
-  "entrypoints": [
-    "static/css/main.7bd38954.css",
-    "static/js/main.fea8f27c.js"
->>>>>>> bb0a0b9 (Update flyers)
   ]
 }
