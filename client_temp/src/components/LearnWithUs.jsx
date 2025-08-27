@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import "./LearnWithUs.css";
 
+
 const trainingsData = [
   {
     title: "",
@@ -61,9 +62,11 @@ const trainingsData = [
   // },
 ];
 
+
 const LearnWithUs = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentTestimonials, setCurrentTestimonials] = useState([]);
+
 
   const openTestimonials = (testimonials) => {
     setCurrentTestimonials(testimonials);
@@ -71,16 +74,19 @@ const LearnWithUs = () => {
     document.body.style.overflow = "hidden";
   };
 
+
   const closeTestimonials = () => {
     setIsModalOpen(false);
     document.body.style.overflow = "auto";
   };
+
 
   return (
     <section className="learn-section">
       <div className="section-header_learn">
         <h2 className="section-title_learn">Capacitaciones Técnicas</h2>
       </div>
+
 
       <div className="trainings-grid">
         {trainingsData.map((training, index) => (
@@ -94,17 +100,21 @@ const LearnWithUs = () => {
               <span className="ribbon">{training.badgeText}</span>
             )}
 
+
             <div className="learn-card__overlay"></div>
+
 
             <div className="learn-card__content">
               <div className="card-meta">
                 <span className="training-date">{training.date}</span>
               </div>
 
+
               <div className="card-body">
                 <h3 className="training-title">{training.title}</h3>
                 <p className="training-subtitle">{training.subtitle}</p>
               </div>
+
 
               {/* ▶️ SOLO la primera card muestra el botón de testimonios */}
               {index === 0 && (
@@ -115,6 +125,7 @@ const LearnWithUs = () => {
                   Testimonios
                 </button>
               )}
+
 
               {/* Botón de inscripción solo para eventos futuros */}
               {!training.isPast && (
@@ -132,6 +143,7 @@ const LearnWithUs = () => {
         ))}
       </div>
 
+
       {/* Modal de testimonios */}
       {isModalOpen && (
         <div className="testimonial-modal active">
@@ -142,6 +154,7 @@ const LearnWithUs = () => {
             <h3 className="testimonial-title">
               Experiencias de nuestros alumnos
             </h3>
+
 
             {currentTestimonials.map((t, idx) => (
               <div className="testimonial-item" key={idx}>
@@ -156,4 +169,7 @@ const LearnWithUs = () => {
   );
 };
 
+
 export default LearnWithUs;
+
+
