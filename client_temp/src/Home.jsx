@@ -211,15 +211,97 @@ const Home = () => {
         )}
 
         {/* ABOUT SECTION (resto igual que ya tenés) */}
-        <div className="about-section" id="about-section">
+ <div className="about-section" id="about-section">
           <div>
             <div className="content-about_section row text-center">
-              {/* ...contenido existente... */}
+              <div data-aos="fade-up" className="col-md-4 col-12 mb-4">
+                <img
+                  src="https://res.cloudinary.com/dqgjcfosx/image/upload/v1740671503/Dise%C3%B1o_sin_t%C3%ADtulo_3_ocqnjy.png"
+                  loading="lazy"
+                  alt="Quienes somos"
+                  className="img-fluid mb-3 circle-image"
+                />
+                <h3
+                  className="home-title_about_section"
+                  style={{ color: "#0a9d6d" }}
+                >
+                  Quienes Somos
+                </h3>
+                <p>
+                  Somos una Asociación Civil sin fines de lucro, conformada por
+                  un gran equipo de usuari@s, cultivadores y profesionales
+                  comprometidos con el abordaje integral e interdisciplinario de
+                  la planta de Cannabis.
+                </p>
+              </div>
+
+              <div data-aos="fade-down" className="col-md-4 col-12 mb-4">
+                <img
+                  src="https://res.cloudinary.com/dqgjcfosx/image/upload/v1742918567/WhatsApp_Image_2025-03-25_at_13.01.24_v5f9ul.jpg"
+                  alt="Nuestro camino"
+                  className="img-fluid mb-3 circle-image"
+                  loading="lazy"
+                />
+                <h3
+                  style={{ color: "#0a9d6d" }}
+                  className="home-title_about_section"
+                >
+                  Nuestro Camino
+                </h3>
+                <p>
+                  Más de 30 años de experiencia desde agronomía, medicina,
+                  genética, bioquímica, docencia, abogacía, economía e
+                  investigación.
+                </p>
+              </div>
+
+              <div data-aos="fade-up" className="col-md-4 col-12 mb-4">
+                <img
+                  src="https://res.cloudinary.com/dqgjcfosx/image/upload/v1742998116/Dise%C3%B1o_sin_t%C3%ADtulo_2_ojffzb.png"
+                  alt="A donde vamos"
+                  className="img-fluid mb-3 circle-image_3"
+                  loading="lazy"
+                />
+                <h3
+                  style={{ color: "#0a9d6d" }}
+                  className="home-title_about_section"
+                >
+                  A Dónde Vamos
+                </h3>
+                <p>
+                  Innovación científica, acceso equitativo, educación y redes
+                  colaborativas para un futuro donde el cannabis sea sinónimo de
+                  salud, innovación y justicia social.
+                </p>
+              </div>
             </div>
-            {/* ...más secciones... */}
+
+            <section className="present-section" id="present-section">
+              <div className="overlay"></div>
+              <div className="container">
+                <div
+                  className="content-present"
+                  data-aos="fade-up"
+                  data-aos-duration="1000"
+                >
+                  <header className="section-header">
+                    <h2 className="section-title gradient-text">
+                      Nuestro Presente
+                    </h2>
+                    <div className="title-divider"></div>
+                  </header>
+                  <p className="section-description">
+                    Brindamos apoyo integral a usuarios terapéuticos, con
+                    gestión especializada, asesoramiento personalizado y
+                    vinculación certificada con REPROCANN.
+                  </p>
+                </div>
+              </div>
+            </section>
           </div>
         </div>
       </div>
+
 
       <QrSection />
       <div id="donate-now"></div>
