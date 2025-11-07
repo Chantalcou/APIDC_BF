@@ -79,7 +79,7 @@ const App = () => {
           <Route path="/learnWithUs" element={<LearnWithUs />} />
         </Routes>
         <WhatsApp />
-        <ChatBot />
+        {/* <ChatBot /> */}
         <ContactOptions />
         {/* <NewsletterBanner /> */}
         <Footer />
