@@ -1,270 +1,458 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "./Gallery.css";
 
+const slides = [
+  {
+    type: "image",
+    src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1762791032/Jornada_10_Noviembre_UNR-1_page-0001_fczkx3.jpg",
+  },
+  {
+    type: "image",
+    src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1762791032/Jornada_10_Noviembre_UNR-2_page-0001_qs4ihx.jpg",
+  },
+  {
+    type: "image",
+    src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1762791033/Jornada_10_Noviembre_UNR-3_page-0001_skukrg.jpg",
+  },
+  {
+    type: "image",
+    src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1762791032/Jornada_10_Noviembre_UNR-4_page-0001_ogppu6.jpg",
+  },
+  {
+    type: "image",
+    src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1762791033/Jornada_10_Noviembre_UNR-5_page-0001_r7amnt.jpg",
+  },
+  {
+    type: "image",
+    src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1762791040/Jornada_10_Noviembre_UNR-6_page-0001_djsotb.jpg",
+  },
+  {
+    type: "image",
+    src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1762791036/Jornada_10_Noviembre_UNR-7_page-0001_nwldh6.jpg",
+  },
+  {
+    type: "image",
+    src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1762791036/Jornada_10_Noviembre_UNR-8_page-0001_qg6qo7.jpg",
+  },
+  {
+    type: "image",
+    src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1762791036/Jornada_10_Noviembre_UNR-9_page-0001_qixouw.jpg",
+  },
+  {
+    type: "image",
+    src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1762791035/Jornada_10_Noviembre_UNR-10_page-0001_ws86io.jpg",
+  },
+  {
+    type: "image",
+    src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1762791036/Jornada_10_Noviembre_UNR-11_page-0001_c9fpyy.jpg",
+  },
+  {
+    type: "image",
+    src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1762791041/Jornada_10_Noviembre_UNR-12_page-0001_jvyqvr.jpg",
+  },
+  {
+    type: "image",
+    src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1762791037/Jornada_10_Noviembre_UNR-13_page-0001_v4fm4z.jpg",
+  },
+  {
+    type: "image",
+    src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1762791039/Jornada_10_Noviembre_UNR-14_page-0001_sjmunm.jpg",
+  },
+  {
+    type: "image",
+    src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1762791038/Jornada_10_Noviembre_UNR-15_page-0001_aigkbv.jpg",
+  },
+  {
+    type: "image",
+    src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1762791038/Jornada_10_Noviembre_UNR-16_page-0001_dutn0l.jpg",
+  },
+  {
+    type: "image",
+    src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1762791039/Jornada_10_Noviembre_UNR-17_page-0001_rcfriy.jpg",
+  },
+  {
+    type: "image",
+    src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1762791040/Jornada_10_Noviembre_UNR-18_page-0001_jika7l.jpg",
+  },
+  {
+    type: "image",
+    src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1762791040/Jornada_10_Noviembre_UNR-19_page-0001_jlh3cq.jpg",
+  },
+  {
+    type: "image",
+    src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1762791040/Jornada_10_Noviembre_UNR-20_page-0001_wshonb.jpg",
+  },
+  {
+    type: "image",
+    src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1762791042/Jornada_10_Noviembre_UNR-21_page-0001_s2srmy.jpg",
+  },
+  {
+    type: "image",
+    src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1762791042/Jornada_10_Noviembre_UNR-22_page-0001_q3jzbe.jpg",
+  },
+  {
+    type: "video",
+    src: "https://res.cloudinary.com/dqgjcfosx/video/upload/v1762520200/TYZER2025-09-19_at_12.53.31_1_bxgf6p.mp4",
+    title: 'AVANCE EXCLUSIVO - PRÓXIMO DOCUMENTAL',
+    description: 'Activa el sonido para una experiencia completa'
+  },{
+    type: "image",
+    src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1762791042/Jornada_10_Noviembre_UNR-24_page-0001_niv3qn.jpg",
+  },
+];
+
 const Gallery = () => {
   const [activeSlide, setActiveSlide] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [isVideoMuted, setIsVideoMuted] = useState(true);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false); // CORREGIDO: empieza en false (pausado)
+  const [showVideoOverlay, setShowVideoOverlay] = useState(true);
+  const resumeAutoPlayTimeout = useRef(null);
+  const videoRef = useRef(null);
 
-  const timelineData = [
-    {
-      id: 1,
-      icon: "",
-      title: "Habilitación municipal",
-      date: "Enero 2024",
-      description: "Obtención de la habilitación municipal para el predio de APIDC en Brandsen, con 4 hectáreas destinadas al cultivo de cannabis medicinal y un invernadero de 500 m².",
-      highlight: "Primer paso formal que permitió iniciar las actividades bajo el marco regulatorio vigente.",
-      image: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1740666960/Dise%C3%B1o_sin_t%C3%ADtulo_mxuge9.png"
-    },
-    {
-      id: 2,
-      icon: "",
-      title: "REPROCANN aprobado",
-      date: "Marzo 2024",
-      description: "Aprobación del REPROCANN institucional, habilitando el cultivo de cannabis medicinal bajo la Ley 27.350 y garantizando el acceso seguro a los pacientes asociados a la ONG.",
-      highlight: "Marco legal seguro para operaciones",
-      image: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1745343363/WhatsApp_Image_2025-04-22_at_14.10.01_bxsz30.jpg"
-    },
-    {
-      id: 3,
-      icon: "",
-      title: "Firma de convenio con Davis Farms",
-      date: "Mayo 2024",
-      description: "Firma de acuerdo de cooperación con Davis Hemp Farms (Oregon, EE. UU.), representado en Argentina por Ananda Pampa, para el desarrollo conjunto de variedades de cáñamo industrial.",
-      highlight: "Painted Lady, Bhutan Glory, entre otras",
-      image: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1761922934/WhatsApp_Image_2025-10-29_at_12.57.19_PM_enflvb.jpg"
-    },
-    {
-      id: 4,
-      icon: "",
-      title: "Firma de convenio con UNR y CONICET",
-      date: "Julio 2024",
-      description: "Acuerdo de investigación y desarrollo con la Universidad Nacional de Rosario (Facultad de Ciencias Agrarias) y CONICET, para la caracterización y cuantificación de cannabinoides.",
-      highlight: "Participan las cátedras de Fisiología Vegetal y Química Inorgánica",
-      image: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1761922910/WhatsApp_Image_2025-10-29_at_12.57.28_PM_badi0l.jpg"
-    },
-    {
-      id: 5,
-      icon: "",
-      title: "Integración Davis–CONICET–UNR–APIDC",
-      date: "Agosto 2024",
-      description: "Consolidación del equipo interdisciplinario conformado por Davis Farms, Ananda Pampa, UNR, CONICET y APIDC para el inicio de ensayos conjuntos en Argentina.",
-      highlight: "Equipo interdisciplinario consolidado",
-      image: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1745336538/WhatsApp_Image_2025-04-01_at_11.51.01_2_qobhew.jpg"
-    }
-  ];
-
-  const galleryImages = [
-    {
-      src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1740666960/Dise%C3%B1o_sin_t%C3%ADtulo_mxuge9.png",
-      topMain: true,
-    },
-    {
-      src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1745343363/WhatsApp_Image_2025-04-22_at_14.10.01_bxsz30.jpg",
-    },
-    {
-      src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1745343363/WhatsApp_Image_2025-04-22_at_13.59.20_qhyfd3.jpg",
-    },
-    {
-      src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1745343363/WhatsApp_Image_2025-04-22_at_14.10.00_puxpev.jpg",
-    },
-    {
-      src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1745336538/WhatsApp_Image_2025-04-01_at_11.51.01_2_qobhew.jpg",
-    },
-    {
-      src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1745343364/WhatsApp_Image_2025-04-22_at_14.10.43_vwr4rq.jpg",
-      main: true,
-    },
-    {
-      src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1745345453/WhatsApp_Image_2025-04-22_at_13.59.20_1_o8bvhu.jpg",
-      bottom: true,
-    },
-    {
-      src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1745345453/WhatsApp_Image_2025-04-22_at_13.59.20_1_o8bvhu.jpg",
-      bottom: true,
-    },
-    {
-      src: "https://res.cloudinary.com/dqgjcfosx/image/upload/v1745345453/WhatsApp_Image_2025-04-22_at_13.59.20_1_o8bvhu.jpg",
-      bottom: true,
-    },
-  ];
-
-  // Ordenar imágenes: las bottom al final
-  const sortedImages = [
-    ...galleryImages.filter(img => !img.bottom),
-    ...galleryImages.filter(img => img.bottom)
-  ];
+  const totalSlides = slides.length;
+  const isVideoSlide = slides[activeSlide].type === "video";
 
   const nextSlide = () => {
-    setActiveSlide((prev) => (prev + 1) % timelineData.length);
+    setActiveSlide((prev) => (prev + 1) % totalSlides);
   };
 
   const prevSlide = () => {
-    setActiveSlide((prev) => (prev - 1 + timelineData.length) % timelineData.length);
+    setActiveSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
   };
 
   const goToSlide = (index) => {
+    if (resumeAutoPlayTimeout.current) {
+      clearTimeout(resumeAutoPlayTimeout.current);
+    }
+
     setActiveSlide(index);
+    setIsPlaying(false);
+    resumeAutoPlayTimeout.current = setTimeout(() => {
+      if (slides[index].type !== "video") {
+        setIsPlaying(true);
+      }
+    }, 5000);
   };
 
-  // Auto-advance del carousel
-  React.useEffect(() => {
-    const timer = setInterval(() => {
+  // Autoplay solo para imágenes
+  useEffect(() => {
+    if (!isPlaying) return;
+    if (isVideoSlide) return;
+
+    const timer = setTimeout(() => {
       nextSlide();
     }, 5000);
-    return () => clearInterval(timer);
-  }, []);
+
+    return () => clearTimeout(timer);
+  }, [isPlaying, activeSlide, isVideoSlide]);
+
+  // Control del video - CORREGIDO
+  useEffect(() => {
+    const current = slides[activeSlide];
+
+    if (current.type === "video") {
+      setIsPlaying(false);
+      setShowVideoOverlay(true);
+      
+      if (videoRef.current) {
+        videoRef.current.currentTime = 0;
+        videoRef.current.muted = isVideoMuted;
+        videoRef.current.pause(); // Asegurar que empiece pausado
+      }
+      setIsVideoPlaying(false); // Resetear a pausado al cambiar slide
+    } else {
+      if (videoRef.current) {
+        videoRef.current.pause();
+      }
+      setIsVideoPlaying(false);
+      setShowVideoOverlay(true);
+    }
+  }, [activeSlide, isVideoMuted]);
+
+  // CORREGIDO: Función simplificada para play/pause del video
+  const handleVideoPlayPause = () => {
+    if (!videoRef.current) return;
+    
+    if (isVideoPlaying) {
+      // Pausar
+      videoRef.current.pause();
+      setIsVideoPlaying(false);
+      setShowVideoOverlay(true);
+    } else {
+      // Reproducir
+      videoRef.current.play().catch(console.error);
+      setIsVideoPlaying(true);
+      setShowVideoOverlay(false);
+    }
+  };
+
+  const toggleVideoMute = () => {
+    if (!isVideoSlide || !videoRef.current) return;
+    setIsVideoMuted((prev) => {
+      const next = !prev;
+      videoRef.current.muted = next;
+      return next;
+    });
+  };
+
+  const toggleGlobalPlayPause = () => {
+    if (resumeAutoPlayTimeout.current) {
+      clearTimeout(resumeAutoPlayTimeout.current);
+    }
+    setIsPlaying((prev) => !prev);
+  };
 
   return (
-    <div className="nosotros-container">
-      {/* Sección Carousel Timeline */}
-      {/* <section className="carousel-section">
-        <motion.div
-          className="carousel-header"
-          initial={{ y: 50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8 }}
-        >
-          <div className="carousel-icon">
-               <motion.h2
+    <div className="gallery-container">
+      {/* Fondo minimalista */}
+      <div className="background-overlay" />
+
+      {/* Header SpaceX Style */}
+      <motion.div
+        className="gallery-header"
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
+        <motion.h2
           className="section-title"
-          initial={{ y: 50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <span style={{ color: "#f7d046" }}>El corazón de </span>
-          <span style={{ color: "#0a9d6d" }}>APIDC</span>
+          <span className="title-main">JORNADA ACADÉMICA</span>
+          <span className="title-accent">UNR · APIDC</span>
         </motion.h2>
-          </div>
-          <h1 className="carousel-title">
-            <span className="carousel-main-title">Línea temporal – </span>
-            <span className="carousel-accent">Avances APIDC</span>
-          </h1>
-          <p className="carousel-subtitle">
-            Nuestro camino de crecimiento e innovación en el cannabis medicinal
-          </p>
-        </motion.div>
+        <motion.p
+          className="section-subtitle"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          COOPERACIÓN CIENTÍFICA EN CANNABIS MEDICINAL · NOVIEMBRE 2024
+        </motion.p>
+      </motion.div>
 
+      {/* Carrusel Principal */}
+      <div className="carousel-wrapper">
         <div className="carousel-container">
-    
-          <button className="carousel-control prev" onClick={prevSlide}>
-            <span>‹</span>
-          </button>
-          
-          <button className="carousel-control next" onClick={nextSlide}>
-            <span>›</span>
-          </button>
-
-          <div className="carousel-wrapper">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeSlide}
-                className="carousel-slide"
-                initial={{ opacity: 0, x: 300 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -300 }}
-                transition={{ duration: 0.5 }}
-              >
-                <div className="slide-image-container">
-                  <img 
-                    src={timelineData[activeSlide].image} 
-                    alt={timelineData[activeSlide].title}
-                    className="slide-image"
-                  />
-                  <div className="image-overlay"></div>
-             
-                  <motion.div 
-                    className="slide-hover-info"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileHover={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <div className="hover-icon">{timelineData[activeSlide].icon}</div>
-                    <h3 className="hover-title">¿Qué pasó en esta etapa?</h3>
-                    <p className="hover-description">{timelineData[activeSlide].description}</p>
-                    {timelineData[activeSlide].highlight && (
-                      <div className="hover-highlight">
-                        <span className="highlight-badge">Destacado</span>
-                        {timelineData[activeSlide].highlight}
-                      </div>
-                    )}
-                  </motion.div>
-                </div>
-
-                <div className="slide-content">
-                  <div className="slide-meta">
-                    <div className="slide-date">{timelineData[activeSlide].date}</div>
-                    <div className="slide-number">
-                      {String(activeSlide + 1).padStart(2, '0')}/{String(timelineData.length).padStart(2, '0')}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeSlide}
+              className="carousel-slide"
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.02 }}
+              transition={{ duration: 0.6, ease: "easeInOut" }}
+            >
+              <div className="slide-content">
+                {slides[activeSlide].type === "image" && (
+                  <>
+                    <div className="image-wrapper">
+                      <img
+                        src={slides[activeSlide].src}
+                        alt="Jornada académica UNR APIDC"
+                        className="carousel-image"
+                        loading="eager"
+                      />
                     </div>
-                  </div>
-                  
-                  <h2 className="slide-title">
-                    <span className="title-icon">{timelineData[activeSlide].icon}</span>
-                    {timelineData[activeSlide].title}
-                  </h2>
-                  
-                  <p className="slide-description">
-                    {timelineData[activeSlide].description}
-                  </p>
-                  
-                  {timelineData[activeSlide].highlight && (
-                    <div className="slide-highlight">
-                      <span className="highlight-arrow">👉</span>
-                      <span className="highlight-text">{timelineData[activeSlide].highlight}</span>
-                    </div>
-                  )}
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
+                  </>
+                )}
 
-          <div className="carousel-indicators">
-            {timelineData.map((_, index) => (
-              <button
-                key={index}
-                className={`indicator ${index === activeSlide ? 'active' : ''}`}
-                onClick={() => goToSlide(index)}
-              >
-                <div className="indicator-progress">
-                  {index === activeSlide && (
-                    <motion.div 
-                      className="indicator-progress-bar"
-                      layoutId="activeProgress"
-                      transition={{ duration: 5, ease: "linear" }}
-                    />
-                  )}
-                </div>
-                <span className="indicator-number">{index + 1}</span>
-              </button>
-            ))}
+                {slides[activeSlide].type === "video" && (
+                  <>
+                    <div className="video-wrapper">
+                      <video
+                        ref={videoRef}
+                        className="carousel-video"
+                        playsInline
+                        muted={isVideoMuted}
+                        loop
+                      >
+                        <source src={slides[activeSlide].src} type="video/mp4" />
+                      </video>
+                      
+                      {/* Overlay que desaparece al hacer play - CORREGIDO: posición abajo */}
+                      <AnimatePresence>
+                        {showVideoOverlay && (
+                          <motion.div 
+                            className="video-overlay-content"
+                            initial={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                          >
+                            <motion.div
+                              className="video-info"
+                              initial={{ opacity: 0, y: 20 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ delay: 0.2 }}
+                            >
+                              <h3 className="video-title">{slides[activeSlide].title}</h3>
+                              <p className="video-description">{slides[activeSlide].description}</p>
+                              
+                              {/* Botón de play grande */}
+                              <motion.button
+                                className="video-play-button"
+                                onClick={handleVideoPlayPause}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ delay: 0.4 }}
+                              >
+                                <span className="play-icon">▶</span>
+                                <span className="play-text">Reproducir Avance</span>
+                              </motion.button>
+
+                              {isVideoMuted && (
+                                <motion.div 
+                                  className="sound-indicator"
+                                  initial={{ opacity: 0, scale: 0.8 }}
+                                  animate={{ opacity: 1, scale: 1 }}
+                                  transition={{ delay: 0.6 }}
+                                >
+                                  <span className="sound-icon">🔇</span>
+                                  <span className="sound-text">Sonido desactivado</span>
+                                </motion.div>
+                              )}
+                            </motion.div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+
+                    {/* Controles del video - Solo visibles cuando el video está reproduciéndose */}
+                    <AnimatePresence>
+                      {isVideoPlaying && (
+                        <motion.div 
+                          className="video-controls"
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 20 }}
+                        >
+                          <button
+                            className="control-btn"
+                            onClick={handleVideoPlayPause}
+                            aria-label="Pausar video"
+                          >
+                            ❚❚
+                          </button>
+                          <button
+                            className="control-btn"
+                            onClick={toggleVideoMute}
+                            aria-label={isVideoMuted ? "Activar sonido" : "Desactivar sonido"}
+                          >
+                            {isVideoMuted ? "🔇" : "🔊"}
+                          </button>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </>
+                )}
+              </div>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Controles de Navegación */}
+          <button
+            className="nav-btn prev"
+            onClick={prevSlide}
+            aria-label="Slide anterior"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+
+          <button
+            className="nav-btn next"
+            onClick={nextSlide}
+            aria-label="Siguiente slide"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+
+          {/* Play/Pause Global - Solo para imágenes */}
+          {!isVideoSlide && (
+            <button
+              className="play-pause-btn"
+              onClick={toggleGlobalPlayPause}
+              aria-label={isPlaying ? "Pausar carrusel" : "Reanudar carrusel"}
+            >
+              {isPlaying ? "❚❚" : "▶"}
+            </button>
+          )}
+
+          {/* Contador */}
+          <div className="slide-counter">
+            <span className="current">{String(activeSlide + 1).padStart(2, "0")}</span>
+            <span className="separator">/</span>
+            <span className="total">{String(totalSlides).padStart(2, "0")}</span>
           </div>
         </div>
-      </section> */}
 
-      {/* Sección Gallery ORIGINAL */}
-      <section className="gallery-container">
-     
+        {/* Barra de Progreso - Solo para imágenes */}
+        <div className="progress-container">
+          <motion.div
+            className="progress-bar"
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: isPlaying && !isVideoSlide ? 1 : 0 }}
+            transition={{ duration: 5, ease: "linear" }}
+            key={activeSlide}
+          />
+        </div>
 
-        <div className="gallery-grid">
-          {sortedImages.map((image, index) => (
-            <motion.div
+        {/* Indicadores */}
+        <div className="indicators">
+          {slides.map((_, index) => (
+            <button
               key={index}
-              className={`gallery-item 
-                ${image.main ? "main" : ""} 
-                ${image.topMain ? "top-main" : ""}
-                ${image.bottom ? "bottom" : ""}`}
-              whileHover={{ scale: image.main || image.topMain ? 1.02 : 1.05 }}
-              transition={{ duration: 0.3 }}
+              className={`indicator ${index === activeSlide ? 'active' : ''}`}
+              onClick={() => goToSlide(index)}
+              aria-label={`Ir al slide ${index + 1}`}
             >
-              <img
-                src={image.src}
-                alt={`Gallery item ${index + 1}`}
-                className={image.main || image.topMain ? "" : "bw-filter"}
-              />
-            </motion.div>
+              <div className="indicator-dot" />
+            </button>
           ))}
         </div>
-      </section>
+      </div>
+
+      {/* Miniaturas */}
+      <motion.div
+        className="thumbnails-container"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.6 }}
+      >
+        <div className="thumbnails-scroll">
+          {slides.map((slide, index) => (
+            <motion.button
+              key={index}
+              className={`thumbnail ${index === activeSlide ? 'active' : ''} ${slide.type === 'video' ? 'video' : ''}`}
+              onClick={() => goToSlide(index)}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              aria-label={`Ver ${slide.type === 'video' ? 'video' : 'imagen'} ${index + 1}`}
+            >
+              {slide.type === "image" ? (
+                <img
+                  src={slide.src}
+                  alt={`Miniatura ${index + 1}`}
+                  className="thumbnail-image"
+                />
+              ) : (
+                <div className="thumbnail-video">
+                  <span className="play-icon">▶</span>
+                </div>
+              )}
+            </motion.button>
+          ))}
+        </div>
+      </motion.div>
     </div>
   );
 };
