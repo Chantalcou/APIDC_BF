@@ -231,7 +231,7 @@ const Gallery = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          COOPERACIÓN CIENTÍFICA EN CANNABIS MEDICINAL · NOVIEMBRE 2024
+          COOPERACIÓN CIENTÍFICA EN CANNABIS MEDICINAL · NOVIEMBRE 2025
         </motion.p>
       </motion.div>
 
