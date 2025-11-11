@@ -80,7 +80,7 @@ const App = () => {
         </Routes>
         <WhatsApp />
         {/* <ChatBot /> */}
-        <ContactOptions />
+        {/* <ContactOptions /> */}
         {/* <NewsletterBanner /> */}
         <Footer />
       </HelmetProvider>

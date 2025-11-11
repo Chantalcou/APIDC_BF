@@ -231,7 +231,7 @@ const Gallery = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          COOPERACIÓN CIENTÍFICA EN CANNABIS MEDICINAL · NOVIEMBRE 2025
+         COORGANIZACIÓN Y PARTICIPACIÓN EN LA 1.ª JORNADA DE CANNABIS DE LA FACULTAD DE CIENCIAS AGRARIAS DE LA UNIVERSIDAD NACIONAL DE ROSARIO (UNR) · NOVIEMBRE 2025
         </motion.p>
       </motion.div>
 
