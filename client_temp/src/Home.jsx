@@ -310,7 +310,7 @@ const Home = () => {
       <div id="ley-section" className="ley-section text-center">
         {/* ...contenido existente... */}
       </div>
-      <SeccionAs />
+      {/* <SeccionAs /> */}
       <Reprocan />
       <WorkTogether />
       <MovingBanner />
