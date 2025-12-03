@@ -69,7 +69,7 @@ const CountdownTimer = () => {
   return (
     <div className="countdown-container" data-aos="fade-down">
       <div className="countdown-header">
-        <div className="countdown-title">Jueves  04-12 <br/> 20:00 hs</div>
+        <div className="countdown-title">Jueves  04.20Hs </div>
         {/* <div className="countdown-subtitle">Jueves 20:00 hs</div> */}
       </div>
       
