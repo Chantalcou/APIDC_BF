@@ -23,92 +23,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./Home.css";
 
-// Componente de cuenta regresiva
-const CountdownTimer = () => {
-  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-  const [eventStarted, setEventStarted] = useState(false);
-
-  useEffect(() => {
-    const calculateTimeLeft = () => {
-      const now = new Date();
-      
-      // Calcular próximo jueves a las 20:00 hs
-      let targetDate = new Date();
-      const currentDay = now.getDay(); // 0 = Domingo, 4 = Jueves
-      const daysUntilThursday = (4 - currentDay + 7) % 7 || 7;
-      
-      targetDate.setDate(now.getDate() + daysUntilThursday);
-      targetDate.setHours(20, 0, 0, 0);
-
-      // Si ya pasó el jueves a las 20:00, ir al siguiente jueves
-      if (now.getDay() === 4 && now.getHours() >= 20) {
-        targetDate.setDate(targetDate.getDate() + 7);
-      }
-
-      const difference = targetDate.getTime() - now.getTime();
-
-      if (difference > 0) {
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
-        const minutes = Math.floor((difference / 1000 / 60) % 60);
-        const seconds = Math.floor((difference / 1000) % 60);
-
-        setTimeLeft({ days, hours, minutes, seconds });
-        setEventStarted(false);
-      } else {
-        setEventStarted(true);
-      }
-    };
-
-    calculateTimeLeft();
-    const timer = setInterval(calculateTimeLeft, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  return (
-    <div className="countdown-container" data-aos="fade-down">
-      <div className="countdown-header">
-        <div className="countdown-title">Jueves  04.20Hs </div>
-        {/* <div className="countdown-subtitle">Jueves 20:00 hs</div> */}
-      </div>
-      
-      {eventStarted ? (
-        <div className="countdown-started">
-          <div className="started-icon">🎬</div>
-          <div className="started-text">¡EL EVENTO HA COMENZADO!</div>
-        </div>
-      ) : (
-        <div className="countdown-grid">
-          <div className="countdown-item">
-            <div className="countdown-value">{timeLeft.days.toString().padStart(2, '0')}</div>
-            <div className="countdown-label">DÍAS</div>
-          </div>
-          <div className="countdown-separator">:</div>
-          <div className="countdown-item">
-            <div className="countdown-value">{timeLeft.hours.toString().padStart(2, '0')}</div>
-            <div className="countdown-label">HORAS</div>
-          </div>
-          <div className="countdown-separator">:</div>
-          <div className="countdown-item">
-            <div className="countdown-value">{timeLeft.minutes.toString().padStart(2, '0')}</div>
-            <div className="countdown-label">MINUTOS</div>
-          </div>
-          <div className="countdown-separator">:</div>
-          <div className="countdown-item">
-            <div className="countdown-value">{timeLeft.seconds.toString().padStart(2, '0')}</div>
-            <div className="countdown-label">SEGUNDOS</div>
-          </div>
-        </div>
-      )}
-      
-      {/* <div className="countdown-message">
-        No te pierdas nuestro próximo contenido exclusivo
-      </div> */}
-    </div>
-  );
-};
-
 const Home = () => {
   const dispatch = useDispatch();
   const { isAuthenticated, loginWithRedirect, user, getAccessTokenSilently } =
@@ -251,9 +165,6 @@ const Home = () => {
           <SpinnerComponent />
         ) : (
           <div className="container-fluid p-0 main-content">
-            {/* CUENTA REGRESIVA ARRIBA DEL VIDEO */}
-            <CountdownTimer />
-            
             <div className="video-container">
               <video
                 ref={videoRef}
@@ -271,11 +182,22 @@ const Home = () => {
                 Tu navegador no soporta videos HTML5.
               </video>
 
-              {/* ESTRENO arriba derecha */}
-              <div className="release-label">
-                ESTRENO DICIEMBRE 2025
-              </div>
+              {/* BANNER HORIZONTAL ELEGANTE SOBRE EL VIDEO */}
+      {/* BANNER ULTRA PROFESIONAL SOBRE EL VIDEO */}
+<div className="hero-banner" data-aos="fade-down">
+  <div className="hero-banner__inner">
+    <h2 className="hero-banner__text">
+      ESTO RECIÉN EMPIEZA
+      <span className="hero-banner__divider"></span>
+      ¡GRACIAS!
+    </h2>
 
+    <div className="hero-banner__shine"></div>
+  </div>
+</div>
+
+
+          
               {/* Botón sonido centrado abajo */}
               <button
                 className="sound-toggle-btn"
