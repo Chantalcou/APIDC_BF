@@ -1344,3 +1344,582 @@ body {
     font-size: 1.45rem;
   }
 }
+/* ============================
+   BANNER DE FIESTAS - ESTILO PROFESIONAL MINIMALISTA
+   ============================ */
+
+.festive-banner-professional {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  width: auto;
+  max-width: 680px;
+  pointer-events: none;
+  animation: professionalBannerAppear 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes professionalBannerAppear {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.festive-banner-professional__inner {
+  position: relative;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  border-radius: 12px;
+  padding: 16px 48px;
+  border: 1px solid rgba(10, 157, 109, 0.15);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(10, 157, 109, 0.05),
+    0 10px 40px rgba(10, 157, 109, 0.05);
+  overflow: hidden;
+  pointer-events: auto;
+}
+
+.festive-banner-professional__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  position: relative;
+  z-index: 2;
+  flex-wrap: wrap;
+}
+
+.festive-banner-professional__greeting {
+  font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #0a9d6d;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.festive-banner-professional__separator {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.3);
+  font-weight: 300;
+}
+
+.festive-banner-professional__message {
+  font-family: 'Inter', 'SF Pro Text', -apple-system, sans-serif;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.75);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.festive-banner-professional__team {
+  font-family: 'Inter', 'SF Pro Display', -apple-system, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.6);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  margin-left: 4px;
+}
+
+.festive-banner-professional__close {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: rgba(0, 0, 0, 0.3);
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0;
+  z-index: 3;
+  border-radius: 4px;
+}
+
+.festive-banner-professional__close:hover {
+  background: rgba(0, 0, 0, 0.04);
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.festive-banner-professional__close:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.festive-banner-professional__ornament-left,
+.festive-banner-professional__ornament-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  color: rgba(10, 157, 109, 0.4);
+  opacity: 0;
+  animation: ornamentFade 8s ease-in-out infinite;
+}
+
+.festive-banner-professional__ornament-left {
+  left: 20px;
+  animation-delay: 0s;
+}
+
+.festive-banner-professional__ornament-right {
+  right: 48px;
+  animation-delay: 4s;
+}
+
+@keyframes ornamentFade {
+  0%, 100% {
+    opacity: 0;
+    transform: translateY(-50%) scale(0.8);
+  }
+  10%, 20% {
+    opacity: 0.8;
+    transform: translateY(-50%) scale(1);
+  }
+  15% {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.1);
+  }
+}
+
+.festive-banner-professional__inner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(10, 157, 109, 0.1) 50%, 
+    transparent 100%
+  );
+}
+
+.festive-banner-professional__inner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(10, 157, 109, 0.02) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ============================
+   RESPONSIVE - BANNER PROFESIONAL
+   ============================ */
+
+@media (max-width: 768px) {
+  .festive-banner-professional {
+    bottom: 20px;
+    width: calc(100% - 32px);
+    max-width: 100%;
+  }
+  
+  .festive-banner-professional__inner {
+    padding: 14px 20px 14px 20px;
+    border-radius: 10px;
+  }
+  
+  .festive-banner-professional__content {
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-start;
+  }
+  
+  .festive-banner-professional__greeting,
+  .festive-banner-professional__message,
+  .festive-banner-professional__team {
+    white-space: normal;
+    line-height: 1.4;
+  }
+  
+  .festive-banner-professional__greeting {
+    font-size: 14px;
+  }
+  
+  .festive-banner-professional__message {
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.7);
+  }
+  
+  .festive-banner-professional__team {
+    font-size: 12px;
+    margin-left: 0;
+    margin-top: 2px;
+  }
+  
+  .festive-banner-professional__separator {
+    display: none;
+  }
+  
+  .festive-banner-professional__close {
+    top: 16px;
+    right: 12px;
+    transform: none;
+  }
+  
+  .festive-banner-professional__close:hover {
+    transform: none;
+  }
+  
+  .festive-banner-professional__close:active {
+    transform: scale(0.95);
+  }
+  
+  .festive-banner-professional__ornament-left,
+  .festive-banner-professional__ornament-right {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .festive-banner-professional {
+    bottom: 16px;
+    width: calc(100% - 24px);
+  }
+  
+  .festive-banner-professional__inner {
+    padding: 12px 16px 12px 16px;
+  }
+  
+  .festive-banner-professional__greeting {
+    font-size: 13px;
+  }
+  
+  .festive-banner-professional__message {
+    font-size: 12px;
+  }
+  
+  .festive-banner-professional__team {
+    font-size: 11px;
+  }
+}
+
+/* Efecto hover sutil para el banner completo */
+.festive-banner-professional__inner:hover {
+  box-shadow: 
+    0 6px 24px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(10, 157, 109, 0.08),
+    0 12px 48px rgba(10, 157, 109, 0.08);
+  transform: translateY(-1px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+
+
+
+/* ============================
+   BANNER DE FIESTAS - ESTILO PROFESIONAL MINIMALISTA
+   ============================ */
+
+.festive-banner-professional {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  width: auto;
+  max-width: 680px;
+  pointer-events: none;
+  animation: professionalBannerAppear 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes professionalBannerAppear {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.festive-banner-professional__inner {
+  position: relative;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  border-radius: 12px;
+  padding: 16px 48px;
+  border: 1px solid rgba(10, 157, 109, 0.15);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(10, 157, 109, 0.05),
+    0 10px 40px rgba(10, 157, 109, 0.05);
+  overflow: hidden;
+  pointer-events: auto;
+}
+
+.festive-banner-professional__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  position: relative;
+  z-index: 2;
+  flex-wrap: wrap;
+}
+
+.festive-banner-professional__greeting {
+  font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #0a9d6d;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.festive-banner-professional__separator {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.3);
+  font-weight: 300;
+}
+
+.festive-banner-professional__message {
+  font-family: 'Inter', 'SF Pro Text', -apple-system, sans-serif;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.75);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.festive-banner-professional__team {
+  font-family: 'Inter', 'SF Pro Display', -apple-system, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.6);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  margin-left: 4px;
+}
+
+.festive-banner-professional__close {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: rgba(0, 0, 0, 0.3);
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0;
+  z-index: 3;
+  border-radius: 4px;
+}
+
+.festive-banner-professional__close:hover {
+  background: rgba(0, 0, 0, 0.04);
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.festive-banner-professional__close:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.festive-banner-professional__ornament-left,
+.festive-banner-professional__ornament-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  color: rgba(10, 157, 109, 0.4);
+  opacity: 0;
+  animation: ornamentFade 8s ease-in-out infinite;
+}
+
+.festive-banner-professional__ornament-left {
+  left: 20px;
+  animation-delay: 0s;
+}
+
+.festive-banner-professional__ornament-right {
+  right: 48px;
+  animation-delay: 4s;
+}
+
+@keyframes ornamentFade {
+  0%, 100% {
+    opacity: 0;
+    transform: translateY(-50%) scale(0.8);
+  }
+  10%, 20% {
+    opacity: 0.8;
+    transform: translateY(-50%) scale(1);
+  }
+  15% {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.1);
+  }
+}
+
+.festive-banner-professional__inner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(10, 157, 109, 0.1) 50%, 
+    transparent 100%
+  );
+}
+
+.festive-banner-professional__inner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(10, 157, 109, 0.02) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ============================
+   RESPONSIVE - BANNER PROFESIONAL
+   ============================ */
+
+@media (max-width: 768px) {
+  .festive-banner-professional {
+    bottom: 20px;
+    width: calc(100% - 32px);
+    max-width: 100%;
+  }
+  
+  .festive-banner-professional__inner {
+    padding: 14px 20px 14px 20px;
+    border-radius: 10px;
+  }
+  
+  .festive-banner-professional__content {
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-start;
+  }
+  
+  .festive-banner-professional__greeting,
+  .festive-banner-professional__message,
+  .festive-banner-professional__team {
+    white-space: normal;
+    line-height: 1.4;
+  }
+  
+  .festive-banner-professional__greeting {
+    font-size: 14px;
+  }
+  
+  .festive-banner-professional__message {
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.7);
+  }
+  
+  .festive-banner-professional__team {
+    font-size: 12px;
+    margin-left: 0;
+    margin-top: 2px;
+  }
+  
+  .festive-banner-professional__separator {
+    display: none;
+  }
+  
+  .festive-banner-professional__close {
+    top: 16px;
+    right: 12px;
+    transform: none;
+  }
+  
+  .festive-banner-professional__close:hover {
+    transform: none;
+  }
+  
+  .festive-banner-professional__close:active {
+    transform: scale(0.95);
+  }
+  
+  .festive-banner-professional__ornament-left,
+  .festive-banner-professional__ornament-right {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .festive-banner-professional {
+    bottom: 16px;
+    width: calc(100% - 24px);
+  }
+  
+.festive-banner-professional__inner {
+  animation: festiveBreath 6s ease-in-out infinite;
+}
+
+@keyframes festiveBreath {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+.festive-banner-professional__greeting {
+  color: #0a9d6d;
+  background: linear-gradient(90deg, #0a9d6d, #d6b25e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+  .festive-banner-professional__message {
+    font-size: 12px;
+  }
+  
+  .festive-banner-professional__team {
+    font-size: 11px;
+  }
+}
+
+/* Efecto hover sutil para el banner completo */
+.festive-banner-professional__inner:hover {
+  box-shadow: 
+    0 6px 24px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(10, 157, 109, 0.08),
+    0 12px 48px rgba(10, 157, 109, 0.08);
+  transform: translateY(-1px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}

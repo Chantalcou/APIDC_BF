@@ -33,6 +33,7 @@ const Home = () => {
   const [isSpinning, setIsSpinning] = useState(false);
   const [captchaVerified, setCaptchaVerified] = useState(false);
   const [showCaptcha, setShowCaptcha] = useState(false);
+  const [showFestiveBanner, setShowFestiveBanner] = useState(true);
 
   // VIDEO
   const videoRef = useRef(null);
@@ -132,6 +133,10 @@ const Home = () => {
     }
   };
 
+  const closeFestiveBanner = () => {
+    setShowFestiveBanner(false);
+  };
+
   return (
     <>
       <Helmet>
@@ -182,22 +187,17 @@ const Home = () => {
                 Tu navegador no soporta videos HTML5.
               </video>
 
-              {/* BANNER HORIZONTAL ELEGANTE SOBRE EL VIDEO */}
-      {/* BANNER ULTRA PROFESIONAL SOBRE EL VIDEO */}
-<div className="hero-banner" data-aos="fade-down">
-  <div className="hero-banner__inner">
-    <h2 className="hero-banner__text">
-      ESTO RECIÉN EMPIEZA
-      <span className="hero-banner__divider"></span>
-      ¡GRACIAS!
-    </h2>
+              <div className="hero-banner" data-aos="fade-down">
+                <div className="hero-banner__inner">
+                  <h2 className="hero-banner__text">
+                    ESTO RECIÉN EMPIEZA
+                    <span className="hero-banner__divider"></span>
+                    ¡GRACIAS!
+                  </h2>
+                  <div className="hero-banner__shine"></div>
+                </div>
+              </div>
 
-    <div className="hero-banner__shine"></div>
-  </div>
-</div>
-
-
-          
               {/* Botón sonido centrado abajo */}
               <button
                 className="sound-toggle-btn"
@@ -324,6 +324,41 @@ const Home = () => {
       <WorkTogether />
       <MovingBanner />
       <ContactInfo />
+      
+      {/* BANNER DE FIESTAS PROFESIONAL - ESTILO ELON MUSK */}
+      {showFestiveBanner && (
+        <div className="festive-banner-professional">
+          <div className="festive-banner-professional__inner">
+            <div className="festive-banner-professional__content">
+              <span className="festive-banner-professional__greeting">
+               ¡Felices fiestas!
+              </span>
+              <span className="festive-banner-professional__separator">·</span>
+              <span className="festive-banner-professional__message">
+                Gracias por acompañarnos durante este año
+              </span>
+              <span className="festive-banner-professional__team">
+                — Equipo APIDC
+              </span>
+              <div className="festive-banner-professional__ornament-left">❄</div>
+<div className="festive-banner-professional__ornament-right">❄</div>
+
+            </div>
+            <button 
+              className="festive-banner-professional__close" 
+              onClick={closeFestiveBanner}
+              aria-label="Cerrar mensaje"
+            >
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M1 1L13 13M13 1L1 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+              </svg>
+            </button>
+            <div className="festive-banner-professional__ornament-left">✦</div>
+            <div className="festive-banner-professional__ornament-right">✦</div>
+          </div>
+        </div>
+      )}
+
       <LoginModal show={showModal} handleClose={handleCloseModal} />
     </>
   );
