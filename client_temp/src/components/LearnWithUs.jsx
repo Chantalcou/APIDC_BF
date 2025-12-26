@@ -88,7 +88,7 @@ const LearnWithUs = () => {
       <section className="clean-trainings">
         <div className="clean-container">
           <div className="clean-header">
-            <h1 className="clean-title">Próximos eventos</h1>
+            <h1 className="clean-title">Nuestros eventos</h1>
           </div>
 
       

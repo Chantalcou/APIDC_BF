@@ -170,7 +170,7 @@ const Home = () => {
           <SpinnerComponent />
         ) : (
           <div className="container-fluid p-0 main-content">
-            <div className="video-container">
+            <div className="home-video-container">
               <video
                 ref={videoRef}
                 className="home-bg-video"
@@ -285,29 +285,36 @@ const Home = () => {
                 </p>
               </div>
             </div>
-
-            <section className="present-section" id="present-section">
-              <div className="overlay"></div>
-              <div className="container">
-                <div
-                  className="content-present"
-                  data-aos="fade-up"
-                  data-aos-duration="1000"
-                >
-                  <header className="section-header">
-                    <h2 className="section-title gradient-text">
-                      Nuestro Presente
-                    </h2>
-                    <div className="title-divider"></div>
-                  </header>
-                  <p className="section-description">
-                    Brindamos apoyo integral a usuarios terapéuticos, con
-                    gestión especializada, asesoramiento personalizado y
-                    vinculación certificada con REPROCANN.
-                  </p>
-                </div>
+          <section className="present-section" id="present-section">
+            <div className="present-overlay"></div>
+            <div className="present-gradient-overlay"></div>
+            <div className="container">
+              <div 
+                className="content-present"
+                data-aos="fade-up" 
+                data-aos-duration="800"
+                data-aos-delay="200"
+              >
+                <header className="section-header">
+              
+                  <h2 className="section-title gradient-text-professional">
+                    Nuestro Presente
+                  </h2>
+                  <div className="title-divider">
+                    <div className="divider-line"></div>
+                    <div className="divider-dot"></div>
+                    <div className="divider-line"></div>
+                  </div>
+                </header>
+                <p className="section-description__present">
+                  Brindamos apoyo integral a usuarios terapéuticos, con gestión 
+                  especializada, asesoramiento personalizado y vinculación 
+                  certificada con REPROCANN.
+                </p>
+             
               </div>
-            </section>
+            </div>
+          </section>
           </div>
         </div>
       </div>
