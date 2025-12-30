@@ -1,100 +1,146 @@
-import React, { useState } from "react";
-import { FaLeaf, FaCopy, FaWhatsapp } from "react-icons/fa";
+// Donations.jsx
+import React from "react";
+import { FaLock, FaArrowRight, FaCheckCircle, FaLeaf, FaQrcode } from "react-icons/fa";
 import "./Donations.css";
 
 const Donations = () => {
-  const [showTransferModal, setShowTransferModal] = useState(false);
-  const [copied, setCopied] = useState(false);
+  const IMAGE_URL =
+    "https://res.cloudinary.com/dqgjcfosx/image/upload/v1767020389/apidc_botellas_cropped_qs2u2k.png";
 
-  const handleWhatsappDonation = () => {
-    const message = `Hola, quiero realizar una donación y necesito información para completar la transferencia.`;
-    const whatsappUrl = `https://wa.me/+5491155655766?text=${encodeURIComponent(
-      message
-    )}`;
-    window.open(whatsappUrl, "_blank");
-  };
+  const FORM_URL =
+    "https://docs.google.com/forms/d/1guSRMEtLnfwWshZFkZ8TDF1DlSh2y6av8TWgYh4RsHY/edit";
 
-  const handleCopyCBU = () => {
-    navigator.clipboard.writeText("0000003100085976480946");
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const QR_URL =
+    "https://res.cloudinary.com/dqgjcfosx/image/upload/v1767026521/frame_14_ldhal7.png";
+
+  const benefits = [
+    "Donación de aceite a hospitales",
+    "Sostenimiento de investigación y seguimiento clínico",
+    "Producción, insumos y logística para garantizar continuidad",
+
+  ];
+
+  const handleOpenForm = () => {
+    window.open(FORM_URL, "_blank", "noopener,noreferrer");
   };
 
   return (
-    <>
-      <div className="donation-background_image">
-        <section className="donacion-container">
-          {/* Modal para transferencia */}
-          {showTransferModal && (
-            <div className="transfer-modal">
-              <div className="modal-content">
-                <button
-                  className="close-modal"
-                  onClick={() => setShowTransferModal(false)}
-                >
-                  &times;
-                </button>
-                <h3>Datos para Transferencia Bancaria</h3>
-                <div className="bank-details">
-                  <p>
-                    <strong>Nombre de la Asociación:</strong>
-                  </p>
-                  <p>Asociación Cannábica Solidaria</p>
+    <section className="donate-section" id="donaciones">
+      <div className="donate-bg" aria-hidden="true">
+        <div className="bg-overlay" />
+      </div>
 
-                  <p>
-                    <strong>CBU:</strong>
-                  </p>
-                  <div className="cbu-container">
-                    <span>0000003100085976480946</span>
-                    <button onClick={handleCopyCBU} className="copy-button">
-                      <FaCopy /> {copied ? "¡Copiado!" : "Copiar"}
-                    </button>
-                  </div>
+      <div className="donate-container">
+        <header className="donate-header">
+          <div className="donate-badge">
+            <FaLeaf className="badge-icon" />
+            <span>DONACIONES</span>
+          </div>
 
-                  <p>
-                    <strong>Alias:</strong>
-                  </p>
-                  <p>apidc.ong.mp</p>
+          <h1 className="donate-title">
+            Colaborá con <span className="title-highlight">APIDC</span>
+          </h1>
+
+          <p className="donate-subtitle">
+            Tu aporte sostiene donaciones a hospitales, investigación y continuidad operativa.
+            <strong> Un gesto simple, un impacto real.</strong>
+          </p>
+        </header>
+
+        <div className="donate-content">
+          {/* Imagen */}
+          <div className="donate-media">
+            <div className="media-frame">
+              <img
+                src={IMAGE_URL}
+                alt="APIDC - Producción con propósito social"
+                className="media-image"
+                loading="lazy"
+              />
+            </div>
+            <p className="media-caption">APIDC — Impacto real, propósito social</p>
+          </div>
+
+          {/* Card */}
+          <div className="donate-card-wrapper">
+            <div className="donate-card">
+              {/* Header card */}
+              <div className="card-header">
+                <h2 className="card-title">
+                  Registrá tu colaboración <FaLock className="lock-icon" />
+                </h2>
+                <p className="card-description">
+                  Elegí tu forma: completá el formulario o escaneá el QR desde el celular.
+                </p>
+              </div>
+
+              {/* Beneficios */}
+              <div className="card-benefits">
+                <h3 className="benefits-title">Por qué colaborar</h3>
+                <ul className="benefits-list">
+                  {benefits.map((benefit, index) => (
+                    <li key={index} className="benefit-item">
+                      <FaCheckCircle className="benefit-icon" />
+                      <span className="benefit-text">{benefit}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* CTA doble */}
+              <div className="card-action">
+                <div className="cta-split" role="group" aria-label="Acciones para donar">
+                  {/* Botón */}
+                  <button
+                    type="button"
+                    className="cta-half cta-button"
+                    onClick={handleOpenForm}
+                    aria-label="Ir al formulario de donaciones"
+                  >
+                    <span className="cta-title-row">
+                      Ir al formulario <FaArrowRight className="arrow-icon" />
+                    </span>
+                    <span className="cta-sub">
+                      Rápido • Seguro • Transparente
+                    </span>
+                  </button>
+
+                  {/* QR */}
+                  <a
+                    className="cta-half cta-qr"
+                    href={FORM_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Abrir formulario desde el QR"
+                  >
+                    <div className="qr-top">
+                      <FaQrcode className="qr-icon" />
+                      <span className="qr-label">Escanear QR</span>
+                    </div>
+
+                    <div className="qr-frame">
+                      <img
+                        src={QR_URL}
+                        alt="QR para formulario de donaciones APIDC"
+                        className="qr-image"
+                        loading="lazy"
+                      />
+                    </div>
+
+                    <span className="qr-sub">Abrir en el teléfono</span>
+                  </a>
                 </div>
-                <button
-                  className="whatsapp-button"
-                  onClick={handleWhatsappDonation}
-                >
-                  <FaWhatsapp /> Confirmar por WhatsApp
-                </button>
+
+                <p className="security-note">
+                  <FaLock className="security-icon" />
+                  Página segura. Tus datos están protegidos.
+                </p>
               </div>
             </div>
-          )}
-
-          {/* Contenido existente */}
-          <div className="donacion-header">
-            <h2 className="donacion-titulo">
-              <FaLeaf className="icono-titulo" />
-              Tu apoyo transforma vidas
-            </h2>
-            <p className="donacion-subtitulo">
-              Cada contribución acerca el acceso a la salud
-            </p>
           </div>
-
-          <div className="razones-grid"></div>
-
-          <div className="cta-container">
-            <button
-              className="donar-button"
-              onClick={() => setShowTransferModal(true)}
-            >
-              Quiero ser parte del cambio
-              <span className="button-badge">Donaciones</span>
-            </button>
-            <p className="garantia-text">
-              <span>✓</span> Transparencia certificada - Recibos digitales -
-              Destino controlado
-            </p>
-          </div>
-        </section>
+        </div>
       </div>
-    </>
+    </section>
   );
 };
 

@@ -16,6 +16,7 @@ import SeccionAs from "./components/SeccionAs.jsx";
 import SpinnerComponent from "./components/SpinnerComponent.jsx";
 import Donations from "./components/Donations.jsx";
 import CannabisBenefits from "./components/CannabisBenefits.jsx";
+import { FaArrowRight, FaQrcode, FaHeart } from "react-icons/fa";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -38,6 +39,10 @@ const Home = () => {
   // VIDEO
   const videoRef = useRef(null);
   const [isMuted, setIsMuted] = useState(true); // autoplay seguro
+
+  // URLs para donaciones
+  const FORM_URL = "https://docs.google.com/forms/d/1guSRMEtLnfwWshZFkZ8TDF1DlSh2y6av8TWgYh4RsHY/edit";
+  const QR_URL = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + encodeURIComponent(FORM_URL);
 
   // Loader
   useEffect(() => {
@@ -133,6 +138,11 @@ const Home = () => {
     }
   };
 
+  // Función para abrir formulario de donaciones
+  const handleOpenForm = () => {
+    window.open(FORM_URL, "_blank", "noopener,noreferrer");
+  };
+
   const closeFestiveBanner = () => {
     setShowFestiveBanner(false);
   };
@@ -187,7 +197,7 @@ const Home = () => {
                 Tu navegador no soporta videos HTML5.
               </video>
 
-              <div className="hero-banner" data-aos="fade-down">
+              {/* <div className="hero-banner" data-aos="fade-down">
                 <div className="hero-banner__inner">
                   <h2 className="hero-banner__text">
                     ESTO RECIÉN EMPIEZA
@@ -195,6 +205,65 @@ const Home = () => {
                     ¡GRACIAS!
                   </h2>
                   <div className="hero-banner__shine"></div>
+                </div>
+              </div> */}
+
+              {/* SECCIÓN DE DONACIONES MEJORADA */}
+              <div className="donations-mini" data-aos="fade-up" data-aos-delay="300">
+                <div className="donations-mini__badge">
+                  <FaHeart />
+                  <span>APOYÁ NUESTRA CAUSA</span>
+                </div>
+                
+                <div className="donations-mini__content">
+                  <h3 className="donations-mini__title">
+                    Tu apoyo transforma vidas
+                  </h3>
+                  <p className="donations-mini__subtitle">
+                    Cada donación nos ayuda a continuar con nuestro trabajo por una comunidad más saludable
+                  </p>
+                  
+                  <div className="cta-split" role="group" aria-label="Acciones para donar">
+                    {/* Botón */}
+                    <button
+                      type="button"
+                      className="cta-half cta-button"
+                      onClick={handleOpenForm}
+                      aria-label="Ir al formulario de donaciones"
+                    >
+                      <span className="cta-title-row">
+                        Ir al formulario <FaArrowRight className="arrow-icon" />
+                      </span>
+                      <span className="cta-sub">
+                        Rápido • Seguro • Transparente
+                      </span>
+                    </button>
+
+                    {/* QR */}
+                    <a
+                      className="cta-half cta-qr"
+                      href={FORM_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Abrir formulario desde el QR"
+                    >
+                      <div className="qr-top">
+                        <FaQrcode className="qr-icon" />
+                        <span className="qr-label">Escanear QR</span>
+                      </div>
+
+                      <div className="qr-frame">
+                        <img
+                          src={QR_URL}
+                          alt="QR para formulario de donaciones APIDC"
+                          className="qr-image"
+                          loading="lazy"
+                        />
+                      </div>
+
+                      <span className="qr-sub">Abrir en el teléfono</span>
+                    </a>
+                  </div>
                 </div>
               </div>
 
@@ -296,7 +365,6 @@ const Home = () => {
                 data-aos-delay="200"
               >
                 <header className="section-header">
-              
                   <h2 className="section-title gradient-text-professional">
                     Nuestro Presente
                   </h2>
@@ -311,7 +379,6 @@ const Home = () => {
                   especializada, asesoramiento personalizado y vinculación 
                   certificada con REPROCANN.
                 </p>
-             
               </div>
             </div>
           </section>
@@ -321,7 +388,7 @@ const Home = () => {
 
       <QrSection />
       <div id="donate-now"></div>
-      <Donations />
+      {/* <Donations /> */}
       <div id="asociarme-section"></div>
       <div id="ley-section" className="ley-section text-center">
         {/* ...contenido existente... */}
@@ -348,8 +415,7 @@ const Home = () => {
                 — Equipo APIDC
               </span>
               <div className="festive-banner-professional__ornament-left">❄</div>
-<div className="festive-banner-professional__ornament-right">❄</div>
-
+              <div className="festive-banner-professional__ornament-right">❄</div>
             </div>
             <button 
               className="festive-banner-professional__close" 

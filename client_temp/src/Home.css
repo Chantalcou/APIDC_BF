@@ -1955,3 +1955,338 @@ body {
   transform: translateY(-1px);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+/* =========================
+   SECCIÓN DE DONACIONES MINI EN VIDEO
+   ========================= */
+
+.donations-mini {
+  position: absolute;
+  top: 20%;
+  right: 2rem;
+  z-index: 5;
+  max-width: 400px;
+  width: 100%;
+  pointer-events: auto;
+  animation: slideInFromRight 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.donations-mini__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(10, 157, 109, 0.15);
+  border: 1px solid rgba(10, 157, 109, 0.3);
+  border-radius: 50px;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  backdrop-filter: blur(10px);
+}
+
+.donations-mini__badge svg {
+  color: #bdf746;
+  font-size: 0.9rem;
+}
+
+.donations-mini__badge span {
+  color: #bdf746;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.donations-mini__content {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 1.5rem;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+}
+
+.donations-mini__title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 0.5rem;
+  line-height: 1.2;
+}
+
+.donations-mini__subtitle {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.4;
+  margin: 0 0 1.5rem;
+}
+
+/* =========================
+   CTA SPLIT MEJORADO
+   ========================= */
+
+.cta-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.cta-half {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.cta-button {
+  background: linear-gradient(135deg, #0a9d6d, #087a55);
+  color: white;
+  border: none;
+  padding: 1.2rem 1rem;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(10, 157, 109, 0.4);
+  background: linear-gradient(135deg, #0bae7a, #098b62);
+}
+
+.cta-button:active {
+  transform: translateY(-1px);
+}
+
+.cta-qr {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.2rem 1rem;
+  backdrop-filter: blur(10px);
+}
+
+.cta-qr:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(10, 157, 109, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.cta-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+.arrow-icon {
+  font-size: 0.8rem;
+  transition: transform 0.3s ease;
+}
+
+.cta-button:hover .arrow-icon {
+  transform: translateX(3px);
+}
+
+.cta-sub {
+  font-size: 0.75rem;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+.qr-top {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.qr-icon {
+  color: #bdf746;
+  font-size: 1rem;
+}
+
+.qr-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.qr-frame {
+  width: 90px;
+  height: 90px;
+  background: white;
+  border-radius: 8px;
+  padding: 8px;
+  margin: 0 auto 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qr-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.qr-sub {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+}
+
+/* =========================
+   RESPONSIVE PARA DONACIONES MINI
+   ========================= */
+
+@media (max-width: 1024px) {
+  .donations-mini {
+    position: relative;
+    top: auto;
+    right: auto;
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+  
+  .cta-split {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .donations-mini {
+    max-width: 100%;
+    padding: 0 0.5rem;
+  }
+  
+  .donations-mini__content {
+    padding: 1.25rem;
+  }
+  
+  .donations-mini__title {
+    font-size: 1.2rem;
+  }
+  
+  .donations-mini__subtitle {
+    font-size: 0.85rem;
+  }
+  
+  .qr-frame {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .donations-mini {
+    margin: 1rem auto;
+  }
+  
+  .donations-mini__badge {
+    padding: 0.4rem 0.8rem;
+  }
+  
+  .donations-mini__badge span {
+    font-size: 0.7rem;
+  }
+  
+  .cta-button, .cta-qr {
+    padding: 1rem 0.75rem;
+  }
+  
+  .cta-title-row {
+    font-size: 0.85rem;
+  }
+  
+  .qr-frame {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+/* =========================
+   AJUSTE PARA BOTÓN DE SONIDO CON DONACIONES
+   ========================= */
+   
+.home-video-container {
+  position: relative;
+}
+
+.sound-toggle-btn {
+  position: absolute;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  z-index: 6; /* Aumentado para estar sobre donaciones */
+  padding: 10px 20px;
+  font-size: 0.95rem;
+  border-radius: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 500;
+  backdrop-filter: blur(4px);
+  transition: all 0.3s ease;
+}
+
+.sound-toggle-btn:hover {
+  background: rgba(0, 0, 0, 0.9);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateX(-50%) scale(1.05);
+}
+
+/* Para pantallas pequeñas, ajustar posición del botón de sonido */
+@media (max-width: 1024px) {
+  .sound-toggle-btn {
+    bottom: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sound-toggle-btn {
+    bottom: 16px;
+    font-size: 0.8rem;
+    padding: 8px 16px;
+  }
+}
+
+/* =========================
+   ANIMACIONES ADICIONALES
+   ========================= */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.donations-mini {
+  animation: fadeInUp 0.6s ease-out 0.3s both;
+}
