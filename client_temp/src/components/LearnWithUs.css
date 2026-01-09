@@ -1,4 +1,67 @@
 /* =========================
+   PRÓXIMAMENTE (BANNER)
+   ========================= */
+
+.upcoming-banner {
+  max-width: 1200px;
+  margin: 0 auto 2.2rem;
+  padding: 1.1rem 1.4rem;
+  border-radius: 16px;
+  background: rgba(10, 157, 109, 0.08);
+  border: 1px solid rgba(10, 157, 109, 0.22);
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.upcoming-badge {
+  flex: 0 0 auto;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #0a9d6d;
+  background: rgba(10, 157, 109, 0.14);
+}
+
+.upcoming-content {
+  flex: 1 1 auto;
+}
+
+.upcoming-title {
+  margin: 0 0 0.55rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--gray-dark);
+}
+.upcoming-list {
+  margin: 0;
+  padding: 0;            /* 👈 sin sangría */
+  list-style: none;      /* 👈 sin puntitos */
+  color: var(--gray-medium);
+  line-height: 1.6;
+  font-size: 1.02rem;
+}
+
+.upcoming-list li {
+  margin: 0.25rem 0;
+  padding-left: 1.15rem;     /* espacio para el “check” */
+  position: relative;
+}
+
+.upcoming-list li::before {
+  content: "✓";              /* o "→" si preferís */
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--green-primary);
+  font-weight: 800;
+}
+
+/* =========================
    VARIABLES / BASE
    ========================= */
 

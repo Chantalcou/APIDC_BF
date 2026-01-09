@@ -88,11 +88,28 @@ const LearnWithUs = () => {
       <section className="clean-trainings">
         <div className="clean-container">
           <div className="clean-header">
-            <h1 className="clean-title">Nuestros eventos</h1>
+            <h1 className="clean-title">Cursos y capacitaciones 2026</h1>
           </div>
 
-      
+      {/* =========================
+    PRÓXIMAMENTE
+   ========================= */}
+<div className="upcoming-banner">
+  <span className="upcoming-badge">Próximamente</span>
 
+  <div className="upcoming-content">
+    <h3 className="upcoming-title">Nuevas capacitaciones en preparación</h3>
+    <ul className="upcoming-list">
+      <li>CULTIVO IN VITRO APLICADO A CANNABIS SATIVA L</li>
+      <li>GENÉTICA APLICADA A CANNABIS SATIVA L</li>
+    </ul>
+  </div>
+</div>
+
+                 <div className="clean-header">
+            <h1 className="clean-title">Eventos 2025</h1>
+          </div>
+      
           <div className="clean-grid">
             {newTrainingsData.map((training, index) => (
               <div key={index} className="clean-card">

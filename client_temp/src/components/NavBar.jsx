@@ -15,13 +15,10 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const { userFromRedux, isAdmin, getAllNotAdmin } = useSelector(
-    (state) => state
-  );
+  const { userFromRedux, isAdmin, getAllNotAdmin } = useSelector((state) => state);
 
   const {
     isAuthenticated,
-    loginWithRedirect,
     logout,
     user,
     getAccessTokenSilently,
@@ -32,10 +29,12 @@ const NavBar = () => {
   const [showCaptcha, setShowCaptcha] = useState(false);
   const [captchaVerified, setCaptchaVerified] = useState(false);
   const [redirectPath, setRedirectPath] = useState(null);
-  // Estado del modal
+
+  // Modal login
   const [showModal, setShowModal] = useState(false);
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
+
   useEffect(() => {
     const loadUsers = async () => {
       try {
@@ -57,17 +56,12 @@ const NavBar = () => {
             )
           );
 
-          const idToken = idTokenObject.id_token;
-         
+          // eslint-disable-next-line no-unused-vars
+          const idToken = idTokenObject?.id_token;
 
           if (redirectPath) {
-            // Si la ruta es para /membershipSection, redirigir inmediatamente
-            if (redirectPath === "/membershipSection") {
-              navigate(redirectPath);
-            } else {
-              navigate(redirectPath);
-            }
-            setRedirectPath(null); // Limpiar la ruta después de la redirección
+            navigate(redirectPath);
+            setRedirectPath(null);
           }
         } catch (error) {
           console.error("Error registrando usuario:", error);
@@ -76,41 +70,25 @@ const NavBar = () => {
     };
 
     registerAuthenticatedUser();
-  }, [
-    isAuthenticated,
-    user,
-    getAccessTokenSilently,
-    dispatch,
-    redirectPath,
-    navigate,
-  ]);
+  }, [isAuthenticated, user, getAccessTokenSilently, dispatch, redirectPath, navigate]);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.pageYOffset;
-      setIsScrolling(
-        currentScrollPos > 50 ? scrollPosition < currentScrollPos : false
-      );
+      setIsScrolling(currentScrollPos > 50 ? scrollPosition < currentScrollPos : false);
       setScrollPosition(currentScrollPos);
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [scrollPosition]);
 
-  // Verification Captcha
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = `https://www.google.com/recaptcha/api.js?render=6Lfxug4rAAAAAAbgHilGD7UcIa4MZhY5DWEaCSl7`;
-    script.async = true;
-    document.head.appendChild(script);
-
-    return () => {
-      document.head.removeChild(script);
-    };
-  }, []);
+  /**
+   * ✅ IMPORTANTE:
+   * Eliminamos la carga manual de reCAPTCHA v3:
+   * https://www.google.com/recaptcha/api.js?render=...
+   * Porque tu sitio usa reCAPTCHA v2 checkbox (react-google-recaptcha).
+   */
 
   const handleLogout = () => {
     logout({ returnTo: window.location.origin });
@@ -121,16 +99,14 @@ const NavBar = () => {
 
   const scrollToSection = (sectionId) => {
     $("html, body").animate(
-      {
-        scrollTop: $("#" + sectionId).offset().top,
-      },
+      { scrollTop: $("#" + sectionId).offset().top },
       1000
     );
   };
 
   const isHome = location.pathname === "/";
 
-  // Maneja la verificación de reCAPTCHA
+  // Maneja la verificación (si la usás en algún lado)
   const handleCaptchaVerify = (value) => {
     if (value) {
       setCaptchaVerified(true);
@@ -139,9 +115,10 @@ const NavBar = () => {
       console.error("Error de verificación del CAPTCHA");
     }
   };
+
   const handleSocioRedirect = () => {
     if (!isAuthenticated) {
-      setRedirectPath("/socio"); 
+      setRedirectPath("/socio");
       handleShowModal();
     } else {
       navigate("/socio");
@@ -166,20 +143,16 @@ const NavBar = () => {
 
   const handleMembershipRedirect = () => {
     if (!isAuthenticated) {
-      // Si no está autenticado, redirigir al login
       setRedirectPath("/login");
       handleShowModal();
     } else {
-      // Si está autenticado, verificamos el tipo de membresía
       const userMembership = getAllNotAdmin?.find(
         (u) => u.email?.toLowerCase() === user?.email?.toLowerCase()
       )?.membershipType;
 
       if (userMembership && ["gestor", "premium"].includes(userMembership)) {
-        // Si tiene un tipo de membresía válido, redirigir a la sección de membresía
         navigate("/membershipSection");
       } else {
-        // Si no tiene una membresía válida, mostrar mensaje o redirigir a una página diferente
         alert("No tienes acceso a la sección de membresía.");
       }
     }
@@ -197,9 +170,7 @@ const NavBar = () => {
       <Navbar
         expand="lg"
         fixed="top"
-        className={`navbar-container ${
-          isScrolling ? "scroll-hide" : "scroll-show"
-        }`}
+        className={`navbar-container ${isScrolling ? "scroll-hide" : "scroll-show"}`}
         bg="dark"
         variant="dark"
       >
@@ -213,42 +184,33 @@ const NavBar = () => {
               className="d-inline-block align-top"
             />
           </Navbar.Brand>
+
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="basic-navbar-nav-autentication-left">
               <Nav.Link href="/">Inicio</Nav.Link>
+
               {isAuthenticated ? (
                 <>
-                  {isAuthenticated &&
-                    getAllNotAdmin?.some(
-                      (u) =>
-                        u.email?.toLowerCase() === user?.email?.toLowerCase() &&
-                        ["gestor", "premium"].includes(u.membershipType)
-                    ) && (
-                      <Link to="/products" className="nav-link me-3">
-                        Tu Cultivo
-                      </Link>
-                    )}
-                  {/* {isAuthenticated &&
-                    getAllNotAdmin?.some(
-                      (u) =>
-                        u.email?.toLowerCase() === user?.email?.toLowerCase() &&
-                        ["gestor", "premium"].includes(u.membershipType)
-                    ) && (
-                      <Link to="/newsLetter" className="nav-link me-3">
-                        NesLetter
-                      </Link>
-                    )} */}
+                  {getAllNotAdmin?.some(
+                    (u) =>
+                      u.email?.toLowerCase() === user?.email?.toLowerCase() &&
+                      ["gestor", "premium"].includes(u.membershipType)
+                  ) && (
+                    <Link to="/products" className="nav-link me-3">
+                      Tu Cultivo
+                    </Link>
+                  )}
                 </>
-              ) : (
-                <></>
-              )}
+              ) : null}
+
               {isHome && (
                 <Nav.Link onClick={() => scrollToSection("about-section")}>
                   Nosotros
                 </Nav.Link>
               )}
+
               {isHome && (
                 <Nav.Link onClick={handleMembershipRedirect}>Asociate</Nav.Link>
               )}
@@ -258,7 +220,7 @@ const NavBar = () => {
                   onClick={() => scrollToSection("donate-now")}
                   className="nav-link_dona"
                 >
-                 Doná ahora
+                  Doná ahora
                 </Nav.Link>
               )}
 
@@ -268,11 +230,8 @@ const NavBar = () => {
               <Link to="/gallery" className="nav-link">
                 Galeria
               </Link>
-              {/* <Link to="/blog" className="nav-link">
-                Blog
-              </Link> */}
               <Link to="/learnWithUs" className="nav-link">
-              Aprende con Nosotros
+                Aprende con Nosotros
               </Link>
             </Nav>
           </Navbar.Collapse>
@@ -281,14 +240,12 @@ const NavBar = () => {
             <Nav className="basic-navbar-nav-autentication-2">
               {isAuthenticated && user ? (
                 <>
-                  {/* Dashboard para admins */}
                   {isAdmin && (
                     <Link to="/dashboard" className="nav-link me-3">
                       Dashboard
                     </Link>
                   )}
 
-                  {/* Perfil del usuario */}
                   <Nav.Link className="d-flex align-items-center me-3">
                     <img
                       src={user.picture}
@@ -297,6 +254,7 @@ const NavBar = () => {
                     />
                     <span>{userFromRedux?.name || user?.name}</span>
                   </Nav.Link>
+
                   <Nav.Link onClick={handleLogout}>Cerrar sesión</Nav.Link>
                 </>
               ) : (
@@ -306,27 +264,13 @@ const NavBar = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      {/* Modal para mostrar el reCAPTCHA */}
-      {/* {showCaptcha && (
-        <div className="captcha-modal">
-          <div className="modal-content">
-            <h2>Verificación CAPTCHA</h2>
-            <ReCAPTCHA
-              sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY} // Usa la clave del .env
-              onChange={handleCaptchaVerify} // Maneja la verificación
-            />
-            <button onClick={handleCaptchaClose}>Cerrar</button>
-          </div>
-        </div>
-      )} */}
 
-      <div
-        className={`breadcrumbs ${isScrolling ? "scroll-hide" : "scroll-show"}`}
-      >
+      <div className={`breadcrumbs ${isScrolling ? "scroll-hide" : "scroll-show"}`}>
         <Container>
           <BreadCrumRoutes />
         </Container>
       </div>
+
       <LoginModal show={showModal} handleClose={handleCloseModal} />
     </>
   );
