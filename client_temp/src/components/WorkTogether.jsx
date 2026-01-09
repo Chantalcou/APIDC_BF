@@ -63,7 +63,7 @@ export const WorkTogether = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
     if (name === "areaOfInterest") {
-      validateField(name, value); // Si necesitas validación adicional
+      validateField(name, value); 
     } else {
       validateField(name, value);
     }
