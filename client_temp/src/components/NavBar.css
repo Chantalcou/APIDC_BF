@@ -243,3 +243,43 @@
 }
 
 /* VerifyCaptcha */
+.captcha-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.65);
+  display: grid;
+  place-items: center;
+  padding: 16px;
+}
+
+.captcha-modal__content {
+  width: min(420px, 92vw);
+  background: #fff;
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.35);
+  text-align: center;
+}
+
+.captcha-modal__title {
+  margin: 0 0 12px 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.captcha-modal__error {
+  margin: 0;
+  color: #b00020;
+  font-size: 0.95rem;
+  line-height: 1.35;
+}
+
+.captcha-modal__btn {
+  margin-top: 14px;
+  border: 0;
+  border-radius: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-weight: 700;
+}
