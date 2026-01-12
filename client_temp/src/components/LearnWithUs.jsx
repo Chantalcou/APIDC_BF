@@ -133,6 +133,7 @@ const LearnWithUs = () => {
         <div className="section-header_learn">
           <h2 className="section-title_learn">
             Capacitaciones Técnicas
+                    APIDC
           </h2>
         </div>
 
