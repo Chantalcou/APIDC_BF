@@ -297,7 +297,7 @@ const Home = () => {
                 <img
                   src="https://res.cloudinary.com/dqgjcfosx/image/upload/v1740671503/Dise%C3%B1o_sin_t%C3%ADtulo_3_ocqnjy.png"
                   loading="lazy"
-                  alt="Quienes somos"
+                  alt="Quiénes somos"
                   className="img-fluid mb-3 circle-image"
                 />
                 <h3
@@ -307,7 +307,7 @@ const Home = () => {
                   Quienes Somos
                 </h3>
                 <p>
-                  Somos una Asociación Civil sin fines de lucro, conformada por
+                  Somos una asociación civil sin fines de lucro, conformada por
                   un gran equipo de usuari@s, cultivadores y profesionales
                   comprometidos con el abordaje integral e interdisciplinario de
                   la planta de Cannabis.
@@ -391,7 +391,7 @@ const Home = () => {
       {/* <Donations /> */}
       <div id="asociarme-section"></div>
       <div id="ley-section" className="ley-section text-center">
-        {/* ...contenido existente... */}
+
       </div>
       {/* <SeccionAs /> */}
       <Reprocan />

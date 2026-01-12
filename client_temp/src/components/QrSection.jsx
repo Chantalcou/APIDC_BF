@@ -4,8 +4,8 @@ import './QrSection.css'
 const QrSection = () => {
   return (
     <div className="asociate-section-QR text-center py-5">
-      <h2 className="mb-3">¡Asóciate a nuestra comunidad!</h2>
-      <p className="mb-4">Escanea el código QR para completar el formulario de asociación.</p>
+      <h2 className="mb-3">¡Asociate a nuestra comunidad!</h2>
+      <p className="mb-4">Escaneá el código QR para completar el formulario de asociación.</p>
       <a
         href="https://form.jotform.com/apidcasociacion/formulario-registro-APIDC-REPROCANN"
         rel="no-follow"

@@ -34,7 +34,7 @@ const Reprocan = () => {
   return (
     <div className="reprocan-section">
       <div className="reprocan-header">
-        <h1>¿Cómo gestiono mi REPROCAN?</h1>
+        <h1>¿Cómo gestiono mi REPROCANN?</h1>
       </div>
       <div className="video-container_reprocan">
         {!showVideo ? (

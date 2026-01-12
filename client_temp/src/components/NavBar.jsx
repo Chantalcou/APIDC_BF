@@ -224,9 +224,9 @@ const NavBar = () => {
                 </Nav.Link>
               )}
 
-              <Link to="/shop" className="nav-link">
+              {/* <Link to="/shop" className="nav-link">
                 Tienda
-              </Link>
+              </Link> */}
               <Link to="/gallery" className="nav-link">
                 Galeria
               </Link>
