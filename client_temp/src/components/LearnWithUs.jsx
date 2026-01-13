@@ -4,52 +4,59 @@ import "./LearnWithUs.css";
 const LearnWithUs = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentTestimonials, setCurrentTestimonials] = useState([]);
-  // Tabs: "EVENTOS" | "CAP_2025" | "CAP_2026"
   const [activeTab, setActiveTab] = useState("EVENTOS");
 
-  // Hero Image
   const HERO_IMAGE =
     "https://res.cloudinary.com/dqgjcfosx/image/upload/v1768229156/ChatGPT_Image_12_ene_2026_11_45_09_a.m._h2utsh.png";
 
-  // EVENTOS (sin año en el tab; el año lo ponés adentro si querés)
   const events = [
     {
       id: 1,
       image:
-        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1762354907/cannabis_3_-4_compressed_page-0001_akrngk.jpg",
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1768309786/expo--_bwcq9n.png",
+      year: "2026" // Año para eventos
     },
     {
       id: 2,
       image:
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1762354907/cannabis_3_-4_compressed_page-0001_akrngk.jpg",
+      year: "2025"
+    },
+    {
+      id: 3,
+      image:
         "https://res.cloudinary.com/dqgjcfosx/image/upload/v1762354908/cannabis_3_-5_compressed_page-0001_aeq0gp.jpg",
+      year: "2025"
     },
   ];
 
-  // Capacitaciones 2025
   const capacitaciones2025 = [
     {
       id: 1,
       image:
         "https://res.cloudinary.com/dqgjcfosx/image/upload/v1752586473/WhatsApp_Image_2025-07-14_at_3.16.26_PM_1_psenun.jpg",
+      year: "2025"
     },
     {
       id: 2,
       image:
         "https://res.cloudinary.com/dqgjcfosx/image/upload/v1752591009/WhatsApp_Image_2025-07-15_at_11.37.49_AM_zyg75b.jpg",
+      year: "2025"
     },
   ];
 
-  // Capacitaciones 2026
   const capacitaciones2026 = [
     {
       id: 1,
       image:
         "https://res.cloudinary.com/dqgjcfosx/image/upload/v1768236747/ChatGPT_Image_12_ene_2026_01_51_43_p.m._e5ppif.png",
+      year: "2026"
     },
     {
       id: 2,
       image:
         "https://res.cloudinary.com/dqgjcfosx/image/upload/v1768237002/ChatGPT_Image_12_ene_2026_01_55_53_p.m._q7jtt7.png",
+      year: "2026"
     },
   ];
 
@@ -64,6 +71,7 @@ const LearnWithUs = () => {
     document.body.style.overflow = "auto";
   };
 
+  // Función modificada para renderizar con año para TODOS los items
   const renderGrid = (items, altPrefix) => (
     <div className="events-grid">
       {items.map((item) => (
@@ -75,6 +83,10 @@ const LearnWithUs = () => {
               className="event-image"
               loading="lazy"
             />
+            {/* Siempre mostrar el badge de año */}
+            <div className="year-badge">
+              <span className="year-text">{item.year}</span>
+            </div>
           </div>
         </div>
       ))}
@@ -113,7 +125,7 @@ const LearnWithUs = () => {
             type="button"
           >
             <span className="year-number">Eventos</span>
-            <span className="year-label">Actividades</span>
+            <span className="year-label">2025</span>
           </button>
 
           <button
@@ -136,13 +148,12 @@ const LearnWithUs = () => {
         </div>
       </div>
 
-      {/* EVENTOS */}
+      {/* EVENTOS - Ahora con año */}
       {activeTab === "EVENTOS" && (
         <section className="events-section">
           <div className="events-container">
             <div className="events-header">
-              {/* si querés año, ponelo acá adentro */}
-              <h2 className="events-title">Eventos</h2>
+              <h2 className="events-title">Eventos 2025</h2>
             </div>
             {renderGrid(events, "Evento")}
           </div>
@@ -156,7 +167,7 @@ const LearnWithUs = () => {
             <div className="events-header">
               <h2 className="events-title">Capacitaciones 2025</h2>
             </div>
-            {renderGrid(capacitaciones2025, "Capacitación 2025")}
+            {renderGrid(capacitaciones2025, "Capacitación")}
           </div>
         </section>
       )}
@@ -167,14 +178,14 @@ const LearnWithUs = () => {
           <div className="events-container">
             <div className="events-header">
               <h2 className="events-title">Capacitaciones 2026</h2>
-              <h2 className="events-title">Proximamente</h2>
+              <p className="events-subtitle">Próximamente</p>
             </div>
-            {renderGrid(capacitaciones2026, "Capacitación 2026")}
+            {renderGrid(capacitaciones2026, "Capacitación")}
           </div>
         </section>
       )}
 
-      {/* Modal (lo dejo listo por si lo volvés a usar) */}
+      {/* Modal */}
       {isModalOpen && (
         <div className="testimonial-modal active">
           <div
@@ -225,10 +236,6 @@ const LearnWithUs = () => {
           </div>
         </div>
       )}
-
-      {/* Ejemplo de uso del modal (si lo necesitás):
-          <button onClick={() => openTestimonials([{text:"...", author:"..."}])}>Abrir</button>
-      */}
     </div>
   );
 };
