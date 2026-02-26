@@ -9,54 +9,77 @@ const LearnWithUs = () => {
   const HERO_IMAGE =
     "https://res.cloudinary.com/dqgjcfosx/image/upload/v1768229156/ChatGPT_Image_12_ene_2026_11_45_09_a.m._h2utsh.png";
 
+
+
+  /**
+   * ✅ EVENTOS (2025 + 2026)
+   * - 2026: Mendocann + Expo Cannabis + 2 flyers nuevos
+   * - 2025: los que ya tenías
+   */
   const events = [
+    // --- 2026 ---
+  
     {
-      id: 1,
+      id: "ev-2026-expo",
       image:
         "https://res.cloudinary.com/dqgjcfosx/image/upload/v1768309786/expo--_bwcq9n.png",
-      year: "2026" // Año para eventos
+      year: "2026",
     },
     {
-      id: 2,
+      id: "ev-2026-1",
+      image:
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1772118518/ChatGPT_Image_26_feb_2026_11_55_29_a.m._lnusz2.png",
+      year: "2026",
+    },
+    {
+      id: "ev-2026-2",
+      image:
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1772118518/ChatGPT_Image_26_feb_2026_12_01_58_p.m._cyio3a.png",
+      year: "2026",
+    },
+
+    // --- 2025 ---
+    {
+      id: "ev-2025-1",
       image:
         "https://res.cloudinary.com/dqgjcfosx/image/upload/v1762354907/cannabis_3_-4_compressed_page-0001_akrngk.jpg",
-      year: "2025"
+      year: "2025",
     },
     {
-      id: 3,
+      id: "ev-2025-2",
       image:
         "https://res.cloudinary.com/dqgjcfosx/image/upload/v1762354908/cannabis_3_-5_compressed_page-0001_aeq0gp.jpg",
-      year: "2025"
+      year: "2025",
     },
   ];
 
   const capacitaciones2025 = [
     {
-      id: 1,
+      id: "cap-2025-1",
       image:
         "https://res.cloudinary.com/dqgjcfosx/image/upload/v1752586473/WhatsApp_Image_2025-07-14_at_3.16.26_PM_1_psenun.jpg",
-      year: "2025"
+      year: "2025",
     },
     {
-      id: 2,
+      id: "cap-2025-2",
       image:
         "https://res.cloudinary.com/dqgjcfosx/image/upload/v1752591009/WhatsApp_Image_2025-07-15_at_11.37.49_AM_zyg75b.jpg",
-      year: "2025"
+      year: "2025",
     },
   ];
 
   const capacitaciones2026 = [
     {
-      id: 1,
+      id: "cap-2026-1",
       image:
         "https://res.cloudinary.com/dqgjcfosx/image/upload/v1768236747/ChatGPT_Image_12_ene_2026_01_51_43_p.m._e5ppif.png",
-      year: "2026"
+      year: "2026",
     },
     {
-      id: 2,
+      id: "cap-2026-2",
       image:
         "https://res.cloudinary.com/dqgjcfosx/image/upload/v1768237002/ChatGPT_Image_12_ene_2026_01_55_53_p.m._q7jtt7.png",
-      year: "2026"
+      year: "2026",
     },
   ];
 
@@ -71,20 +94,18 @@ const LearnWithUs = () => {
     document.body.style.overflow = "auto";
   };
 
-  // Función modificada para renderizar con año para TODOS los items
   const renderGrid = (items, altPrefix) => (
     <div className="events-grid">
       {items.map((item) => (
-        <div key={item.id} className="event-card">
+        <div key={item.id} className="event-card" data-year={item.year}>
           <div className="event-image-wrapper">
             <img
               src={item.image}
-              alt={`${altPrefix} ${item.id}`}
+              alt={`${altPrefix} ${item.year}`}
               className="event-image"
               loading="lazy"
             />
-            {/* Siempre mostrar el badge de año */}
-            <div className="year-badge">
+            <div className="year-badge" data-year={item.year}>
               <span className="year-text">{item.year}</span>
             </div>
           </div>
@@ -92,6 +113,9 @@ const LearnWithUs = () => {
       ))}
     </div>
   );
+
+  const events2025 = events.filter((e) => e.year === "2025");
+  const events2026 = events.filter((e) => e.year === "2026");
 
   return (
     <div className="learn-container">
@@ -125,7 +149,7 @@ const LearnWithUs = () => {
             type="button"
           >
             <span className="year-number">Eventos</span>
-            <span className="year-label">2025</span>
+            <span className="year-label">2025 / 2026</span>
           </button>
 
           <button
@@ -148,16 +172,27 @@ const LearnWithUs = () => {
         </div>
       </div>
 
-      {/* EVENTOS - Ahora con año */}
+      {/* EVENTOS (2026 ARRIBA / 2025 ABAJO) */}
       {activeTab === "EVENTOS" && (
-        <section className="events-section">
-          <div className="events-container">
-            <div className="events-header">
-              <h2 className="events-title">Eventos 2025</h2>
+        <>
+          <section className="events-section">
+            <div className="events-container">
+              <div className="events-header">
+                <h2 className="events-title">Eventos 2026</h2>
+              </div>
+              {renderGrid(events2026, "Evento")}
             </div>
-            {renderGrid(events, "Evento")}
-          </div>
-        </section>
+          </section>
+
+          <section className="events-section">
+            <div className="events-container">
+              <div className="events-header">
+                <h2 className="events-title">Eventos 2025</h2>
+              </div>
+              {renderGrid(events2025, "Evento")}
+            </div>
+          </section>
+        </>
       )}
 
       {/* CAP 2025 */}
@@ -213,7 +248,8 @@ const LearnWithUs = () => {
             <div className="modal-header">
               <h3 className="modal-title">Experiencias de Nuestros Alumnos</h3>
               <p className="modal-subtitle">
-                Lo que dicen profesionales que han participado en nuestras capacitaciones
+                Lo que dicen profesionales que han participado en nuestras
+                capacitaciones
               </p>
             </div>
 

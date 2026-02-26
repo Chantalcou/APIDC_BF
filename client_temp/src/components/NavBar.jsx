@@ -164,6 +164,10 @@ const NavBar = () => {
       setRedirectPath(null);
     }
   }, [isAuthenticated, redirectPath, navigate]);
+  useEffect(() => {
+  console.log("RECAPTCHA KEY:", process.env.REACT_APP_RECAPTCHA_SITE_KEY);
+}, []);
+
 
   return (
     <>
@@ -231,8 +235,11 @@ const NavBar = () => {
                 Galeria
               </Link>
               <Link to="/learnWithUs" className="nav-link">
-                Aprende con Nosotros
+                Aprendé con Nosotros
               </Link>
+                    {/* <Link to="/newsLetter" className="nav-link">
+                NewsLetter
+              </Link> */}
             </Nav>
           </Navbar.Collapse>
 
@@ -258,7 +265,7 @@ const NavBar = () => {
                   <Nav.Link onClick={handleLogout}>Cerrar sesión</Nav.Link>
                 </>
               ) : (
-                <Nav.Link onClick={handleShowModal}>Iniciar sesión</Nav.Link>
+                <Nav.Link onClick={handleShowModal}>Soy socio/a</Nav.Link>
               )}
             </Nav>
           </Navbar.Collapse>

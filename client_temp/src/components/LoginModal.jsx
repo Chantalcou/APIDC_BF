@@ -8,6 +8,14 @@ const LoginModal = ({ show, handleClose }) => {
   const { loginWithRedirect } = useAuth0();
   const [captchaVerified, setCaptchaVerified] = useState(false);
 
+  const siteKey = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
+
+  useEffect(() => {
+    if (show) {
+      console.log("SITEKEY EN MODAL:", siteKey);
+    }
+  }, [show, siteKey]);
+
   const handleCaptchaChange = (value) => {
     setCaptchaVerified(!!value);
   };
@@ -21,28 +29,33 @@ const LoginModal = ({ show, handleClose }) => {
   };
 
   return (
-    <Modal show={show} onHide={handleClose} centered>
+    <Modal
+      show={show}
+      onHide={handleClose}
+      centered
+      onExited={() => setCaptchaVerified(false)} // resetea al cerrar
+    >
       <Modal.Header closeButton>
         <Modal.Title className="btn-captcha">Iniciar Sesión</Modal.Title>
       </Modal.Header>
+
       <Modal.Body>
         <p>Por favor, verificá el CAPTCHA para continuar.</p>
-        <div className="captcha-container">
-          <ReCAPTCHA
-            sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
-            onChange={handleCaptchaChange}
-          />
-        </div>
+
+  <div className="captcha-container">
+  <ReCAPTCHA
+    sitekey={siteKey}
+    onChange={handleCaptchaChange}
+    enterprise
+  />
+</div>
       </Modal.Body>
+
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
           Cancelar
         </Button>
-        <Button
-          variant="primary"
-          onClick={handleLogin}
-          disabled={!captchaVerified}
-        >
+        <Button variant="primary" onClick={handleLogin} disabled={!captchaVerified}>
           Iniciar Sesión
         </Button>
       </Modal.Footer>

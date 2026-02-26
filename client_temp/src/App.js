@@ -16,6 +16,7 @@ import CannabisBenefitsSection from "./components/CannabisBenefits";
 import { ContactOptions } from "./components/ContactOptions";
 import Gallery from "./components/Gallery";
 import Shop from "./components/Shop";
+import NewsLetter from "./components/Newsletter";
 import LearnWithUs from "./components/LearnWithUs";
 import { HelmetProvider } from "react-helmet-async"; //Optimización SEO
 import MembershipComponent from "./components/MembershipComponent";
@@ -73,7 +74,7 @@ const App = () => {
             element={<SocioSinReprocan />}
           />
           <Route path="/shop" element={<Shop />} />
-
+       <Route path="/newsLetter" element={<NewsLetter />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/termsAndPrivacy" element={<TermsAndPrivacy />} />
           <Route path="/learnWithUs" element={<LearnWithUs />} />
@@ -81,7 +82,6 @@ const App = () => {
         <WhatsApp />
         {/* <ChatBot /> */}
         {/* <ContactOptions /> */}
-        {/* <NewsletterBanner /> */}
         <Footer />
       </HelmetProvider>
     </>
