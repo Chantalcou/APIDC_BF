@@ -178,7 +178,7 @@ const LearnWithUs = () => {
           <section className="events-section">
             <div className="events-container">
               <div className="events-header">
-                <h2 className="events-title">Eventos 2026</h2>
+                <h2 className="events-title">Eventos cannabicos Argentina 2026</h2>
               </div>
               {renderGrid(events2026, "Evento")}
             </div>
@@ -187,7 +187,7 @@ const LearnWithUs = () => {
           <section className="events-section">
             <div className="events-container">
               <div className="events-header">
-                <h2 className="events-title">Eventos 2025</h2>
+                <h2 className="events-title">Eventos cannabicos APIDC 2025</h2>
               </div>
               {renderGrid(events2025, "Evento")}
             </div>
