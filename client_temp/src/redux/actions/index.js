@@ -140,14 +140,10 @@ export const fetchUsers = (token) => {
 };
 
 // Acción para obtener usuarios
-export const getAllNotAdmins = (token) => {
+export const getAllNotAdmins = () => {
   return async (dispatch) => {
     try {
-      // usersNotAdmin
-      const response = await axios.get(
-        `https://apidc.ong/usersNotAdmin`,
-        {}
-      );
+      const response = await axios.get("https://apidc.ong/usersNotAdmin");
 
       dispatch({
         type: FETCH_USERS_SUCCESS_NOT_ADMIN,
@@ -162,6 +158,7 @@ export const getAllNotAdmins = (token) => {
     }
   };
 };
+
 
 export const updateUserRole = (userId, membershipType, token) => {
   return async (dispatch, getState) => {
@@ -222,34 +219,52 @@ export const sendWorkTogether = (formData) => async (dispatch) => {
   }
 };
 
-export const verifySocio = (email, id_socio) => async (dispatch) => {
+export const verifySocio = (email) => async (dispatch) => {
+  // `https://apidc.ong/verifySocio`
   try {
-    const response = await axios.post(`https://apidc.ong/verifySocio`, {
+    const response = await axios.post(`http://localhost:5001/verifySocio`, {
       email,
-      id_socio,
     });
-    console.log("Respuesta del servidor:", response.data);
 
     if (response.data.success) {
-      console.log(response);
       dispatch({
         type: VERIFICAR_SOCIO_SUCCESS,
         payload: response.data.success,
         socio: response.data.socio,
       });
-    } else {
-      dispatch({
-        type: "VERIFICAR_SOCIO_FAIL",
-        payload: response.data.message,
-      });
+
+      return {
+        success: true,
+        socio: response.data.socio,
+        message: response.data.message,
+      };
     }
-  } catch (error) {
+
     dispatch({
       type: "VERIFICAR_SOCIO_FAIL",
-      payload: error.response?.data.message || "Error desconocido",
+      payload: response.data.message || "El usuario no está habilitado como socio adherente.",
     });
+
+    return {
+      success: false,
+      message: response.data.message || "El usuario no está habilitado como socio adherente.",
+    };
+  } catch (error) {
+    const message =
+      error.response?.data?.message || "Error desconocido al verificar socio";
+
+    dispatch({
+      type: "VERIFICAR_SOCIO_FAIL",
+      payload: message,
+    });
+
+    return {
+      success: false,
+      message,
+    };
   }
 };
+
 
 export const deleteUser = (userId, token) => async (dispatch) => {
   try {
@@ -304,6 +319,8 @@ export const sendChatMessage = (formData) => async (dispatch) => {
     throw new Error(errorMsg); // también importante para capturarlo en el componente
   }
 };
+
+
 
 
 // export const webhookJotform = () => async (dispatch) => {

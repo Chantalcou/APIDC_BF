@@ -3,8 +3,9 @@ import { Navbar, Nav, Container } from "react-bootstrap";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllNotAdmins } from "../redux/actions/index";
-import BreadCrumRoutes from "./BreadCrumbRoutes";
+import { verifySocio } from "../redux/actions";
+import BreadCrumbRoutes from "./BreadCrumbRoutes";
+import NonSocioModal from "./NonSocioModal";   
 import LoginModal from "./LoginModal";
 import $ from "jquery";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -15,62 +16,17 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const { userFromRedux, isAdmin, getAllNotAdmin } = useSelector((state) => state);
-
-  const {
-    isAuthenticated,
-    logout,
-    user,
-    getAccessTokenSilently,
-  } = useAuth0();
-
+  const { userFromRedux, isAdmin, isSocioVerified, error } = useSelector((state) => state);
+  const { isAuthenticated, isLoading, logout, user } = useAuth0();
+  
   const [isScrolling, setIsScrolling] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [showCaptcha, setShowCaptcha] = useState(false);
-  const [captchaVerified, setCaptchaVerified] = useState(false);
-  const [redirectPath, setRedirectPath] = useState(null);
-
-  // Modal login
   const [showModal, setShowModal] = useState(false);
+  const [isCheckingSocio, setIsCheckingSocio] = useState(false);
+  const [showNonSocioModal, setShowNonSocioModal] = useState(false);
+
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
-
-  useEffect(() => {
-    const loadUsers = async () => {
-      try {
-        await dispatch(getAllNotAdmins());
-      } catch (err) {
-        console.log("Error cargando usuarios");
-      }
-    };
-    loadUsers();
-  }, [dispatch, getAccessTokenSilently]);
-
-  useEffect(() => {
-    const registerAuthenticatedUser = async () => {
-      if (isAuthenticated && user) {
-        try {
-          const idTokenObject = JSON.parse(
-            localStorage.getItem(
-              "@@auth0spajs@@::8KX5NG5JLM5pdOJYuYkFZTRGtOs53t2v::@@user@@"
-            )
-          );
-
-          // eslint-disable-next-line no-unused-vars
-          const idToken = idTokenObject?.id_token;
-
-          if (redirectPath) {
-            navigate(redirectPath);
-            setRedirectPath(null);
-          }
-        } catch (error) {
-          console.error("Error registrando usuario:", error);
-        }
-      }
-    };
-
-    registerAuthenticatedUser();
-  }, [isAuthenticated, user, getAccessTokenSilently, dispatch, redirectPath, navigate]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -83,57 +39,15 @@ const NavBar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [scrollPosition]);
 
-  /**
-   * ✅ IMPORTANTE:
-   * Eliminamos la carga manual de reCAPTCHA v3:
-   * https://www.google.com/recaptcha/api.js?render=...
-   * Porque tu sitio usa reCAPTCHA v2 checkbox (react-google-recaptcha).
-   */
-
-  const handleLogout = () => {
-    logout({ returnTo: window.location.origin });
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("isAdmin");
-    navigate("/");
-  };
-
-  const scrollToSection = (sectionId) => {
-    $("html, body").animate(
-      { scrollTop: $("#" + sectionId).offset().top },
-      1000
-    );
-  };
-
-  const isHome = location.pathname === "/";
-
-  // Maneja la verificación (si la usás en algún lado)
-  const handleCaptchaVerify = (value) => {
-    if (value) {
-      setCaptchaVerified(true);
-      setShowCaptcha(false);
-    } else {
-      console.error("Error de verificación del CAPTCHA");
-    }
-  };
-
-  const handleSocioRedirect = () => {
-    if (!isAuthenticated) {
-      setRedirectPath("/socio");
-      handleShowModal();
-    } else {
-      navigate("/socio");
-    }
-  };
-
-  const handleCaptchaClose = () => {
-    setShowCaptcha(false);
-  };
-
   useEffect(() => {
     const handleStorageChange = (e) => {
-      if (e.key === "reduxState") {
-        const newState = JSON.parse(e.newValue);
-        dispatch({ type: "REHYDRATE_STATE", payload: newState });
+      if (e.key === "reduxState" && e.newValue) {
+        try {
+          const newState = JSON.parse(e.newValue);
+          dispatch({ type: "REHYDRATE_STATE", payload: newState });
+        } catch (storageError) {
+          console.error("Error rehidratando estado:", storageError);
+        }
       }
     };
 
@@ -141,33 +55,106 @@ const NavBar = () => {
     return () => window.removeEventListener("storage", handleStorageChange);
   }, [dispatch]);
 
-  const handleMembershipRedirect = () => {
-    if (!isAuthenticated) {
-      setRedirectPath("/login");
-      handleShowModal();
-    } else {
-      const userMembership = getAllNotAdmin?.find(
-        (u) => u.email?.toLowerCase() === user?.email?.toLowerCase()
-      )?.membershipType;
-
-      if (userMembership && ["gestor", "premium"].includes(userMembership)) {
-        navigate("/membershipSection");
-      } else {
-        alert("No tienes acceso a la sección de membresía.");
-      }
+  const scrollToSection = (sectionId) => {
+    const section = $("#" + sectionId);
+    if (section.length) {
+      $("html, body").animate({ scrollTop: section.offset().top }, 1000);
     }
   };
 
-  useEffect(() => {
-    if (isAuthenticated && redirectPath) {
-      navigate(redirectPath);
-      setRedirectPath(null);
-    }
-  }, [isAuthenticated, redirectPath, navigate]);
-  useEffect(() => {
-  console.log("RECAPTCHA KEY:", process.env.REACT_APP_RECAPTCHA_SITE_KEY);
-}, []);
+  const isHome = location.pathname === "/";
 
+  const clearSocioSession = () => {
+    localStorage.removeItem("socioAuthorized");
+    localStorage.removeItem("postLoginRedirect");
+    localStorage.removeItem("isSocioVerified");
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("isAdmin");
+    clearSocioSession();
+
+    logout({
+      logoutParams: { returnTo: window.location.origin },
+    });
+  };
+
+  const runSocioVerification = async (redirectTo) => {
+  if (!user?.email) {
+    alert("No se pudo obtener el email del usuario autenticado.");
+    return;
+  }
+
+  try {
+    setIsCheckingSocio(true);
+    const result = await dispatch(verifySocio(user.email));
+
+    if (result?.success) {
+      localStorage.setItem("socioAuthorized", "true");
+      localStorage.setItem("isSocioVerified", "true");
+      navigate(redirectTo);
+    } else {
+      clearSocioSession();
+      // Mostrar modal de no socio en lugar de alert
+      setShowNonSocioModal(true);
+      // No navegamos, solo mostramos el modal
+    }
+  } catch (verifyError) {
+    console.error("Error verificando socio:", verifyError);
+    clearSocioSession();
+    alert("Ocurrió un error al verificar el acceso del socio.");
+    navigate("/");
+  } finally {
+    setIsCheckingSocio(false);
+    localStorage.removeItem("postLoginRedirect");
+  }
+};
+
+  const handleSocioRedirect = () => {
+    if (isLoading || isCheckingSocio) return;
+
+    if (!isAuthenticated) {
+      localStorage.setItem("postLoginRedirect", "/geneticas-disponibles");
+      handleShowModal();
+      return;
+    }
+
+    runSocioVerification("/geneticas-disponibles");
+  };
+
+  const handleMembershipRedirect = () => {
+    if (isLoading || isCheckingSocio) return;
+
+    if (!isAuthenticated) {
+      localStorage.setItem("postLoginRedirect", "/membershipSection");
+      handleShowModal();
+      return;
+    }
+
+    runSocioVerification("/membershipSection");
+  };
+
+  useEffect(() => {
+    if (isLoading || !isAuthenticated || !user?.email) return;
+
+    const postLoginRedirect = localStorage.getItem("postLoginRedirect");
+    if (!postLoginRedirect) return;
+
+    runSocioVerification(postLoginRedirect);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuthenticated, isLoading, user?.email]);
+
+  const handleAsociarme = () => {
+  setShowNonSocioModal(false);
+  // Redirige directamente a la sección de membresía (sin verificar socio nuevamente)
+  navigate("/membershipSection");
+};
+
+const handleCloseNonSocioModal = () => {
+  setShowNonSocioModal(false);
+  // Permanece en la página actual
+};
 
   return (
     <>
@@ -179,7 +166,7 @@ const NavBar = () => {
         variant="dark"
       >
         <Container>
-          <Navbar.Brand href="/">
+          <Navbar.Brand as={Link} to="/">
             <img
               src="https://res.cloudinary.com/dqgjcfosx/image/upload/v1725973641/apidc-logo_hz26kf.png"
               alt="Logo"
@@ -193,21 +180,15 @@ const NavBar = () => {
 
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="basic-navbar-nav-autentication-left">
-              <Nav.Link href="/">Inicio</Nav.Link>
+              <Nav.Link as={Link} to="/">
+                Inicio
+              </Nav.Link>
 
-              {isAuthenticated ? (
-                <>
-                  {getAllNotAdmin?.some(
-                    (u) =>
-                      u.email?.toLowerCase() === user?.email?.toLowerCase() &&
-                      ["gestor", "premium"].includes(u.membershipType)
-                  ) && (
-                    <Link to="/products" className="nav-link me-3">
-                      Tu Cultivo
-                    </Link>
-                  )}
-                </>
-              ) : null}
+              {isAuthenticated && localStorage.getItem("socioAuthorized") === "true" && (
+                <Link to="/products" className="nav-link me-3">
+                  Tu Cultivo
+                </Link>
+              )}
 
               {isHome && (
                 <Nav.Link onClick={() => scrollToSection("about-section")}>
@@ -216,7 +197,9 @@ const NavBar = () => {
               )}
 
               {isHome && (
-                <Nav.Link onClick={handleMembershipRedirect}>Asociate</Nav.Link>
+                <Nav.Link onClick={handleMembershipRedirect}>
+                  Asociate
+                </Nav.Link>
               )}
 
               {isHome && (
@@ -228,18 +211,13 @@ const NavBar = () => {
                 </Nav.Link>
               )}
 
-              {/* <Link to="/shop" className="nav-link">
-                Tienda
-              </Link> */}
               <Link to="/gallery" className="nav-link">
-                Galeria
+                Galería
               </Link>
+
               <Link to="/learnWithUs" className="nav-link">
                 Aprendé con Nosotros
               </Link>
-                    {/* <Link to="/newsLetter" className="nav-link">
-                NewsLetter
-              </Link> */}
             </Nav>
           </Navbar.Collapse>
 
@@ -254,18 +232,28 @@ const NavBar = () => {
                   )}
 
                   <Nav.Link className="d-flex align-items-center me-3">
-                    <img
-                      src={user.picture}
-                      alt="Profile"
-                      className="profile-picture me-2"
-                    />
-                    <span>{userFromRedux?.name || user?.name}</span>
+                    {user.picture && (
+                      <img
+                        src={user.picture}
+                        alt="Profile"
+                        className="profile-picture me-2"
+                      />
+                    )}
+                    <span>{userFromRedux?.name || user?.name || user?.email}</span>
                   </Nav.Link>
 
-                  <Nav.Link onClick={handleLogout}>Cerrar sesión</Nav.Link>
+                  <Nav.Link onClick={handleSocioRedirect}>
+                    Mi espacio socio
+                  </Nav.Link>
+
+                  <Nav.Link onClick={handleLogout}>
+                    Cerrar sesión
+                  </Nav.Link>
                 </>
               ) : (
-                <Nav.Link onClick={handleShowModal}>Soy socio/a</Nav.Link>
+                <Nav.Link onClick={handleSocioRedirect}>
+                  Soy socio/a
+                </Nav.Link>
               )}
             </Nav>
           </Navbar.Collapse>
@@ -274,11 +262,16 @@ const NavBar = () => {
 
       <div className={`breadcrumbs ${isScrolling ? "scroll-hide" : "scroll-show"}`}>
         <Container>
-          <BreadCrumRoutes />
+          <BreadCrumbRoutes />
         </Container>
       </div>
 
       <LoginModal show={showModal} handleClose={handleCloseModal} />
+      <NonSocioModal
+  show={showNonSocioModal}
+  onClose={handleCloseNonSocioModal}
+  onAsociarme={handleAsociarme}
+  qrImageUrl="https://res.cloudinary.com/dqgjcfosx/image/upload/v1773841222/frame_17_g7dkcv.png"/>
     </>
   );
 };

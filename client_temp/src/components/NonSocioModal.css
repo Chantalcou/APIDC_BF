@@ -1,0 +1,98 @@
+.non-socio-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.65);
+  display: grid;
+  place-items: center;
+  padding: 16px;
+}
+
+.non-socio-modal-content {
+  width: min(420px, 92vw);
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px 20px;
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.35);
+  text-align: center;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.non-socio-modal-title {
+  margin: 0 0 12px 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.non-socio-modal-message {
+  margin: 0 0 20px 0;
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.5;
+}
+
+.non-socio-modal-qr-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.non-socio-modal-qr {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 8px;
+  background: #f9f9f9;
+}
+
+.non-socio-modal-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.non-socio-modal-btn {
+  border: none;
+  border-radius: 30px;
+  padding: 10px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.non-socio-modal-btn:active {
+  transform: scale(0.98);
+}
+
+.non-socio-modal-btn-primary {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.non-socio-modal-btn-primary:hover {
+  background-color: #45a049;
+}
+
+.non-socio-modal-btn-secondary {
+  background-color: #f1f1f1;
+  color: #333;
+}
+
+.non-socio-modal-btn-secondary:hover {
+  background-color: #e0e0e0;
+}

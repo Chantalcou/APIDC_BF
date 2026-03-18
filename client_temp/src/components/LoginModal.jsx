@@ -1,31 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Modal, Button } from "react-bootstrap";
-import ReCAPTCHA from "react-google-recaptcha";
 import { useAuth0 } from "@auth0/auth0-react";
 import "./LoginModal.css";
 
 const LoginModal = ({ show, handleClose }) => {
   const { loginWithRedirect } = useAuth0();
-  const [captchaVerified, setCaptchaVerified] = useState(false);
 
-  const siteKey = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
-
-  useEffect(() => {
-    if (show) {
-      console.log("SITEKEY EN MODAL:", siteKey);
+  const handleLogin = async () => {
+    try {
+      await loginWithRedirect();
+    } catch (error) {
+      console.error("Error al iniciar sesión:", error);
+      alert("Ocurrió un error al iniciar sesión.");
     }
-  }, [show, siteKey]);
-
-  const handleCaptchaChange = (value) => {
-    setCaptchaVerified(!!value);
-  };
-
-  const handleLogin = () => {
-    if (!captchaVerified) {
-      alert("Por favor, verifica el CAPTCHA.");
-      return;
-    }
-    loginWithRedirect();
   };
 
   return (
@@ -33,30 +20,23 @@ const LoginModal = ({ show, handleClose }) => {
       show={show}
       onHide={handleClose}
       centered
-      onExited={() => setCaptchaVerified(false)} // resetea al cerrar
+      backdrop="static"
+      keyboard={false}
     >
       <Modal.Header closeButton>
-        <Modal.Title className="btn-captcha">Iniciar Sesión</Modal.Title>
+        <Modal.Title className="btn-captcha">Iniciar sesión</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
-        <p>Por favor, verificá el CAPTCHA para continuar.</p>
-
-  <div className="captcha-container">
-  <ReCAPTCHA
-    sitekey={siteKey}
-    onChange={handleCaptchaChange}
-    enterprise
-  />
-</div>
+        <p>Ingresá para acceder al espacio de socios.</p>
       </Modal.Body>
 
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
           Cancelar
         </Button>
-        <Button variant="primary" onClick={handleLogin} disabled={!captchaVerified}>
-          Iniciar Sesión
+        <Button variant="primary" onClick={handleLogin}>
+          Ingresar
         </Button>
       </Modal.Footer>
     </Modal>

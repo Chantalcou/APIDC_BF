@@ -20,13 +20,14 @@ const initialState = {
   userFromRedux: {},
   isAuthenticated: false,
   isAdmin: false,
-  allNotAdmins: [],
+  getAllNotAdmin: [],
   users: [],
   user: {},
   error: null,
   isSocioVerified: null,
   isSocio: {},
-  jotformSubmissions: [], // nuevo
+  jotformSubmissions: [],
+  chatbotReply: "",
 };
 
 const reducer = (state = initialState, action) => {
@@ -34,29 +35,37 @@ const reducer = (state = initialState, action) => {
     case REGISTER_USER:
       return {
         ...state,
-        user: action.payload.user,
+        user: action.payload.user || {},
         isAuthenticated: true,
-        isAdmin: action.payload.isAdmin,
-        users: action.payload.users,
-        userFromRedux: action.payload.user,
+        isAdmin: action.payload.isAdmin || false,
+        users: Array.isArray(action.payload.users) ? action.payload.users : state.users,
+        userFromRedux: action.payload.user || {},
         error: null,
       };
 
     case FETCH_USERS_SUCCESS_NOT_ADMIN:
       return {
         ...state,
-        getAllNotAdmin: action.payload,
+        getAllNotAdmin: Array.isArray(action.payload) ? action.payload : [],
+        error: null,
       };
+
     case FETCH_USERS_SUCCESS:
       return {
         ...state,
-        users: Array.isArray(action.payload) ? action.payload : [], // Forzar a que sea array
+        users: Array.isArray(action.payload) ? action.payload : [],
         error: null,
       };
+
     case UPDATE_USER_ROLE_SUCCESS:
       return {
         ...state,
         users: state.users.map((user) =>
+          user.id === action.payload.id
+            ? { ...user, membershipType: action.payload.membershipType }
+            : user
+        ),
+        getAllNotAdmin: state.getAllNotAdmin.map((user) =>
           user.id === action.payload.id
             ? { ...user, membershipType: action.payload.membershipType }
             : user
@@ -68,6 +77,7 @@ const reducer = (state = initialState, action) => {
                 membershipType: action.payload.membershipType,
               }
             : state.userFromRedux,
+        error: null,
       };
 
     case UPDATE_USER_ROLE_FAILURE:
@@ -84,38 +94,45 @@ const reducer = (state = initialState, action) => {
             ? { ...user, membershipType: action.payload.membershipType }
             : user
         ),
+        getAllNotAdmin: state.getAllNotAdmin.map((user) =>
+          user.id === action.payload.userId
+            ? { ...user, membershipType: action.payload.membershipType }
+            : user
+        ),
       };
+
     case UPDATE_CURRENT_USER:
       return {
         ...state,
-        userFromRedux: action.payload, // Actualizar userFromRedux aquí
+        userFromRedux: action.payload || {},
       };
 
     case SET_USERS_FROM_STORAGE:
       return {
         ...state,
-        // Actualizamos la lista de usuarios
-        users: action.payload,
+        users: Array.isArray(action.payload) ? action.payload : [],
       };
+
     case VERIFICAR_SOCIO_SUCCESS:
       return {
         ...state,
         isSocioVerified: action.payload,
-        isSocio: action.socio,
+        isSocio: action.socio || {},
+        error: null,
       };
+
     case VERIFICAR_SOCIO_FAIL:
       return {
         ...state,
-        isSocioVerified: false, // En caso de fallo, lo marcamos como false
-        error: action.payload, // Guardamos el mensaje de error si es necesario
+        isSocioVerified: false,
+        error: action.payload,
       };
-    // DELETE USER
-    // Agrega estos nuevos casos al switch
 
     case DELETE_USER_SUCCESS:
       return {
         ...state,
         users: state.users.filter((user) => user.id !== action.payload),
+        getAllNotAdmin: state.getAllNotAdmin.filter((user) => user.id !== action.payload),
         error: null,
       };
 
@@ -123,28 +140,27 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         error: action.payload,
-        users: [...state.users], // Mantiene los usuarios actuales
       };
 
-    // case GET_JOTFORM_SUBMISSIONS_SUCCESS:
-    //   return {
-    //     ...state,
-    //     jotformSubmissions: action.payload,
-    //     error: null,
-    //   };
-
-    // CHATBOT
     case SEND_FORM_SUCCESS:
       return {
         ...state,
-        chatbotReply: action.payload.reply, // Guardamos la respuesta del bot en el estado
+        chatbotReply: action.payload?.reply || "",
+        error: null,
       };
 
     case SEND_FORM_FAILURE:
       return {
         ...state,
-        error: action.payload, // Guardamos el error en caso de fallo
+        error: action.payload,
       };
+
+    case SET_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+      };
+
     default:
       return state;
   }

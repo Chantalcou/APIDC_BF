@@ -22,8 +22,7 @@ sequelize
 
 module.exports = sequelize;
 
-//  Local
-
+// //  Local
 // const { Sequelize } = require("sequelize");
 // require("dotenv").config();
 

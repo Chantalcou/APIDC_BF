@@ -1,0 +1,233 @@
+.genetics-section {
+  padding: 120px 40px 50px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+}
+
+.genetics-container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.genetics-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1a2e3b;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+.genetics-subtitle {
+  font-size: 1.05rem;
+  color: #4a5b65;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.genetics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  gap: 2rem;
+  align-items: stretch;
+}
+
+.genetics-card {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  box-shadow: 0 20px 35px -8px rgba(0, 20, 10, 0.12);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.genetics-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 28px 42px -10px rgba(0, 40, 20, 0.18);
+}
+
+.card-image-wrapper {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  background: #e9ecef;
+  flex-shrink: 0;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+}
+
+.card-content {
+  padding: 1.4rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.card-title {
+  font-size: 1.65rem;
+  font-weight: 600;
+  color: #1d3b2f;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #d4e0da;
+  padding-bottom: 0.7rem;
+  text-align: center;
+  line-height: 1.2;
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-detail {
+  font-size: 1rem;
+  color: #2f4858;
+  margin-bottom: 0.7rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.detail-label {
+  font-weight: 700;
+  color: #1d3b2f;
+  min-width: 65px;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  background: #e9ecef;
+  color: #1a2e3b;
+}
+
+.status-disponible {
+  background: #d8f3dc;
+  color: #1b5e20;
+}
+
+.status-stock-limitado {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.card-description {
+  margin-top: 1rem;
+  font-size: 0.96rem;
+  line-height: 1.65;
+  color: #49616d;
+  font-style: italic;
+  border-top: 1px dashed #cbd5e0;
+  padding-top: 0.9rem;
+  text-align: center;
+  flex: 1;
+}
+
+/* Tablets */
+@media (max-width: 992px) {
+  .genetics-section {
+    padding: 105px 24px 40px;
+  }
+
+  .genetics-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .card-image-wrapper {
+    height: 210px;
+  }
+
+  .card-title {
+    font-size: 1.45rem;
+    min-height: 64px;
+  }
+}
+
+/* Móviles */
+@media (max-width: 768px) {
+  .genetics-section {
+    padding: 95px 16px 36px;
+  }
+
+  .genetics-title {
+    font-size: 2rem;
+  }
+
+  .genetics-subtitle {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .genetics-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .card-image-wrapper {
+    height: 200px;
+  }
+
+  .card-content {
+    padding: 1.15rem;
+  }
+
+  .card-title {
+    font-size: 1.35rem;
+    min-height: auto;
+  }
+
+  .card-detail {
+    font-size: 0.95rem;
+  }
+
+  .card-description {
+    font-size: 0.93rem;
+  }
+}
+
+/* Celulares chicos */
+@media (max-width: 480px) {
+  .genetics-section {
+    padding: 90px 12px 30px;
+  }
+
+  .genetics-title {
+    font-size: 1.75rem;
+  }
+
+  .card-image-wrapper {
+    height: 185px;
+  }
+
+  .card-content {
+    padding: 1rem;
+  }
+
+  .card-title {
+    font-size: 1.2rem;
+  }
+
+  .status-badge {
+    font-size: 0.72rem;
+    padding: 0.28rem 0.7rem;
+  }
+}

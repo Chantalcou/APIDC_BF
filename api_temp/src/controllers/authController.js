@@ -1,61 +1,40 @@
-// controllers/userController.js
 const User = require("../models/userModel");
 const { jwtVerify, createRemoteJWKSet } = require("jose");
-const { getIO } = require("../socket.js");
-const jwksUri = `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`;
 
-// Configuramos JWKS para Auth0
+const jwksUri = `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`;
 const JWKS = createRemoteJWKSet(new URL(jwksUri));
 
-// // Middleware para verificar el JWT con jose
-// const verifyToken = async (req, res, next) => {
-//   const authHeader = req.headers.authorization;
-
-//   if (!authHeader || !authHeader.startsWith("Bearer ")) {
-//     console.log("Token no proporcionado o mal formado");
-//     return res.status(401).json({ message: "Token no proporcionado o mal formado" });
-//   }
-
-//   const token = authHeader.split(" ")[1];
-
-//   try {
-//     const { payload } = await jwtVerify(token, JWKS, {
-//       issuer: `https://${process.env.AUTH0_DOMAIN}/`,
-//       audience: process.env.AUTH0_AUDIENCE,
-//     });
-//     req.user = payload;
-//     next();
-//   } catch (err) {
-//     console.error("Error verificando el token:", err);
-//     return res.status(401).json({ message: "Token inválido o expirado" });
-//   }
-// };
 const verifyToken = async (req, res, next) => {
-  const token = req.headers.authorization?.split(" ")[1];
+  const authHeader = req.headers.authorization;
 
-  if (!token) {
-    return res.status(401).json({ message: "Token no proporcionado" });
+  if (!authHeader?.startsWith("Bearer ")) {
+    return res.status(401).json({ message: "Formato de token inválido" });
   }
 
+  const token = authHeader.split(" ")[1];
+
   try {
-    const { payload } = await jwtVerify(token, JWKS);
+    const { payload } = await jwtVerify(token, JWKS, {
+      issuer: `https://${process.env.AUTH0_DOMAIN}/`,
+      audience: process.env.AUTH0_AUDIENCE,
+    });
+
     req.user = payload;
     next();
   } catch (error) {
     console.error("Error verificando token:", error);
-    return res.status(401).json({ message: "Token inválido" });
+    return res.status(401).json({ message: "Token inválido o expirado" });
   }
 };
 
-// Registro de usuario
 const registerUser = async (req, res) => {
   const { name, email } = req.body;
 
   try {
     const isAdmin = email === process.env.ADMIN_EMAIL;
-    console.log(isAdmin, "ESTE ES EL IS ADMIN DEL BACKEND");
 
     const userExists = await User.findOne({ where: { email } });
+
     if (userExists) {
       if (isAdmin) {
         const userAdmin = await User.findOne({
@@ -90,6 +69,7 @@ const registerUser = async (req, res) => {
       const users = await User.findAll({
         attributes: ["id", "name", "email", "isAdmin", "membershipType"],
       });
+
       return res.status(201).json({
         message: "Usuario registrado con éxito y es admin",
         users,
@@ -102,9 +82,10 @@ const registerUser = async (req, res) => {
     });
   } catch (error) {
     console.error("Error al registrar el usuario:", error);
-    res.status(500).json({ error: "Error al registrar el usuario" });
+    return res.status(500).json({ error: "Error al registrar el usuario" });
   }
 };
+
 const loginUser = async (req, res) => {
   const { email } = req.body;
 
@@ -115,7 +96,7 @@ const loginUser = async (req, res) => {
       return res.status(400).json({ message: "Credenciales incorrectas" });
     }
 
-    res.status(200).json({
+    return res.status(200).json({
       user: {
         id: user.id,
         name: user.name,
@@ -126,7 +107,7 @@ const loginUser = async (req, res) => {
     });
   } catch (error) {
     console.error("Error en el inicio de sesión:", error);
-    res.status(500).json({ message: "Error en el inicio de sesión" });
+    return res.status(500).json({ message: "Error en el inicio de sesión" });
   }
 };
 
@@ -136,67 +117,46 @@ const getAllUsers = async (req, res) => {
       attributes: ["id", "name", "email", "isAdmin", "membershipType"],
     });
 
-    res.status(200).json(users);
+    return res.status(200).json(users);
   } catch (error) {
     console.error("Error al obtener usuarios:", error);
-    res.status(500).json({ message: "Error al obtener usuarios" });
+    return res.status(500).json({ message: "Error al obtener usuarios" });
   }
 };
 
 const getAllNotAdmin = async (req, res) => {
   try {
     const users = await User.findAll({
+      where: { isAdmin: false },
       attributes: ["id", "name", "email", "isAdmin", "membershipType"],
     });
 
-    res.status(200).json(users);
+    return res.status(200).json(users);
   } catch (error) {
     console.error("Error al obtener usuarios:", error);
-    res.status(500).json({ message: "Error al obtener usuarios" });
+    return res.status(500).json({ message: "Error al obtener usuarios" });
   }
 };
 
-const deleteUserByEmail = async (req, res) => {
-  const { email } = req.body;
-  try {
-    const user = await User.findOne({ where: { email } });
-    if (!user) {
-      return res
-        .status(404)
-        .json({ message: `Usuario con email "${email}" no encontrado` });
-    }
-
-    await user.destroy();
-    res
-      .status(200)
-      .json({ message: `Usuario con email "${email}" eliminado con éxito` });
-  } catch (error) {
-    console.error("Error al eliminar el usuario:", error);
-    res.status(500).json({ message: "Error al eliminar el usuario" });
-  }
-};
-
-// Middleware para verificar si el usuario es admin
 const isAdmin = (req, res, next) => {
-  if (!req.user || !req.user.isAdmin) {
-    return res
-      .status(403)
-      .json({ message: "Acceso denegado: no eres administrador" });
+  if (!req.user || !req.user.email || req.user.email !== process.env.ADMIN_EMAIL) {
+    return res.status(403).json({ message: "Acceso denegado: no eres administrador" });
   }
+
   next();
 };
 
-// Actualizar rol de usuario
 const updateUserRole = async (req, res) => {
   const { userId } = req.params;
   const { membershipType } = req.body;
 
   try {
-    if (!["premium", "gestor", "sinMembresia"].includes(membershipType)) {
+    if (!["socioAdherente", "sinMembresia"].includes(membershipType)) {
       return res.status(400).json({ message: "Rol inválido" });
     }
 
     const user = await User.findByPk(userId);
+
     if (!user) {
       return res.status(404).json({ message: "Usuario no encontrado" });
     }
@@ -204,41 +164,56 @@ const updateUserRole = async (req, res) => {
     user.membershipType = membershipType;
     await user.save();
 
-    return res.status(200).json({ message: "Rol actualizado con éxito", user });
+    return res.status(200).json({
+      message: "Rol actualizado con éxito",
+      user,
+    });
   } catch (error) {
     console.error("Error al actualizar el rol:", error);
     return res.status(500).json({ message: "Error al actualizar el rol" });
   }
 };
-
-// Verificar si el socio coincide con el id y email, y si es un socio premium o gestor
 const verifySocio = async (req, res) => {
-  const { email, id_socio } = req.body;
+  const { email } = req.body;
 
   try {
+    if (!email) {
+      return res.status(400).json({
+        success: false,
+        message: "El email es obligatorio",
+      });
+    }
+
     const user = await User.findOne({
-      where: { email: email },
+      where: { email: email.toLowerCase() },
+      attributes: ["id", "name", "email", "isAdmin", "membershipType"],
     });
 
     if (!user) {
-      return res.status(404).json({ message: "Usuario no encontrado" });
+      return res.status(404).json({
+        success: false,
+        message: "Usuario no encontrado",
+      });
     }
 
-    if (user.membershipType !== "premium" && user.membershipType !== "gestor") {
+    if (user.membershipType !== "socioAdherente") {
       return res.status(403).json({
-        message: "El usuario no es un socio premium ni gestor",
+        success: false,
+        message: "El usuario no tiene acceso como socio adherente",
       });
-    } else {
-      console.log("La búsqueda fue exitosa", user);
     }
 
     return res.status(200).json({
       success: true,
+      message: "Socio adherente verificado correctamente",
       socio: user,
     });
   } catch (error) {
     console.error("Error al verificar el socio:", error);
-    return res.status(500).json({ message: "Error al verificar el socio" });
+    return res.status(500).json({
+      success: false,
+      message: "Error al verificar el socio",
+    });
   }
 };
 const deleteUser = async (req, res) => {
@@ -246,138 +221,40 @@ const deleteUser = async (req, res) => {
 
   try {
     const user = await User.findByPk(userId);
-    if (!user)
-      return res.status(404).json({ message: `Usuario no encontrado` });
+
+    if (!user) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
 
     if (user.email === process.env.ADMIN_EMAIL) {
-      return res
-        .status(403)
-        .json({ message: "No se puede eliminar al administrador principal" });
+      return res.status(403).json({
+        message: "No se puede eliminar al administrador principal",
+      });
     }
 
     await user.destroy();
-    res
-      .status(200)
-      .json({ message: `Usuario eliminado correctamente`, userDeleted: user });
+
+    return res.status(200).json({
+      message: "Usuario eliminado correctamente",
+      userDeleted: user,
+    });
   } catch (error) {
-    console.error("Error:", error);
-    res
-      .status(500)
-      .json({ message: "Error al eliminar el usuario", error: error.message });
+    console.error("Error al eliminar usuario:", error);
+    return res.status(500).json({
+      message: "Error al eliminar el usuario",
+      error: error.message,
+    });
   }
 };
 
-// const handleJotFormWebhook = async (req, res) => {
-//   try {
-//     if (req.method === "OPTIONS") {
-//       res.setHeader("Access-Control-Allow-Origin", "*");
-//       res.setHeader("Access-Control-Allow-Methods", "POST");
-//       res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-//       return res.status(204).end();
-//     }
-
-//     const { formID, submissionID, rawRequest } = req.body;
-//     const YOUR_FORM_ID = 250913776216662;
-
-//     if (!rawRequest) {
-//       return res.status(400).json({ message: "Falta rawRequest" });
-//     }
-
-//     let formData;
-//     try {
-//       formData = JSON.parse(rawRequest);
-//     } catch (error) {
-//       return res.status(400).json({ message: "rawRequest inválido (JSON)" });
-//     }
-
-//     if (parseInt(formID) !== YOUR_FORM_ID || !submissionID) {
-//       return res
-//         .status(200)
-//         .json({ message: "Webhook recibido pero no válido" });
-//     }
-
-//     // Armado de datos
-//     const userData = {
-//       name: `${formData.q3_fullName3?.first ?? ""} ${
-//         formData.q3_fullName3?.last ?? ""
-//       }`.trim(),
-//       birthdate: new Date(
-//         `${formData.q31_fechaDe?.year}-${formData.q31_fechaDe?.month.padStart(
-//           2,
-//           "0"
-//         )}-${formData.q31_fechaDe?.day.padStart(2, "0")}`
-//       ),
-//       dni: formData.q32_dni?.toString().replace(/\D/g, "") ?? null,
-//       email: formData.q33_email?.toLowerCase().trim() ?? null,
-//       phone: formData.q34_telefono?.full?.replace(/\D/g, "") ?? null,
-//       address: [
-//         formData.q4_address4?.addr_line1,
-//         formData.q4_address4?.addr_line2,
-//         formData.q4_address4?.city,
-//         formData.q4_address4?.state,
-//         formData.q4_address4?.postal,
-//       ]
-//         .filter(Boolean)
-//         .join(", "),
-//       hasReprocann: formData.q45_poseeReprocann === "Sí",
-//       reprocannNumber: formData.q36_numeroDe?.toString().trim() ?? null,
-//       reprocannExpiry: formData.q37_fechaDe37?.year
-//         ? new Date(
-//             `${
-//               formData.q37_fechaDe37.year
-//             }-${formData.q37_fechaDe37.month.padStart(
-//               2,
-//               "0"
-//             )}-${formData.q37_fechaDe37.day.padStart(2, "0")}`
-//           )
-//         : null,
-//       gestorAsociado: formData.q41_gestorAsociado41 === "Sí",
-//       isAdmin: ["chantiicou@gmail.com", process.env.ADMIN_EMAIL].includes(
-//         formData.q33_email?.toLowerCase()
-//       ),
-//     };
-
-//     // Guardar o actualizar
-//     let user = await User.findOne({ where: { email: userData.email } });
-//     const isNew = !user;
-
-//     if (isNew) {
-//       user = await User.create(userData);
-//     } else {
-//       await user.update(userData);
-//       await user.reload();
-//     }
-
-//     return res.status(isNew ? 201 : 200).json({
-//       message: isNew ? "Usuario creado" : "Usuario actualizado",
-//       user,
-//     });
-//   } catch (error) {
-//     console.error("Error webhook:", error);
-//     return res.status(500).json({ message: "Error interno del servidor" });
-//   }
-// };
-// const getJotformSubmissions = async (req, res) => {
-//   try {
-//     const users = await User.findAll();
-//     res.status(200).json(users);
-//   } catch (error) {
-//     console.error("Error al obtener usuarios:", error);
-//     res.status(500).json({ message: "Error interno del servidor" });
-//   }
-// };
-
 module.exports = {
   registerUser,
-  deleteUser,
   loginUser,
-  verifyToken, // Usamos la versión actualizada con jose
-  isAdmin,
-  getAllNotAdmin,
-  getAllUsers,
-  deleteUserByEmail,
-  updateUserRole,
   verifySocio,
-  // handleJotFormWebhook,
-  // getJotformSubmissions,
+  deleteUser,
+  getAllUsers,
+  getAllNotAdmin,
+  verifyToken,
+  isAdmin,
+  updateUserRole,
 };
