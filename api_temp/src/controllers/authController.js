@@ -151,7 +151,7 @@ const updateUserRole = async (req, res) => {
   const { membershipType } = req.body;
 
   try {
-    if (!["socioAdherente", "sinMembresia"].includes(membershipType)) {
+    if (!["premium", "sinMembresia", "gestor"].includes(membershipType)) {
       return res.status(400).json({ message: "Rol inválido" });
     }
 
@@ -173,6 +173,7 @@ const updateUserRole = async (req, res) => {
     return res.status(500).json({ message: "Error al actualizar el rol" });
   }
 };
+
 const verifySocio = async (req, res) => {
   const { email } = req.body;
 
@@ -196,16 +197,16 @@ const verifySocio = async (req, res) => {
       });
     }
 
-    if (user.membershipType !== "socioAdherente") {
+    if (user.membershipType !== "premium") {
       return res.status(403).json({
         success: false,
-        message: "El usuario no tiene acceso como socio adherente",
+        message: "El usuario no tiene acceso como socio habilitado",
       });
     }
 
     return res.status(200).json({
       success: true,
-      message: "Socio adherente verificado correctamente",
+      message: "Socio verificado correctamente",
       socio: user,
     });
   } catch (error) {
@@ -216,6 +217,7 @@ const verifySocio = async (req, res) => {
     });
   }
 };
+
 const deleteUser = async (req, res) => {
   const { userId } = req.params;
 
