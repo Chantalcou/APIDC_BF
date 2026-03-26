@@ -220,9 +220,9 @@ export const sendWorkTogether = (formData) => async (dispatch) => {
 };
 
 export const verifySocio = (email) => async (dispatch) => {
-  // `https://apidc.ong/verifySocio`
+  // 
   try {
-    const response = await axios.post(`http://localhost:5001/verifySocio`, {
+    const response = await axios.post(`https://apidc.ong/verifySocio`, {
       email,
     });
 
