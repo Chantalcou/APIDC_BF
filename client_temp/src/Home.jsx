@@ -196,7 +196,42 @@ const Home = () => {
                 />
                 Tu navegador no soporta videos HTML5.
               </video>
-
+              {/* BANNER PROFESIONAL CENTRADO - EVENTO AMNISTÍA CANNABIS (VERSIÓN GRANDE Y LLAMATIVA) */}
+<div className="event-banner-professional event-banner-premium" data-aos="fade-down" data-aos-duration="800">
+  <div className="event-banner__inner">
+    <div className="event-banner__shine"></div>
+    <div className="event-banner__glow"></div>
+    <div className="event-banner__content">
+ <div className="event-banner__title">
+  <span className="highlight attention-line">ATENCIÓN</span>
+  <span className="highlight main-line">AMNISTÍA EN EL CINE</span>
+</div>
+      <div className="event-banner__details">
+        <div className="event-detail">
+          <i className="fas fa-map-marker-alt"></i>
+          <span>Cine Monumental Rosario</span>
+        </div>
+        <div className="event-detail">
+          <i className="far fa-calendar-alt"></i>
+          <span>Sábado 9 de mayo</span>
+        </div>
+        <div className="event-detail">
+          <i className="fas fa-clock"></i>
+          <span>Funciones: 20:30hs / 22:00hs</span>
+        </div>
+      </div>
+      <a
+        href="https://compras.evento-simple.com/apidc"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="event-button event-button-premium"
+      >
+         SACA TUS ENTRADAS 
+        <i className="fas fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+</div>
               {/* <div className="hero-banner" data-aos="fade-down">
                 <div className="hero-banner__inner">
                   <h2 className="hero-banner__text">

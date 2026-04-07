@@ -1,1102 +1,365 @@
-/* =========================
-   LearnWithUs.css (FULL)
-   - Incluye responsive MOBILE bien prolijo
-   - Sin pisar el grid con display:block
-   ========================= */
-
-/* =========================
-   VARIABLES Y RESET
-   ========================= */
-
 :root {
-  --primary-green: #0a9d6d;
-  --primary-dark: #087a55;
-  --secondary-teal: #2DD4BF;
-  --accent-coral: #FF6B6B;
-  --accent-blue: #4ECDC4;
-  --accent-gold: #0a9d6d;
-  --dark-gray: #1F2937;
-  --medium-gray: #6B7280;
-  --light-gray: #F3F4F6;
-  --white: #FFFFFF;
-
-  --gradient-primary: linear-gradient(135deg, #0a9d6d 0%, #08b47c 100%);
-  --gradient-dark: linear-gradient(135deg, #087a55 0%, #0a9d6d 100%);
-
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-
-  --font-heading: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --green: #0a9d6d;
+  --green-dark: #087a55;
+  --green-soft: #e9f8f2;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --line: #e5e7eb;
+  --bg: #ffffff;
+  --bg-soft: #f8faf9;
+  --shadow-sm: 0 10px 25px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 18px 45px rgba(15, 23, 42, 0.1);
+  --radius-xl: 28px;
+  --radius-lg: 22px;
+  --radius-md: 16px;
+  --container: 1240px;
+  --transition: 0.28s ease;
 }
 
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
+html {
+  scroll-behavior: smooth;
 }
 
-/* =========================
-   CONTENEDOR GENERAL
-   ========================= */
-
-.learn-container {
+.learn-page {
   width: 100%;
-  font-family: var(--font-body);
-  background: var(--white);
-  color: var(--dark-gray);
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-/* =========================
-   HERO SECTION
-   ========================= */
+/* HERO */
 
 .learn-hero {
-  padding: 7rem 2rem 2.5rem;
-  background: var(--white);
+  padding: 7rem 1.5rem 2.5rem;
 }
 
 .learn-hero-inner {
-  max-width: 1200px;
+  max-width: var(--container);
   margin: 0 auto;
-
+  min-height: 620px;
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
-
-  min-height: 720px;
   overflow: hidden;
-  background: var(--white);
+  border-radius: 34px;
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(10, 157, 109, 0.08);
 }
 
 .learn-hero-left {
-  padding: 4rem 4rem;
+  padding: 4.25rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background:
+    radial-gradient(circle at top left, rgba(10, 157, 109, 0.12), transparent 36%),
+    linear-gradient(135deg, #ffffff 0%, #f8fcfa 100%);
+}
 
-  background: linear-gradient(
-    135deg,
-    rgba(10, 157, 109, 0.08) 0%,
-    rgba(255, 255, 255, 1) 55%
-  );
+.hero-kicker {
+  display: inline-flex;
+  width: fit-content;
+  margin-bottom: 1rem;
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  background: var(--green-soft);
+  color: var(--green);
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
 }
 
 .learn-hero-title {
-  font-size: 4rem;
-  font-weight: 800;
-  line-height: 1.05;
-  margin-bottom: 1.4rem;
-  letter-spacing: -0.02em;
-  color: var(--dark-gray);
-}
-
-.hero-title-line {
-  display: block;
-}
-
-.hero-title-line:first-child {
-  color: var(--primary-green);
+  margin: 0 0 1.25rem;
+  font-size: clamp(2.4rem, 4vw, 4.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  font-weight: 900;
+  color: var(--text);
 }
 
 .learn-hero-subtitle {
-  font-size: 1.15rem;
-  color: var(--medium-gray);
   max-width: 560px;
-  margin: 0 0 2.2rem;
-  line-height: 1.6;
-}
-
-.learn-hero-subtitle strong {
-  color: var(--primary-green);
-}
-
-/* (Si no los usás, podés borrarlos) */
-.hero-stats {
-  display: flex;
-  gap: 2.2rem;
-  flex-wrap: wrap;
-  margin-top: 0.5rem;
-}
-
-.stat-item {
-  background: rgba(255, 255, 255, 0.75);
-  border: 1px solid rgba(10, 157, 109, 0.18);
-  box-shadow: var(--shadow-sm);
-  border-radius: 16px;
-  padding: 1.1rem 1.3rem;
-  min-width: 150px;
-  text-align: center;
-}
-
-.stat-number {
-  font-size: 2.4rem;
-  font-weight: 800;
-  line-height: 1;
-  margin-bottom: 0.35rem;
-  color: var(--primary-green);
-}
-
-.stat-label {
-  font-size: 0.78rem;
-  color: var(--medium-gray);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-weight: 700;
+  margin: 0;
+  font-size: 1.08rem;
+  line-height: 1.75;
+  color: var(--muted);
 }
 
 .learn-hero-right {
   position: relative;
+  min-height: 100%;
   background-position: center;
-  background-size: cover;
   background-repeat: no-repeat;
+  background-size: cover;
 }
 
-/* oscurece arriba de la imagen para que siempre quede prolijo */
 .learn-hero-right::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.45) 0%,
-    rgba(0, 0, 0, 0.12) 45%,
-    rgba(0, 0, 0, 0) 100%
-  );
+  background:
+    linear-gradient(to right, rgba(255, 255, 255, 0.14), transparent 18%),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.16), transparent 38%);
 }
 
-/* un degradé suave en el borde entre texto e imagen */
-.learn-hero-right::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 60px;
-  background: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 255, 255, 0) 100%
-  );
+/* TABS */
+
+.learn-tabs-section {
+  padding: 0 1.5rem 1rem;
 }
 
-/* =========================
-   YEAR NAVIGATION
-   ========================= */
-
-.year-navigation {
-  padding: 0 2rem;
-  background: var(--white);
-  border-bottom: 1px solid var(--light-gray);
-}
-
-.year-nav-container {
-  max-width: 1200px;
+.learn-tabs {
+  max-width: var(--container);
   margin: 0 auto;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
-  padding: 1rem 0;
-  justify-content: center;
 }
 
-.year-nav-btn {
-  flex: 1;
-  max-width: 300px;
-
+.learn-tab {
+  appearance: none;
+  border: 1.5px solid var(--line);
+  background: #fff;
+  border-radius: 20px;
+  padding: 1.35rem 1rem;
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition), background var(--transition);
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  padding: 1.5rem 1rem;
-  background: var(--white);
-  border: 2px solid var(--light-gray);
-  border-radius: 16px;
-
-  cursor: pointer;
-  transition: var(--transition);
-  position: relative;
-  overflow: hidden;
+  justify-content: center;
+  min-height: 108px;
 }
 
-.year-nav-btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-
-  height: 4px;
-  background: var(--primary-green);
-  transform: translateY(-100%);
-  transition: transform 0.3s ease;
-}
-
-.year-nav-btn:hover {
-  border-color: var(--primary-green);
+.learn-tab:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-sm);
+  border-color: rgba(10, 157, 109, 0.35);
 }
 
-.year-nav-btn.active {
-  border-color: var(--primary-green);
-  background: linear-gradient(to bottom, rgba(10, 157, 109, 0), transparent);
+.learn-tab.active {
+  border-color: var(--green);
+  background: linear-gradient(180deg, #ffffff 0%, #f6fffb 100%);
+  box-shadow: 0 12px 30px rgba(10, 157, 109, 0.08);
 }
 
-.year-nav-btn.active::before {
-  transform: translateY(0);
+.tab-title {
+  font-size: clamp(1.35rem, 2vw, 2.2rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--text);
 }
 
-.year-number {
-  font-size: 2.1rem; /* un toque más chico para que no rompa en desktop */
-  font-weight: 800;
-  color: var(--dark-gray);
-  margin-bottom: 0.5rem;
-  transition: var(--transition);
-  text-align: center;
+.learn-tab.active .tab-title {
+  color: var(--green);
 }
 
-.year-nav-btn.active .year-number {
-  color: var(--primary-green);
-}
-
-.year-label {
-  font-size: 0.875rem;
-  color: var(--medium-gray);
+.tab-subtitle {
+  margin-top: 0.5rem;
+  font-size: 0.88rem;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  text-align: center;
+  letter-spacing: 0.16em;
+  color: var(--muted);
 }
 
-.year-nav-btn.active .year-label {
-  color: var(--primary-green);
-  font-weight: 600;
+/* CONTENT */
+
+.content-section {
+  padding: 4.75rem 1.5rem;
 }
 
-/* =========================
-   EVENTS / CAPACITACIONES (GRID DE IMÁGENES)
-   ========================= */
-
-.events-section {
-  padding: 6rem 2rem;
-  background: #ffffff;
+.content-section-soft {
+  background: var(--bg-soft);
 }
 
-.events-container {
-  max-width: 1200px;
+.content-container {
+  max-width: var(--container);
   margin: 0 auto;
 }
 
-.events-header {
+.section-heading {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 2.5rem;
 }
 
-.events-title {
-  font-size: 3.2rem;
-  font-weight: 800;
-  color: var(--primary-green);
+.section-heading h2 {
   margin: 0;
+  color: var(--green);
+  font-size: clamp(2rem, 4vw, 3.6rem);
+  line-height: 1.05;
+  font-weight: 900;
+  letter-spacing: -0.03em;
   text-transform: uppercase;
-  letter-spacing: 1px;
 }
 
-/* ✅ Grid real, no lo pises con display:block */
-.events-grid {
+.section-heading p {
+  margin: 0.7rem 0 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+/* GRID DE POSTERS */
+/* ACÁ ESTÁ LA CLAVE: el flyer se ve completo */
+
+.poster-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 3rem;
-
-  max-width: 1000px;
-  margin: 0 auto;
-
-  align-items: stretch; /* que estiren parejo */
+  gap: 2rem;
+  align-items: start;
 }
 
-/* Cards perfectamente iguales */
-.event-card {
+.poster-card {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.poster-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.poster-media {
   width: 100%;
   aspect-ratio: 1 / 1;
-
-  border-radius: 20px;
-  overflow: hidden;
-
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
-
-  position: relative;
-  background: #fff;
+  background:
+    linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
 }
 
-.event-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
-}
-
-.event-image-wrapper {
+.poster-image {
   width: 100%;
   height: 100%;
-  position: relative;
-  overflow: hidden;
-}
-
-.event-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  object-fit: contain; /* IMPORTANTE: no recorta */
+  object-position: center;
   display: block;
-  transform: scale(1);
-  transition: transform 0.6s ease;
+  border-radius: 18px;
 }
 
-.event-card:hover .event-image {
-  transform: scale(1.05);
-}
+/* badge */
 
-/* overlay suave */
-.event-card::before {
-  content: "";
+.poster-badge {
   position: absolute;
-  inset: 0;
-  background: rgba(10, 157, 109, 0);
-  transition: background 0.3s ease;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.event-card:hover::before {
-  background: rgba(10, 157, 109, 0.06);
-}
-
-/* =========================
-   TESTIMONIAL MODAL
-   ========================= */
-
-.testimonial-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-
+  top: 16px;
+  right: 16px;
+  z-index: 3;
+  width: 68px;
+  height: 68px;
+  border-radius: 999px;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s, visibility 0.3s;
+  background: linear-gradient(135deg, #58d3da 0%, #4cb4d5 100%);
+  color: #fff;
+  font-weight: 900;
+  font-size: 1rem;
+  border: 4px solid rgba(255, 255, 255, 0.92);
+  box-shadow: 0 14px 28px rgba(17, 24, 39, 0.18);
 }
 
-.testimonial-modal.active {
-  opacity: 1;
-  visibility: visible;
+.poster-card[data-year="2025"] .poster-badge {
+  background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
 }
 
-.testimonial-modal-backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(4px);
-}
+/* RESPONSIVE */
 
-.testimonial-modal-content {
-  position: relative;
-  background: var(--white);
-
-  width: min(800px, 92vw);
-  max-height: 90vh;
-
-  border-radius: 24px;
-  padding: 3rem;
-
-  overflow-y: auto;
-  transform: translateY(20px);
-  transition: transform 0.3s ease;
-
-  box-shadow: var(--shadow-2xl);
-  z-index: 2;
-}
-
-.testimonial-modal.active .testimonial-modal-content {
-  transform: translateY(0);
-}
-
-.modal-close-btn {
-  position: absolute;
-  top: 1.2rem;
-  right: 1.2rem;
-
-  width: 40px;
-  height: 40px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background: var(--light-gray);
-  border: none;
-  border-radius: 50%;
-
-  cursor: pointer;
-  transition: var(--transition);
-  color: var(--dark-gray);
-}
-
-.modal-close-btn:hover {
-  background: var(--medium-gray);
-  color: var(--white);
-}
-
-.modal-close-btn svg {
-  width: 24px;
-  height: 24px;
-}
-
-.modal-header {
-  text-align: center;
-  margin-bottom: 2.2rem;
-}
-
-.modal-title {
-  font-size: 2rem;
-  font-weight: 800;
-  margin-bottom: 0.6rem;
-  color: var(--dark-gray);
-}
-
-.modal-subtitle {
-  color: var(--medium-gray);
-  line-height: 1.6;
-}
-
-.testimonials-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.testimonial-card {
-  background: var(--light-gray);
-  border-radius: 16px;
-  padding: 2rem;
-  position: relative;
-}
-
-.testimonial-quote {
-  position: absolute;
-  top: -1rem;
-  left: 1.5rem;
-  font-size: 6rem;
-  color: var(--primary-green);
-  opacity: 0.1;
-  font-family: serif;
-}
-
-.testimonial-text {
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: var(--dark-gray);
-  margin-bottom: 1.2rem;
-  position: relative;
-  z-index: 1;
-}
-
-.testimonial-author {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.author-info {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.author-name {
-  font-weight: 800;
-  color: var(--primary-green);
-}
-
-.author-role {
-  font-size: 0.875rem;
-  color: var(--medium-gray);
-}
-
-/* =========================
-   ANIMACIONES
-   ========================= */
-
-@keyframes fadeInScale {
-  from {
-    opacity: 0;
-    transform: scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.event-card {
-  animation: fadeInScale 0.5s ease forwards;
-  opacity: 0;
-}
-
-.event-card:nth-child(1) { animation-delay: 0.08s; }
-.event-card:nth-child(2) { animation-delay: 0.18s; }
-.event-card:nth-child(3) { animation-delay: 0.28s; }
-.event-card:nth-child(4) { animation-delay: 0.38s; }
-
-.year-nav-btn {
-  animation: fadeInUp 0.35s ease forwards;
-  opacity: 0;
-}
-
-.year-nav-btn:nth-child(1) { animation-delay: 0.08s; }
-.year-nav-btn:nth-child(2) { animation-delay: 0.16s; }
-.year-nav-btn:nth-child(3) { animation-delay: 0.24s; }
-
-/* =========================
-   RESPONSIVE (TABLET)
-   ========================= */
-
-@media (max-width: 992px) {
-  /* HERO */
+@media (max-width: 1100px) {
   .learn-hero-inner {
     grid-template-columns: 1fr;
-    min-height: auto;
-  }
-
-  .learn-hero-left {
-    padding: 3rem 2rem;
+    min-height: unset;
   }
 
   .learn-hero-right {
-    min-height: 340px;
+    min-height: 360px;
   }
 
-  .learn-hero-title {
-    font-size: 3rem;
-  }
-
-  /* GRID */
-  .events-grid {
-    grid-template-columns: 1fr;
-    max-width: 650px;
-    gap: 2.2rem;
+  .poster-grid {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
-/* =========================
-   RESPONSIVE (MOBILE) ✅
-   ========================= */
-
-@media (max-width: 576px) {
-  /* HERO */
+@media (max-width: 820px) {
   .learn-hero {
     padding: 6rem 1rem 2rem;
   }
 
   .learn-hero-left {
-    padding: 2.2rem 1.25rem;
+    padding: 2.4rem 1.5rem;
   }
 
+  .learn-tabs-section,
+  .content-section {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .learn-tabs {
+    grid-template-columns: 1fr;
+  }
+
+  .poster-grid {
+    grid-template-columns: 1fr;
+    gap: 1.35rem;
+  }
+
+  .poster-media {
+    aspect-ratio: 1 / 1;
+    padding: 0.85rem;
+  }
+
+  .poster-badge {
+    width: 58px;
+    height: 58px;
+    font-size: 0.9rem;
+    top: 12px;
+    right: 12px;
+  }
+}
+
+@media (max-width: 560px) {
   .learn-hero-title {
-    font-size: 2.25rem;
-    line-height: 1.08;
-    margin-bottom: 1rem;
+    font-size: 2.35rem;
   }
 
   .learn-hero-subtitle {
     font-size: 1rem;
-    margin-bottom: 1.4rem;
+    line-height: 1.65;
   }
 
-  .hero-stats {
-    gap: 1rem;
+  .tab-title {
+    font-size: 1.55rem;
   }
 
-  .stat-item {
-    min-width: 0;
-    width: 100%;
-    padding: 0.9rem 1rem;
-  }
-
-  .stat-number {
-    font-size: 2rem;
-  }
-
-  /* NAV */
-  .year-navigation {
-    padding: 0 1rem;
-  }
-
-  .year-nav-container {
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
-  .year-nav-btn {
-    width: 100%;
-    max-width: 360px;
-    padding: 1rem 0.9rem;
-    border-radius: 14px;
-  }
-
-  .year-number {
-    font-size: 1.7rem;
-    margin-bottom: 0.25rem;
-  }
-
-  .year-label {
+  .tab-subtitle {
     font-size: 0.8rem;
   }
 
-  /* SECTION */
-  .events-section {
-    padding: 3.5rem 1rem;
+  .section-heading {
+    margin-bottom: 1.8rem;
   }
 
-  .events-header {
-    margin-bottom: 2.2rem;
+  .section-heading h2 {
+    font-size: 2rem;
   }
 
-  .events-title {
-    font-size: 1.9rem;
-    letter-spacing: 0.06em;
+  .poster-card {
+    border-radius: 20px;
   }
 
-  /* GRID */
-  .events-grid {
-    gap: 1.2rem;
-    max-width: 420px;
+  .poster-image {
+    border-radius: 14px;
   }
-
-  .event-card {
-    border-radius: 16px;
-  }
-
-  /* MODAL */
-  .testimonial-modal-content {
-    padding: 1.5rem;
-    border-radius: 18px;
-  }
-
-  .modal-title {
-    font-size: 1.4rem;
-  }
-
-  .testimonial-card {
-    padding: 1.4rem;
-  }
-}
-
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
-
-
-/* =========================
-   YEAR BADGE DESIGN
-   ========================= */
-
-.year-badge {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 70px;
-  height: 70px;
-  background: linear-gradient(135deg, var(--primary-green) 0%, var(--primary-dark) 100%);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 3;
-  box-shadow: var(--shadow-xl);
-  transition: var(--transition);
-  transform: rotate(15deg);
-  border: 3px solid rgba(255, 255, 255, 0.9);
-  overflow: hidden;
-}
-
-.year-badge::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.15) 50%, transparent 70%);
-  animation: shine 3s infinite;
-}
-
-@keyframes shine {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
-}
-
-.event-card:hover .year-badge {
-  transform: rotate(0deg) scale(1.1);
-  box-shadow: var(--shadow-2xl);
-}
-
-.year-text {
-  font-size: 1.1rem;
-  font-weight: 800;
-  color: white;
-  letter-spacing: 1px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  transform: rotate(-15deg);
-  transition: transform 0.3s ease;
-}
-
-.event-card:hover .year-text {
-  transform: rotate(0deg);
-}
-
-/* =========================
-   EVENTS SUBTITLE
-   ========================= */
-
-.events-subtitle {
-  font-size: 1.2rem;
-  color: var(--medium-gray);
-  margin-top: 0.5rem;
-  font-weight: 500;
-}
-
-/* =========================
-   RESPONSIVE YEAR BADGE
-   ========================= */
-
-@media (max-width: 992px) {
-  .year-badge {
-    width: 60px;
-    height: 60px;
-    top: 15px;
-    right: 15px;
-  }
-  
-  .year-text {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .year-badge {
-    width: 50px;
-    height: 50px;
-    top: 12px;
-    right: 12px;
-    border-width: 2px;
-  }
-  
-  .year-text {
-    font-size: 0.9rem;
-  }
-  
-  .events-subtitle {
-    font-size: 1rem;
-  }
-}
-
-/* =========================
-   ANIMATION FOR YEAR BADGE
-   ========================= */
-
-@keyframes badgePulse {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(10, 157, 109, 0.4);
-  }
-  50% {
-    box-shadow: 0 0 0 10px rgba(10, 157, 109, 0);
-  }
-}
-
-.year-badge {
-  animation: badgePulse 3s infinite;
-}
-
-/* =========================
-   EVENT CARD POSITION FOR BADGE
-   ========================= */
-
-.event-image-wrapper {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
-}
-
-/* =========================
-   CARD ENHANCEMENT WITH BADGE
-   ========================= */
-
-.event-card {
-  position: relative;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.event-card::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 80px;
-  height: 80px;
-  background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 2;
-  border-radius: 0 20px 0 0;
-}
-
-/* =========================
-   CAP 2026 SPECIAL STYLE
-   ========================= */
-
-/* Para 2026 puedes cambiar el color del badge si quieres */
-.event-card .year-badge[data-year="2026"] {
-  background: linear-gradient(135deg, var(--accent-blue) 0%, #3a9bc9 100%);
-}
-
-/* =========================
-   HOVER EFFECT ENHANCEMENT
-   ========================= */
-
-.event-card:hover {
-  transform: translateY(-8px) scale(1.02);
-}
-
-.event-card:hover .year-badge {
-  animation: badgePulse 1.5s infinite;
-}
-
-/* =========================
-   LOADING OPTIMIZATION
-   ========================= */
-
-.year-badge {
-  will-change: transform, box-shadow;
-}
-
-
-/* =========================
-   YEAR BADGE DESIGN PARA TODAS LAS SECCIONES
-   ========================= */
-
-.year-badge {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 70px;
-  height: 70px;
-  background: linear-gradient(135deg, var(--primary-green) 0%, var(--primary-dark) 100%);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 3;
-  box-shadow: var(--shadow-xl);
-  transition: var(--transition);
-  transform: rotate(15deg);
-  border: 3px solid rgba(255, 255, 255, 0.9);
-  overflow: hidden;
-}
-
-/* Estilo diferente para eventos si quieres */
-.event-card[data-section="events"] .year-badge {
-  background: linear-gradient(135deg, var(--accent-coral) 0%, #e05555 100%);
-}
-
-/* Estilo diferente para 2026 */
-.event-card[data-year="2026"] .year-badge {
-  background: linear-gradient(135deg, var(--accent-blue) 0%, #3a9bc9 100%);
-}
-
-.year-badge::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.15) 50%, transparent 70%);
-  animation: shine 3s infinite;
-}
-
-@keyframes shine {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
-}
-
-.event-card:hover .year-badge {
-  transform: rotate(0deg) scale(1.1);
-  box-shadow: var(--shadow-2xl);
-}
-
-.year-text {
-  font-size: 1.1rem;
-  font-weight: 800;
-  color: white;
-  letter-spacing: 1px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  transform: rotate(-15deg);
-  transition: transform 0.3s ease;
-}
-
-.event-card:hover .year-text {
-  transform: rotate(0deg);
-}
-
-/* =========================
-   EVENTS SUBTITLE
-   ========================= */
-
-.events-subtitle {
-  font-size: 1.2rem;
-  color: var(--medium-gray);
-  margin-top: 0.5rem;
-  font-weight: 500;
-}
-
-/* =========================
-   RESPONSIVE YEAR BADGE
-   ========================= */
-
-@media (max-width: 992px) {
-  .year-badge {
-    width: 60px;
-    height: 60px;
-    top: 15px;
-    right: 15px;
-  }
-  
-  .year-text {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .year-badge {
-    width: 50px;
-    height: 50px;
-    top: 12px;
-    right: 12px;
-    border-width: 2px;
-  }
-  
-  .year-text {
-    font-size: 0.9rem;
-  }
-  
-  .events-subtitle {
-    font-size: 1rem;
-  }
-}
-
-/* =========================
-   ANIMATION FOR YEAR BADGE
-   ========================= */
-
-@keyframes badgePulse {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(10, 157, 109, 0.4);
-  }
-  50% {
-    box-shadow: 0 0 0 10px rgba(10, 157, 109, 0);
-  }
-}
-
-.year-badge {
-  animation: badgePulse 3s infinite;
-}
-
-/* =========================
-   EVENT CARD POSITION FOR BADGE
-   ========================= */
-
-.event-image-wrapper {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
-}
-
-/* =========================
-   CARD ENHANCEMENT WITH BADGE
-   ========================= */
-
-.event-card {
-  position: relative;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.event-card::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 80px;
-  height: 80px;
-  background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 2;
-  border-radius: 0 20px 0 0;
-}
-
-/* =========================
-   HOVER EFFECT ENHANCEMENT
-   ========================= */
-
-.event-card:hover {
-  transform: translateY(-8px) scale(1.02);
-}
-
-.event-card:hover .year-badge {
-  animation: badgePulse 1.5s infinite;
-}
-
-/* =========================
-   LOADING OPTIMIZATION
-   ========================= */
-
-.year-badge {
-  will-change: transform, box-shadow;
-}
-
-/* =========================
-   BADGE COLORS BY YEAR
-   ========================= */
-
-/* Badge color para 2025 (verde por defecto ya está) */
-.year-badge[data-year="2025"] {
-  background: linear-gradient(135deg, var(--primary-green) 0%, var(--primary-dark) 100%);
-}
-
-/* Badge color para 2026 (azul) */
-.year-badge[data-year="2026"] {
-  background: linear-gradient(135deg, var(--accent-blue) 0%, #3a9bc9 100%);
 }

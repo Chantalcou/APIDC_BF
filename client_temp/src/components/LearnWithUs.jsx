@@ -1,55 +1,54 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import "./LearnWithUs.css";
 
 const LearnWithUs = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentTestimonials, setCurrentTestimonials] = useState([]);
   const [activeTab, setActiveTab] = useState("EVENTOS");
 
   const HERO_IMAGE =
     "https://res.cloudinary.com/dqgjcfosx/image/upload/v1768229156/ChatGPT_Image_12_ene_2026_11_45_09_a.m._h2utsh.png";
 
-
-
-  /**
-   * ✅ EVENTOS (2025 + 2026)
-   * - 2026: Mendocann + Expo Cannabis + 2 flyers nuevos
-   * - 2025: los que ya tenías
-   */
   const events = [
-    // --- 2026 ---
-  
+    {
+      id: "ev-amnistia-cine",
+      image:
+        "https://res.cloudinary.com/dqgjcfosx/image/upload/v1775569132/WhatsApp_Image_2026-04-07_at_10.00.25_AM_oatjma.jpg",
+      year: "2026",
+      title: "Amnistía Cannabis",
+    },
     {
       id: "ev-2026-expo",
       image:
         "https://res.cloudinary.com/dqgjcfosx/image/upload/v1768309786/expo--_bwcq9n.png",
       year: "2026",
+      title: "Expo Cannabis",
     },
     {
       id: "ev-2026-1",
       image:
         "https://res.cloudinary.com/dqgjcfosx/image/upload/v1772118518/ChatGPT_Image_26_feb_2026_11_55_29_a.m._lnusz2.png",
       year: "2026",
+      title: "Evento 2026",
     },
     {
       id: "ev-2026-2",
       image:
         "https://res.cloudinary.com/dqgjcfosx/image/upload/v1772118518/ChatGPT_Image_26_feb_2026_12_01_58_p.m._cyio3a.png",
       year: "2026",
+      title: "Evento 2026",
     },
-
-    // --- 2025 ---
     {
       id: "ev-2025-1",
       image:
         "https://res.cloudinary.com/dqgjcfosx/image/upload/v1762354907/cannabis_3_-4_compressed_page-0001_akrngk.jpg",
       year: "2025",
+      title: "Evento APIDC 2025",
     },
     {
       id: "ev-2025-2",
       image:
         "https://res.cloudinary.com/dqgjcfosx/image/upload/v1762354908/cannabis_3_-5_compressed_page-0001_aeq0gp.jpg",
       year: "2025",
+      title: "Evento APIDC 2025",
     },
   ];
 
@@ -59,12 +58,14 @@ const LearnWithUs = () => {
       image:
         "https://res.cloudinary.com/dqgjcfosx/image/upload/v1752586473/WhatsApp_Image_2025-07-14_at_3.16.26_PM_1_psenun.jpg",
       year: "2025",
+      title: "Capacitación 2025",
     },
     {
       id: "cap-2025-2",
       image:
         "https://res.cloudinary.com/dqgjcfosx/image/upload/v1752591009/WhatsApp_Image_2025-07-15_at_11.37.49_AM_zyg75b.jpg",
       year: "2025",
+      title: "Capacitación 2025",
     },
   ];
 
@@ -74,61 +75,71 @@ const LearnWithUs = () => {
       image:
         "https://res.cloudinary.com/dqgjcfosx/image/upload/v1768236747/ChatGPT_Image_12_ene_2026_01_51_43_p.m._e5ppif.png",
       year: "2026",
+      title: "Capacitación 2026",
     },
     {
       id: "cap-2026-2",
       image:
         "https://res.cloudinary.com/dqgjcfosx/image/upload/v1768237002/ChatGPT_Image_12_ene_2026_01_55_53_p.m._q7jtt7.png",
       year: "2026",
+      title: "Capacitación 2026",
     },
   ];
 
-  const openTestimonials = (testimonials = []) => {
-    setCurrentTestimonials(testimonials);
-    setIsModalOpen(true);
-    document.body.style.overflow = "hidden";
-  };
-
-  const closeTestimonials = () => {
-    setIsModalOpen(false);
-    document.body.style.overflow = "auto";
-  };
-
-  const renderGrid = (items, altPrefix) => (
-    <div className="events-grid">
-      {items.map((item) => (
-        <div key={item.id} className="event-card" data-year={item.year}>
-          <div className="event-image-wrapper">
-            <img
-              src={item.image}
-              alt={`${altPrefix} ${item.year}`}
-              className="event-image"
-              loading="lazy"
-            />
-            <div className="year-badge" data-year={item.year}>
-              <span className="year-text">{item.year}</span>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
+  const events2026 = useMemo(
+    () => events.filter((item) => item.year === "2026"),
+    [events]
   );
 
-  const events2025 = events.filter((e) => e.year === "2025");
-  const events2026 = events.filter((e) => e.year === "2026");
+  const events2025 = useMemo(
+    () => events.filter((item) => item.year === "2025"),
+    [events]
+  );
+
+  const renderPosterGrid = (items, altPrefix) => {
+    return (
+      <div className="poster-grid">
+        {items.map((item) => (
+          <article
+            key={item.id}
+            className="poster-card"
+            data-year={item.year}
+            aria-label={`${altPrefix} ${item.title}`}
+          >
+            <div className="poster-badge">
+              <span>{item.year}</span>
+            </div>
+
+            <div className="poster-media">
+              <img
+                src={item.image}
+                alt={`${altPrefix} ${item.title} ${item.year}`}
+                className="poster-image"
+                loading="lazy"
+              />
+            </div>
+          </article>
+        ))}
+      </div>
+    );
+  };
 
   return (
-    <div className="learn-container">
-      {/* Hero */}
+    <div className="learn-page">
       <section className="learn-hero">
         <div className="learn-hero-inner">
           <div className="learn-hero-left">
+            <span className="hero-kicker">APIDC</span>
+
             <h1 className="learn-hero-title">
-              <span className="hero-title-line">Cursos y capacitaciones</span>
-              <span className="hero-title-line">en Cannabis Medicinal</span>
+              Cursos, capacitaciones
+              <br />
+              y eventos cannábicos
             </h1>
+
             <p className="learn-hero-subtitle">
-              <strong>APIDC</strong>.
+              Espacios de formación, encuentros y actividades vinculadas al
+              cannabis medicinal, la investigación y el desarrollo.
             </p>
           </div>
 
@@ -140,137 +151,80 @@ const LearnWithUs = () => {
         </div>
       </section>
 
-      {/* Navigation */}
-      <div className="year-navigation">
-        <div className="year-nav-container">
+      <section className="learn-tabs-section">
+        <div className="learn-tabs">
           <button
-            className={`year-nav-btn ${activeTab === "EVENTOS" ? "active" : ""}`}
+            type="button"
+            className={`learn-tab ${activeTab === "EVENTOS" ? "active" : ""}`}
             onClick={() => setActiveTab("EVENTOS")}
-            type="button"
           >
-            <span className="year-number">Eventos</span>
-            <span className="year-label">2025 / 2026</span>
+            <span className="tab-title">Eventos</span>
+            <span className="tab-subtitle">2025 / 2026</span>
           </button>
 
           <button
-            className={`year-nav-btn ${activeTab === "CAP_2025" ? "active" : ""}`}
+            type="button"
+            className={`learn-tab ${activeTab === "CAP_2025" ? "active" : ""}`}
             onClick={() => setActiveTab("CAP_2025")}
-            type="button"
           >
-            <span className="year-number">Capacitaciones</span>
-            <span className="year-label">2025</span>
+            <span className="tab-title">Capacitaciones</span>
+            <span className="tab-subtitle">2025</span>
           </button>
 
           <button
-            className={`year-nav-btn ${activeTab === "CAP_2026" ? "active" : ""}`}
-            onClick={() => setActiveTab("CAP_2026")}
             type="button"
+            className={`learn-tab ${activeTab === "CAP_2026" ? "active" : ""}`}
+            onClick={() => setActiveTab("CAP_2026")}
           >
-            <span className="year-number">Capacitaciones</span>
-            <span className="year-label">2026</span>
+            <span className="tab-title">Capacitaciones</span>
+            <span className="tab-subtitle">2026</span>
           </button>
         </div>
-      </div>
+      </section>
 
-      {/* EVENTOS (2026 ARRIBA / 2025 ABAJO) */}
       {activeTab === "EVENTOS" && (
         <>
-          <section className="events-section">
-            <div className="events-container">
-              <div className="events-header">
-                <h2 className="events-title">Eventos cannabicos Argentina 2026</h2>
+          <section className="content-section">
+            <div className="content-container">
+              <div className="section-heading">
+                <h2>Eventos cannábicos Argentina 2026</h2>
               </div>
-              {renderGrid(events2026, "Evento")}
+              {renderPosterGrid(events2026, "Evento")}
             </div>
           </section>
 
-          <section className="events-section">
-            <div className="events-container">
-              <div className="events-header">
-                <h2 className="events-title">Eventos cannabicos APIDC 2025</h2>
+          <section className="content-section content-section-soft">
+            <div className="content-container">
+              <div className="section-heading">
+                <h2>Eventos cannábicos APIDC 2025</h2>
               </div>
-              {renderGrid(events2025, "Evento")}
+              {renderPosterGrid(events2025, "Evento")}
             </div>
           </section>
         </>
       )}
 
-      {/* CAP 2025 */}
       {activeTab === "CAP_2025" && (
-        <section className="events-section">
-          <div className="events-container">
-            <div className="events-header">
-              <h2 className="events-title">Capacitaciones 2025</h2>
+        <section className="content-section">
+          <div className="content-container">
+            <div className="section-heading">
+              <h2>Capacitaciones 2025</h2>
             </div>
-            {renderGrid(capacitaciones2025, "Capacitación")}
+            {renderPosterGrid(capacitaciones2025, "Capacitación")}
           </div>
         </section>
       )}
 
-      {/* CAP 2026 */}
       {activeTab === "CAP_2026" && (
-        <section className="events-section">
-          <div className="events-container">
-            <div className="events-header">
-              <h2 className="events-title">Capacitaciones 2026</h2>
-              <p className="events-subtitle">Próximamente</p>
+        <section className="content-section">
+          <div className="content-container">
+            <div className="section-heading">
+              <h2>Capacitaciones 2026</h2>
+              <p>Próximamente</p>
             </div>
-            {renderGrid(capacitaciones2026, "Capacitación")}
+            {renderPosterGrid(capacitaciones2026, "Capacitación")}
           </div>
         </section>
-      )}
-
-      {/* Modal */}
-      {isModalOpen && (
-        <div className="testimonial-modal active">
-          <div
-            className="testimonial-modal-backdrop"
-            onClick={closeTestimonials}
-          />
-          <div className="testimonial-modal-content">
-            <button
-              className="modal-close-btn"
-              onClick={closeTestimonials}
-              type="button"
-              aria-label="Cerrar"
-            >
-              <svg viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M18 6L6 18M6 6L18 18"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
-
-            <div className="modal-header">
-              <h3 className="modal-title">Experiencias de Nuestros Alumnos</h3>
-              <p className="modal-subtitle">
-                Lo que dicen profesionales que han participado en nuestras
-                capacitaciones
-              </p>
-            </div>
-
-            <div className="testimonials-list">
-              {currentTestimonials.map((testimonial, index) => (
-                <div key={index} className="testimonial-card">
-                  <div className="testimonial-quote">"</div>
-                  <p className="testimonial-text">{testimonial.text}</p>
-                  <div className="testimonial-author">
-                    <div className="author-info">
-                      <span className="author-name">{testimonial.author}</span>
-                      {testimonial.role && (
-                        <span className="author-role">{testimonial.role}</span>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
       )}
     </div>
   );
