@@ -36,26 +36,24 @@ const Home = () => {
   const [showCaptcha, setShowCaptcha] = useState(false);
   const [showFestiveBanner, setShowFestiveBanner] = useState(true);
 
-  // VIDEO
   const videoRef = useRef(null);
-  const [isMuted, setIsMuted] = useState(true); // autoplay seguro
+  const [isMuted, setIsMuted] = useState(true);
 
-  // URLs para donaciones
-  const FORM_URL = "https://docs.google.com/forms/d/1guSRMEtLnfwWshZFkZ8TDF1DlSh2y6av8TWgYh4RsHY/edit";
-  const QR_URL = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + encodeURIComponent(FORM_URL);
+  const FORM_URL =
+    "https://docs.google.com/forms/d/1guSRMEtLnfwWshZFkZ8TDF1DlSh2y6av8TWgYh4RsHY/edit";
+  const QR_URL =
+    "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" +
+    encodeURIComponent(FORM_URL);
 
-  // Loader
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1500);
     return () => clearTimeout(timer);
   }, []);
 
-  // Scroll top
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // AOS
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -64,19 +62,15 @@ const Home = () => {
     });
   }, []);
 
-  // Play video cuando está listo el DOM (muteado para que no lo bloquee)
   useEffect(() => {
     if (!loading && videoRef.current) {
       const v = videoRef.current;
       v.muted = isMuted;
       v.volume = isMuted ? 0 : 1;
-      v.play().catch(() => {
-        // Si el navegador bloquea, se muestra igual y el user puede darle sonido
-      });
+      v.play().catch(() => {});
     }
   }, [loading, isMuted]);
 
-  // Datos usuario
   useEffect(() => {
     const fetchUserData = async () => {
       if (isAuthenticated && user) {
@@ -125,7 +119,6 @@ const Home = () => {
     }
   };
 
-  // Toggle sonido
   const toggleMute = () => {
     if (!videoRef.current) return;
     const v = videoRef.current;
@@ -138,7 +131,6 @@ const Home = () => {
     }
   };
 
-  // Función para abrir formulario de donaciones
   const handleOpenForm = () => {
     window.open(FORM_URL, "_blank", "noopener,noreferrer");
   };
@@ -196,108 +188,124 @@ const Home = () => {
                 />
                 Tu navegador no soporta videos HTML5.
               </video>
-              {/* BANNER PROFESIONAL CENTRADO - EVENTO AMNISTÍA CANNABIS (VERSIÓN GRANDE Y LLAMATIVA) */}
-<div className="event-banner-professional event-banner-premium" data-aos="fade-down" data-aos-duration="800">
-  <div className="event-banner__inner">
-    <div className="event-banner__shine"></div>
-    <div className="event-banner__glow"></div>
-    <div className="event-banner__content">
- <div className="event-banner__title">
-  <span className="highlight attention-line">ATENCIÓN</span>
-  <span className="highlight main-line">AMNISTÍA EN EL CINE</span>
-</div>
-      <div className="event-banner__details">
-        <div className="event-detail">
-          <i className="fas fa-map-marker-alt"></i>
-          <span>Cine Monumental Rosario</span>
-        </div>
-        <div className="event-detail">
-          <i className="far fa-calendar-alt"></i>
-          <span>Sábado 9 de mayo</span>
-        </div>
-        <div className="event-detail">
-          <i className="fas fa-clock"></i>
-          <span>Funciones: 20:30hs / 22:00hs</span>
-        </div>
-      </div>
-      <a
-        href="https://compras.evento-simple.com/apidc"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="event-button event-button-premium"
-      >
-         SACA TUS ENTRADAS 
-        <i className="fas fa-arrow-right"></i>
-      </a>
-    </div>
-  </div>
-</div>
-              {/* <div className="hero-banner" data-aos="fade-down">
-                <div className="hero-banner__inner">
-                  <h2 className="hero-banner__text">
-                    ESTO RECIÉN EMPIEZA
-                    <span className="hero-banner__divider"></span>
-                    ¡GRACIAS!
-                  </h2>
-                  <div className="hero-banner__shine"></div>
-                </div>
-              </div> */}
 
-              {/* SECCIÓN DE DONACIONES MEJORADA */}
-              <div className="donations-mini" data-aos="fade-up" data-aos-delay="300">
-                <div className="donations-mini__badge">
-                  <FaHeart />
-                  <span>APOYÁ NUESTRA CAUSA</span>
-                </div>
-                
-                <div className="donations-mini__content">
-                  <h3 className="donations-mini__title">
-                    Tu apoyo transforma vidas
-                  </h3>
-                  <p className="donations-mini__subtitle">
-                    Cada donación nos ayuda a continuar con nuestro trabajo por una comunidad más saludable
-                  </p>
-                  
-                  <div className="cta-split" role="group" aria-label="Acciones para donar">
-                    {/* Botón */}
-                    <button
-                      type="button"
-                      className="cta-half cta-button"
-                      onClick={handleOpenForm}
-                      aria-label="Ir al formulario de donaciones"
-                    >
-                      <span className="cta-title-row">
-                        Ir al formulario <FaArrowRight className="arrow-icon" />
-                      </span>
-                      <span className="cta-sub">
-                        Rápido • Seguro • Transparente
-                      </span>
-                    </button>
+              {/* STACK: banner arriba / donaciones abajo */}
+              <div className="hero-mobile-stack">
+                {/* BANNER AMNISTÍA */}
+                <div
+                  className="event-banner-professional event-banner-premium"
+                  data-aos="fade-down"
+                  data-aos-duration="800"
+                >
+                  <div className="event-banner__inner">
+                    <div className="event-banner__shine"></div>
+                    <div className="event-banner__glow"></div>
 
-                    {/* QR */}
-                    <a
-                      className="cta-half cta-qr"
-                      href={FORM_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Abrir formulario desde el QR"
-                    >
-                      <div className="qr-top">
-                        <FaQrcode className="qr-icon" />
-                        <span className="qr-label">Escanear QR</span>
+                    <div className="event-banner__content">
+                      <div className="event-banner__title">
+                        <span className="highlight attention-line">
+                          ATENCIÓN
+                        </span>
+                        <span className="highlight main-line">
+                          AMNISTÍA EN EL CINE
+                        </span>
                       </div>
 
-                      <div className="qr-frame">
-                        <img
-                          src={QR_URL}
-                          alt="QR para formulario de donaciones APIDC"
-                          className="qr-image"
-                          loading="lazy"
-                        />
+                      <div className="event-banner__details">
+                        <div className="event-detail">
+                          <i className="fas fa-map-marker-alt"></i>
+                          <span>Cine Monumental Rosario</span>
+                        </div>
+
+                        <div className="event-detail">
+                          <i className="far fa-calendar-alt"></i>
+                          <span>Sábado 9 de mayo</span>
+                        </div>
+
+                        <div className="event-detail">
+                          <i className="fas fa-clock"></i>
+                          <span>Funciones: 20:30hs / 22:00hs</span>
+                        </div>
                       </div>
 
-                      <span className="qr-sub">Abrir en el teléfono</span>
-                    </a>
+                      <a
+                        href="https://compras.evento-simple.com/apidc"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="event-button event-button-premium"
+                      >
+                        SACA TUS ENTRADAS
+                        <i className="fas fa-arrow-right"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                {/* DONACIONES */}
+                <div
+                  className="donations-mini"
+                  data-aos="fade-up"
+                  data-aos-delay="300"
+                >
+                  <div className="donations-mini__badge">
+                    <FaHeart />
+                    <span>APOYÁ NUESTRA CAUSA</span>
+                  </div>
+
+                  <div className="donations-mini__content">
+                    <h3 className="donations-mini__title">
+                      Tu apoyo transforma vidas
+                    </h3>
+
+                    <p className="donations-mini__subtitle">
+                      Cada donación nos ayuda a continuar con nuestro trabajo
+                      por una comunidad más saludable
+                    </p>
+
+                    <div
+                      className="cta-split"
+                      role="group"
+                      aria-label="Acciones para donar"
+                    >
+                      <button
+                        type="button"
+                        className="cta-half cta-button"
+                        onClick={handleOpenForm}
+                        aria-label="Ir al formulario de donaciones"
+                      >
+                        <span className="cta-title-row">
+                          Ir al formulario{" "}
+                          <FaArrowRight className="arrow-icon" />
+                        </span>
+                        <span className="cta-sub">
+                          Rápido • Seguro • Transparente
+                        </span>
+                      </button>
+
+                      <a
+                        className="cta-half cta-qr"
+                        href={FORM_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Abrir formulario desde el QR"
+                      >
+                        <div className="qr-top">
+                          <FaQrcode className="qr-icon" />
+                          <span className="qr-label">Escanear QR</span>
+                        </div>
+
+                        <div className="qr-frame">
+                          <img
+                            src={QR_URL}
+                            alt="QR para formulario de donaciones APIDC"
+                            className="qr-image"
+                            loading="lazy"
+                          />
+                        </div>
+
+                        <span className="qr-sub">Abrir en el teléfono</span>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -389,34 +397,36 @@ const Home = () => {
                 </p>
               </div>
             </div>
-          <section className="present-section" id="present-section">
-            <div className="present-overlay"></div>
-            <div className="present-gradient-overlay"></div>
-            <div className="container">
-              <div 
-                className="content-present"
-                data-aos="fade-up" 
-                data-aos-duration="800"
-                data-aos-delay="200"
-              >
-                <header className="section-header">
-                  <h2 className="section-title gradient-text-professional">
-                    Nuestro Presente
-                  </h2>
-                  <div className="title-divider">
-                    <div className="divider-line"></div>
-                    <div className="divider-dot"></div>
-                    <div className="divider-line"></div>
-                  </div>
-                </header>
-                <p className="section-description__present">
-                  Brindamos apoyo integral a usuarios terapéuticos, con gestión 
-                  especializada, asesoramiento personalizado y vinculación 
-                  certificada con REPROCANN.
-                </p>
+
+            <section className="present-section" id="present-section">
+              <div className="present-overlay"></div>
+              <div className="present-gradient-overlay"></div>
+              <div className="container">
+                <div
+                  className="content-present"
+                  data-aos="fade-up"
+                  data-aos-duration="800"
+                  data-aos-delay="200"
+                >
+                  <header className="section-header">
+                    <h2 className="section-title gradient-text-professional">
+                      Nuestro Presente
+                    </h2>
+                    <div className="title-divider">
+                      <div className="divider-line"></div>
+                      <div className="divider-dot"></div>
+                      <div className="divider-line"></div>
+                    </div>
+                  </header>
+
+                  <p className="section-description__present">
+                    Brindamos apoyo integral a usuarios terapéuticos, con
+                    gestión especializada, asesoramiento personalizado y
+                    vinculación certificada con REPROCANN.
+                  </p>
+                </div>
               </div>
-            </div>
-          </section>
+            </section>
           </div>
         </div>
       </div>
@@ -425,16 +435,13 @@ const Home = () => {
       <div id="donate-now"></div>
       {/* <Donations /> */}
       <div id="asociarme-section"></div>
-      <div id="ley-section" className="ley-section text-center">
-
-      </div>
+      <div id="ley-section" className="ley-section text-center"></div>
       {/* <SeccionAs /> */}
       <Reprocan />
       <WorkTogether />
       <MovingBanner />
       <ContactInfo />
-      
-     
+
       <LoginModal show={showModal} handleClose={handleCloseModal} />
     </>
   );
