@@ -1,15 +1,119 @@
-
-
-.asociate-section-QR{
-    background-color:#f8f9fa ;
+.asociate-section-QR {
+  background-color: #f8f9fa;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
+.qr-section-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
 
+.asociate-section-QR h2 {
+  color: #0a9d6d;
+  font-weight: 700;
+}
 
-.asociate-section-QR p{
-        color: #4a6352;
-    font-size: 1.2rem;
-    max-width: 600px;
-    margin: 0 auto;
-    line-height: 1.6;
+.asociate-section-QR p {
+  color: #4a6352;
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.qr-options-wrapper {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.qr-image-link {
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+.qr-image-link:hover {
+  transform: scale(1.03);
+}
+
+.qr-image {
+  width: 100%;
+  max-width: 220px;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  background: #fff;
+  padding: 10px;
+}
+
+.qr-link-box {
+  max-width: 420px;
+  text-align: center;
+}
+
+.qr-link-text {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: #4a6352;
+}
+
+.qr-form-button {
+  display: inline-block;
+  background: linear-gradient(135deg, #0a9d6d, #087a55);
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 14px 24px;
+  border-radius: 999px;
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.qr-form-button:hover {
+  background: linear-gradient(135deg, #0bae7a, #098b62);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.qr-direct-link {
+  display: block;
+  word-break: break-word;
+  color: #0a9d6d;
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+
+.qr-direct-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .asociate-section-QR h2 {
+    font-size: 1.7rem;
+  }
+
+  .asociate-section-QR p {
+    font-size: 1rem;
+  }
+
+  .qr-options-wrapper {
+    gap: 1.4rem;
+  }
+
+  .qr-image {
+    max-width: 190px;
+  }
+
+  .qr-form-button {
+    width: 100%;
+    max-width: 320px;
+    padding: 13px 20px;
+  }
+
+  .qr-direct-link {
+    font-size: 0.88rem;
+  }
 }
