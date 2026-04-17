@@ -40,7 +40,7 @@ const Home = () => {
   const [isMuted, setIsMuted] = useState(true);
 
   const FORM_URL =
-    "https://docs.google.com/forms/d/1guSRMEtLnfwWshZFkZ8TDF1DlSh2y6av8TWgYh4RsHY/edit";
+    "https://forms.gle/Csok9EBmUkVG95YF9";
   const QR_URL =
     "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" +
     encodeURIComponent(FORM_URL);
