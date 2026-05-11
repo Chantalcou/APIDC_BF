@@ -40,7 +40,7 @@ const Home = () => {
   const [isMuted, setIsMuted] = useState(true);
 
   const FORM_URL =
-    "https://forms.gle/Csok9EBmUkVG95YF9";
+    "https://forms.gle/Csok9EBmUkVG95YF9cd";
   const QR_URL =
     "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" +
     encodeURIComponent(FORM_URL);
@@ -197,48 +197,7 @@ const Home = () => {
                   data-aos="fade-down"
                   data-aos-duration="800"
                 >
-                  <div className="event-banner__inner">
-                    <div className="event-banner__shine"></div>
-                    <div className="event-banner__glow"></div>
-
-                    <div className="event-banner__content">
-                      <div className="event-banner__title">
-                        <span className="highlight attention-line">
-                          ATENCIÓN
-                        </span>
-                        <span className="highlight main-line">
-                          AMNISTÍA EN EL CINE
-                        </span>
-                      </div>
-
-                      <div className="event-banner__details">
-                        <div className="event-detail">
-                          <i className="fas fa-map-marker-alt"></i>
-                          <span>Cine Monumental Rosario</span>
-                        </div>
-
-                        <div className="event-detail">
-                          <i className="far fa-calendar-alt"></i>
-                          <span>Sábado 9 de mayo</span>
-                        </div>
-
-                        <div className="event-detail">
-                          <i className="fas fa-clock"></i>
-                          <span>Funciones: 20:30hs / 22:00hs</span>
-                        </div>
-                      </div>
-
-                      <a
-                        href="https://compras.evento-simple.com/apidc"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="event-button event-button-premium"
-                      >
-                        SACA TUS ENTRADAS
-                        <i className="fas fa-arrow-right"></i>
-                      </a>
-                    </div>
-                  </div>
+                 
                 </div>
 
                 {/* DONACIONES */}

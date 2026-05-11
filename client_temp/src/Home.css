@@ -3217,3 +3217,46 @@ body {
     font-size: 0.76rem !important;
   }
 }
+
+
+/* =========================================
+   DONACIONES FIJO AL LADO DERECHO
+   PEGAR ABAJO DE TODO
+   ========================================= */
+
+.home-video-container {
+  position: relative !important;
+}
+
+/* Si donaciones está adentro del hero-mobile-stack, que el stack ocupe todo el ancho */
+@media (min-width: 769px) {
+  .hero-mobile-stack {
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    transform: none !important;
+  }
+
+  .donations-mini,
+  .hero-mobile-stack .donations-mini {
+    position: absolute !important;
+
+    top: 130px !important;
+    right: 35px !important;
+    left: auto !important;
+    bottom: auto !important;
+
+    width: 400px !important;
+    max-width: 400px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+
+    z-index: 50 !important;
+  }
+
+  .donations-mini__content {
+    width: 100% !important;
+  }
+}
