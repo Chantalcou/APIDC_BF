@@ -1,180 +1,615 @@
 import React, { useState } from "react";
 import { send } from "emailjs-com";
-import { sendWorkTogether } from "../redux/actions/index";
-import ButtonComponent from "./Button";
 import { useDispatch } from "react-redux";
+import {
+  FaBriefcase,
+  FaCheckCircle,
+  FaCommentDots,
+  FaEnvelope,
+  FaExclamationTriangle,
+  FaPaperPlane,
+  FaUser,
+} from "react-icons/fa";
+
+import { sendWorkTogether } from "../redux/actions/index";
 import "./WorkTogether.css";
 
-export const WorkTogether = () => {
+const INITIAL_FORM_DATA = {
+  fullName: "",
+  email: "",
+  area: "",
+  message: "",
+};
+
+const INTEREST_OPTIONS = [
+  {
+    value: "investigacion",
+    label: "Investigación y desarrollo",
+  },
+  {
+    value: "convenios",
+    label: "Convenios institucionales",
+  },
+  {
+    value: "alianzas",
+    label: "Alianzas estratégicas",
+  },
+  {
+    value: "servicios",
+    label: "Servicios profesionales",
+  },
+  {
+    value: "voluntariado",
+    label: "Voluntariado",
+  },
+  {
+    value: "otro",
+    label: "Otro motivo",
+  },
+];
+
+const WorkTogether = ({
+  backgroundImage = "/images/bandera-argentina.jpg",
+}) => {
   const dispatch = useDispatch();
 
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    message: "",
-    areaOfInterest: "",
-  });
+  const [formData, setFormData] = useState(
+    INITIAL_FORM_DATA
+  );
 
   const [errors, setErrors] = useState({});
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitStatus, setSubmitStatus] =
+    useState("idle");
+  const [submitMessage, setSubmitMessage] =
+    useState("");
 
-  const validateField = (name, value) => {
-    const newErrors = { ...errors };
-    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-
-    switch (name) {
-      case "fullName":
-        if (!value.trim()) {
-          newErrors.fullName = "Por favor, escribinos tu nombre.";
-        } else {
-          delete newErrors.fullName;
-        }
-        break;
-      case "email":
-        if (!emailRegex.test(value)) {
-          newErrors.email = "Por favor, escribí un email válido.";
-        } else {
-          delete newErrors.email;
-        }
-        break;
-      case "message":
-        if (!value.trim()) {
-          newErrors.message = "No te olvides de escribir un mensaje.";
-        } else {
-          delete newErrors.message;
-        }
-        break;
-      case "areaOfInterest":
-        if (!value) {
-          newErrors.areaOfInterest =
-            "Elegí un área de interés, por favor.";
-        } else {
-          delete newErrors.areaOfInterest;
-        }
-        break;
-      default:
-        break;
-    }
-
-    setErrors(newErrors);
+  const sectionStyle = {
+    "--wwu-background-image": `url("${backgroundImage}")`,
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-    if (name === "areaOfInterest") {
-      validateField(name, value); 
-    } else {
-      validateField(name, value);
+  const validateForm = () => {
+    const newErrors = {};
+
+    const cleanName = formData.fullName.trim();
+    const cleanEmail = formData.email.trim();
+    const cleanMessage = formData.message.trim();
+
+    if (!cleanName) {
+      newErrors.fullName =
+        "Ingresá tu nombre completo.";
+    } else if (cleanName.length < 3) {
+      newErrors.fullName =
+        "El nombre debe tener al menos 3 caracteres.";
+    }
+
+    if (!cleanEmail) {
+      newErrors.email =
+        "Ingresá tu correo electrónico.";
+    } else if (
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+        cleanEmail
+      )
+    ) {
+      newErrors.email =
+        "Ingresá un correo electrónico válido.";
+    }
+
+    if (!formData.area) {
+      newErrors.area =
+        "Seleccioná un área de interés.";
+    }
+
+    if (!cleanMessage) {
+      newErrors.message =
+        "Escribí brevemente tu consulta.";
+    } else if (cleanMessage.length < 10) {
+      newErrors.message =
+        "El mensaje debe tener al menos 10 caracteres.";
+    }
+
+    return newErrors;
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormData((previousData) => ({
+      ...previousData,
+      [name]: value,
+    }));
+
+    if (errors[name]) {
+      setErrors((previousErrors) => {
+        const updatedErrors = {
+          ...previousErrors,
+        };
+
+        delete updatedErrors[name];
+
+        return updatedErrors;
+      });
+    }
+
+    if (submitStatus !== "idle") {
+      setSubmitStatus("idle");
+      setSubmitMessage("");
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-    // Verificar si hay errores
-    const hasErrors = Object.keys(errors).length > 0;
-    if (!hasErrors) {
-      dispatch(sendWorkTogether(formData));
-      setIsSubmitted(true);
+    const validationErrors = validateForm();
+
+    if (
+      Object.keys(validationErrors).length > 0
+    ) {
+      setErrors(validationErrors);
+      setSubmitStatus("error");
+      setSubmitMessage(
+        "Revisá los campos señalados antes de enviar."
+      );
+      return;
     }
+
+    const cleanFormData = {
+      fullName: formData.fullName.trim(),
+      email: formData.email.trim(),
+      area: formData.area,
+      message: formData.message.trim(),
+    };
+
+    setErrors({});
+    setSubmitStatus("sending");
+    setSubmitMessage("");
+
+    try {
+      const serviceId =
+        process.env
+          .REACT_APP_EMAILJS_SERVICE_ID;
+
+      const templateId =
+        process.env
+          .REACT_APP_EMAILJS_TEMPLATE_ID;
+
+      const publicKey =
+        process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
+
+      if (
+        serviceId &&
+        templateId &&
+        publicKey
+      ) {
+        await send(
+          serviceId,
+          templateId,
+          {
+            from_name: cleanFormData.fullName,
+            reply_to: cleanFormData.email,
+            email: cleanFormData.email,
+            area: cleanFormData.area,
+            message: cleanFormData.message,
+          },
+          publicKey
+        );
+      }
+
+      const dispatchResult = dispatch(
+        sendWorkTogether(cleanFormData)
+      );
+
+      if (
+        dispatchResult &&
+        typeof dispatchResult.then ===
+          "function"
+      ) {
+        await dispatchResult;
+      }
+
+      setSubmitStatus("success");
+
+      setSubmitMessage(
+        "¡Gracias por contactarnos! Recibimos tu mensaje y nos comunicaremos a la brevedad."
+      );
+
+      setFormData(INITIAL_FORM_DATA);
+    } catch (error) {
+      console.error(
+        "Error al enviar el formulario:",
+        error
+      );
+
+      setSubmitStatus("error");
+
+      setSubmitMessage(
+        "No pudimos enviar tu mensaje en este momento. Por favor, intentá nuevamente."
+      );
+    }
+  };
+
+  const getControlClassName = (
+    fieldName
+  ) => {
+    return errors[fieldName]
+      ? "wwu-form__control wwu-form__control--error"
+      : "wwu-form__control";
   };
 
   return (
-    <div id="work-together" className="work-together">
-      <video className="background-video" autoPlay muted loop>
-        <source
-          src="https://res.cloudinary.com/dqgjcfosx/video/upload/v1737463914/8243034-uhd_2160_3840_24fps_bsifnn.mp4"
-          type="video/mp4"
-        />
-Tu navegador no admite videos HTML5
-      </video>
-      <div className="content-work_together">
-        <h2 className="work-together-title">¡Trabajemos juntos!</h2>
-        {isSubmitted ? (
-          <div className="success-message">
-          ¡Gracias por escribirnos!
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="work-together-form">
-            <div className="form-group">
-              <label htmlFor="fullName">Nombre completo</label>
-              <input
-                type="text"
-                id="fullName"
-                name="fullName"
-                value={formData.fullName}
-                onChange={handleChange}
-                className={errors.fullName ? "error" : ""}
-              />
-              {errors.fullName && (
-                <span className="error-message">{errors.fullName}</span>
-              )}
+    <section
+      className="wwu-section"
+      id="trabajemos-juntos"
+      aria-labelledby="wwu-title"
+      style={sectionStyle}
+    >
+      <div
+        className="wwu-section__background"
+        aria-hidden="true"
+      />
+
+      <div
+        className="wwu-section__overlay"
+        aria-hidden="true"
+      />
+
+      <div
+        className="wwu-section__glow"
+        aria-hidden="true"
+      />
+
+      <div className="wwu-section__container">
+        <div className="wwu-card">
+          <header className="wwu-card__header">
+            <span className="wwu-card__eyebrow">
+              Contacto institucional
+            </span>
+
+            <h2
+              className="wwu-card__title"
+              id="wwu-title"
+            >
+              Trabajemos juntos
+            </h2>
+
+            <p className="wwu-card__description">
+              Completá el formulario para contarnos
+              tu propuesta, consulta o interés en
+              colaborar con nuestra organización.
+            </p>
+          </header>
+
+          <form
+            className="wwu-form"
+            onSubmit={handleSubmit}
+            noValidate
+          >
+            <div className="wwu-form__grid">
+              <div className="wwu-form__field">
+                <label
+                  className="wwu-form__label"
+                  htmlFor="wwu-fullName"
+                >
+                  Nombre completo
+                  <span
+                    className="wwu-form__required"
+                    aria-hidden="true"
+                  >
+                    *
+                  </span>
+                </label>
+
+                <div className="wwu-form__control-wrapper">
+                  <FaUser
+                    className="wwu-form__field-icon"
+                    aria-hidden="true"
+                  />
+
+                  <input
+                    id="wwu-fullName"
+                    name="fullName"
+                    type="text"
+                    value={formData.fullName}
+                    onChange={handleChange}
+                    className={getControlClassName(
+                      "fullName"
+                    )}
+                    placeholder="Ej.: María González"
+                    autoComplete="name"
+                    maxLength={80}
+                    aria-invalid={Boolean(
+                      errors.fullName
+                    )}
+                    aria-describedby={
+                      errors.fullName
+                        ? "wwu-fullName-error"
+                        : undefined
+                    }
+                  />
+                </div>
+
+                {errors.fullName && (
+                  <span
+                    className="wwu-form__error"
+                    id="wwu-fullName-error"
+                    role="alert"
+                  >
+                    <FaExclamationTriangle
+                      aria-hidden="true"
+                    />
+
+                    {errors.fullName}
+                  </span>
+                )}
+              </div>
+
+              <div className="wwu-form__field">
+                <label
+                  className="wwu-form__label"
+                  htmlFor="wwu-email"
+                >
+                  Correo electrónico
+                  <span
+                    className="wwu-form__required"
+                    aria-hidden="true"
+                  >
+                    *
+                  </span>
+                </label>
+
+                <div className="wwu-form__control-wrapper">
+                  <FaEnvelope
+                    className="wwu-form__field-icon"
+                    aria-hidden="true"
+                  />
+
+                  <input
+                    id="wwu-email"
+                    name="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className={getControlClassName(
+                      "email"
+                    )}
+                    placeholder="nombre@correo.com"
+                    autoComplete="email"
+                    maxLength={120}
+                    aria-invalid={Boolean(
+                      errors.email
+                    )}
+                    aria-describedby={
+                      errors.email
+                        ? "wwu-email-error"
+                        : undefined
+                    }
+                  />
+                </div>
+
+                {errors.email && (
+                  <span
+                    className="wwu-form__error"
+                    id="wwu-email-error"
+                    role="alert"
+                  >
+                    <FaExclamationTriangle
+                      aria-hidden="true"
+                    />
+
+                    {errors.email}
+                  </span>
+                )}
+              </div>
+
+              <div className="wwu-form__field wwu-form__field--full">
+                <label
+                  className="wwu-form__label"
+                  htmlFor="wwu-area"
+                >
+                  Área de interés
+                  <span
+                    className="wwu-form__required"
+                    aria-hidden="true"
+                  >
+                    *
+                  </span>
+                </label>
+
+                <div className="wwu-form__control-wrapper">
+                  <FaBriefcase
+                    className="wwu-form__field-icon"
+                    aria-hidden="true"
+                  />
+
+                  <select
+                    id="wwu-area"
+                    name="area"
+                    value={formData.area}
+                    onChange={handleChange}
+                    className={`${getControlClassName(
+                      "area"
+                    )} wwu-form__select`}
+                    aria-invalid={Boolean(
+                      errors.area
+                    )}
+                    aria-describedby={
+                      errors.area
+                        ? "wwu-area-error"
+                        : undefined
+                    }
+                  >
+                    <option
+                      value=""
+                      disabled
+                    >
+                      Seleccioná una opción
+                    </option>
+
+                    {INTEREST_OPTIONS.map(
+                      (option) => (
+                        <option
+                          key={option.value}
+                          value={option.value}
+                        >
+                          {option.label}
+                        </option>
+                      )
+                    )}
+                  </select>
+
+                  <span
+                    className="wwu-form__select-arrow"
+                    aria-hidden="true"
+                  >
+                    ▾
+                  </span>
+                </div>
+
+                {errors.area && (
+                  <span
+                    className="wwu-form__error"
+                    id="wwu-area-error"
+                    role="alert"
+                  >
+                    <FaExclamationTriangle
+                      aria-hidden="true"
+                    />
+
+                    {errors.area}
+                  </span>
+                )}
+              </div>
+
+              <div className="wwu-form__field wwu-form__field--full">
+                <label
+                  className="wwu-form__label"
+                  htmlFor="wwu-message"
+                >
+                  Mensaje
+                  <span
+                    className="wwu-form__required"
+                    aria-hidden="true"
+                  >
+                    *
+                  </span>
+                </label>
+
+                <div className="wwu-form__control-wrapper wwu-form__control-wrapper--textarea">
+                  <FaCommentDots
+                    className="wwu-form__field-icon wwu-form__field-icon--textarea"
+                    aria-hidden="true"
+                  />
+
+                  <textarea
+                    id="wwu-message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    className={`${getControlClassName(
+                      "message"
+                    )} wwu-form__textarea`}
+                    placeholder="Contanos brevemente tu propuesta, consulta o interés..."
+                    rows={6}
+                    maxLength={1000}
+                    aria-invalid={Boolean(
+                      errors.message
+                    )}
+                    aria-describedby={
+                      errors.message
+                        ? "wwu-message-error"
+                        : "wwu-message-help"
+                    }
+                  />
+                </div>
+
+                <div className="wwu-form__field-footer">
+                  <span
+                    className="wwu-form__helper"
+                    id="wwu-message-help"
+                  >
+                    Máximo 1000 caracteres
+                  </span>
+
+                  <span className="wwu-form__counter">
+                    {formData.message.length}/1000
+                  </span>
+                </div>
+
+                {errors.message && (
+                  <span
+                    className="wwu-form__error"
+                    id="wwu-message-error"
+                    role="alert"
+                  >
+                    <FaExclamationTriangle
+                      aria-hidden="true"
+                    />
+
+                    {errors.message}
+                  </span>
+                )}
+              </div>
             </div>
 
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className={errors.email ? "error" : ""}
-              />
-              {errors.email && (
-                <span className="error-message">{errors.email}</span>
-              )}
-            </div>
+            <button
+              className="wwu-form__submit"
+              type="submit"
+              disabled={
+                submitStatus === "sending"
+              }
+            >
+              {submitStatus === "sending" ? (
+                <>
+                  <span
+                    className="wwu-form__spinner"
+                    aria-hidden="true"
+                  />
 
-            <div className="form-group">
-              <label htmlFor="message">Mensaje</label>
-              <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                className={errors.message ? "error" : ""}
-              />
-              {errors.message && (
-                <span className="error-message">{errors.message}</span>
+                  Enviando mensaje...
+                </>
+              ) : (
+                <>
+                  <FaPaperPlane
+                    aria-hidden="true"
+                  />
+
+                  Enviar mensaje
+                </>
               )}
-            </div>
-            <div className="form-group">
-              <label htmlFor="areaOfInterest">Área de interés</label>
-              <select
-                id="areaOfInterest"
-                name="areaOfInterest"
-                value={formData.areaOfInterest}
-                onChange={handleChange}
-                className={errors.areaOfInterest ? "error" : ""}
+            </button>
+
+            {submitMessage && (
+              <div
+                className={`wwu-form__status wwu-form__status--${submitStatus}`}
+                role={
+                  submitStatus === "error"
+                    ? "alert"
+                    : "status"
+                }
               >
-                <option value="">Elegí una opción</option>
-                <option value="medicos">Médicos</option>
-                <option value="ingenierosAgronomos">
-                  Ingenieros Agrónomos
-                </option>
-                <option value="administracion">Administración</option>
-                <option value="tecnicosCultivo">Técnicos en Cultivo</option>
-                <option value="ayudantesCultivo">Ayudantes de Cultivo</option>
-              </select>
-              {errors.areaOfInterest && (
-                <span className="error-message">{errors.areaOfInterest}</span>
-              )}
-            </div>
+                {submitStatus === "success" ? (
+                  <FaCheckCircle
+                    aria-hidden="true"
+                  />
+                ) : (
+                  <FaExclamationTriangle
+                    aria-hidden="true"
+                  />
+                )}
 
-            <ButtonComponent
-              text="Enviar mensaje"
-              color={{
-                background: "transparent",
-                text: "#ffffff",
-                border: "2px solid white",
-              }}
-              // Aquí llamamos a la función handleSubmit
-            />
+                <span>{submitMessage}</span>
+              </div>
+            )}
+
+            <p className="wwu-form__privacy">
+              Los datos ingresados serán utilizados
+              únicamente para responder tu consulta.
+            </p>
           </form>
-        )}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
+
+export { WorkTogether };
+export default WorkTogether;

@@ -184,11 +184,7 @@ const handleCloseNonSocioModal = () => {
                 Inicio
               </Nav.Link>
 
-              {isAuthenticated && localStorage.getItem("socioAuthorized") === "true" && (
-                <Link to="/products" className="nav-link me-3">
-                  Tu Cultivo
-                </Link>
-              )}
+      
 
               {isHome && (
                 <Nav.Link onClick={() => scrollToSection("about-section")}>

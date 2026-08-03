@@ -17,9 +17,8 @@ app.use(express.urlencoded({ extended: true }));
 // Middlewares
 app.use(
   cors({
-    origin: "https://apidc.ong",
-    // origin: "http://localhost:3000",
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: ["http://localhost:3000"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
   })
 );
@@ -40,7 +39,7 @@ app.use("/", chatBotRoutes);
 if (process.env.NODE_ENV === "production") {
   // Configura la ruta correcta para los archivos estáticos del frontend
   app.use(express.static(path.join(__dirname, "../../client_temp/build")));
-  console.log(path.join(__dirname, "../client_temp/build"));
+  // console.log(path.join(__dirname, "../client_temp/build"));
 
   // Ruta catch-all para servir el frontend
   app.get("*", (req, res) => {

@@ -1,4 +1,5 @@
 // // Produccion
+
 const { Sequelize } = require("sequelize");
 require("dotenv").config();
 
@@ -23,10 +24,10 @@ sequelize
 module.exports = sequelize;
 
 // //  Local
+
 // const { Sequelize } = require("sequelize");
 // require("dotenv").config();
 
-// console.log("DB_PASSWORD:", process.env.DB_PASSWORD);
 
 // const sequelize = new Sequelize(
 //   process.env.DB_NAME,

@@ -197,13 +197,14 @@ const verifySocio = async (req, res) => {
       });
     }
 
-    if (user.membershipType !== "premium") {
-      return res.status(403).json({
-        success: false,
-        message: "El usuario no tiene acceso como socio habilitado",
-      });
-    }
+const allowedMemberships = ["socioAdherente", "premium", "gestor"];
 
+if (!allowedMemberships.includes(user.membershipType)) {
+  return res.status(403).json({
+    success: false,
+    message: "El usuario no tiene acceso como socio habilitado",
+  });
+}
     return res.status(200).json({
       success: true,
       message: "Socio verificado correctamente",

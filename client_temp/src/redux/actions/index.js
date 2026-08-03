@@ -10,11 +10,14 @@ import {
   FETCH_USERS_SUCCESS_NOT_ADMIN,
 } from "../actions_types";
 
+// http://localhost:5001
+// http://localhost:5001
+
 export const registerUser = (userData, token) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(
-        "https://apidc.ong/register",
+        "http://localhost:5001/register",
         {
           email: userData.email,
           name: userData.name,
@@ -59,7 +62,7 @@ export const formInfo = (formData) => async (dispatch) => {
   try {
     // Enviar los datos al backend
     const response = await axios.post(
-      "https://apidc.ong/send/admin",
+      "http://localhost:5001/send/admin",
 
       formData,
       {
@@ -89,7 +92,7 @@ export const formInfo = (formData) => async (dispatch) => {
 //   return async (dispatch) => {
 //     try {
 //       const response = await axios.put(
-//         `https://apidc.ong/users/${userId}`,
+//         `http://localhost:5001/users/${userId}`,
 //         { membershipType },
 //         {
 //           headers: {
@@ -119,7 +122,7 @@ export const fetchUsers = (token) => {
   return async (dispatch) => {
     try {
       // usersNotAdmin
-      const response = await axios.get(`https://apidc.ong/users`, {
+      const response = await axios.get(`http://localhost:5001/users`, {
         headers: {
           Authorization: `Bearer ${token}`, // Token de autenticación
         },
@@ -143,7 +146,7 @@ export const fetchUsers = (token) => {
 export const getAllNotAdmins = () => {
   return async (dispatch) => {
     try {
-      const response = await axios.get("https://apidc.ong/usersNotAdmin");
+      const response = await axios.get("http://localhost:5001/usersNotAdmin");
 
       dispatch({
         type: FETCH_USERS_SUCCESS_NOT_ADMIN,
@@ -164,7 +167,7 @@ export const updateUserRole = (userId, membershipType, token) => {
   return async (dispatch, getState) => {
     try {
       const response = await axios.put(
-        `https://apidc.ong/users/${userId}`,
+        `http://localhost:5001/users/${userId}`,
         { membershipType },
         {
           headers: {
@@ -197,7 +200,7 @@ export const updateUserRole = (userId, membershipType, token) => {
 export const sendWorkTogether = (formData) => async (dispatch) => {
   try {
     const response = await axios.post(
-      "https://apidc.ong/workWithUs",
+      "http://localhost:5001/workWithUs",
 
       formData,
       {
@@ -222,7 +225,7 @@ export const sendWorkTogether = (formData) => async (dispatch) => {
 export const verifySocio = (email) => async (dispatch) => {
   // 
   try {
-    const response = await axios.post(`https://apidc.ong/verifySocio`, {
+    const response = await axios.post(`http://localhost:5001/verifySocio`, {
       email,
     });
 
@@ -269,7 +272,7 @@ export const verifySocio = (email) => async (dispatch) => {
 export const deleteUser = (userId, token) => async (dispatch) => {
   try {
     const response = await fetch(
-      `https://apidc.ong/usersDelete/${userId}`,
+      `http://localhost:5001/usersDelete/${userId}`,
       {
         method: "DELETE",
         headers: {
@@ -295,7 +298,7 @@ export const deleteUser = (userId, token) => async (dispatch) => {
 
 export const sendChatMessage = (formData) => async (dispatch) => {
   try {
-    const response = await axios.post("https://apidc.ong/chatbot", formData, {
+    const response = await axios.post("http://localhost:5001/chatbot", formData, {
       headers: { "Content-Type": "application/json" },
     });
 
@@ -325,7 +328,7 @@ export const sendChatMessage = (formData) => async (dispatch) => {
 
 // export const webhookJotform = () => async (dispatch) => {
 //   try {
-//     const response = await axios.post("https://apidc.ong/webhook-jotform");
+//     const response = await axios.post("http://localhost:5001/webhook-jotform");
 //     console.log(response, "ESTO ME LLEGA AL ACTIONS");
 //     // dispatch({
 //     //   type: "SEND_FORM_SUCCESS",
@@ -342,7 +345,7 @@ export const sendChatMessage = (formData) => async (dispatch) => {
 // export const getJotformSubmissions = () => async (dispatch) => {
 //   try {
 //     const response = await axios.get(
-//       "https://apidc.ong/jotform-submissions"
+//       "http://localhost:5001/jotform-submissions"
 //     );
 //     console.log("Datos recibidos desde el backend:", response.data);
 
