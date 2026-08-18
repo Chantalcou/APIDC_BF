@@ -1,37 +1,852 @@
-/* Contenedor general para navbar y breadcrumbs */
-.navbar-container {
-  position: fixed;
+/* =========================================================
+   APIDC NAVBAR
+   Versión clara + profesional + mayor contraste
+========================================================= */
+
+:root {
+  --apidc-deep-green: #20372a;
+  --apidc-dark-green: #2d5138;
+  --apidc-green: #4f7b57;
+  --apidc-medium-green: #6f965e;
+  --apidc-light-green: #b8d37c;
+
+  --apidc-teal: #447c72;
+
+  --apidc-yellow: #efc84e;
+  --apidc-orange: #df9038;
+
+  --apidc-cream: #fbfaf5;
+  --apidc-soft-cream: #f5f4ed;
+
+  --apidc-text: #263128;
+  --apidc-muted: #657168;
+  --apidc-border: #dfe5dc;
+
+  --apidc-navbar-height: 92px;
+}
+
+
+/* =========================================================
+   NAVBAR PRINCIPAL
+========================================================= */
+
+.apidc-navbar.apidc-navbar-shell {
+  position: fixed !important;
   top: 0;
   left: 0;
+
   width: 100%;
+  min-height: var(--apidc-navbar-height);
+
   z-index: 1050;
-  transition: opacity 0.5s ease, transform 0.5s ease;
+
+  padding: 0 !important;
+
+  background:
+    linear-gradient(
+      90deg,
+      #ffffff 0%,
+      #fcfdf9 45%,
+      #fffdf7 100%
+    ) !important;
+
+  border: 0 !important;
+
+  box-shadow:
+    0 5px 25px rgba(30, 50, 34, 0.1);
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  transition:
+    transform 0.32s ease,
+    opacity 0.32s ease,
+    box-shadow 0.25s ease;
 }
 
-.navbar-container.scroll-hide {
+
+/* =========================================================
+   SCROLL
+========================================================= */
+
+.apidc-navbar.scroll-hide {
   opacity: 0;
-  transform: translateY(-100%);
+  transform: translateY(-105%);
+  pointer-events: none;
 }
 
-.navbar-container.scroll-show {
+.apidc-navbar.scroll-show {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Navbar negro opaco */
-.navbar {
-  background-color: rgba(86, 150, 68, 0.9) !important;
-  padding: 0.5rem 1rem;
+
+/* =========================================================
+   CONTENEDOR
+========================================================= */
+
+.apidc-navbar-wrapper {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  min-height: var(--apidc-navbar-height);
+
+  padding-left: 28px !important;
+  padding-right: 28px !important;
 }
 
-/* Breadcrumbs con fondo claro */
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.apidc-brand {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  margin-right: 28px !important;
+  padding: 0 !important;
+
+  text-decoration: none !important;
+}
+
+.apidc-logo-box {
+  position: relative;
+
+  width: 74px;
+  height: 74px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #263c2e;
+
+  box-shadow:
+    0 6px 18px rgba(27, 51, 33, 0.18);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.apidc-logo-box::after {
+  content: "";
+
+  position: absolute;
+
+  inset: -4px;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(79, 123, 87, 0.17);
+
+  pointer-events: none;
+}
+
+.apidc-logo-box:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 24px rgba(27, 51, 33, 0.23);
+}
+
+.apidc-logo {
+  width: 61px;
+  height: 61px;
+
+  display: block;
+
+  object-fit: contain;
+}
+
+
+/* =========================================================
+   COLLAPSE
+========================================================= */
+
+.apidc-navbar-collapse {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  min-width: 0;
+}
+
+
+/* =========================================================
+   NAVEGACIÓN PRINCIPAL
+========================================================= */
+
+.apidc-main-nav {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+
+  flex: 1 1 auto;
+
+  gap: 8px;
+
+  min-width: 0;
+}
+
+
+/* =========================================================
+   BOTONES GENERALES
+========================================================= */
+
+.apidc-navbar-shell .apidc-menu-link {
+  appearance: none;
+  -webkit-appearance: none;
+
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  min-height: 39px;
+
+  padding: 9px 14px !important;
+
+  margin: 0 !important;
+
+  border: 1.5px solid !important;
+  border-radius: 999px !important;
+
+  font-family: inherit;
+  font-size: 11.5px !important;
+  font-weight: 750 !important;
+
+  line-height: 1.1;
+
+  letter-spacing: 0.15px;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+
+  text-decoration: none !important;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 2px 8px rgba(30, 48, 33, 0.035);
+
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.apidc-navbar-shell
+  .apidc-menu-link:hover {
+  transform: translateY(-2px);
+
+  text-decoration: none !important;
+
+  box-shadow:
+    0 7px 16px rgba(34, 54, 38, 0.11);
+}
+
+.apidc-navbar-shell
+  .apidc-menu-link:focus-visible {
+  outline: 3px solid
+    rgba(79, 123, 87, 0.18);
+
+  outline-offset: 2px;
+}
+
+
+/* =========================================================
+   INICIO
+========================================================= */
+
+.apidc-navbar-shell .link-inicio {
+  color: #28583a !important;
+
+  border-color: #88b593 !important;
+
+  background: #f2f8f3 !important;
+}
+
+.apidc-navbar-shell
+  .link-inicio:hover,
+.apidc-navbar-shell
+  .link-inicio.active {
+  background: #437a53 !important;
+
+  border-color: #437a53 !important;
+
+  color: #ffffff !important;
+}
+
+
+/* =========================================================
+   NOSOTROS
+========================================================= */
+
+.apidc-navbar-shell .link-nosotros {
+  color: #4a662f !important;
+
+  border-color: #a5bf77 !important;
+
+  background: #f6f8ef !important;
+}
+
+.apidc-navbar-shell
+  .link-nosotros:hover {
+  background: #789852 !important;
+
+  border-color: #789852 !important;
+
+  color: #ffffff !important;
+}
+
+
+/* =========================================================
+   ASOCIATE
+========================================================= */
+
+.apidc-navbar-shell .link-asociate {
+  color: #28634a !important;
+
+  border-color: #79aa91 !important;
+
+  background: #f1f8f5 !important;
+}
+
+.apidc-navbar-shell
+  .link-asociate:hover {
+  background: #4f8569 !important;
+
+  border-color: #4f8569 !important;
+
+  color: #ffffff !important;
+}
+
+
+/* =========================================================
+   DONÁ
+========================================================= */
+
+.apidc-navbar-shell .link-dona {
+  color: #76530d !important;
+
+  border-color: #deb943 !important;
+
+  background: #fff9df !important;
+}
+
+.apidc-navbar-shell
+  .link-dona:hover {
+  background: #e9c34b !important;
+
+  border-color: #e9c34b !important;
+
+  color: #4a360a !important;
+}
+
+.apidc-donate-heart {
+  font-size: 13px;
+
+  color: #b66d2c;
+}
+
+
+/* =========================================================
+   GALERÍA
+========================================================= */
+
+.apidc-navbar-shell .link-galeria {
+  color: #33685f !important;
+
+  border-color: #76aaa1 !important;
+
+  background: #f1f8f7 !important;
+}
+
+.apidc-navbar-shell
+  .link-galeria:hover,
+.apidc-navbar-shell
+  .link-galeria.active {
+  background: #4c8278 !important;
+
+  border-color: #4c8278 !important;
+
+  color: #ffffff !important;
+}
+
+
+/* =========================================================
+   INVESTIGACIÓN
+========================================================= */
+
+.apidc-navbar-shell
+  .link-investigacion {
+  color: #536c2e !important;
+
+  border-color: #9db95e !important;
+
+  background: #f7f9ef !important;
+}
+
+.apidc-navbar-shell
+  .link-investigacion:hover,
+.apidc-navbar-shell
+  .link-investigacion.active {
+  background: #779246 !important;
+
+  border-color: #779246 !important;
+
+  color: #ffffff !important;
+}
+
+
+/* =========================================================
+   APRENDÉ
+========================================================= */
+
+.apidc-navbar-shell .link-aprende {
+  color: #805811 !important;
+
+  border-color: #d8aa3d !important;
+
+  background: #fff8e9 !important;
+}
+
+.apidc-navbar-shell
+  .link-aprende:hover,
+.apidc-navbar-shell
+  .link-aprende.active {
+  background: #c89129 !important;
+
+  border-color: #c89129 !important;
+
+  color: #ffffff !important;
+}
+
+
+/* =========================================================
+   ÁREA CUENTA
+========================================================= */
+
+.apidc-account-area {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  flex-shrink: 0;
+
+  gap: 7px;
+
+  margin-left: 22px;
+
+  padding: 6px;
+
+  border: 1px solid #e1e6dd;
+  border-radius: 999px;
+
+  background:
+    rgba(245, 247, 241, 0.92);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 2px 10px rgba(34, 51, 37, 0.04);
+}
+
+
+/* =========================================================
+   PERFIL
+========================================================= */
+
+.apidc-profile {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  min-width: 0;
+
+  padding: 4px 11px 4px 4px;
+
+  border: 1px solid #d8e0d5;
+  border-radius: 999px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 2px 7px rgba(37, 56, 41, 0.05);
+}
+
+.apidc-profile-img,
+.apidc-profile-fallback {
+  width: 35px;
+  height: 35px;
+
+  flex: 0 0 35px;
+
+  border-radius: 50%;
+}
+
+.apidc-profile-img {
+  display: block;
+
+  object-fit: cover;
+
+  border: 2px solid #9eb67d;
+}
+
+.apidc-profile-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #304f38;
+
+  border: 2px solid #aec584;
+
+  color: #ffffff;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: 0.5px;
+}
+
+.apidc-profile-copy {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+
+  min-width: 0;
+
+  line-height: 1.05;
+}
+
+.apidc-profile-label {
+  margin-bottom: 3px;
+
+  color: #778177;
+
+  font-size: 8px;
+  font-weight: 700;
+
+  letter-spacing: 0.5px;
+
+  text-transform: uppercase;
+}
+
+.apidc-profile-name {
+  display: block;
+
+  max-width: 115px;
+
+  overflow: hidden;
+
+  color: #293b2e !important;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: 0.15px;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   MI ESPACIO SOCIO
+========================================================= */
+
+.apidc-navbar-shell
+  .apidc-socio-btn {
+  appearance: none;
+  -webkit-appearance: none;
+
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 39px;
+
+  padding: 9px 15px !important;
+
+  border: 1px solid #294832 !important;
+  border-radius: 999px !important;
+
+  background: #294832 !important;
+
+  color: #ffffff !important;
+
+  font-family: inherit;
+  font-size: 10.5px !important;
+  font-weight: 800 !important;
+
+  letter-spacing: 0.25px;
+
+  line-height: 1;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 5px 12px rgba(35, 64, 43, 0.18);
+
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.apidc-navbar-shell
+  .apidc-socio-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+
+  background: #3f6649 !important;
+
+  border-color: #3f6649 !important;
+
+  color: #ffffff !important;
+
+  box-shadow:
+    0 7px 15px rgba(35, 64, 43, 0.23);
+}
+
+.apidc-navbar-shell
+  .apidc-socio-btn:disabled {
+  opacity: 0.7;
+
+  cursor: wait;
+}
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+.apidc-navbar-shell
+  .apidc-dashboard-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 39px;
+
+  padding: 9px 13px;
+
+  border: 1.5px solid #91ab75;
+  border-radius: 999px;
+
+  background: #f7f9f2;
+
+  color: #45622f !important;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: 0.25px;
+
+  text-transform: uppercase;
+  text-decoration: none !important;
+
+  white-space: nowrap;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.apidc-navbar-shell
+  .apidc-dashboard-btn:hover {
+  transform: translateY(-2px);
+
+  background: #607f48;
+
+  border-color: #607f48;
+
+  color: #ffffff !important;
+}
+
+
+/* =========================================================
+   SALIR
+========================================================= */
+
+.apidc-navbar-shell
+  .apidc-logout-btn {
+  appearance: none;
+  -webkit-appearance: none;
+
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 39px;
+
+  padding: 9px 13px !important;
+
+  border: 1.5px solid #d7a065 !important;
+  border-radius: 999px !important;
+
+  background: #fff8f0 !important;
+
+  color: #85521f !important;
+
+  font-family: inherit;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+
+  letter-spacing: 0.4px;
+
+  line-height: 1;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.apidc-navbar-shell
+  .apidc-logout-btn:hover {
+  transform: translateY(-2px);
+
+  background: #d98d3b !important;
+
+  border-color: #d98d3b !important;
+
+  color: #ffffff !important;
+}
+
+
+/* =========================================================
+   FOCUS ACCESIBILIDAD
+========================================================= */
+
+.apidc-socio-btn:focus-visible,
+.apidc-dashboard-btn:focus-visible,
+.apidc-logout-btn:focus-visible {
+  outline: 3px solid
+    rgba(79, 123, 87, 0.2);
+
+  outline-offset: 2px;
+}
+
+
+/* =========================================================
+   LÍNEA DE COLOR
+========================================================= */
+
+.apidc-navbar-line {
+  position: absolute;
+
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+  height: 4px;
+
+  display: flex;
+
+  overflow: hidden;
+
+  pointer-events: none;
+}
+
+.apidc-navbar-line span {
+  flex: 1;
+}
+
+.apidc-navbar-line
+  span:nth-child(1) {
+  background: #4f7b57;
+}
+
+.apidc-navbar-line
+  span:nth-child(2) {
+  background: #a8ca65;
+}
+
+.apidc-navbar-line
+  span:nth-child(3) {
+  background: #efca51;
+}
+
+.apidc-navbar-line
+  span:nth-child(4) {
+  background: #df913e;
+}
+
+
+/* =========================================================
+   BREADCRUMB
+========================================================= */
+
+.breadcrumbs {
+  position: fixed;
+
+  top: var(--apidc-navbar-height);
+  left: 0;
+
+  width: 100%;
+
+  z-index: 1040;
+
+  padding: 8px 30px;
+
+  background:
+    rgba(250, 249, 245, 0.97);
+
+  border-bottom:
+    1px solid #e6e8e2;
+
+  box-shadow:
+    0 3px 12px rgba(37, 53, 40, 0.035);
+
+  backdrop-filter: blur(10px);
+
+  transition:
+    opacity 0.32s ease,
+    transform 0.32s ease;
+}
 
 .breadcrumbs ul {
   display: flex;
-  list-style: none;
-  padding: 0;
+  align-items: center;
+
+  gap: 9px;
+
   margin: 0;
-  gap: 8px;
+  padding: 0;
+
+  list-style: none;
 }
 
 .breadcrumbs li {
@@ -40,246 +855,293 @@
 }
 
 .breadcrumbs li a {
+  color: #57645b !important;
+
+  font-size: 11px;
+  font-weight: 600;
+
   text-decoration: none;
 }
 
 .breadcrumbs li a:hover {
-  text-decoration: underline;
+  color: #31583b !important;
 }
 
 .breadcrumbs li span {
-  color: #888;
-}
-
-/* Ocultar navbar y breadcrumbs al hacer scroll */
-.scroll-hide {
-  opacity: 0;
-  transform: translateY(-100%);
-}
-
-.scroll-show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.navbar-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1050;
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.breadcrumbs {
-  position: fixed;
-  top: 68px;
-  width: 100%;
-  padding-bottom: 0px;
-  z-index: 1040;
-  transition: opacity 0.5s ease, transform 0.5s ease;
-  background-color: rgba(255, 255, 255, 0.68);
-  opacity: 1; /* Por defecto, visible */
-  box-shadow: 0 1px 1px rgba(123, 161, 45, 0.7);
+  color: #8d968f;
 }
 
 .breadcrumbs.scroll-hide {
-  opacity: 0; /* Desaparece completamente */
-  transform: translateY(
-    -20px
-  ); /* Opcional: añade un efecto de desplazamiento */
-}
-
-/* ------------------------------------------ */
-
-/* Navbar negro transparente */
-.navbar {
-  background-color: rgba(0, 0, 0, 0.7) !important;
-  transition: opacity 0.5s ease, background-color 0.5s ease;
-  padding: 0;
-}
-
-/* Ocultar y mostrar el navbar al hacer scroll */
-.navbar.scroll-hide {
   opacity: 0;
+
+  transform: translateY(-25px);
+
+  pointer-events: none;
 }
 
-.navbar.scroll-show {
+.breadcrumbs.scroll-show {
   opacity: 1;
+
+  transform: translateY(0);
 }
 
-/* Estilos para los enlaces del navbar */
-.nav-link {
-  color: #ffffff;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 0.66rem;
-  position: relative;
-  padding: 0.5rem 1rem;
+
+/* =========================================================
+   BOTÓN HAMBURGUESA
+========================================================= */
+
+.apidc-toggler {
+  padding: 8px !important;
+
+  border:
+    1px solid #aebcac !important;
+
+  border-radius: 12px !important;
+
+  background: #f6f8f3 !important;
+
+  box-shadow: none !important;
 }
 
-/* Subrayado blanco al hacer hover */
-.nav-link::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  background-color: #ffffff;
-  bottom: 0;
-  left: 0;
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.3s ease;
+.apidc-toggler:focus {
+  box-shadow:
+    0 0 0 3px
+      rgba(79, 123, 87, 0.12) !important;
 }
 
-/* Subrayado blanco al hacer hover */
-.nav-link_dona::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  background-color: #ffffff;
-  bottom: 0;
-  left: 0;
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.3s ease;
-}
-.nav-link_dona:hover::after {
-  transform: scaleX(1);
-  transform-origin: left;
+.apidc-toggler
+  .navbar-toggler-icon {
+  width: 24px;
+  height: 24px;
+
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23283f2e' stroke-width='2.4' stroke-linecap='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") !important;
 }
 
-.nav-link:hover::after {
-  transform: scaleX(1);
-  transform-origin: left;
+
+/* =========================================================
+   NOTEBOOKS / PANTALLAS MEDIAS
+========================================================= */
+
+@media (max-width: 1540px) {
+  .apidc-navbar-wrapper {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  .apidc-brand {
+    margin-right: 19px !important;
+  }
+
+  .apidc-logo-box {
+    width: 68px;
+    height: 68px;
+  }
+
+  .apidc-logo {
+    width: 56px;
+    height: 56px;
+  }
+
+  .apidc-main-nav {
+    gap: 6px;
+  }
+
+  .apidc-navbar-shell
+    .apidc-menu-link {
+    padding: 8px 11px !important;
+
+    font-size: 10.5px !important;
+  }
+
+  .apidc-account-area {
+    margin-left: 14px;
+  }
+
+  .apidc-profile-name {
+    max-width: 90px;
+  }
+
+  .apidc-navbar-shell
+    .apidc-socio-btn {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+
+    font-size: 9.5px !important;
+  }
 }
 
-.nav-link_dona {
-  color: #f7d046 !important;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 0.8rem;
-  position: relative;
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-}
 
-/* Cambia el color al hacer hover */
-.nav-link:hover {
-  color: #ffffff !important;
-}
+/* =========================================================
+   MOBILE / TABLET
+   Coincide con Navbar expand="xl"
+========================================================= */
 
-/* Estilos para la imagen de perfil */
-.profile-picture {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-}
+@media (max-width: 1199.98px) {
+  :root {
+    --apidc-navbar-height: 80px;
+  }
 
-.user-name {
-  color: #ffffff;
-  font-weight: bold;
-}
+  .apidc-navbar-wrapper {
+    min-height:
+      var(--apidc-navbar-height);
 
-/* Ajustes para los elementos de navegación */
-.navbar-nav {
-  display: flex;
-  gap: 0.5rem;
-  justify-content: flex-end; /* Alinea los enlaces a la derecha */
-  align-items: center;
-  width: 100%;
-}
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
 
-.basic-navbar-nav-autentication {
-  display: flex;
-  gap: 2rem;
-  justify-content: center; /* Alinea los enlaces a la derecha */
-  align-items: center;
-  width: 100%;
-}
+  .apidc-brand {
+    margin-right: 0 !important;
+  }
 
-.basic-navbar-nav-autentication-2 {
-  display: flex;
-  gap: 2rem;
-  justify-content: right; /* Alinea los enlaces a la derecha */
-  align-items: center;
-  width: 100%;
-}
+  .apidc-logo-box {
+    width: 62px;
+    height: 62px;
+  }
 
-.basic-navbar-nav-autentication-left {
-  display: flex;
-  gap: 0.5rem;
-  justify-content: left; /* Alinea los enlaces a la derecha */
-  align-items: center;
-  width: 100%;
-}
-.navbar-brand {
-  flex-shrink: 0; /* Evita que el logo se redimensione */
-  margin-right: auto; /* Alinea el logo a la izquierda */
-}
+  .apidc-logo {
+    width: 51px;
+    height: 51px;
+  }
 
-/* Alineación del botón de menú hamburguesa */
-.navbar-toggler {
-  border: none;
-}
+  .apidc-navbar-collapse {
+    position: absolute;
 
-/* Personalización del icono del menú hamburguesa */
-.navbar-toggler-icon {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.5%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-}
+    top: var(--apidc-navbar-height);
+    left: 0;
 
-/* Estilos responsivos */
-@media (max-width: 991px) {
-  .navbar-nav .nav-link {
-    margin-right: 0;
-    margin-bottom: 0.5rem;
+    width: 100%;
+    max-height:
+      calc(
+        100vh -
+          var(--apidc-navbar-height)
+      );
+
+    overflow-y: auto;
+
+    padding: 22px;
+
+    background: rgba(
+      255,
+      255,
+      255,
+      0.99
+    );
+
+    border-top: 1px solid #eef0eb;
+
+    box-shadow:
+      0 18px 30px
+        rgba(27, 45, 31, 0.14);
+
+    backdrop-filter: blur(16px);
+
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .apidc-main-nav {
+    flex-direction: column !important;
+
+    align-items: stretch !important;
+
+    width: 100%;
+
+    gap: 9px;
+  }
+
+  .apidc-navbar-shell
+    .apidc-menu-link {
+    width: 100%;
+
+    min-height: 46px;
+
+    padding: 11px 15px !important;
+
+    font-size: 11.5px !important;
+  }
+
+  .apidc-account-area {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    width: 100%;
+
+    gap: 9px;
+
+    margin: 20px 0 0;
+
+    padding: 18px;
+
+    border-radius: 18px;
+
+    background: #f6f8f3;
+  }
+
+  .apidc-profile {
+    width: 100%;
+
+    padding: 7px;
+
+    border-radius: 14px;
+  }
+
+  .apidc-profile-copy {
+    flex: 1;
+  }
+
+  .apidc-profile-name {
+    max-width: none;
+
+    font-size: 11px;
+  }
+
+  .apidc-navbar-shell
+    .apidc-socio-btn,
+  .apidc-navbar-shell
+    .apidc-dashboard-btn,
+  .apidc-navbar-shell
+    .apidc-logout-btn {
+    width: 100%;
+
+    min-height: 45px;
+
+    justify-content: center;
+
     text-align: center;
   }
 
-  .navbar-nav {
-    align-items: center;
+  .breadcrumbs {
+    top:
+      var(--apidc-navbar-height);
+
+    padding-left: 16px;
+    padding-right: 16px;
   }
 }
 
-/* VerifyCaptcha */
-.captcha-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: rgba(0, 0, 0, 0.65);
-  display: grid;
-  place-items: center;
-  padding: 16px;
-}
 
-.captcha-modal__content {
-  width: min(420px, 92vw);
-  background: #fff;
-  border-radius: 16px;
-  padding: 18px;
-  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.35);
-  text-align: center;
-}
+/* =========================================================
+   CELULARES
+========================================================= */
 
-.captcha-modal__title {
-  margin: 0 0 12px 0;
-  font-size: 1.1rem;
-  font-weight: 700;
-}
+@media (max-width: 575.98px) {
+  .apidc-navbar-collapse {
+    padding:
+      18px 14px 22px;
+  }
 
-.captcha-modal__error {
-  margin: 0;
-  color: #b00020;
-  font-size: 0.95rem;
-  line-height: 1.35;
-}
+  .apidc-account-area {
+    padding: 14px;
+  }
 
-.captcha-modal__btn {
-  margin-top: 14px;
-  border: 0;
-  border-radius: 10px;
-  padding: 10px 14px;
-  cursor: pointer;
-  font-weight: 700;
+  .breadcrumbs {
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+
+  .breadcrumbs li a {
+    font-size: 10px;
+  }
 }

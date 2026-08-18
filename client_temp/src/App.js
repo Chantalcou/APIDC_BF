@@ -25,6 +25,7 @@ import ProductsSection from "./components/ProductsSection";
 import SearchFormSocio from "./components/SearchFormSocio";
 import ProtectedSocioRoute from "./components/ProtectedSocioRoute";
 import GeneticasDisponibles from "./components/GeneticasDisponibles";
+import InvestigacionDesarrollo from "./components/InvestigacionDesarrollo";
 
 const App = () => {
   return (
@@ -85,6 +86,10 @@ const App = () => {
         <Route path="/shop" element={<Shop />} />
         <Route path="/newsLetter" element={<NewsLetter />} />
         <Route path="/gallery" element={<Gallery />} />
+        <Route
+          path="/investigacion-y-desarrollo"
+          element={<InvestigacionDesarrollo />}
+        />
         <Route path="/termsAndPrivacy" element={<TermsAndPrivacy />} />
         <Route path="/learnWithUs" element={<LearnWithUs />} />
         <Route path="/no-autorizado" element={<Unauthorized />} />

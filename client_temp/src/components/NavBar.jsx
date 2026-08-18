@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { verifySocio } from "../redux/actions";
 import BreadCrumbRoutes from "./BreadCrumbRoutes";
-import NonSocioModal from "./NonSocioModal";   
+import NonSocioModal from "./NonSocioModal";
 import LoginModal from "./LoginModal";
-import $ from "jquery";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./NavBar.css";
 
@@ -16,53 +15,96 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const { userFromRedux, isAdmin, isSocioVerified, error } = useSelector((state) => state);
+  const { userFromRedux, isAdmin } = useSelector((state) => state);
+
   const { isAuthenticated, isLoading, logout, user } = useAuth0();
-  
+
   const [isScrolling, setIsScrolling] = useState(false);
-  const [scrollPosition, setScrollPosition] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [isCheckingSocio, setIsCheckingSocio] = useState(false);
   const [showNonSocioModal, setShowNonSocioModal] = useState(false);
 
+  const lastScrollY = useRef(0);
+
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
 
+  /* =========================================================
+     SCROLL NAVBAR
+  ========================================================= */
+
   useEffect(() => {
+    lastScrollY.current = window.pageYOffset;
+
     const handleScroll = () => {
-      const currentScrollPos = window.pageYOffset;
-      setIsScrolling(currentScrollPos > 50 ? scrollPosition < currentScrollPos : false);
-      setScrollPosition(currentScrollPos);
+      const currentScrollY = window.pageYOffset;
+
+      if (currentScrollY <= 60) {
+        setIsScrolling(false);
+      } else {
+        setIsScrolling(currentScrollY > lastScrollY.current);
+      }
+
+      lastScrollY.current = currentScrollY;
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [scrollPosition]);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  /* =========================================================
+     SINCRONIZACIÓN REDUX ENTRE PESTAÑAS
+  ========================================================= */
 
   useEffect(() => {
-    const handleStorageChange = (e) => {
-      if (e.key === "reduxState" && e.newValue) {
+    const handleStorageChange = (event) => {
+      if (event.key === "reduxState" && event.newValue) {
         try {
-          const newState = JSON.parse(e.newValue);
-          dispatch({ type: "REHYDRATE_STATE", payload: newState });
+          const newState = JSON.parse(event.newValue);
+
+          dispatch({
+            type: "REHYDRATE_STATE",
+            payload: newState,
+          });
         } catch (storageError) {
-          console.error("Error rehidratando estado:", storageError);
+          console.error(
+            "Error rehidratando estado:",
+            storageError
+          );
         }
       }
     };
 
     window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
   }, [dispatch]);
 
+  /* =========================================================
+     SCROLL A SECCIONES DEL HOME
+  ========================================================= */
+
   const scrollToSection = (sectionId) => {
-    const section = $("#" + sectionId);
-    if (section.length) {
-      $("html, body").animate({ scrollTop: section.offset().top }, 1000);
+    const section = document.getElementById(sectionId);
+
+    if (section) {
+      section.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
     }
   };
 
   const isHome = location.pathname === "/";
+
+  /* =========================================================
+     SESIÓN SOCIO
+  ========================================================= */
 
   const clearSocioSession = () => {
     localStorage.removeItem("socioAuthorized");
@@ -70,64 +112,112 @@ const NavBar = () => {
     localStorage.removeItem("isSocioVerified");
   };
 
+  /* =========================================================
+     LOGOUT
+  ========================================================= */
+
   const handleLogout = () => {
     localStorage.removeItem("authToken");
     localStorage.removeItem("isAdmin");
+
     clearSocioSession();
 
     logout({
-      logoutParams: { returnTo: window.location.origin },
+      logoutParams: {
+        returnTo: window.location.origin,
+      },
     });
   };
 
+  /* =========================================================
+     VERIFICACIÓN DE SOCIO
+  ========================================================= */
+
   const runSocioVerification = async (redirectTo) => {
-  if (!user?.email) {
-    alert("No se pudo obtener el email del usuario autenticado.");
-    return;
-  }
-
-  try {
-    setIsCheckingSocio(true);
-    const result = await dispatch(verifySocio(user.email));
-
-    if (result?.success) {
-      localStorage.setItem("socioAuthorized", "true");
-      localStorage.setItem("isSocioVerified", "true");
-      navigate(redirectTo);
-    } else {
-      clearSocioSession();
-      // Mostrar modal de no socio en lugar de alert
-      setShowNonSocioModal(true);
-      // No navegamos, solo mostramos el modal
+    if (!user?.email) {
+      alert(
+        "No se pudo obtener el email del usuario autenticado."
+      );
+      return;
     }
-  } catch (verifyError) {
-    console.error("Error verificando socio:", verifyError);
-    clearSocioSession();
-    alert("Ocurrió un error al verificar el acceso del socio.");
-    navigate("/");
-  } finally {
-    setIsCheckingSocio(false);
-    localStorage.removeItem("postLoginRedirect");
-  }
-};
+
+    try {
+      setIsCheckingSocio(true);
+
+      const result = await dispatch(
+        verifySocio(user.email)
+      );
+
+      if (result?.success) {
+        localStorage.setItem(
+          "socioAuthorized",
+          "true"
+        );
+
+        localStorage.setItem(
+          "isSocioVerified",
+          "true"
+        );
+
+        navigate(redirectTo);
+      } else {
+        clearSocioSession();
+        setShowNonSocioModal(true);
+      }
+    } catch (verifyError) {
+      console.error(
+        "Error verificando socio:",
+        verifyError
+      );
+
+      clearSocioSession();
+
+      alert(
+        "Ocurrió un error al verificar el acceso del socio."
+      );
+
+      navigate("/");
+    } finally {
+      setIsCheckingSocio(false);
+      localStorage.removeItem("postLoginRedirect");
+    }
+  };
+
+  /* =========================================================
+     MI ESPACIO SOCIO
+  ========================================================= */
 
   const handleSocioRedirect = () => {
     if (isLoading || isCheckingSocio) return;
 
     if (!isAuthenticated) {
-      localStorage.setItem("postLoginRedirect", "/geneticas-disponibles");
+      localStorage.setItem(
+        "postLoginRedirect",
+        "/geneticas-disponibles"
+      );
+
       handleShowModal();
       return;
     }
 
-    runSocioVerification("/geneticas-disponibles");
+    runSocioVerification(
+      "/geneticas-disponibles"
+    );
   };
+
+  /* =========================================================
+     ASOCIARSE
+  ========================================================= */
 
   const handleMembershipRedirect = () => {
     if (isLoading || isCheckingSocio) return;
 
     if (!isAuthenticated) {
-      localStorage.setItem("postLoginRedirect", "/membershipSection");
+      localStorage.setItem(
+        "postLoginRedirect",
+        "/membershipSection"
+      );
+
       handleShowModal();
       return;
     }
@@ -135,139 +225,358 @@ const NavBar = () => {
     runSocioVerification("/membershipSection");
   };
 
-  useEffect(() => {
-    if (isLoading || !isAuthenticated || !user?.email) return;
+  /* =========================================================
+     REDIRECT DESPUÉS DEL LOGIN
+  ========================================================= */
 
-    const postLoginRedirect = localStorage.getItem("postLoginRedirect");
+  useEffect(() => {
+    if (
+      isLoading ||
+      !isAuthenticated ||
+      !user?.email
+    ) {
+      return;
+    }
+
+    const postLoginRedirect =
+      localStorage.getItem(
+        "postLoginRedirect"
+      );
+
     if (!postLoginRedirect) return;
 
     runSocioVerification(postLoginRedirect);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isAuthenticated, isLoading, user?.email]);
+  }, [
+    isAuthenticated,
+    isLoading,
+    user?.email,
+  ]);
+
+  /* =========================================================
+     MODAL NO SOCIO
+  ========================================================= */
 
   const handleAsociarme = () => {
-  setShowNonSocioModal(false);
-  // Redirige directamente a la sección de membresía (sin verificar socio nuevamente)
-  navigate("/membershipSection");
-};
+    setShowNonSocioModal(false);
+    navigate("/membershipSection");
+  };
 
-const handleCloseNonSocioModal = () => {
-  setShowNonSocioModal(false);
-  // Permanece en la página actual
-};
+  const handleCloseNonSocioModal = () => {
+    setShowNonSocioModal(false);
+  };
+
+  /* =========================================================
+     DATOS DEL USUARIO
+  ========================================================= */
+
+  const displayName =
+    userFromRedux?.name ||
+    user?.name ||
+    user?.nickname ||
+    user?.email ||
+    "Usuario";
+
+  const getInitials = (name = "") => {
+    const parts = name
+      .trim()
+      .split(" ")
+      .filter(Boolean);
+
+    if (parts.length === 0) return "AP";
+
+    if (parts.length === 1) {
+      return parts[0]
+        .substring(0, 2)
+        .toUpperCase();
+    }
+
+    return (
+      parts[0][0] +
+      parts[parts.length - 1][0]
+    ).toUpperCase();
+  };
+
+  /* =========================================================
+     RENDER
+  ========================================================= */
 
   return (
     <>
       <Navbar
-        expand="lg"
+        expand="xl"
         fixed="top"
-        className={`navbar-container ${isScrolling ? "scroll-hide" : "scroll-show"}`}
-        bg="dark"
-        variant="dark"
+        className={`apidc-navbar apidc-navbar-shell ${
+          isScrolling
+            ? "scroll-hide"
+            : "scroll-show"
+        }`}
       >
-        <Container>
-          <Navbar.Brand as={Link} to="/">
-            <img
-              src="https://res.cloudinary.com/dqgjcfosx/image/upload/v1725973641/apidc-logo_hz26kf.png"
-              alt="Logo"
-              width="60"
-              height="60"
-              className="d-inline-block align-top"
-            />
+        <Container
+          fluid
+          className="apidc-navbar-wrapper"
+        >
+          {/* ==========================
+              LOGO
+          ========================== */}
+
+          <Navbar.Brand
+            as={Link}
+            to="/"
+            className="apidc-brand"
+            aria-label="Ir al inicio de APIDC"
+          >
+            <div className="apidc-logo-box">
+              <img
+                src="https://res.cloudinary.com/dqgjcfosx/image/upload/v1725973641/apidc-logo_hz26kf.png"
+                alt="APIDC"
+                className="apidc-logo"
+              />
+            </div>
           </Navbar.Brand>
 
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          {/* ==========================
+              TOGGLER MOBILE
+          ========================== */}
 
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="basic-navbar-nav-autentication-left">
-              <Nav.Link as={Link} to="/">
+          <Navbar.Toggle
+            aria-controls="apidc-navbar-menu"
+            className="apidc-toggler"
+          />
+
+          <Navbar.Collapse
+            id="apidc-navbar-menu"
+            className="apidc-navbar-collapse"
+          >
+            {/* ==========================
+                NAVEGACIÓN
+            ========================== */}
+
+            <Nav className="apidc-main-nav">
+              <Link
+                to="/"
+                className={`apidc-menu-link link-inicio ${
+                  location.pathname === "/"
+                    ? "active"
+                    : ""
+                }`}
+              >
                 Inicio
-              </Nav.Link>
-
-      
+              </Link>
 
               {isHome && (
-                <Nav.Link onClick={() => scrollToSection("about-section")}>
-                  Nosotros
-                </Nav.Link>
-              )}
-
-              {isHome && (
-                <Nav.Link onClick={handleMembershipRedirect}>
-                  Asociate
-                </Nav.Link>
-              )}
-
-              {isHome && (
-                <Nav.Link
-                  onClick={() => scrollToSection("donate-now")}
-                  className="nav-link_dona"
+                <button
+                  type="button"
+                  onClick={() =>
+                    scrollToSection(
+                      "about-section"
+                    )
+                  }
+                  className="apidc-menu-link link-nosotros"
                 >
-                  Doná ahora
-                </Nav.Link>
+                  Nosotros
+                </button>
               )}
 
-              <Link to="/gallery" className="nav-link">
+              {isHome && (
+                <button
+                  type="button"
+                  onClick={
+                    handleMembershipRedirect
+                  }
+                  className="apidc-menu-link link-asociate"
+                >
+                  Asociate
+                </button>
+              )}
+
+              {isHome && (
+                <button
+                  type="button"
+                  onClick={() =>
+                    scrollToSection(
+                      "donate-now"
+                    )
+                  }
+                  className="apidc-menu-link link-dona"
+                >
+                  <span className="apidc-donate-heart">
+                    ♥
+                  </span>
+                  Doná
+                </button>
+              )}
+
+              <Link
+                to="/gallery"
+                className={`apidc-menu-link link-galeria ${
+                  location.pathname ===
+                  "/gallery"
+                    ? "active"
+                    : ""
+                }`}
+              >
                 Galería
               </Link>
 
-              <Link to="/learnWithUs" className="nav-link">
+              <Link
+                to="/investigacion-y-desarrollo"
+                className={`apidc-menu-link link-investigacion ${
+                  location.pathname ===
+                  "/investigacion-y-desarrollo"
+                    ? "active"
+                    : ""
+                }`}
+              >
+                Investigación y Desarrollo
+              </Link>
+
+              <Link
+                to="/learnWithUs"
+                className={`apidc-menu-link link-aprende ${
+                  location.pathname ===
+                  "/learnWithUs"
+                    ? "active"
+                    : ""
+                }`}
+              >
                 Aprendé con Nosotros
               </Link>
             </Nav>
-          </Navbar.Collapse>
 
-          <Navbar.Collapse id="basic-navbar-nav-autentication">
-            <Nav className="basic-navbar-nav-autentication-2">
+            {/* ==========================
+                CUENTA / USUARIO
+            ========================== */}
+
+            <div className="apidc-account-area">
               {isAuthenticated && user ? (
                 <>
                   {isAdmin && (
-                    <Link to="/dashboard" className="nav-link me-3">
+                    <Link
+                      to="/dashboard"
+                      className="apidc-dashboard-btn"
+                    >
                       Dashboard
                     </Link>
                   )}
 
-                  <Nav.Link className="d-flex align-items-center me-3">
-                    {user.picture && (
+                  <div className="apidc-profile">
+                    {user.picture ? (
                       <img
                         src={user.picture}
-                        alt="Profile"
-                        className="profile-picture me-2"
+                        alt=""
+                        className="apidc-profile-img"
                       />
+                    ) : (
+                      <div className="apidc-profile-fallback">
+                        {getInitials(
+                          displayName
+                        )}
+                      </div>
                     )}
-                    <span>{userFromRedux?.name || user?.name || user?.email}</span>
-                  </Nav.Link>
 
-                  <Nav.Link onClick={handleSocioRedirect}>
-                    Mi espacio socio
-                  </Nav.Link>
+                    <div className="apidc-profile-copy">
+                      <span className="apidc-profile-label">
+                        Bienvenido/a
+                      </span>
 
-                  <Nav.Link onClick={handleLogout}>
-                    Cerrar sesión
-                  </Nav.Link>
+                      <span
+                        className="apidc-profile-name"
+                        title={displayName}
+                      >
+                        {displayName}
+                      </span>
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={handleSocioRedirect}
+                    disabled={
+                      isLoading ||
+                      isCheckingSocio
+                    }
+                    className="apidc-socio-btn"
+                  >
+                    {isCheckingSocio
+                      ? "Verificando..."
+                      : "Mi espacio socio"}
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={handleLogout}
+                    className="apidc-logout-btn"
+                  >
+                    Salir
+                  </button>
                 </>
               ) : (
-                <Nav.Link onClick={handleSocioRedirect}>
-                  Soy socio/a
-                </Nav.Link>
+                <button
+                  type="button"
+                  onClick={handleSocioRedirect}
+                  disabled={
+                    isLoading ||
+                    isCheckingSocio
+                  }
+                  className="apidc-socio-btn"
+                >
+                  {isLoading
+                    ? "Cargando..."
+                    : "Soy socio/a"}
+                </button>
               )}
-            </Nav>
+            </div>
           </Navbar.Collapse>
         </Container>
+
+        {/* ==========================
+            LÍNEA DE COLOR
+        ========================== */}
+
+        <div
+          className="apidc-navbar-line"
+          aria-hidden="true"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </Navbar>
 
-      <div className={`breadcrumbs ${isScrolling ? "scroll-hide" : "scroll-show"}`}>
-        <Container>
+      {/* ==========================
+          BREADCRUMB
+      ========================== */}
+
+      <div
+        className={`breadcrumbs ${
+          isScrolling
+            ? "scroll-hide"
+            : "scroll-show"
+        }`}
+      >
+        <Container fluid>
           <BreadCrumbRoutes />
         </Container>
       </div>
 
-      <LoginModal show={showModal} handleClose={handleCloseModal} />
+      {/* ==========================
+          MODALES
+      ========================== */}
+
+      <LoginModal
+        show={showModal}
+        handleClose={handleCloseModal}
+      />
+
       <NonSocioModal
-  show={showNonSocioModal}
-  onClose={handleCloseNonSocioModal}
-  onAsociarme={handleAsociarme}
-  qrImageUrl="https://res.cloudinary.com/dqgjcfosx/image/upload/v1773841222/frame_17_g7dkcv.png"/>
+        show={showNonSocioModal}
+        onClose={handleCloseNonSocioModal}
+        onAsociarme={handleAsociarme}
+        qrImageUrl="https://res.cloudinary.com/dqgjcfosx/image/upload/v1773841222/frame_17_g7dkcv.png"
+      />
     </>
   );
 };
